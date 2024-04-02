@@ -1,0 +1,8 @@
+<div *ngIf="isloaded">
+
+    <div *ngFor="let valaszopcio of question.results">
+        <p>{{valaszopcio.questionId}}-re adott válasz: {{valaszopcio.selectedAnswer}}. <span style="font-weight: 600;">Pontszám:</span> {{valaszopcio.points}}</p>
+    </div>
+<p>Összpontszám: {{question.totalPoints}}</p>
+
+</div>

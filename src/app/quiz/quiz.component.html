@@ -1,0 +1,11 @@
+<div *ngIf="questions[currentQuestionIndex] as currentQuestion">
+    <h2>Kérdés {{currentQuestionIndex + 1}}: {{currentQuestion.question}}</h2>
+    <ul>
+      <li *ngFor="let answer of currentQuestion.answers">
+        <input type="radio" [value]="answer.answer" [(ngModel)]="currentQuestion.selectedAnswer" name="answer">
+        {{answer.answer}}
+      </li>
+    </ul>
+    <button (click)="prevQuestion()" [disabled]="currentQuestionIndex === 0">Előző</button>
+    <button (click)="nextQuestion()" [disabled]="!canMoveToNextQuestion()">Következő</button>
+  </div>

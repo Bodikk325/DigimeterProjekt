@@ -1,0 +1,5 @@
+<a routerLink="quiz">Menjünk a kérdésekre!</a>
+<div *ngFor="let kitoltes of result" style="border: 2px black solid; cursor: pointer;" [routerLink]="['result', kitoltes.id]">
+    <p>{{kitoltes.id}}</p>
+    <p>{{kitoltes.totalPoints}}</p>
+</div>
