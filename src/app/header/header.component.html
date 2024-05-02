@@ -1,0 +1,14 @@
+<header>
+    <div class="menu-toggle" (click)="toggleMenu()">
+      &#9776;
+    </div>
+    <nav [class.active]="menuOpen">
+      <ul>
+        <li><a href="#">Vissza a főoldalra</a></li>
+        <li><a routerLink="../quiz">Kérdőív</a></li>
+      </ul>
+    </nav>
+    <div class="logo">
+      <a href="#">Logo</a>
+    </div>
+  </header>

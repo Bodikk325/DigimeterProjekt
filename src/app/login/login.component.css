@@ -1,0 +1,100 @@
+/* Bejelentkezési konténer alapstílusai */
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.mess
+{
+    padding: 20px;
+    background-color: #ededed;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* Input csoportok stílusai */
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #666;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Biztosítja, hogy a padding és border is beleértendő a teljes szélességbe */
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Reszponzív stílusok */
+@media (max-width: 768px) {
+    .login-container {
+        margin: 20px;
+        padding: 15px;
+    }
+}
+
+.ai-cont
+{
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    width: 60%;
+    margin: 90px auto;
+}
+
+
+.container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container img {
+    margin-right: 20px;
+    width: 10%;
+    border-radius: 50%;/* Kép és szöveg közötti távolság */
+}
+
+.container p {
+    max-width: 60%; /* Szöveg maximális szélessége */
+}

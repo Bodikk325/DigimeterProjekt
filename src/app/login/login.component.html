@@ -1,0 +1,53 @@
+<div class="ai-cont">
+  <div class="container">
+      <img src="assets/ai.png" alt="Kép leírása">
+          <p class="mess">Kezdjük azzal, hogy létrehozunk neked egy fiókot!<br> <br>
+            Ez azért fontos, hogy le tudjuk neked menteni az előző kitöltéseidnek eredményeit. Ezeket később vissza tudod majd keresni és össze tudod hasonlítani majd egy előző eredménnyel. <br> <br>
+            Amennyiben van már fiókod, úgy csak szimplán jelentkezz be!
+          
+      </p>
+  </div>
+</div>
+
+<div class="login-container" *ngIf="loginShown">
+    <h2>Bejelentkezés</h2>
+    <form [formGroup]="loginForm" (submit)="onSubmit()">
+      <div class="input-group">
+        <label for="username">Felhasználónév:</label>
+        <input type="text" formControlName="username" id="username" required>
+      </div>
+      <div class="input-group" style="margin-bottom: 2px;">
+        <label for="password">Jelszó:</label>
+        <input type="password" formControlName="password" id="password" required>
+      </div>
+      <span (click)="loginShown = !loginShown" style="cursor: pointer;">Nincs még fiókom...</span>
+      <button style="margin-top: 20px;" type="submit" [disabled]="!loginForm.valid">Bejelentkezés</button>
+    </form>
+  </div>
+
+  <div class="login-container" *ngIf="!loginShown">
+    <h2>Regisztráció</h2>
+    <form [formGroup]="loginForm" (submit)="onSubmit()">
+      <div class="input-group">
+        <label for="username">Felhasználónév:</label>
+        <input type="text" formControlName="username" id="username" required>
+      </div>
+      <div class="input-group">
+        <label for="username">Email cím:</label>
+        <input type="text" formControlName="username" id="username" required>
+      </div>
+      <div class="input-group">
+        <label for="password">Jelszó:</label>
+        <input type="password" formControlName="password" id="password" required>
+      </div>
+      <div class="input-group" style="margin-bottom: 2px;">
+        <label for="password">Jelszó újra:</label>
+        <input type="password" formControlName="password" id="password" required>
+      </div>
+      <span (click)="loginShown = !loginShown" style="cursor: pointer;">Már van fiókom!</span>
+      <button style="margin-top: 20px;" type="submit" [disabled]="!loginForm.valid">Regisztráció</button>
+    </form>
+  </div>
+
+
+  

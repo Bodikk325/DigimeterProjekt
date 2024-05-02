@@ -1,11 +1,20 @@
 <div *ngIf="questions[currentQuestionIndex] as currentQuestion">
-    <h2>Kérdés {{currentQuestionIndex + 1}}: {{currentQuestion.question}}</h2>
-    <ul>
-      <li *ngFor="let answer of currentQuestion.answers">
+  <h2>Kérdés {{currentQuestionIndex + 1}}: {{currentQuestion.question}}</h2>
+  <ul>
+    <li *ngFor="let answer of currentQuestion.answers">
+      <div *ngIf="!currentQuestion.isThereMoreThanOneAnswer">
         <input type="radio" [value]="answer.answer" [(ngModel)]="currentQuestion.selectedAnswer" name="answer">
         {{answer.answer}}
-      </li>
-    </ul>
-    <button (click)="prevQuestion()" [disabled]="currentQuestionIndex === 0">Előző</button>
-    <button (click)="nextQuestion()" [disabled]="!canMoveToNextQuestion()">Következő</button>
-  </div>
+      </div>
+      <div *ngIf="currentQuestion.isThereMoreThanOneAnswer">
+        <input type="checkbox" [value]="answer.answer" 
+               [(ngModel)]="answer.selected" 
+               (change)="updateSelectedAnswers(currentQuestion, answer)">
+        {{answer.answer}}
+      </div>
+    </li>
+  </ul>
+  <button (click)="prevQuestion()" [disabled]="currentQuestionIndex === 0">Előző</button>
+  <button (click)="nextQuestion()" [disabled]="!canMoveToNextQuestion()">Következő</button>
+</div>
+

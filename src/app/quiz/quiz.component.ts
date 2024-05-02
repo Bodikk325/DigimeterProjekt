@@ -54,7 +54,8 @@ export class QuizComponent {
       results: this.questions.map(q => ({
         questionId: q.id,
         selectedAnswer: q.selectedAnswer,
-        points: this.getPointsForSelectedAnswer(q.id)
+        points: this.getPointsForSelectedAnswer(q.id),
+        category : q.category
       }))
     };
   
@@ -68,12 +69,32 @@ export class QuizComponent {
     return this.questions.reduce((total, question) => total + this.getPointsForSelectedAnswer(question.id), 0);
   }
 
+  updateSelectedAnswers(question: Question, answer: { answer: string, points: number, selected?: boolean }): void {
+    if (!question.selectedAnswer) {
+      question.selectedAnswer = [];
+    }
+
+    if (answer.selected && !(question.selectedAnswer as string[]).includes(answer.answer)) {
+      (question.selectedAnswer as string[]).push(answer.answer);
+    } else if (!answer.selected) {
+      question.selectedAnswer = (question.selectedAnswer as string[]).filter(a => a !== answer.answer);
+    }
+  }
+
   getPointsForSelectedAnswer(questionId: number): number {
     const question = this.questions.find(q => q.id === questionId);
-    if (!question || !question.selectedAnswer) return 0; // Ha nincs ilyen kérdés vagy nincs választott válasz, térjünk vissza 0-val
-  
-    const selectedAnswerOption = question.answers.find(a => a.answer === question.selectedAnswer);
-    return selectedAnswerOption ? selectedAnswerOption.points : 0;
+    if (!question || !question.selectedAnswer) return 0;
+
+    if (Array.isArray(question.selectedAnswer)) {
+      const totalPoints = question.selectedAnswer.reduce((acc, answer) => {
+        const answerOption = question.answers.find(a => a.answer === answer);
+        return acc + (answerOption ? answerOption.points : 0);
+      }, 0);
+      return Math.min(totalPoints, question.maxpoint);
+    } else {
+      const selectedAnswerOption = question.answers.find(a => a.answer === question.selectedAnswer);
+      return selectedAnswerOption ? selectedAnswerOption.points : 0;
+    }
   }
 
 }

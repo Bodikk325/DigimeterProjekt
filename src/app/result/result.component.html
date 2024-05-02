@@ -1,7 +1,21 @@
-<div *ngIf="isloaded">
+<button (click)="changeTab('')">Összes</button>
+<button (click)="changeTab('Földrajz')">Földrajz</button>
+<button (click)="changeTab('Csillagászat')">Csillagászat</button>
+<button (click)="changeTab('Kultúra')">Kultúra</button>
 
-    <div *ngFor="let valaszopcio of question.results">
+<div *ngIf="isloaded">
+    <select [(ngModel)]="selectedValue" (change)="onSelect(selectedValue)">
+        <option selected  [value]="'Összes'">Összes</option>
+        <option  [value]="'Regió'">Regió</option>
+        <option  [value]="'Munkásszám'">Munkásszám</option>
+        <option  [value]="'Szakma'">Szakma</option>
+      </select>
+    <div *ngFor="let valaszopcio of question.results; let i = index">
+        
         <p>{{valaszopcio.questionId}}-re adott válasz: {{valaszopcio.selectedAnswer}}. <span style="font-weight: 600;">Pontszám:</span> {{valaszopcio.points}}</p>
+        <p>A pontszám amit el értek a többiek {{sortedPoints[i].ShownPoint}}</p>
+        <span *ngIf="valaszopcio.points >= sortedPoints[i].ShownPoint">Jó eredmény!</span>
+        <span *ngIf="valaszopcio.points < sortedPoints[i].ShownPoint">Rossz eredmény...</span>
     </div>
 <p>Összpontszám: {{question.totalPoints}}</p>
 

@@ -1,5 +1,23 @@
-<a routerLink="quiz">Menjünk a kérdésekre!</a>
-<div *ngFor="let kitoltes of result" style="border: 2px black solid; cursor: pointer;" [routerLink]="['result', kitoltes.id]">
-    <p>{{kitoltes.id}}</p>
-    <p>{{kitoltes.totalPoints}}</p>
+<app-header></app-header>
+<div class="results-container">
+  <div *ngFor="let kitoltes of result" class="result-item" routerLink="../result/{{kitoltes.id}}">
+      <p>{{kitoltes.id}}</p>
+      <p>{{kitoltes.totalPoints}}</p>
+  </div>
+</div>
+
+<div>
+  <h2>My Firm Data Entry</h2>
+  <form>
+    <label for="region">Region:</label>
+    <input type="text" id="region" [(ngModel)]="myFirm.Region" name="region" required>
+
+    <label for="field">Field:</label>
+    <input type="text" id="field" [(ngModel)]="myFirm.Field" name="field" required>
+
+    <label for="workers">Workers:</label>
+    <input type="text" id="workers" [(ngModel)]="myFirm.Workers" name="workers" required>
+
+    <button type="button" (click)="saveToFirm()">Save to Local Storage</button>
+  </form>
 </div>

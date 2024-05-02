@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { QuizService } from '../quiz.service';
+import { MyFirm } from '../myFirm';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,17 @@ import { QuizService } from '../quiz.service';
 })
 export class HomeComponent {
   asd = "id"
+
+  myFirm: MyFirm = {
+    Region: '',
+    Field: '',
+    Workers: ''
+  };
+
+  saveToFirm() {
+    localStorage.setItem('myFirm', JSON.stringify(this.myFirm));
+    alert('Data Saved!');
+  }
 
   result : any[] = []
   /**
