@@ -18,7 +18,7 @@ export class ChatService {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer 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`  // Replace with your API Key
+      'Authorization': `Bearer`
     });
 
     return this.http.post(this.apiUrl, data, { headers }).pipe(
