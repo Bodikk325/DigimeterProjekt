@@ -1,22 +1,59 @@
-<button (click)="changeTab('')">Összes</button>
-<button (click)="changeTab('Földrajz')">Földrajz</button>
-<button (click)="changeTab('Csillagászat')">Csillagászat</button>
-<button (click)="changeTab('Kultúra')">Kultúra</button>
+<app-header></app-header>
 
-<div *ngIf="isloaded">
-    <select [(ngModel)]="selectedValue" (change)="onSelect(selectedValue)">
-        <option selected  [value]="'Összes'">Összes</option>
-        <option  [value]="'Regió'">Regió</option>
-        <option  [value]="'Munkásszám'">Munkásszám</option>
-        <option  [value]="'Szakma'">Szakma</option>
-      </select>
-    <div *ngFor="let valaszopcio of question.results; let i = index">
-        
-        <p>{{valaszopcio.questionId}}-re adott válasz: {{valaszopcio.selectedAnswer}}. <span style="font-weight: 600;">Pontszám:</span> {{valaszopcio.points}}</p>
-        <p>A pontszám amit el értek a többiek {{sortedPoints[i].ShownPoint}}</p>
-        <span *ngIf="valaszopcio.points >= sortedPoints[i].ShownPoint">Jó eredmény!</span>
-        <span *ngIf="valaszopcio.points < sortedPoints[i].ShownPoint">Rossz eredmény...</span>
+<div class="container mx-auto px-4 pt-4">
+    <div class="flex flex-wrap justify-start gap-2 z-10"> <!-- Csökkentett margó -->
+        <button [ngClass]="tabname == '' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('')"> <!-- Árnyék hozzáadása -->
+            Összes
+        </button>
+        <button [ngClass]="tabname == 'Földrajz' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('Földrajz')">
+            Földrajz
+        </button>
+        <button [ngClass]="tabname == 'Csillagászat' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('Csillagászat')">
+            Csillagászat
+        </button>
+        <button [ngClass]="tabname == 'Kultúra' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('Kultúra')">
+            Kultúra
+        </button>
     </div>
-<p>Összpontszám: {{question.totalPoints}}</p>
 
+    <div *ngIf="isloaded" class="bg-white shadow-lg big_cont px-8 pb-8 mb-4 border-solid  border-2 border-gray-100 p-6 "> <!-- Erősebb árnyék a tartalmi résznek -->
+        <div class="mb-4 w-1/2">
+            <select [(ngModel)]="selectedValue" (change)="onSelect(selectedValue)"
+                class="block  w-full bg-gray-50 border-solid border-2 border-gray-200 text-gray-700 py-3 rounded leading-tight focus:outline-none px-4">
+                <option selected [value]="'Összes'">Összes</option>
+                <option [value]="'Regió'">Regió</option>
+                <option [value]="'Munkásszám'">Munkásszám</option>
+                <option [value]="'Szakma'">Szakma</option>
+            </select>
+        </div>
+        <div class="space-y-4">
+            <div c *ngFor="let valaszopcio of question.results; let i = index">
+                <div class="flex flex-row w-full justify-between items-center mt-32">
+                    <div class="flex flex-col ">
+                        <span class="text-2xl font-bold">{{valaszopcio.questionText}}</span>
+                    </div>
+                    <div>
+                        <div *ngIf="valaszopcio.points >= sortedPoints[i].ShownPoint" class="flex items-center">
+                            <div class="mess mr-5 flex flex-col justify-end items-end">
+                                <span>A válaszoddal elért pontszám: <span class="font-bold">{{valaszopcio.points}} pont</span>.</span>
+                                <span>Ez egy jó eredmény!</span>
+                            </div>
+                            <img src="assets/ai_trans.png" class="w-28 rounded-full" alt="">
+                        </div>
+                        <div *ngIf="valaszopcio.points < sortedPoints[i].ShownPoint" class="flex items-center">
+                            <div class="mess mr-5 flex flex-col justify-end items-end">
+                                <span>A válaszoddal elért pontszám: <span class="font-bold">{{valaszopcio.points}} pont</span>.</span>
+                                <span>Ezen van mit javítani...</span>
+                            </div>
+                            <img src="assets/ai_not_happy.png" class="w-28 rounded-full" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="w-1/2 mx-auto mt-10">
+                    <div [id]="'chart' +  i"></div>
+                </div>
+            </div>
+        </div>
+        <p class="font-semibold text-lg">Összpontszám: {{question.totalPoints}}</p>
+    </div>
 </div>

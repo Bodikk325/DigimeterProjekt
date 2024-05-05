@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { StartComponent } from './start/start.component';
 import { HeaderComponent } from './header/header.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

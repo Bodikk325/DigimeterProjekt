@@ -53,6 +53,8 @@ export class QuizComponent {
       totalPoints: this.calculateTotalPoints(), // Összpontszám számítás
       results: this.questions.map(q => ({
         questionId: q.id,
+        questionText : q.question,
+        maxpoint : q.maxpoint,
         selectedAnswer: q.selectedAnswer,
         points: this.getPointsForSelectedAnswer(q.id),
         category : q.category

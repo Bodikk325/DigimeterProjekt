@@ -55,15 +55,7 @@ p {
 }
 
 /* Konténer, ami az űrlapot tartalmazza */
-div {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  }
+
   
   /* Az űrlap címe */
   h2 {
@@ -122,3 +114,42 @@ div {
       margin: 10px 0;
     }
   }
+
+  .mess
+  {
+      padding: 20px;
+      background-color: #ededed;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .ai-cont
+{
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    width: 60%;
+    margin: 90px auto;
+}
+
+
+.container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container img {
+    margin-right: 20px;
+    width: 10%;
+    border-radius: 50%;/* Kép és szöveg közötti távolság */
+}
+
+.container p {
+    max-width: 60%; /* Szöveg maximális szélessége */
+}
+
+  

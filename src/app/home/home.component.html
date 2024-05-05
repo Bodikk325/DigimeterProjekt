@@ -1,23 +1,116 @@
 <app-header></app-header>
-<div class="results-container">
-  <div *ngFor="let kitoltes of result" class="result-item" routerLink="../result/{{kitoltes.id}}">
-      <p>{{kitoltes.id}}</p>
-      <p>{{kitoltes.totalPoints}}</p>
+
+<div class="ai-cont">
+  <div class="container">
+    <img src="assets/ai.png" alt="Kép leírása">
+    <p class="mess">Ez itt a főoldal!<br> <br>
+      Itt tudsz majd új kérdőívet kitölteni vagy akár megnézni az előző kitöltéseidnek az eredményét!<br> <br>
+      Fontos, hogy mielőtt új kérdőívet töltenél ki azelőtt meg kell adnod a céged adatai!
+    </p>
   </div>
 </div>
 
-<div>
-  <h2>My Firm Data Entry</h2>
-  <form>
-    <label for="region">Region:</label>
-    <input type="text" id="region" [(ngModel)]="myFirm.Region" name="region" required>
+<div class="flex flex-col lg:flex-row w-[90%]  mx-auto justify-around ">
 
-    <label for="field">Field:</label>
-    <input type="text" id="field" [(ngModel)]="myFirm.Field" name="field" required>
+  <div
+    class="max-w-4xl h-[50rem] w-full lg:w-[40rem] flex flex-col justify-center  p-5 bg-white shadow-lg rounded-lg border-solid border-2 border-gray-100">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">My Firm Data Entry</h2>
+    <form class="">
+      <div class="mb-4">
+        <label for="region" class="block text-gray-700 text-sm font-bold mb-2">Region:</label>
+        <select id="region" [(ngModel)]="myFirm.Region" name="region" required
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          <option value="">Első</option>
+          <option value="">Első</option>
+          <option value="">Első</option>
+          <option value="">Első</option>
+        </select>
+      </div>
 
-    <label for="workers">Workers:</label>
-    <input type="text" id="workers" [(ngModel)]="myFirm.Workers" name="workers" required>
+      <div class="mb-4">
+        <label for="field" class="block text-gray-700 text-sm font-bold mb-2">Field:</label>
+        <select id="region" [(ngModel)]="myFirm.Region" name="region" required
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          <option value="">Első</option>
+          <option value="">Első</option>
+          <option value="">Első</option>
+          <option value="">Első</option>
+        </select>
+      </div>
 
-    <button type="button" (click)="saveToFirm()">Save to Local Storage</button>
-  </form>
+      <div class="mb-4">
+        <label for="field" class="block text-gray-700 text-sm font-bold mb-2">Field:</label>
+        <select id="region" [(ngModel)]="myFirm.Region" name="region" required
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          <option value="">Első</option>
+          <option value="">Első</option>
+          <option value="">Első</option>
+          <option value="">Első</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label for="field" class="block text-gray-700 text-sm font-bold mb-2">Field:</label>
+        <select id="region" [(ngModel)]="myFirm.Region" name="region" required
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          <option value="">Első</option>
+          <option value="">Első</option>
+          <option value="">Első</option>
+          <option value="">Első</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label for="workers" class="block text-gray-700 text-sm font-bold mb-2">Workers:</label>
+        <select id="region" [(ngModel)]="myFirm.Region" name="region" required
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          <option value="">Első</option>
+          <option value="">Első</option>
+          <option value="">Első</option>
+          <option value="">Első</option>
+        </select>
+      </div>
+
+      <div class="w-full flex justify-center">
+        <button type="button" (click)="saveToFirm()"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Adatok mentése</button>
+      </div>
+    </form>
+  </div>
+
+
+  <div>
+
+    <div
+      class="w-full h-[10rem] lg:w-[50rem] shadow-lg p-10 rounded-lg  border-l-2 border-solid border-2 border-gray-100">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4">My Firm Data Entry</h2>
+      <div class="w-full flex justify-center">
+        <button type="button" routerLink="../quiz"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mx-auto ">Teszt kitöltése</button>
+      </div>
+    </div>
+
+
+    <div class="h-[5rem]">
+
+    </div>
+
+
+    <div class="w-full h-[35rem] lg:w-[50rem] shadow-lg p-10 border-solid border-2 border-gray-100 rounded-lg">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4">My Firm Data Entry</h2>
+      <div *ngIf="result.length != 0">
+        <div *ngFor="let kitoltes of result" class="result-item" routerLink="../result/{{kitoltes.id}}">
+          <p>{{kitoltes.id}}</p>
+          <p>{{kitoltes.totalPoints}}</p>
+        </div>
+      </div>
+      <div *ngIf="result.length == 0">
+        <p class="text-center">Még nem töltöttél ki egy kérdőívet sem! Kezdj neki most az elsőnek!</p>
+      </div>
+    </div>
+
+
+
+
+  </div>
 </div>
