@@ -40,7 +40,7 @@
             <div id="piechart2"></div>
         </div>
         <div class="space-y-4">
-            <div *ngFor="let valaszopcio of question.results; let i = index">
+            <div *ngFor="let valaszopcio of currentResult.results; let i = index">
                 <div class="flex flex-row w-full justify-between items-center mt-32">
                     <div class="flex flex-col w-[30rem]">
                         <span class="text-lg font-bold">{{valaszopcio.questionText}}</span>
@@ -71,6 +71,7 @@
                 </div>
             </div>
         </div>
-        <p class="font-semibold text-lg">Összpontszám: {{question.totalPoints}}</p>
+        <p class="font-semibold text-lg">Összpontszám: {{currentResult.totalPoints}}</p>
+        <p class="font-semibold text-lg">Összpontszám: {{finalResult}}</p>
     </div>
 </div>

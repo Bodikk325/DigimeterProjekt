@@ -34,7 +34,7 @@ export interface Point {
   husznegyvenkilenc: number | undefined,
   tiztizenkilenc: number | undefined,
   otvenketszaznegyvenkilenc: number | undefined,
-  ShownPoint: number | string | undefined
+  ShownPoint: number
 }
 
 @Injectable({

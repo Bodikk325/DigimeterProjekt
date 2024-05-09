@@ -1,10 +1,12 @@
-import { Component, ViewChild, afterNextRender } from '@angular/core';
+import { Component } from '@angular/core';
 import { Question, QuizResultsService } from '../quizResults.service';
 import { ActivatedRoute } from '@angular/router';
 import { FirmsService, Point } from '../firms.service';
 import { DataService } from '../data.service';
 import { MyFirm } from '../myFirm';
 import { AuthService } from '../auth.service';
+import { CountResultService } from '../count-result.service';
+import { Result, ResultQuestion } from '../result';
 
 declare var ApexCharts: any;
 
@@ -17,58 +19,112 @@ export class ResultComponent {
 
   myFirm!: MyFirm;
 
-  questions: any[] = []
+
+  allResults: Result[] = []
   points: number[] = []
-  question: any;
+  currentResult!: Result
+  newResult : Result = {
+    id: 0,
+    totalPoints: 0,
+    results: []
+  }
+  newResultQuestion : ResultQuestion[] = []
   isloaded = false;
+  categoryMaxPoint = 0;
+  firmAvaragePointByCategory = 0;
   sum: number = 0;
-  quizService!: QuizResultsService;
   selectedValue: string = "Összes";
   firmPoints: Point[] = [];
   comparisonPoints!: Point[];
   sortedAnswers!: Question[];
   sortedPoints: Point[] = [];
+  finalResult : number = 0;
   ids: string[] = [];
   tabname = "";
 
   ngOnInit()
   {
     this.myFirm = this.firmService.getMyFirmData();
+    this.loadQuestions("", "");
   }
 
 
+  constructor(private quizService: QuizResultsService, private route: ActivatedRoute, private firmService: FirmsService, private dataService: DataService, private authService: AuthService, private countResultService: CountResultService) {
+    
+
+  }
+
+  changeShowPoint(szures: string) {
+    this.firmPoints.forEach(element => {
+      if (this.ids.indexOf(element.questionId) !== -1) {
+
+        element.ShownPoint = element.AvaragePoint;
+        if (szures == "Regió") {
+          element.ShownPoint = this.countResultService.FindWhichPointToShow(element, this.myFirm.Region);
+        }
+        if (szures == "Munkásszám") {
+          element.ShownPoint = this.countResultService.FindWhichPointToShow(element, this.myFirm.Workers);
+        }
+        if (szures == "Szakma") {
+          element.ShownPoint = this.countResultService.FindWhichPointToShow(element, this.myFirm.Field);
+        }
+        if (element.ShownPoint) {
+          element.ShownPoint = Math.round(element.ShownPoint as number)
+        }
+
+        this.sortedPoints.push(element)
+      }
+    });
+  }
 
 
-  constructor(quizService: QuizResultsService, private route: ActivatedRoute, private firmService: FirmsService, private dataService: DataService, private authService: AuthService) {
-    afterNextRender(() => {
-      this.quizService = quizService;
-      this.myFirm = this.firmService.getMyFirmData();
-      this.loadQuestions("", "");
+  loadQuestions(text: string, szures: string) {
+    this.isloaded = false;
+    this.sortedPoints = []
+    this.firmService.getPoints().subscribe((res: Point[]) => {
 
-      setTimeout(() => {
-        this.RenderCharts();
-        this.RenderPieChart("");
-      }, 1000);
+      this.firmPoints = res;
+      this.allResults = this.quizService.getQuizResults();
+      this.currentResult = this.allResults.find(q => q.id == parseInt(this.route.snapshot.paramMap.get('id') ?? "0")) as Result;
+
+      this.finalResult = this.currentResult.totalPoints;
+
+      if (text != "") {
+        this.currentResult.results = this.currentResult.results.filter(x=> x.category == text)
+        this.finalResult = this.currentResult.results.reduce((sum, question) => sum + question.points, 0);
+      }
+
+      const categoryResult = this.getTotalPointsByFirm(text);
+
+      this.firmAvaragePointByCategory = categoryResult.otherpoint
+      this.categoryMaxPoint = categoryResult.maxpoint
+      
+      console.log(this.finalResult)
+
+      this.ids = this.currentResult.results.map((element) => element.questionId);
+
+      this.changeShowPoint(szures);
+
+      this.isloaded = true
 
     })
-
   }
 
-  isNumber(value: any): value is number {
-    return typeof value === 'number';
+  changeTab(tabName: string): void {
+    this.tabname = tabName;
+    this.selectedValue = "Összes"
+    this.loadQuestions(tabName, this.tabname);
   }
 
-  getTotalPointsByTopic(questions: any[], topicFilter: string): any {
-    // Szűrjük a kérdéseket a kérdés szövege alapján, ami tartalmazza a témakört
-    const filteredQuestions = questions.filter(question =>
-      question.category.includes(topicFilter)
-    );
+  onSelect(newValue: string) {
+    this.selectedValue = newValue;
+    console.log(newValue)
+    this.loadQuestions(this.tabname, newValue);
+  }
 
-    // Összegzünk minden releváns kérdés pontját
-    const totalPoints = filteredQuestions.reduce((sum, question) => sum + question.points, 0);
-
-
-
+  
+  getTotalPointsByFirm(topicFilter: string): any {
+    
     var filteredPoints = this.firmPoints;
 
     if (topicFilter == "") {
@@ -111,15 +167,15 @@ export class ResultComponent {
         question.questionId.includes("DIGITÁLIS_JELENLÉT")
       );
     }
-
-
-
     const totalFirmPoints = filteredPoints[0].AvaragePoint;
     const maximumpoint = filteredPoints[0].Maxpoint;
 
-    return { userPoint: totalPoints, otherpoint: totalFirmPoints, maxpoint: maximumpoint };
+    return {otherpoint: totalFirmPoints, maxpoint: maximumpoint };
   }
+  
+  
 
+  /*
   RenderPieChart(tabname: string) {
     var result = this.getTotalPointsByTopic(this.question.results, tabname);
 
@@ -255,128 +311,8 @@ export class ResultComponent {
       number += 1;
     });
   }
+  */
 
 
-  findBudapestProperty(point: Point, text: string): number | string | undefined {
-
-    // Végigmegyünk a point objektum kulcsain
-    for (const key of Object.keys(point)) {
-
-      // Ellenőrizzük, hogy a kulcs tartalmazza-e a "Budapest" szót
-      if (key.includes(text)) {
-        return point[key as keyof Point];  // Visszatérünk a kulccsal, ha megtaláltuk
-      }
-    }
-    return 0;  // Visszatérünk null-lal, ha nem találtuk meg
-  }
-
-  loadQuestions(text: string, szures: string) {
-    this.sortedPoints = []
-    this.firmService.getPoints().subscribe((res: Point[]) => {
-      this.firmPoints = res;
-      this.questions = this.quizService.getQuizResults();
-      this.question = this.questions.find(q => q.id == this.route.snapshot.paramMap.get('id'));
-      if (text != "") {
-        this.question = this.filterQuestionsByCategory(text);
-      }
-      this.ids = this.question.results.map((element: any) => element.questionId);
-
-      this.firmPoints.forEach(element => {
-        if (this.ids.indexOf(element.questionId) !== -1) {
-          element.ShownPoint = element.AvaragePoint;
-          if (szures == "Regió") {
-            element.ShownPoint = this.findBudapestProperty(element, this.myFirm.Region);
-          }
-          if (szures == "Munkásszám") {
-            element.ShownPoint = this.findBudapestProperty(element, this.myFirm.Workers);
-          }
-          if (szures == "Szakma") {
-            element.ShownPoint = this.findBudapestProperty(element, this.myFirm.Field);
-          }
-
-          if (element.ShownPoint) {
-            element.ShownPoint = Math.round(element.ShownPoint as number)
-          }
-
-          this.sortedPoints.push(element)
-        }
-      });
-
-      this.questions.forEach(element => {
-        this.points.push(this.getPointsForSelectedAnswer(element.id))
-      });
-
-      this.sum = this.points.reduce((acc, cur) => acc + cur, 0);
-      this.isloaded = true
-    })
-
-  }
-
-  getPointsForSelectedAnswer(questionId: number): number {
-    const question = this.questions.find(q => q.id === questionId);
-    if (!question) return 0;
-
-    if (question.isThereMoreThanOneAnswer && Array.isArray(question.selectedAnswer)) {
-      const selectedAnswers = question.selectedAnswer as string[];
-      const points = selectedAnswers.reduce((acc, answer) => {
-        const answerOption = question.answers.find((a: any) => a.answer === answer);
-        return acc + (answerOption ? answerOption.points : 0);
-      }, 0);
-      return Math.min(points, question.maxpoint);
-    } else if (question.selectedAnswer) {
-      const selectedAnswerOption = question.answers.find((a: any) => a.answer === question.selectedAnswer);
-      return selectedAnswerOption ? selectedAnswerOption.points : 0;
-    }
-    return 0;
-  }
-
-  selectAnswer(questionId: number, answer: string, multiSelect: boolean): void {
-    const question = this.questions.find(q => q.id === questionId);
-    if (!question) return;
-
-    if (multiSelect && question.isThereMoreThanOneAnswer) {
-      question.selectedAnswer = question.selectedAnswer || [];
-      if ((question.selectedAnswer as string[]).includes(answer)) {
-        question.selectedAnswer = (question.selectedAnswer as string[]).filter(a => a !== answer);
-      } else {
-        (question.selectedAnswer as string[]).push(answer);
-      }
-    } else {
-      question.selectedAnswer = answer;
-    }
-  }
-
-  filterQuestionsByCategory(category: string) {
-    // Creating a new filtered object
-    const filteredData = {
-      id: this.question.id, // keep the original id
-      totalPoints: 0, // we will calculate this based on filtered results
-      results: this.question.results.filter((item: any) => item.category === category)
-    };
-
-    // Calculate the total points for the filtered results
-    filteredData.totalPoints = filteredData.results.reduce((sum: any, current: { points: any; }) => sum + current.points, 0);
-
-    return filteredData;
-  }
-
-  changeTab(tabName: string): void {
-    this.tabname = tabName;
-    this.selectedValue = "Összes"
-    this.loadQuestions(tabName, this.tabname);
-    setTimeout(() => {
-      this.RenderCharts();
-      this.RenderPieChart(tabName);
-    }, 300);
-  }
-
-  onSelect(newValue: string) {
-    this.selectedValue = newValue;
-    this.loadQuestions(this.tabname, newValue);
-    /*
-    setTimeout(() => {
-      this.RenderCharts();
-    }, 300);
-    */
-  }
+  
 }

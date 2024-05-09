@@ -24,9 +24,6 @@ export class DataService {
 
   // Szűrés és rendezés
   getFilteredAndSortedData(): { sortedAnswers: Question[], sortedPoints: Point[] } {
-
-    
-
     const filteredPoints = this.points.filter(point =>
       this.answers.some(answer =>
         {
