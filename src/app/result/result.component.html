@@ -5,14 +5,23 @@
         <button [ngClass]="tabname == '' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('')"> <!-- Árnyék hozzáadása -->
             Összes
         </button>
-        <button [ngClass]="tabname == 'Földrajz' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('Földrajz')">
-            Földrajz
+        <button [ngClass]="tabname == 'Penz' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('Digitális pénzügy')">
+            Digitális pénzügy
         </button>
-        <button [ngClass]="tabname == 'Csillagászat' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('Csillagászat')">
-            Csillagászat
+        <button [ngClass]="tabname == 'Bizt' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('Informatikai biztonság')">
+            Informatikai biztonság
         </button>
-        <button [ngClass]="tabname == 'Kultúra' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('Kultúra')">
-            Kultúra
+        <button [ngClass]="tabname == 'Vez' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('Vállalatvezetés')">
+            Vállalatvezetés
+        </button>
+        <button [ngClass]="tabname == 'Ert' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('Értékesítés és marketing')">
+            Értékesítés és marketing
+        </button>
+        <button [ngClass]="tabname == 'Mindennap' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('Digitális mindennapok')">
+            Digitális mindennapok
+        </button>
+        <button [ngClass]="tabname == 'Jelen' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('Digitális Jelenlét')">
+            Digitális Jelenlét
         </button>
     </div>
 
@@ -21,29 +30,37 @@
             <select [(ngModel)]="selectedValue" (change)="onSelect(selectedValue)"
                 class="block  w-full bg-gray-50 border-solid border-2 border-gray-200 text-gray-700 py-3 rounded leading-tight focus:outline-none px-4">
                 <option selected [value]="'Összes'">Összes</option>
+                <option [value]="'Szakma'">Tevékenységi kör</option>
                 <option [value]="'Regió'">Regió</option>
                 <option [value]="'Munkásszám'">Munkásszám</option>
-                <option [value]="'Szakma'">Szakma</option>
             </select>
         </div>
+        <div class="w-full flex justify-around">
+            <div id="piechart"></div>
+            <div id="piechart2"></div>
+        </div>
         <div class="space-y-4">
-            <div c *ngFor="let valaszopcio of question.results; let i = index">
+            <div *ngFor="let valaszopcio of question.results; let i = index">
                 <div class="flex flex-row w-full justify-between items-center mt-32">
-                    <div class="flex flex-col ">
-                        <span class="text-2xl font-bold">{{valaszopcio.questionText}}</span>
+                    <div class="flex flex-col w-[30rem]">
+                        <span class="text-lg font-bold">{{valaszopcio.questionText}}</span>
+                        <span class="mt-5">A te válaszod/válaszaid a kérdésre: <span class="font-bold">{{valaszopcio.selectedAnswer}}</span></span>
                     </div>
-                    <div>
-                        <div *ngIf="valaszopcio.points >= sortedPoints[i].ShownPoint" class="flex items-center">
+                    <div class="w-[40rem] text-sm">
+                            <div *ngIf="(valaszopcio?.points ?? 0) >= (sortedPoints[i]?.ShownPoint ?? 0)" class="flex items-center">
                             <div class="mess mr-5 flex flex-col justify-end items-end">
-                                <span>A válaszoddal elért pontszám: <span class="font-bold">{{valaszopcio.points}} pont</span>.</span>
-                                <span>Ez egy jó eredmény!</span>
+                                <span>A válaszoddal elért pontszám: <span class="font-bold">{{valaszopcio?.points}} pont</span>, ami százalékra átszámítva <span class="font-bold">{{(valaszopcio?.points | rounder:valaszopcio.maxpoint)}}</span></span>
+                                <span>A többi cég átlagos pontszáma: <span class="font-bold">{{sortedPoints[i].ShownPoint}} pont</span>, ami százalékra átszámítva <span class="font-bold">{{ (sortedPoints[i].ShownPoint | rounder:valaszopcio.maxpoint)}}</span></span>
+                                <span>Ez számodra egy jó eredménynek számít!</span>
                             </div>
                             <img src="assets/ai_trans.png" class="w-28 rounded-full" alt="">
                         </div>
-                        <div *ngIf="valaszopcio.points < sortedPoints[i].ShownPoint" class="flex items-center">
+                        <div *ngIf="(valaszopcio?.points ?? 0) < (sortedPoints[i]?.ShownPoint ?? 0)" class="flex items-center">
                             <div class="mess mr-5 flex flex-col justify-end items-end">
-                                <span>A válaszoddal elért pontszám: <span class="font-bold">{{valaszopcio.points}} pont</span>.</span>
-                                <span>Ezen van mit javítani...</span>
+                                <span>A válaszoddal elért pontszám: <span class="font-bold">{{valaszopcio?.points}} pont</span>, ami százalékra átszámítva <span class="font-bold">{{(valaszopcio?.points | rounder:valaszopcio.maxpoint)}}</span></span>
+                                <span>A többi cég átlagos pontszáma: <span class="font-bold">{{sortedPoints[i].ShownPoint}} pont</span>, ami százalékra átszámítva <span class="font-bold">{{ (sortedPoints[i].ShownPoint | rounder:valaszopcio.maxpoint)}}</span></span>
+                                <span class="text-right">Ez számodra egy nem jó eredmény, ebben a témában van még hova fejlődni..</span>
+                            
                             </div>
                             <img src="assets/ai_not_happy.png" class="w-28 rounded-full" alt="">
                         </div>

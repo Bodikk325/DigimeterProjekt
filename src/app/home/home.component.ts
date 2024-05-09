@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
-import { QuizService } from '../quiz.service';
+import { Component, afterNextRender } from '@angular/core';
+import { Question, QuizResultsService } from '../quizResults.service';
 import { MyFirm } from '../myFirm';
+import { DataService } from '../data.service';
+import { FirmsService } from '../firms.service';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,26 +12,32 @@ import { MyFirm } from '../myFirm';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  asd = "id"
 
-  myFirm: MyFirm = {
-    Region: '',
-    Field: '',
-    Workers: ''
-  };
+  myFirm!: MyFirm;
 
   saveToFirm() {
-    localStorage.setItem('myFirm', JSON.stringify(this.myFirm));
-    alert('Data Saved!');
+    this.firmService.saveFirmToList(this.myFirm)
   }
 
-  result : any[] = []
-  /**
-   *
-   */
-  constructor(private quizService : QuizService) {
-    this.result = quizService.getQuizResults();
-    console.log(this.result)
+  ngOnInit() {
+    this.result = this.quizResultService.getQuizResults();
+    this.myFirm = this.firmService.getMyFirmData();
   }
 
+  result: any[] = []
+
+  constructor(private quizResultService: QuizResultsService, private dataService: DataService, private firmService: FirmsService, private authService: AuthService, private router : Router) {
+  }
+
+  checkFirmData()
+  {
+    if(this.myFirm == null || this.myFirm.Field == "" || this.myFirm.Region == "" || this.myFirm.Workers == "")
+      {
+        alert("Kérlek tölts ki minden mezőt!")
+      }
+      else
+      {
+        this.router.navigate(['../quiz'])
+      }
+  }
 }

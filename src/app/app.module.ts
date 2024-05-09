@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { StartComponent } from './start/start.component';
 import { HeaderComponent } from './header/header.component';
+import { RounderPipe } from './rounder.pipe';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { HeaderComponent } from './header/header.component';
     LoginComponent,
     StartComponent,
     HeaderComponent,
+    RounderPipe,
   ],
   imports: [
     BrowserModule,

@@ -9,45 +9,25 @@
   </div>
 </div>
 
-<div class="login-container" *ngIf="loginShown">
-    <h2>Bejelentkezés</h2>
-    <form [formGroup]="loginForm" (submit)="onSubmit()">
-      <div class="input-group">
-        <label for="username">Felhasználónév:</label>
-        <input type="text" formControlName="username" id="username" required>
-      </div>
-      <div class="input-group" style="margin-bottom: 2px;">
-        <label for="password">Jelszó:</label>
-        <input type="password" formControlName="password" id="password" required>
-      </div>
-      <span (click)="loginShown = !loginShown" style="cursor: pointer;">Nincs még fiókom...</span>
-      <button style="margin-top: 20px;" type="submit" [disabled]="!loginForm.valid">Bejelentkezés</button>
-    </form>
-  </div>
+<div *ngIf="loginShown">
+  <form [formGroup]="loginForm" (ngSubmit)="authService.onLoginSubmit(loginForm)">
+    <input formControlName="username" placeholder="Felhasználónév">
+    <input formControlName="password" type="password" placeholder="Jelszó">
+    <button type="submit">Bejelentkezés</button>
+  </form>
+  <button (click)="toggleForm()">Regisztráció</button>
+</div>
 
-  <div class="login-container" *ngIf="!loginShown">
-    <h2>Regisztráció</h2>
-    <form [formGroup]="loginForm" (submit)="onSubmit()">
-      <div class="input-group">
-        <label for="username">Felhasználónév:</label>
-        <input type="text" formControlName="username" id="username" required>
-      </div>
-      <div class="input-group">
-        <label for="username">Email cím:</label>
-        <input type="text" formControlName="username" id="username" required>
-      </div>
-      <div class="input-group">
-        <label for="password">Jelszó:</label>
-        <input type="password" formControlName="password" id="password" required>
-      </div>
-      <div class="input-group" style="margin-bottom: 2px;">
-        <label for="password">Jelszó újra:</label>
-        <input type="password" formControlName="password" id="password" required>
-      </div>
-      <span (click)="loginShown = !loginShown" style="cursor: pointer;">Már van fiókom!</span>
-      <button style="margin-top: 20px;" type="submit" [disabled]="!loginForm.valid">Regisztráció</button>
-    </form>
-  </div>
+  <form *ngIf="!loginShown" [formGroup]="registerForm" (ngSubmit)="
+  authService.onRegisterSubmit(registerForm); 
+  this.loginShown = true;">
+    <input formControlName="username" placeholder="Felhasználónév">
+    <input formControlName="password" type="password" placeholder="Jelszó">
+    <input formControlName="confirmPassword" type="password" placeholder="Jelszó megerősítése">
+    <button type="submit">Regisztráció</button>
+    <button (click)="toggleForm()">Bejelentkezés</button>
+  </form>
+  
 
 
   

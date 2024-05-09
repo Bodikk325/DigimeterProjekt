@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Question } from './quiz.service';
+import { BehaviorSubject, Observable, map } from 'rxjs';
+import { Question } from './quizResults.service';
 import { Point } from './firms.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class DataService {
   private answers: Question[] = [];
   private points: Point[] = [];
 
-  constructor() { }
+  constructor(private http : HttpClient) { }
 
   // A két lista beállítása
   setAnswers(answers: Question[]): void {
@@ -37,9 +38,49 @@ export class DataService {
 
     console.log(filteredPoints)
 
-    const sortedAnswers = this.answers.sort((a, b) => a.id - b.id);
-    const sortedPoints = filteredPoints.sort((a, b) => a.questionId - b.questionId);
+    const sortedAnswers = this.answers.sort((a, b) => a.id.localeCompare(b.id));
+    const sortedPoints = filteredPoints.sort((a, b) => a.questionId.localeCompare(b.questionId));
 
     return { sortedAnswers, sortedPoints };
   }
+
+  getQuestions(): Observable<Question[]> {
+    // Az elérési út a fájlhoz az assets mappán belül
+    return this.http.get<any[]>('assets/questions.json').pipe(
+      map(data => this.transformQuestions(data))
+    );
+  }
+
+
+  transformQuestions(data: any[]): Question[] {
+    const questionMap = new Map<string, Question>();
+
+    data.forEach(item => {
+      if (!questionMap.has(item.id)) {
+        questionMap.set(item.id, {
+          id: item.id,
+          question: item.kerdes,
+          answers: [],
+          maxpoint: 0,
+          category: item.Temakorok,
+          isThereMoreThanOneAnswer : item["Többválasztós-e"]
+        });
+      }
+
+      const question = questionMap.get(item.id);
+      question!.answers.push({
+        answer: item.answer,
+        points: item.random_point,
+        selected: false
+      });
+
+      // Frissítsük a max pontszámot, ha szükséges
+      if (item.random_point > question!.maxpoint) {
+        question!.maxpoint = item.random_point;
+      }
+    });
+
+    return Array.from(questionMap.values());
+  }
+
 }

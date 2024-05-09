@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,27 +8,28 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+
   loginForm!: FormGroup;
-
+  registerForm!: FormGroup;
   loginShown = true;
+  authService: AuthService;
 
-  constructor(private router: Router) { }
+  constructor(authService: AuthService) {
+    this.authService = authService;
 
-  ngOnInit(): void {
     this.loginForm = new FormGroup({
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
     });
+
+    this.registerForm = new FormGroup({
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+      confirmPassword: new FormControl('', [Validators.required])
+    });
   }
 
-  onSubmit(): void {
-    const { username, password } = this.loginForm.value;
-
-    if (username === 'admin' && password === 'admin') {
-      localStorage.setItem('isLoggedIn', 'true');
-      this.router.navigate(['/home']);
-    } else {
-      alert('Helytelen felhasználónév vagy jelszó.');
-    }
+  toggleForm(): void {
+    this.loginShown = !this.loginShown;
   }
 }
