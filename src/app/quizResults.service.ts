@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Result } from "./result";
+import { AuthService } from "./auth.service";
 
 export interface Question {
   id: string;
@@ -20,19 +21,29 @@ export interface Question {
 })
 export class QuizResultsService {
 
-  constructor() { }
+  constructor(private authService : AuthService) { }
 
   quizResults!: Result[];
   currentResult!: Result;
 
   public getQuizResults(): Result[] {
-    return JSON.parse(localStorage.getItem('quizResults') || '[]');
+    var results = JSON.parse(localStorage.getItem('quizResults') || '[]') as Result[];
+    const userResults = this.authService.getUserResults();
+
+    var finalList: Result[] = [] 
+    results.forEach(element => {
+      if(userResults.indexOf(element.id))
+        {
+          finalList.push(element)
+        }
+    });
+
+    return finalList;
   }
 
   public saveQuizResults(questions: Question[]) {
     var stamp = new Date().getTime();
-    window.location.href = "result/" + stamp;
-
+    
     this.currentResult = {
       id: stamp, // Timestamp, mint egyedi azonosító
       totalPoints: this.calculateTotalPoints(questions), // Összpontszám számítás
@@ -50,7 +61,9 @@ export class QuizResultsService {
     // Meglévő eredmények lekérése és frissítése
     const existingResults = JSON.parse(localStorage.getItem('quizResults') || '[]') as Result[];
     existingResults.push(this.currentResult);
+    this.authService.addResultToUser(this.currentResult)
     localStorage.setItem('quizResults', JSON.stringify(existingResults));
+    window.location.href = "result/" + stamp;
   }
 
   private getPointsForSelectedAnswer(questionId: string, questions: Question[]): number {

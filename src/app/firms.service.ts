@@ -4,6 +4,7 @@ import { Observable, map } from 'rxjs';
 import { MyFirm } from './myFirm';
 import { LogarithmicScale } from 'chart.js';
 import { AuthService } from './auth.service';
+import { User } from './user';
 
 export interface Point {
   questionId: string,
@@ -48,7 +49,7 @@ export class FirmsService {
   firmsList: MyFirm[] = [];
 
   newFirm: MyFirm = {
-    UserName: this.authService.getCurrentUser(),
+    UserName: (this.authService.getCurrentUser() as User).username,
     Region: '',
     Field: '',
     Workers: ''
@@ -60,7 +61,7 @@ export class FirmsService {
   }
 
   getMyFirmData(): MyFirm {
-    return this.firmsList.find(x => x.UserName == this.authService.getCurrentUser()) ?? this.newFirm
+    return this.firmsList.find(x => x.UserName == this.authService.getCurrentUser().username) ?? this.newFirm
   }
 
   saveFirmToList(myFirm: MyFirm) {

@@ -7,6 +7,7 @@ import { MyFirm } from '../myFirm';
 import { AuthService } from '../auth.service';
 import { CountResultService } from '../count-result.service';
 import { Result, ResultQuestion } from '../result';
+import { ChartService } from '../chart.service';
 
 declare var ApexCharts: any;
 
@@ -49,15 +50,17 @@ export class ResultComponent {
   }
 
 
-  constructor(private quizService: QuizResultsService, private route: ActivatedRoute, private firmService: FirmsService, private dataService: DataService, private authService: AuthService, private countResultService: CountResultService) {
+  constructor(private chartService : ChartService,private quizService: QuizResultsService, private route: ActivatedRoute, private firmService: FirmsService, private dataService: DataService, private authService: AuthService, private countResultService: CountResultService) {
     
 
   }
 
+
   changeShowPoint(szures: string) {
+    var fullPoints = 0;
+    var count = 0;
     this.firmPoints.forEach(element => {
       if (this.ids.indexOf(element.questionId) !== -1) {
-
         element.ShownPoint = element.AvaragePoint;
         if (szures == "Regió") {
           element.ShownPoint = this.countResultService.FindWhichPointToShow(element, this.myFirm.Region);
@@ -72,9 +75,14 @@ export class ResultComponent {
           element.ShownPoint = Math.round(element.ShownPoint as number)
         }
 
+        fullPoints += element.ShownPoint;
+        count += 1;
+
         this.sortedPoints.push(element)
       }
     });
+
+    this.firmAvaragePointByCategory = fullPoints / count
   }
 
 
@@ -98,8 +106,6 @@ export class ResultComponent {
 
       this.firmAvaragePointByCategory = categoryResult.otherpoint
       this.categoryMaxPoint = categoryResult.maxpoint
-      
-      console.log(this.finalResult)
 
       this.ids = this.currentResult.results.map((element) => element.questionId);
 
@@ -107,7 +113,16 @@ export class ResultComponent {
 
       this.isloaded = true
 
+      this.renderCharts();
     })
+  }
+
+  renderCharts()
+  {
+    setTimeout(() => {
+      this.chartService.RenderCharts(this.currentResult.results, this.sortedPoints)
+      this.chartService.RenderPieChart(this.finalResult, this.categoryMaxPoint, this.firmAvaragePointByCategory);
+    }, 500);
   }
 
   changeTab(tabName: string): void {
@@ -118,7 +133,6 @@ export class ResultComponent {
 
   onSelect(newValue: string) {
     this.selectedValue = newValue;
-    console.log(newValue)
     this.loadQuestions(this.tabname, newValue);
   }
 
@@ -172,147 +186,5 @@ export class ResultComponent {
 
     return {otherpoint: totalFirmPoints, maxpoint: maximumpoint };
   }
-  
-  
-
-  /*
-  RenderPieChart(tabname: string) {
-    var result = this.getTotalPointsByTopic(this.question.results, tabname);
-
-    var first1 = result.userPoint;
-    var second1 = result.maxpoint - result.userPoint;
-
-    var first2 = result.otherpoint;
-    var second2 = result.maxpoint - result.otherpoint;
-
-
-
-    var chartOptions = {
-      series: [first1, second1], // Ide kerülnek az adatok
-      colors: ['#3357FF', '#080729'],
-      chart: {
-        width: 380,
-        type: 'pie',
-      },
-      labels: ['A te eredményed', 'Fejlődési lehetőség'], // Adatcímkék
-      responsive: [{
-        breakpoint: 480,
-        options: {
-          chart: {
-            width: 200
-          },
-          legend: {
-            position: 'bottom'
-          }
-        }
-      }]
-    };
-
-    var chartOptions2 = {
-      series: [first2, second2], // Ide kerülnek az adatok
-      chart: {
-        width: 380,
-        type: 'pie',
-      },
-      colors: ['#3357FF', '#080729'],
-      labels: ['Más cégek', 'Fejlődési lehetőség'], // Adatcímkék
-      responsive: [{
-        breakpoint: 480,
-        options: {
-          chart: {
-            width: 200
-          },
-          legend: {
-            position: 'bottom'
-          }
-        }
-      }]
-    };
-
-    const chart = new ApexCharts(document.querySelector("#piechart"), chartOptions);
-
-    const chart2 = new ApexCharts(document.querySelector("#piechart2"), chartOptions2);
-
-    chart.render();
-    chart2.render();
-  }
-
-  calculateMaxPoint(): number {
-    var maxPoint = 0
-
-    this.question.results.forEach((element: any) => {
-      maxPoint = maxPoint + element.maxpoint
-    });
-
-    return maxPoint;
-  }
-
-
-  RenderCharts() {
-    var number = 0;
-    this.question.results.forEach((element: any) => {
-      var second = 0
-      if (this.sortedPoints[number].ShownPoint != null) {
-        if (this.isNumber(this.sortedPoints[number].ShownPoint)) {
-          second = (((this.sortedPoints[number].ShownPoint) as number) / element.maxpoint) * 100;
-        }
-      }
-
-      var first = (element.points / element.maxpoint) * 100;
-
-      const options = {
-        chart: {
-          type: 'bar',
-          toolbar: {
-            show: false,
-            autoSelected: 'zoom'
-          }
-        },
-        series: [{
-          name: 'pontszám',
-          data: [first, second],
-        }],
-        yaxis: {
-          labels: {
-            formatter: function (value: any) {
-              return (value).toFixed(0) + '%'; // Százalékban kifejezett érték
-            }
-          },
-          min: 0, // Minimum érték
-          max: 100, // Maximum érték
-          tickAmount: 5 // Hány osztás legyen az Y-tengelyen
-        },
-        xaxis: {
-          categories: ['Az ön vállalkozása', 'A többi cég a piacon'],
-        },
-        dataLabels: {
-          enabled: true,
-          formatter: function (val: any) {
-            return (val).toFixed(0) + '%'; // Százalékban formázott értékek, két tizedesjeggyel
-          },
-          style: {
-            colors: ['#fff'] // Adatcímkék színe
-          }
-        },
-        plotOptions: {
-          bar: {
-            distributed: true, // Ez teszi lehetővé, hogy külön színe legyen minden oszlopnak
-            columnWidth: '50%'
-          }
-        },
-        colors: ['#3357FF', '#080729'], // Egyedi színek minden oszlophoz
-        legend: {
-          show: false // Itt tiltjuk le a jelmagyarázat megjelenését
-        },
-      };
-
-      const chart = new ApexCharts(document.querySelector("#chart" + number), options);
-      chart.render();
-      number += 1;
-    });
-  }
-  */
-
-
   
 }
