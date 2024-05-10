@@ -28,16 +28,19 @@ export class QuizResultsService {
 
   public getQuizResults(): Result[] {
     var results = JSON.parse(localStorage.getItem('quizResults') || '[]') as Result[];
+
     const userResults = this.authService.getUserResults();
+    
 
     var finalList: Result[] = [] 
     results.forEach(element => {
-      if(userResults.indexOf(element.id))
+      if(userResults.indexOf(element.id) !== -1)
         {
           finalList.push(element)
         }
     });
 
+    
     return finalList;
   }
 

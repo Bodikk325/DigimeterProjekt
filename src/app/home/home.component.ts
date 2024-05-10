@@ -5,6 +5,7 @@ import { DataService } from '../data.service';
 import { FirmsService } from '../firms.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { Result } from '../result';
 
 @Component({
   selector: 'app-home',
@@ -20,11 +21,11 @@ export class HomeComponent {
   }
 
   ngOnInit() {
-    this.result = this.quizResultService.getQuizResults();
+    this.results = this.quizResultService.getQuizResults();
     this.myFirm = this.firmService.getMyFirmData();
   }
 
-  result: any[] = []
+  results: Result[] = []
 
   constructor(private quizResultService: QuizResultsService, private dataService: DataService, private firmService: FirmsService, private authService: AuthService, private router : Router) {
   }

@@ -89,13 +89,13 @@
 
     <div class="w-full h-[35rem] shadow-lg p-10 border-solid border-2 border-gray-100 rounded-lg">
       <h2 class="text-2xl font-semibold text-gray-800 mb-4">My Firm Data Entry</h2>
-      <div *ngIf="result.length != 0">
-        <div *ngFor="let kitoltes of result" class="result-item" routerLink="../result/{{kitoltes.id}}">
+      <div *ngIf="results.length != 0">
+        <div *ngFor="let kitoltes of results" class="result-item" routerLink="../result/{{kitoltes.id}}">
           <p>{{kitoltes.id}}</p>
           <p>{{kitoltes.totalPoints}}</p>
         </div>
       </div>
-      <div *ngIf="result.length == 0">
+      <div *ngIf="results.length == 0">
         <p class="text-center">Még nem töltöttél ki egy kérdőívet sem! Kezdj neki most az elsőnek!</p>
       </div>
     </div>
