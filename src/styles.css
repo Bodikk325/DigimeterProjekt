@@ -7,6 +7,8 @@ html
     font-family: "Open Sans", sans-serif;
 }
 
+
+
 * {
     margin: 0;
     padding: 0;
@@ -28,3 +30,25 @@ html
 .form-container {
     @apply flex flex-col gap-4 p-5 bg-white shadow-xl border-2 border-gray-200 border-solid rounded-lg max-w-sm mx-auto my-10;
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  

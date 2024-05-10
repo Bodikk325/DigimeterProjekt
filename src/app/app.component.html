@@ -1,6 +1,10 @@
-<router-outlet></router-outlet>
+<app-header></app-header>
 
-<div class="app-container" (document:click)="onDocumentClick($event)" *ngIf="isChatShown">
+<div class="min-h-[80vh] flex justify-center w-full">
+  <router-outlet ></router-outlet>
+</div>
+
+<div class="app-container"  (document:click)="onDocumentClick($event)" *ngIf="isChatShown">
   <div class="chat-container" [class.hidden]="!isChatVisible">
     <div class="chat-header">
       <span style="margin-left: 10px;">
@@ -26,3 +30,5 @@
 </div>
 
 <app-notification #toast></app-notification>
+
+<app-footer></app-footer>

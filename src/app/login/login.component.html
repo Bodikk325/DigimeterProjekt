@@ -9,7 +9,7 @@
   </div>
 </div>
 
-<div class="form-container" *ngIf="loginShown">
+<div class="form-container " *ngIf="loginShown">
   <form [formGroup]="loginForm" (ngSubmit)="authService.onLoginSubmit(loginForm)">
     <input class="input-field" formControlName="username" placeholder="Felhasználónév">
     <input class="input-field" formControlName="password" type="password" placeholder="Jelszó">

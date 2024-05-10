@@ -52,7 +52,10 @@ export class FirmsService {
     UserName: (this.authService.getCurrentUser() as User).username,
     Region: '',
     Field: '',
-    Workers: ''
+    Workers: '',
+    Sector: '',
+    Capital: '',
+    Revenue: ''
   }
 
   constructor(private http: HttpClient, private authService : AuthService) {

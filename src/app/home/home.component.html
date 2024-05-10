@@ -1,4 +1,4 @@
-<app-header></app-header>
+
 
 <div class="ai-cont">
   <div class="container">
@@ -10,12 +10,11 @@
   </div>
 </div>
 
-<div class="flex flex-col lg:flex-row w-[90%]  mx-auto justify-around">
-
+<div class="flex flex-col lg:flex-row w-[92%] md:w-[90%] xl:w-[90%]  mx-auto justify-around">
   <div
-    class="max-w-4xl h-[50rem] w-full lg:w-[50%] flex flex-col justify-center p-5 bg-white shadow-lg rounded-lg border-solid border-2 border-gray-100">
+    class="max-w-4xl md:h-[40rem] py-16 md:py-5 w-full lg:w-[50%] flex flex-col  p-5 bg-white shadow-lg rounded-lg border-solid border-2 border-gray-100">
     <h2 class="text-2xl font-semibold text-gray-800 mb-4">Céged adatai</h2>
-    <form class="">
+    <form class="px-10">
       <div class="mb-4">
         <label for="region" class="block text-gray-700 text-sm font-bold mb-2">Régió:</label>
         <select id="region" [(ngModel)]="myFirm.Region" name="region" required
@@ -54,7 +53,7 @@
 
       <div class="mb-4">
         <label for="workers" class="block text-gray-700 text-sm font-bold mb-2">Foglalkoztatottak száma:</label>
-        <select id="workers" [(ngModel)]="myFirm.Workers" name="regworkersion" required
+        <select id="workers" [(ngModel)]="myFirm.Workers" name="workers" required
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
           <option value="otkilenc">5-9 fő</option>
           <option value="husznegyvenkilenc">10-19 fő</option>
@@ -63,16 +62,69 @@
         </select>
       </div>
 
+      <div class="mb-4">
+        <label for="capital" class="block text-gray-700 text-sm font-bold mb-2">A cég székhelye:</label>
+        <select id="capital" [(ngModel)]="myFirm.Capital" name="capital" required
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          <option value="0">Budapest</option>
+          <option value="1">Komárom-Esztergom</option>
+          <option value="2">Pest</option>
+          <option value="3">Vas</option>
+          <option value="4">Zala</option>
+          <option value="5">Heves</option>
+          <option value="6">Bács-Kiskun</option>
+          <option value="7">Csongrád-Csanád</option>
+          <option value="8">Szabolcs-Szatmár-Bereg</option>
+          <option value="9">Fejér</option>
+          <option value="10">Békés</option>
+          <option value="11">Borsod-Abaúj-Zemplén</option>
+          <option value="12">Jász-Nagykun-Szolnok</option>
+          <option value="13">Baranya</option>
+          <option value="14">Tolna</option>
+          <option value="15">Győr-Moson-Sopron</option>
+          <option value="16">Hajdú-Bihar</option>
+          <option value="17">Veszprém</option>
+          <option value="18">Somogy</option>
+          <option value="19">Nógrád</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label for="sector" class="block text-gray-700 text-sm font-bold mb-2">Szektor:</label>
+        <select id="sector" [(ngModel)]="myFirm.Sector" name="sector" required
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          <option value="0">Szolgáltatás</option>
+          <option value="1">Ipar</option>
+          <option value="2">Kereskedelem</option>
+          <option value="3">Mezőgazdaság</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label for="revenue" class="block text-gray-700 text-sm font-bold mb-2">Árbevétel:</label>
+        <select id="revenue" [(ngModel)]="myFirm.Revenue" name="revenue" required
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          <option value="0">100-199 millió Ft</option>
+          <option value="1">500-999 millió Ft</option>
+          <option value="2">200-499 millió Ft</option>
+          <option value="3">3-10 milliárd Ft</option>
+          <option value="4">50-99 millió Ft</option>
+          <option value="5">Kevesebb mint 50 millió Ft</option>
+          <option value="6">1-2 milliárd Ft</option>
+          <option value="7">11-18 milliárd Ft</option>
+        </select>
+      </div>
+
       <div class="w-full flex justify-center">
         <button type="button" (click)="saveToFirm()"
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Adatok
+          class="bg-[#1372B6] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Adatok
           mentése</button>
       </div>
     </form>
   </div>
 
 
-  <div>
+  <div class="md:w-[40%]">
     <div
       class="w-full h-[10rem] shadow-lg p-10 rounded-lg  border-l-2 border-solid border-2 border-gray-100">
       <h2 class="text-2xl font-semibold  mb-4">Teszt indítása</h2>
@@ -83,18 +135,20 @@
       </div>
     </div>
 
-    <div class="h-[5rem]">
+    <div class="md:h-[5rem]">
 
     </div>
 
-    <div class="w-full h-[35rem] shadow-lg p-10 border-solid border-2 border-gray-100 text-white rounded-lg">
-      <h2 class="text-2xl font-semibold  mb-4">Eddigi eredmények</h2>
-      <div *ngIf="results.length != 0">
-        <div *ngFor="let kitoltes of results" class="rounded-md px-2 py-3 bg-blue-500 cursor-pointer mt-10" routerLink="../result/{{kitoltes.id}}">
-          <p>Kitöltés dátuma: <br> <span class="font-bold">{{kitoltes.id | date: 'yyyy-MM-dd'}}</span> </p>
-          <p>Elért pontszám: <br> <span class="font-bold">{{kitoltes.totalPoints}} pont</span> </p>
+    <div class="w-full md:h-[25rem] shadow-lg py-10 border-solid border-2 border-gray-100 text-black rounded-lg">
+      <h2 class="text-2xl font-semibold mb-4">Eddigi eredmények</h2>
+      <!-- Megváltoztatott rész kezdete: hozzáadtunk egy max-h-[20rem] és overflow-y-auto class-t -->
+      <div *ngIf="results.length != 0" class="max-h-[15rem] border-solid border-t-2 border-b-2 border-gray-300 px-10 mr-2 w-full overflow-y-auto">
+        <div *ngFor="let kitoltes of results" class="rounded-md px-2 py-3 bg-blue-500 cursor-pointer mt-10 text-white"  routerLink="../result/{{kitoltes.id}}">
+          <p>Kitöltés dátuma: <br> <span class="font-bold">{{kitoltes.id | date: 'yyyy-MM-dd'}}</span></p>
+          <p class="mt-5">Elért pontszám: <br> <span class="font-bold">{{kitoltes.totalPoints}} pont</span></p>
         </div>
       </div>
+      <!-- Megváltoztatott rész vége -->
       <div *ngIf="results.length == 0">
         <p class="text-center">Még nem töltöttél ki egy kérdőívet sem! Kezdj neki most az elsőnek!</p>
       </div>

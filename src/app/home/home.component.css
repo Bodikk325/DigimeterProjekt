@@ -1,115 +1,7 @@
-a {
-    color: #007BFF;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-a:hover {
-    text-decoration: underline;
-    color: #0056b3;
-}
-
-/* Eredmények konténere */
-.results-container {
-    max-width: 600px; /* Meghatározza a maximális szélességet */
-    margin: 20px auto; /* Középre igazítja a tartalmat */
-    padding: 10px;
-    background-color: white;
-    border-radius: 5px;
-}
-
-/* Eredményeket tartalmazó dobozok stílusa */
-.result-item {
-    border: 2px solid black;
-    cursor: pointer;
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    transition: background-color 0.2s ease-in-out;
-}
-
-.result-item:hover {
-    background-color: #f0f0f0;
-}
-
-/* Azonosító és pontszám megjelenítése */
-
-
-/* Reszponzivitás */
-@media (max-width: 768px) {
-    .results-container {
-        max-width: 100%; /* Teljes szélesség mobil eszközökön */
-    }
-
-    p {
-        font-size: 14px;
-    }
-
-    .result-item {
-        padding: 8px;
-    }
-}
-
-/* Konténer, ami az űrlapot tartalmazza */
-
-  
-  /* Az űrlap címe */
-  h2 {
+h2
+{
     text-align: center;
-    color: #333;
-  }
-  
-  /* Label és input mezők formázása */
-  label {
-    display: block;
-    margin-bottom: 5px;
-    color: #666;
-    font-size: 16px;
-  }
-  
-  input[type="text"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-  
-  /* Gombok stílusai */
-  button {
-    width: 48%; /* Két gomb egymás mellett, kis térközükkel */
-    padding: 10px;
-    margin: 5px 1%; /* Kis tér a gombok között */
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  /* Reszponzív stílusok */
-  @media (max-width: 768px) {
-    div {
-      margin: 20px;
-      padding: 15px;
-    }
-  
-    button {
-      width: 100%; /* Mobil nézetben a gombok teljes szélességet foglaljanak el */
-      margin: 10px 0;
-    }
-  }
+}
 
   .mess
   {
@@ -124,7 +16,6 @@ a:hover {
     background-color: white;
     color: black;
     font-weight: bold;
-    width: 60%;
     margin: 90px auto;
 }
 
