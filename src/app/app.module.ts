@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { StartComponent } from './start/start.component';
 import { HeaderComponent } from './header/header.component';
 import { RounderPipe } from './rounder.pipe';
+import { NotificationComponent } from './notification/notification.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { RounderPipe } from './rounder.pipe';
     StartComponent,
     HeaderComponent,
     RounderPipe,
+    NotificationComponent,
   ],
   imports: [
     BrowserModule,

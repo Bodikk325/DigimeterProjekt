@@ -18,6 +18,7 @@ export class CountResultService {
         var selectedPoint = point[key as keyof Point]
         if(typeof selectedPoint == "number")
           {
+            
             return selectedPoint
           }
       }

@@ -1,11 +1,11 @@
-import { Component, afterNextRender } from '@angular/core';
+import { Component } from '@angular/core';
 import { Question, QuizResultsService } from '../quizResults.service';
 import { MyFirm } from '../myFirm';
-import { DataService } from '../data.service';
 import { FirmsService } from '../firms.service';
-import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { Result } from '../result';
+import { NotificationComponent, NotificationType } from '../notification/notification.component';
+import { NotificationService } from '../notification.service';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +18,7 @@ export class HomeComponent {
 
   saveToFirm() {
     this.firmService.saveFirmToList(this.myFirm)
+    this.notiService.show("Cégadatok sikeresen mentve!", NotificationType.positivie)
   }
 
   ngOnInit() {
@@ -27,18 +28,20 @@ export class HomeComponent {
 
   results: Result[] = []
 
-  constructor(private quizResultService: QuizResultsService, private dataService: DataService, private firmService: FirmsService, private authService: AuthService, private router : Router) {
+  constructor(private notiService : NotificationService,private quizResultService: QuizResultsService, private firmService: FirmsService, private router : Router) {
   }
 
   checkFirmData()
   {
     if(this.myFirm == null || this.myFirm.Field == "" || this.myFirm.Region == "" || this.myFirm.Workers == "")
       {
-        alert("Kérlek tölts ki minden mezőt!")
+        this.notiService.show("Nincsenek kitöltve a cégadatok! Kérünk töltsd ki azokat először!", NotificationType.error)
       }
       else
       {
         this.router.navigate(['../quiz'])
       }
   }
+
+
 }

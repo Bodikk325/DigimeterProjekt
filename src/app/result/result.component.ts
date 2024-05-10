@@ -82,7 +82,7 @@ export class ResultComponent {
       }
     });
 
-    this.firmAvaragePointByCategory = fullPoints / count
+    this.firmAvaragePointByCategory = fullPoints
   }
 
 
@@ -110,6 +110,8 @@ export class ResultComponent {
       this.ids = this.currentResult.results.map((element) => element.questionId);
 
       this.changeShowPoint(szures);
+
+      console.log(this.firmAvaragePointByCategory)
 
       this.isloaded = true
 

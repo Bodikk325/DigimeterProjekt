@@ -2,6 +2,7 @@ import { Component, HostListener, afterNextRender } from '@angular/core';
 import { ChatService } from './chat.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { NotificationService } from './notification.service';
 
 @Component({
   selector: 'app-root',
@@ -40,7 +41,9 @@ export class AppComponent {
     return url.includes("quiz") || url.includes("result")
   }
 
-  constructor(private chatService: ChatService, private activatedRoute: ActivatedRoute, private router : Router) {
+  
+
+  constructor(private chatService: ChatService, private activatedRoute: ActivatedRoute, private router : Router, private notiService : NotificationService) {
 
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)

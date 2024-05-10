@@ -75,7 +75,7 @@
   <div>
     <div
       class="w-full h-[10rem] shadow-lg p-10 rounded-lg  border-l-2 border-solid border-2 border-gray-100">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-4">My Firm Data Entry</h2>
+      <h2 class="text-2xl font-semibold  mb-4">Teszt indítása</h2>
       <div class="w-full flex justify-center">
         <button type="button" (click)="checkFirmData()"
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mx-auto ">Teszt
@@ -87,21 +87,18 @@
 
     </div>
 
-    <div class="w-full h-[35rem] shadow-lg p-10 border-solid border-2 border-gray-100 rounded-lg">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-4">My Firm Data Entry</h2>
+    <div class="w-full h-[35rem] shadow-lg p-10 border-solid border-2 border-gray-100 text-white rounded-lg">
+      <h2 class="text-2xl font-semibold  mb-4">Eddigi eredmények</h2>
       <div *ngIf="results.length != 0">
-        <div *ngFor="let kitoltes of results" class="result-item" routerLink="../result/{{kitoltes.id}}">
-          <p>{{kitoltes.id}}</p>
-          <p>{{kitoltes.totalPoints}}</p>
+        <div *ngFor="let kitoltes of results" class="rounded-md px-2 py-3 bg-blue-500 cursor-pointer mt-10" routerLink="../result/{{kitoltes.id}}">
+          <p>Kitöltés dátuma: <br> <span class="font-bold">{{kitoltes.id | date: 'yyyy-MM-dd'}}</span> </p>
+          <p>Elért pontszám: <br> <span class="font-bold">{{kitoltes.totalPoints}} pont</span> </p>
         </div>
       </div>
       <div *ngIf="results.length == 0">
         <p class="text-center">Még nem töltöttél ki egy kérdőívet sem! Kezdj neki most az elsőnek!</p>
       </div>
     </div>
-
-
-
-
   </div>
 </div>
+

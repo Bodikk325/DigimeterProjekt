@@ -9,10 +9,9 @@ import { StartComponent } from './start/start.component';
 
 const routes: Routes = [
   { path: 'home', 
-  component : HomeComponent,
-   canActivate : [AuthGuard] 
+  component : HomeComponent
   },
-  { path: '', component : LoginComponent },
+  { path: '', component : LoginComponent},
   {path : 'quiz', component : QuizComponent},
   {path : 'start', component : StartComponent},
   {path : 'result/:id', component : ResultComponent},

@@ -3,13 +3,16 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from './user';
 import { Result } from './result';
+import { NotificationService } from './notification.service';
+import { NotificationType } from './notification/notification.component';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private notificationService : NotificationService) { }
 
   currentUser! : User;
   users! : User[];
@@ -17,6 +20,13 @@ export class AuthService {
     username: '',
     password: '',
     results: []
+  }
+
+  private loginFormSubject = new BehaviorSubject<boolean>(true);
+  loginFormState = this.loginFormSubject.asObservable();
+
+  showLoginForm(show: boolean): void {
+    this.loginFormSubject.next(show);
   }
 
   getCurrentUser() : User
@@ -34,7 +44,7 @@ export class AuthService {
       localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
       this.router.navigate(['/home']);
     } else {
-      alert('Helytelen felhasználónév vagy jelszó.');
+      this.notificationService.show("Helytelen felhasználónév vagy jelszó!", NotificationType.error)
     }
   }
 
@@ -67,18 +77,22 @@ export class AuthService {
     this.newUser.password = registerForm.value["password"]
     this.newUser.username = registerForm.value["username"]
     this.newUser.results = []
+    if (password == "" || username == "") {
+      this.notificationService.show("Kérünk tölts ki minden adatot!", NotificationType.error)
+      return;
+    }
     if (password !== confirmPassword) {
-      alert('A jelszavak nem egyeznek.');
+      this.notificationService.show("Nem egyeznek a jelszavak!", NotificationType.error)
       return;
     }
     this.users = JSON.parse(localStorage.getItem('users') || '[]');
     if (this.users.some((u: any) => u.username === username)) {
-      alert('A felhasználónév már foglalt.');
+      this.notificationService.show("A felhasználónév már foglalt.", NotificationType.error)
       return;
     }
     this.users.push(this.newUser);
     localStorage.setItem('users', JSON.stringify(this.users));
-    alert('Sikeres regisztráció!');
+    this.notificationService.show("Sikeres regisztráció!", NotificationType.positivie)
+    this.showLoginForm(true);
   }
-
 }

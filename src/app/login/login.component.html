@@ -9,24 +9,28 @@
   </div>
 </div>
 
-<div *ngIf="loginShown">
+<div class="form-container" *ngIf="loginShown">
   <form [formGroup]="loginForm" (ngSubmit)="authService.onLoginSubmit(loginForm)">
-    <input formControlName="username" placeholder="Felhasználónév">
-    <input formControlName="password" type="password" placeholder="Jelszó">
-    <button type="submit">Bejelentkezés</button>
+    <input class="input-field" formControlName="username" placeholder="Felhasználónév">
+    <input class="input-field" formControlName="password" type="password" placeholder="Jelszó">
+    <p class="text-right mt-2 text-gray-600 hover:text-black cursor-pointer" (click)="toggleForm()">Még nincs fiókom..</p>
+    <div class="w-full flex justify-center">
+      <button class="button" type="submit">Bejelentkezés</button>
+    </div>
   </form>
-  <button (click)="toggleForm()">Regisztráció</button>
 </div>
 
-  <form *ngIf="!loginShown" [formGroup]="registerForm" (ngSubmit)="
-  authService.onRegisterSubmit(registerForm); 
-  this.loginShown = true;">
-    <input formControlName="username" placeholder="Felhasználónév">
-    <input formControlName="password" type="password" placeholder="Jelszó">
-    <input formControlName="confirmPassword" type="password" placeholder="Jelszó megerősítése">
-    <button type="submit">Regisztráció</button>
-    <button (click)="toggleForm()">Bejelentkezés</button>
+<div class="form-container" *ngIf="!loginShown">
+  <form [formGroup]="registerForm" (ngSubmit)="authService.onRegisterSubmit(registerForm);">
+    <input class="input-field" formControlName="username" placeholder="Felhasználónév">
+    <input class="input-field" formControlName="password" type="password" placeholder="Jelszó">
+    <input class="input-field" formControlName="confirmPassword" type="password" placeholder="Jelszó megerősítése">
+    <p class="text-right mt-2 text-gray-600 hover:text-black cursor-pointer" (click)="toggleForm()">Már van fiókom!</p>
+    <div class="w-full flex justify-center">
+      <button class="button" type="submit">Regisztráció</button>
+    </div>
   </form>
+</div>
   
 
 

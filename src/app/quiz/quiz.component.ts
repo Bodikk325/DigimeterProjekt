@@ -15,7 +15,7 @@ export class QuizComponent {
 
   constructor(private router: Router, private dataService: DataService, private quizResultsService: QuizResultsService) {
     dataService.getQuestions().subscribe((res: Question[]) => {
-      this.questions = res.slice(0, 2)
+      this.questions = res.slice(0, 10)
     })
   }
 

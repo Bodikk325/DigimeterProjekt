@@ -85,9 +85,11 @@ export class ChartService {
     var first2 = firmAvaragePointByCategory;
     var second2 = categoryMaxPoint - firmAvaragePointByCategory;
 
+    /*
     console.log(userScore)
     console.log(firmAvaragePointByCategory)
     console.log(categoryMaxPoint)
+    */
 
     var chartOptions = {
       series: [first1, second1], // Ide kerülnek az adatok
