@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Question, QuizResultsService } from '../quizResults.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 import { FirmsService, Point } from '../firms.service';
 import { DataService } from '../data.service';
 import { MyFirm } from '../myFirm';
@@ -8,8 +8,7 @@ import { AuthService } from '../auth.service';
 import { CountResultService } from '../count-result.service';
 import { Result, ResultQuestion } from '../result';
 import { ChartService } from '../chart.service';
-
-declare var ApexCharts: any;
+import { ChatService } from '../chat.service';
 
 @Component({
   selector: 'app-result',
@@ -19,6 +18,40 @@ declare var ApexCharts: any;
 export class ResultComponent {
 
   myFirm!: MyFirm;
+
+  isMessageLoading = false;
+
+  isChatVisible = false;
+
+  toggleChat(event: MouseEvent) {
+    event.stopPropagation(); // Megállítjuk az esemény terjedését
+    this.isChatVisible = !this.isChatVisible;
+  }
+
+  onDocumentClick(event: MouseEvent) {
+    if (!this.isChatVisible) return;
+    const container = document.querySelector('.chat-container');
+    if (event.target instanceof Node && !container!.contains(event.target)) {
+      this.isChatVisible = false;
+    }
+  }
+
+  messages: any[] = [];
+  inputText: string = '';
+
+  sendMessage(): void {
+    if (this.inputText.trim()) {
+      this.messages.push({ text: this.inputText, user: true });
+      this.isMessageLoading = true;
+      
+      this.chatService.sendMessageResult(this.finalResult, this.firmAvaragePointByCategory, this.categoryMaxPoint,this.inputText, this.tabname).subscribe(response => {
+        this.messages.push({ text: response.choices[0].message.content, user: false });
+        this.isMessageLoading = false;
+      });
+      
+      this.inputText = '';
+    }
+  }
 
 
   allResults: Result[] = []
@@ -43,16 +76,18 @@ export class ResultComponent {
   ids: string[] = [];
   tabname = "";
 
+  constructor(private chatService : ChatService,private chartService : ChartService,private quizService: QuizResultsService, private route: ActivatedRoute, private firmService: FirmsService, private dataService: DataService, private authService: AuthService, private countResultService: CountResultService) {
+    this.messages.push(
+      {
+        text : "Kérdésed van az eredményekkel kapcsolatban? Nyugodtan tedd azt fel, segítek!", user : false
+      }
+    )
+  }
+
   ngOnInit()
   {
     this.myFirm = this.firmService.getMyFirmData();
     this.loadQuestions("", "");
-  }
-
-
-  constructor(private chartService : ChartService,private quizService: QuizResultsService, private route: ActivatedRoute, private firmService: FirmsService, private dataService: DataService, private authService: AuthService, private countResultService: CountResultService) {
-    
-
   }
 
 
@@ -85,6 +120,15 @@ export class ResultComponent {
     this.firmAvaragePointByCategory = fullPoints
   }
 
+  filterQuestionsByNull(inputResult : Result) : Result
+  {
+    const filteredQuestions = inputResult.results.filter(q => q.maxpoint !== null);
+    return {
+      ...inputResult, // Az eredeti objektum más attribútumait megtartjuk
+      results: filteredQuestions // Csak a szűrt kérdéseket tartalmazó tömböt állítjuk be
+    };
+  }
+
 
   loadQuestions(text: string, szures: string) {
     this.isloaded = false;
@@ -94,6 +138,10 @@ export class ResultComponent {
       this.firmPoints = res;
       this.allResults = this.quizService.getQuizResults();
       this.currentResult = this.allResults.find(q => q.id == parseInt(this.route.snapshot.paramMap.get('id') ?? "0")) as Result;
+      
+      this.currentResult = this.filterQuestionsByNull(this.currentResult);
+
+      console.log(this.currentResult)
 
       this.finalResult = this.currentResult.totalPoints;
 

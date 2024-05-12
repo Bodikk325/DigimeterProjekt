@@ -58,17 +58,18 @@ export class DataService {
           id: item.id,
           question: item.kerdes,
           answers: [],
-          maxpoint: 0,
+          maxpoint: item.max_point,
           category: item.Temakorok,
-          isThereMoreThanOneAnswer : item["Többválasztós-e"]
+          isThereMoreThanOneAnswer : item["Többválasztós-e"],
         });
       }
 
       const question = questionMap.get(item.id);
       question!.answers.push({
         answer: item.answer,
-        points: item.random_point,
-        selected: false
+        points: item.pontok,
+        selected: false,
+        nextQuestionId : ""
       });
 
       // Frissítsük a max pontszámot, ha szükséges

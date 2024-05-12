@@ -76,3 +76,29 @@
         -->
     </div>
 </div>
+
+<div class="app-container"  (document:click)="onDocumentClick($event)">
+    <div class="chat-container" [class.hidden]="!isChatVisible">
+      <div class="chat-header">
+        <span style="margin-left: 10px;">
+          DIGIMÉTER
+        </span>
+        <button style="margin-right: 10px;" class="close-button" (click)="isChatVisible = false">×</button>
+    </div>
+      <div class="messages">
+        <div *ngFor="let message of messages" class="message" [ngClass]="{'user': message.user, 'bot': !message.user}">
+          {{ message.text }}
+        </div>
+        <div class="loader" *ngIf="isMessageLoading">
+          <span></span>
+          <span></span>
+          <span></span>
+      </div>
+      </div>
+      <input type="text" [(ngModel)]="inputText" (keyup.enter)="sendMessage()" placeholder="Írj valamit...">
+    </div>
+    <button class="chat-button" [ngClass]="{'shown-button': isChatVisible}" (click)="toggleChat($event)">
+      <img src="assets/ai.png" alt="Chat">
+    </button>
+</div>
+

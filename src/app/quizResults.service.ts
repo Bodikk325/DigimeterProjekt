@@ -8,12 +8,14 @@ export interface Question {
   answers: {
     answer: string;
     points: number;
-    selected?: boolean; // Ez az új mező azonosítja, hogy a válasz ki van-e jelölve (csak checkbox esetén)
+    selected?: boolean;
+    nextQuestionId?: string; // Következő kérdés azonosítója, ha ez a válasz kiválasztásra kerül
   }[];
-  selectedAnswer?: string | string[]; // Több választás támogatása
+  selectedAnswer?: string | string[];
   maxpoint: number;
   isThereMoreThanOneAnswer: boolean;
   category: string;
+  defaultNextQuestionId?: string; // Ez az alapértelmezett következő kérdés azonosítója, ha nincs külön meghatározva a válaszban
 }
 
 @Injectable({
