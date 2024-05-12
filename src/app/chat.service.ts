@@ -90,7 +90,7 @@ export class ChatService {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer sk-proj-oPkBsvKLCBol2oY0pF6sT3BlbkFJX76z7gLXQuJKZoL3tTKa`
+      'Authorization': `Bearer `
     });
 
     return this.http.post(this.apiUrl, data, { headers }).pipe(
