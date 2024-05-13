@@ -9,11 +9,13 @@ export interface Question {
     answer: string;
     points: number;
     selected?: boolean;
-    nextQuestionId?: string; // Következő kérdés azonosítója, ha ez a válasz kiválasztásra kerül
+    nextQuestionId?: string;
+    contains_Textbox : boolean // Következő kérdés azonosítója, ha ez a válasz kiválasztásra kerül
   }[];
   selectedAnswer?: string | string[];
   maxpoint: number;
   isThereMoreThanOneAnswer: boolean;
+  isA7related : boolean,
   category: string;
   defaultNextQuestionId?: string; // Ez az alapértelmezett következő kérdés azonosítója, ha nincs külön meghatározva a válaszban
 }

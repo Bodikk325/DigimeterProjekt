@@ -61,6 +61,8 @@ export class DataService {
           maxpoint: item.max_point,
           category: item.Temakorok,
           isThereMoreThanOneAnswer : item["Többválasztós-e"],
+          defaultNextQuestionId : item["defaultNextQuestionId"],
+          isA7related : item["is_A7_related"]
         });
       }
 
@@ -69,7 +71,8 @@ export class DataService {
         answer: item.answer,
         points: item.pontok,
         selected: false,
-        nextQuestionId : ""
+        nextQuestionId : item.nextQuestionId,
+        contains_Textbox : item.contains_Textbox
       });
 
       // Frissítsük a max pontszámot, ha szükséges

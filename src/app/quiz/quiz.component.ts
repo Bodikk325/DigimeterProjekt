@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Question, QuizResultsService } from '../quizResults.service';
-import { NavigationEnd, Router } from '@angular/router';
 import { DataService } from '../data.service';
-import { filter } from 'rxjs';
 import { ChatService } from '../chat.service';
 import { NotificationService } from '../notification.service';
 import { NotificationType } from '../notification/notification.component';
@@ -51,7 +49,8 @@ export class QuizComponent {
 
   constructor(dataService: DataService, private quizResultsService: QuizResultsService, private chatService : ChatService, private notiService : NotificationService) {
     dataService.getQuestions().subscribe((res: Question[]) => {
-      this.questions = res.slice(0, 10)
+      this.questions = res.filter(x=> x.id == "A7")
+      console.log(res)
     })
 
     this.messages.push(
@@ -63,7 +62,12 @@ export class QuizComponent {
 
   nextQuestion() {
     const currentQuestion = this.questions[this.currentQuestionIndex];
-  
+
+    if(this.questions[this.currentQuestionIndex].id == "A7")
+      {
+        localStorage.setItem("A7Response", currentQuestion.selectedAnswer as string)
+      }
+
     if (currentQuestion.selectedAnswer) {
       const selectedAnswer = currentQuestion.answers.find(answer => answer.answer === currentQuestion.selectedAnswer);
       if (selectedAnswer && selectedAnswer.nextQuestionId) {

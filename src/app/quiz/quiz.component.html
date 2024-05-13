@@ -10,15 +10,22 @@
     <ul class="list-none pl-0 space-y-4">
       <li *ngFor="let answer of currentQuestion.answers" class="flex items-start">
         <div *ngIf="!currentQuestion.isThereMoreThanOneAnswer" class="flex items-center p-[20px] m-[20px]">
-          <input type="radio" [value]="answer.answer" [(ngModel)]="currentQuestion.selectedAnswer" name="answer"
+          <input type="radio" *ngIf="!answer.contains_Textbox" [value]="answer.answer" [(ngModel)]="currentQuestion.selectedAnswer" name="answer"
             class="form-radio h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500 focus:ring-offset-0">
-          <label class="ml-3 text-md text-gray-800">{{answer.answer}}</label>
+          <label *ngIf="!answer.contains_Textbox" class="ml-3 text-md text-gray-800">{{answer.answer}}</label>
+          <label *ngIf="answer.contains_Textbox" class="ml-3 text-md text-gray-800">Írja be a választ a mezőbe!</label>
+          <input type="text" *ngIf="answer.contains_Textbox" [value]="answer.answer" [(ngModel)]="currentQuestion.selectedAnswer" name="answer"
+            class="ml-10 h-10 w-[20rem] border-black">
         </div>
         <div *ngIf="currentQuestion.isThereMoreThanOneAnswer" class="flex items-center p-[20px] m-[20px]">
-          <input type="checkbox" [value]="answer.answer" [(ngModel)]="answer.selected"
+          <input type="checkbox" *ngIf="!answer.contains_Textbox" [value]="answer.answer" [(ngModel)]="answer.selected"
             (change)="updateSelectedAnswers(currentQuestion, answer)"
             class="form-checkbox h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500 focus:ring-offset-0">
-          <label class="ml-3 text-md text-gray-800">{{answer.answer}}</label>
+            <label *ngIf="!answer.contains_Textbox" class="ml-3 text-md text-gray-800">{{answer.answer}}</label>
+            <label *ngIf="answer.contains_Textbox" class="ml-3 text-md text-gray-800">Írja be a választ a mezőbe!</label>
+          <input type="text" *ngIf="answer.contains_Textbox" [value]="answer.answer" [(ngModel)]="answer.selected"
+            (change)="updateSelectedAnswers(currentQuestion, answer)"
+            class="form-checkbox h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500 focus:ring-offset-0">
         </div>
       </li>
     </ul>
@@ -55,7 +62,7 @@
         <span></span>
     </div>
     </div>
-    <input type="text" [(ngModel)]="inputText" (keyup.enter)="sendMessage()" placeholder="Írj valamit...">
+    <input type="text" class="aiinput" [(ngModel)]="inputText" (keyup.enter)="sendMessage()" placeholder="Írj valamit...">
   </div>
   <button class="chat-button" [ngClass]="{'shown-button': isChatVisible}" (click)="toggleChat($event)">
     <img src="assets/ai.png" alt="Chat">
