@@ -11,7 +11,7 @@ export class RounderPipe implements PipeTransform {
     }
     if(points != null)
       {
-        const percentage = (points as number / maxPoints) * 100;
+        const percentage = (points as number / maxPoints);
         return `${Math.round(percentage)}%`;
       }
     return ""

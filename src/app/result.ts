@@ -5,8 +5,10 @@ export interface ResultQuestion
     points : number,
     questionId : string,
     questionText : string,
-    selectedAnswer : string[]
+    selectedAnswer : string[],
+    selectedAnswerTexts: string[];
 }
+
 
 export interface Result 
 {

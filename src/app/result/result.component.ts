@@ -93,7 +93,6 @@ export class ResultComponent {
 
   changeShowPoint(szures: string) {
     var fullPoints = 0;
-    var count = 0;
     this.firmPoints.forEach(element => {
       if (this.ids.indexOf(element.questionId) !== -1) {
         element.ShownPoint = element.AvaragePoint;
@@ -110,8 +109,8 @@ export class ResultComponent {
           element.ShownPoint = Math.round(element.ShownPoint as number)
         }
 
+        
         fullPoints += element.ShownPoint;
-        count += 1;
 
         this.sortedPoints.push(element)
       }
@@ -141,7 +140,6 @@ export class ResultComponent {
       
       this.currentResult = this.filterQuestionsByNull(this.currentResult);
 
-      console.log(this.currentResult)
 
       this.finalResult = this.currentResult.totalPoints;
 
@@ -153,13 +151,11 @@ export class ResultComponent {
       const categoryResult = this.getTotalPointsByFirm(text);
 
       this.firmAvaragePointByCategory = categoryResult.otherpoint
-      this.categoryMaxPoint = categoryResult.maxpoint
+      this.categoryMaxPoint = categoryResult.Maxpoint
 
       this.ids = this.currentResult.results.map((element) => element.questionId);
 
       this.changeShowPoint(szures);
-
-      console.log(this.firmAvaragePointByCategory)
 
       this.isloaded = true
 

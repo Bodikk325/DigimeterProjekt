@@ -5,13 +5,13 @@
         "Temakorok": "Bevezető",
         "answer_id": "A5_1",
         "answer": "Pénzügyek és\/vagy kontrolling tevékenység",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "A6",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "A5",
@@ -19,13 +19,13 @@
         "Temakorok": "Bevezető",
         "answer_id": "A5_2",
         "answer": "Egyik sem",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "A6",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "A5",
@@ -33,13 +33,13 @@
         "Temakorok": "Bevezető",
         "answer_id": "A5_3",
         "answer": "Értékesítés (sales) és\/vagy marketing",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "A6",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "A5",
@@ -47,13 +47,13 @@
         "Temakorok": "Bevezető",
         "answer_id": "A5_4",
         "answer": "Könyvelés",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "A6",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "A5",
@@ -61,13 +61,13 @@
         "Temakorok": "Bevezető",
         "answer_id": "A5_5",
         "answer": "Humánerőforrás menedzselése",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "A6",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "A5",
@@ -75,13 +75,13 @@
         "Temakorok": "Bevezető",
         "answer_id": "A5_6",
         "answer": "Ügyfélszolgálat",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "A6",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "A6",
@@ -89,13 +89,13 @@
         "Temakorok": "Bevezető",
         "answer_id": "A6_1",
         "answer": "Szerződéses külső szakember \/ szolgáltató vállalat",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 8.0,
         "pontok": 8.0,
-        "defaultNextQuestionId": "A7",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "A6",
@@ -103,13 +103,13 @@
         "Temakorok": "Bevezető",
         "answer_id": "A6_2",
         "answer": "Nincs ilyen állandó személy jelenleg",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 8.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "A7",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "A6",
@@ -117,13 +117,13 @@
         "Temakorok": "Bevezető",
         "answer_id": "A6_3",
         "answer": "Önálló IT munkakört betöltő vállalati munkatárs",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 8.0,
         "pontok": 8.0,
-        "defaultNextQuestionId": "A7",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "A6",
@@ -131,41 +131,41 @@
         "Temakorok": "Bevezető",
         "answer_id": "A6_4",
         "answer": "Más jellegű munkakörrel (is) rendelkező vállalati munkatárs",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 8.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "A7",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "A7",
         "kerdes": "A jelenleg foglalkoztatott munkavállalók közül hányan használnak munkavégzéshez kapcsolódóan informatikai eszközt?",
         "Temakorok": "Bevezető",
         "answer_id": "A7_1",
-        "answer": "Egyéb",
-        "Többválasztós-e": 0,
+        "answer": "8",
+        "Többválasztós-e": 0.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "A8",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": true
+        "contains_Textbox": true,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "A8",
         "kerdes": "A digitális eszközt használó munkavállalók közül hányan dolgoznak jelenleg távmunkában a munkahét legalább egy napján?",
         "Temakorok": "Bevezető",
-        "answer_id": "A8_1",
-        "answer": "0.0",
-        "Többválasztós-e": 0,
+        "answer_id": "A8_20",
+        "answer": "15.0",
+        "Többválasztós-e": 0.0,
         "max_point": 6.0,
-        "pontok": 0.0,
-        "defaultNextQuestionId": "B1_1",
-        "nextQuestionId": null,
+        "pontok": 6.0,
         "is_A7_related": false,
-        "contains_Textbox": true
+        "contains_Textbox": true,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B1_1",
@@ -173,13 +173,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B1_1_1",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B1_2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B1_1",
@@ -187,13 +187,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B1_1_2",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 15.0,
-        "defaultNextQuestionId": "B1_2",
-        "nextQuestionId": "B2",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B1_1",
@@ -201,13 +201,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B1_1_3",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B1_2",
-        "nextQuestionId": "B4",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B1_2",
@@ -215,13 +215,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B1_2_1",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B1_3",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B1_2",
@@ -229,13 +229,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B1_2_2",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 15.0,
-        "defaultNextQuestionId": "B1_3",
-        "nextQuestionId": "B4",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B1_2",
@@ -243,13 +243,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B1_2_3",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B1_3",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B1_3",
@@ -257,13 +257,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B1_3_1",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 5.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B1_3",
@@ -271,13 +271,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B1_3_2",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 5.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "B2",
-        "nextQuestionId": "B8",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B1_3",
@@ -285,13 +285,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B1_3_3",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 5.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B2",
@@ -299,13 +299,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B2_1",
         "answer": "Saját domainként működő honlap",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 15.0,
-        "defaultNextQuestionId": "B3",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1"
+        ],
+        "condition": [
+            "B1_1_2"
+        ]
     },
     {
         "id": "B2",
@@ -313,13 +317,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B2_2",
         "answer": "Más szolgáltatóhoz tartozó aldomainként működő honlap",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 8.0,
-        "defaultNextQuestionId": "B3",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1"
+        ],
+        "condition": [
+            "B1_1_2"
+        ]
     },
     {
         "id": "B2",
@@ -327,13 +335,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B2_3",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 15.0,
-        "defaultNextQuestionId": "B3",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1"
+        ],
+        "condition": [
+            "B1_1_2"
+        ]
     },
     {
         "id": "B3",
@@ -341,13 +353,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B3_1",
         "answer": "Ritkábban, alkalmilag",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 2.0,
-        "defaultNextQuestionId": "B4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1"
+        ],
+        "condition": [
+            "B1_1_2"
+        ]
     },
     {
         "id": "B3",
@@ -355,13 +371,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B3_2",
         "answer": "2-3 havonta",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 10.0,
-        "defaultNextQuestionId": "B4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1"
+        ],
+        "condition": [
+            "B1_1_2"
+        ]
     },
     {
         "id": "B3",
@@ -369,13 +389,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B3_3",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1"
+        ],
+        "condition": [
+            "B1_1_2"
+        ]
     },
     {
         "id": "B3",
@@ -383,13 +407,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B3_4",
         "answer": "A kialakítás óta nem frissítették",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1"
+        ],
+        "condition": [
+            "B1_1_2"
+        ]
     },
     {
         "id": "B3",
@@ -397,13 +425,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B3_5",
         "answer": "4-6 havonta",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "B4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1"
+        ],
+        "condition": [
+            "B1_1_2"
+        ]
     },
     {
         "id": "B3",
@@ -411,13 +443,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B3_6",
         "answer": "Rendszeresen: legalább hetente",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 15.0,
-        "defaultNextQuestionId": "B4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1"
+        ],
+        "condition": [
+            "B1_1_2"
+        ]
     },
     {
         "id": "B3",
@@ -425,13 +461,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B3_7",
         "answer": "Rendszeresen: legalább havonta",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 15.0,
-        "defaultNextQuestionId": "B4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1"
+        ],
+        "condition": [
+            "B1_1_2"
+        ]
     },
     {
         "id": "B4",
@@ -439,13 +479,19 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B4_1",
         "answer": "Naponta",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "B5a_1",
-        "nextQuestionId": "B5b_1",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1",
+            "B1_2"
+        ],
+        "condition": [
+            "B1_1_3",
+            "B1_2_2"
+        ]
     },
     {
         "id": "B5a_1",
@@ -453,13 +499,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B5a_1_1",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 7.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B5a_2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1"
+        ],
+        "condition": [
+            "B1_1_2"
+        ]
     },
     {
         "id": "B5a_1",
@@ -467,13 +517,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B5a_1_2",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 7.0,
         "pontok": 3.0,
-        "defaultNextQuestionId": "B5a_2",
-        "nextQuestionId": "B7a",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1"
+        ],
+        "condition": [
+            "B1_1_2"
+        ]
     },
     {
         "id": "B5a_1",
@@ -481,13 +535,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B5a_1_3",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 7.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B5a_2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1"
+        ],
+        "condition": [
+            "B1_1_2"
+        ]
     },
     {
         "id": "B5a_2",
@@ -495,13 +553,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B5a_2_1",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 7.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B5a_3",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1"
+        ],
+        "condition": [
+            "B1_1_2"
+        ]
     },
     {
         "id": "B5a_2",
@@ -509,13 +571,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B5a_2_2",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 7.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "B5a_3",
-        "nextQuestionId": "B7b",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1"
+        ],
+        "condition": [
+            "B1_1_2"
+        ]
     },
     {
         "id": "B5a_2",
@@ -523,13 +589,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B5a_2_3",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 7.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B5a_3",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1"
+        ],
+        "condition": [
+            "B1_1_2"
+        ]
     },
     {
         "id": "B5a_3",
@@ -537,13 +607,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B5a_3_1",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 7.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B5b_1",
-        "nextQuestionId": "B6a",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1"
+        ],
+        "condition": [
+            "B1_1_2"
+        ]
     },
     {
         "id": "B5a_3",
@@ -551,13 +625,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B5a_3_2",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 7.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "B5b_1",
-        "nextQuestionId": "B6a",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1"
+        ],
+        "condition": [
+            "B1_1_2"
+        ]
     },
     {
         "id": "B5a_3",
@@ -565,13 +643,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B5a_3_3",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 7.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B5b_1",
-        "nextQuestionId": "B6a",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1"
+        ],
+        "condition": [
+            "B1_1_2"
+        ]
     },
     {
         "id": "B5b_1",
@@ -579,13 +661,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B5b_1_1",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 7.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B5b_2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "B5b_1",
@@ -593,13 +679,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B5b_1_2",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 7.0,
         "pontok": 3.0,
-        "defaultNextQuestionId": "B5b_2",
-        "nextQuestionId": "B7a",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "B5b_1",
@@ -607,13 +697,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B5b_1_3",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 7.0,
         "pontok": 1.0,
-        "defaultNextQuestionId": "B5b_2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "B5b_2",
@@ -621,13 +715,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B5b_2_1",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 7.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B5b_3",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "B5b_2",
@@ -635,13 +733,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B5b_2_2",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 7.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "B5b_3",
-        "nextQuestionId": "B7b",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "B5b_2",
@@ -649,13 +751,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B5b_2_3",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 7.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B5b_3",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "B5b_3",
@@ -663,13 +769,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B5b_3_1",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 7.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B6a",
-        "nextQuestionId": "B6b",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "B5b_3",
@@ -677,13 +787,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B5b_3_2",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 7.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "B6a",
-        "nextQuestionId": "B6b",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "B5b_3",
@@ -691,27 +805,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B5b_3_3",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 7.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B6a",
-        "nextQuestionId": "B6b",
         "is_A7_related": false,
-        "contains_Textbox": false
-    },
-    {
-        "id": "B6a",
-        "kerdes": "Kinek a feladata a vállalati honlap tartalmának frissítése?",
-        "Temakorok": "Digitális Jelenlét",
-        "answer_id": "B6a_1",
-        "answer": "Egyéb",
-        "Többválasztós-e": 0,
-        "max_point": 5.0,
-        "pontok": 0.0,
-        "defaultNextQuestionId": "B6b",
-        "nextQuestionId": null,
-        "is_A7_related": false,
-        "contains_Textbox": true
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "B6a",
@@ -719,13 +823,23 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B6a_2",
         "answer": "Szerződéses külső szakember",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 5.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "B6b",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1",
+            "B3"
+        ],
+        "condition": [
+            "B3_1",
+            "B3_2",
+            "B3_5",
+            "B3_6",
+            "B3_7",
+            "B1_1_2"
+        ]
     },
     {
         "id": "B6a",
@@ -733,13 +847,23 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B6a_3",
         "answer": "Vállalati munkatárs, akinek ez az állandó munkaköréhez tartozik",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 5.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "B6b",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1",
+            "B3"
+        ],
+        "condition": [
+            "B3_1",
+            "B3_2",
+            "B3_5",
+            "B3_6",
+            "B3_7",
+            "B1_1_2"
+        ]
     },
     {
         "id": "B6a",
@@ -747,13 +871,23 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B6a_4",
         "answer": "Egyéb",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 5.0,
         "pontok": 1.0,
-        "defaultNextQuestionId": "B6b",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": true
+        "contains_Textbox": true,
+        "based_On": [
+            "B1_1",
+            "B3"
+        ],
+        "condition": [
+            "B3_1",
+            "B3_2",
+            "B3_5",
+            "B3_6",
+            "B3_7",
+            "B1_1_2"
+        ]
     },
     {
         "id": "B6a",
@@ -761,13 +895,23 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B6a_6",
         "answer": "Nincs meghatározva \/ az a vállalati munkatárs, akinek éppen ideje van rá",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 5.0,
         "pontok": 1.0,
-        "defaultNextQuestionId": "B6b",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1",
+            "B3"
+        ],
+        "condition": [
+            "B3_1",
+            "B3_2",
+            "B3_5",
+            "B3_6",
+            "B3_7",
+            "B1_1_2"
+        ]
     },
     {
         "id": "B6a",
@@ -775,13 +919,23 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B6a_15",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 5.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B6b",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1",
+            "B3"
+        ],
+        "condition": [
+            "B3_1",
+            "B3_2",
+            "B3_5",
+            "B3_6",
+            "B3_7",
+            "B1_1_2"
+        ]
     },
     {
         "id": "B6b",
@@ -789,13 +943,23 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B6b_2",
         "answer": "Vállalati munkatárs, akinek ez az állandó munkaköréhez tartozik",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 5.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "Shoptet1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2",
+            "B4"
+        ],
+        "condition": [
+            "B1_2_2",
+            "B4_1",
+            "B4_2",
+            "B4_5",
+            "B4_6",
+            "B4_7"
+        ]
     },
     {
         "id": "B6b",
@@ -803,13 +967,23 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B6b_3",
         "answer": "Egyéb",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 5.0,
         "pontok": 1.0,
-        "defaultNextQuestionId": "Shoptet1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": true
+        "contains_Textbox": true,
+        "based_On": [
+            "B1_2",
+            "B4"
+        ],
+        "condition": [
+            "B1_2_2",
+            "B4_1",
+            "B4_2",
+            "B4_5",
+            "B4_6",
+            "B4_7"
+        ]
     },
     {
         "id": "Shoptet1",
@@ -817,13 +991,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "Shoptet1_1",
         "answer": "A webáruház saját fejlesztésű",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "Shoptet2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "Shoptet1",
@@ -831,13 +1009,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "Shoptet1_2",
         "answer": "A webáruház bérelhető rendszeren fut",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "Shoptet2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "Shoptet1",
@@ -845,13 +1027,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "Shoptet1_3",
         "answer": "Nem tudja",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "Shoptet2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "Shoptet1",
@@ -859,13 +1045,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "Shoptet1_4",
         "answer": "A webáruház open source rendszeren fut",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "Shoptet2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "Shoptet2",
@@ -873,13 +1063,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "Shoptet2_1",
         "answer": "Unas",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "Shoptet3",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "Shoptet2",
@@ -887,13 +1081,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "Shoptet2_2",
         "answer": "Shoprenter",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "Shoptet3",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "Shoptet2",
@@ -901,13 +1099,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "Shoptet2_3",
         "answer": "Shopify",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "Shoptet3",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "Shoptet2",
@@ -915,13 +1117,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "Shoptet2_4",
         "answer": "Nem tudja pontosan",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "Shoptet3",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "Shoptet2",
@@ -929,13 +1135,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "Shoptet2_5",
         "answer": "Egyéb bérelhető rendszer",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "Shoptet3",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": true
+        "contains_Textbox": true,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "Shoptet3",
@@ -943,13 +1153,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "Shoptet3_1",
         "answer": "Teljes mértékben elégedett",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "Shoptet4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "Shoptet3",
@@ -957,13 +1171,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "Shoptet3_2",
         "answer": "Inkább elégedett",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "Shoptet4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "Shoptet3",
@@ -971,13 +1189,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "Shoptet3_3",
         "answer": "Elégedett is meg nem is",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "Shoptet4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "Shoptet3",
@@ -985,13 +1207,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "Shoptet3_4",
         "answer": "Kifejezetten elégedetlen",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "Shoptet4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "Shoptet3",
@@ -999,13 +1225,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "Shoptet3_5",
         "answer": "Inkább elégedetlen",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "Shoptet4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "Shoptet3",
@@ -1013,13 +1243,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "Shoptet3_6",
         "answer": "Nem tudja megítélni",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "Shoptet4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "Shoptet4",
@@ -1027,13 +1261,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "Shoptet4_1",
         "answer": "Nem",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "B7a",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "Shoptet4",
@@ -1041,13 +1279,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "Shoptet4_2",
         "answer": "Nem tudja",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "B7a",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "Shoptet4",
@@ -1055,13 +1297,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "Shoptet4_3",
         "answer": "Igen",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "B7a",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "B7a",
@@ -1069,13 +1315,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B7a_2",
         "answer": "Más vállalati munkatárs, akinek más munkaköre is van",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 3.0,
         "pontok": 2.0,
-        "defaultNextQuestionId": "B7b",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B5a_1"
+        ],
+        "condition": [
+            "B5a_1_2"
+        ]
     },
     {
         "id": "B7a",
@@ -1083,13 +1333,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B7a_3",
         "answer": "Nincs meghatározva \/ akinek éppen ideje van rá",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 3.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B7b",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B5a_1"
+        ],
+        "condition": [
+            "B5a_1_2"
+        ]
     },
     {
         "id": "B7a",
@@ -1097,13 +1351,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B7a_4",
         "answer": "Ügyfélszolgálati munkatárs",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 3.0,
         "pontok": 3.0,
-        "defaultNextQuestionId": "B7b",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B5a_1"
+        ],
+        "condition": [
+            "B5a_1_2"
+        ]
     },
     {
         "id": "B7a",
@@ -1111,13 +1369,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B7a_12",
         "answer": "Egyéb",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 3.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B7b",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": true
+        "contains_Textbox": true,
+        "based_On": [
+            "B5a_1"
+        ],
+        "condition": [
+            "B5a_1_2"
+        ]
     },
     {
         "id": "B7a",
@@ -1125,13 +1387,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B7a_19",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 3.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B7b",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B5a_1"
+        ],
+        "condition": [
+            "B5a_1_2"
+        ]
     },
     {
         "id": "B7b",
@@ -1139,13 +1405,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B7b_2",
         "answer": "Ügyfélszolgálati munkatárs",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 3.0,
         "pontok": 3.0,
-        "defaultNextQuestionId": "B8",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B5b_2"
+        ],
+        "condition": [
+            "B5b_2_2"
+        ]
     },
     {
         "id": "B7b",
@@ -1153,13 +1423,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B7b_3",
         "answer": "Más vállalati munkatárs, aminek más munkaköre is van",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 3.0,
         "pontok": 2.0,
-        "defaultNextQuestionId": "B8",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B5b_2"
+        ],
+        "condition": [
+            "B5b_2_2"
+        ]
     },
     {
         "id": "B7b",
@@ -1167,13 +1441,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B7b_6",
         "answer": "Nincs meghatározva \/ akinek éppen ideje van rá",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 3.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B8",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B5b_2"
+        ],
+        "condition": [
+            "B5b_2_2"
+        ]
     },
     {
         "id": "B8",
@@ -1181,13 +1459,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B8_1",
         "answer": "Rendszeresen: legalább havonta",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 3.0,
         "pontok": 2.0,
-        "defaultNextQuestionId": "B9",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_3"
+        ],
+        "condition": [
+            "B1_3_2"
+        ]
     },
     {
         "id": "B8",
@@ -1195,13 +1477,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B8_2",
         "answer": "Alkalmilag, szükség esetén",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 3.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B9",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_3"
+        ],
+        "condition": [
+            "B1_3_2"
+        ]
     },
     {
         "id": "B8",
@@ -1209,13 +1495,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B8_3",
         "answer": "2-3 havonta",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 3.0,
         "pontok": 1.0,
-        "defaultNextQuestionId": "B9",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_3"
+        ],
+        "condition": [
+            "B1_3_2"
+        ]
     },
     {
         "id": "B8",
@@ -1223,13 +1513,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B8_4",
         "answer": "Rendszeresen: legalább hetente",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 3.0,
         "pontok": 3.0,
-        "defaultNextQuestionId": "B9",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_3"
+        ],
+        "condition": [
+            "B1_3_2"
+        ]
     },
     {
         "id": "B8",
@@ -1237,13 +1531,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B8_5",
         "answer": "Kialakítása óta nem tekintették át",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 3.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B9",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_3"
+        ],
+        "condition": [
+            "B1_3_2"
+        ]
     },
     {
         "id": "B8",
@@ -1251,13 +1549,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B8_6",
         "answer": "Naponta",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 3.0,
         "pontok": 3.0,
-        "defaultNextQuestionId": "B9",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_3"
+        ],
+        "condition": [
+            "B1_3_2"
+        ]
     },
     {
         "id": "B8",
@@ -1265,13 +1567,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B8_7",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 3.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B9",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_3"
+        ],
+        "condition": [
+            "B1_3_2"
+        ]
     },
     {
         "id": "B9",
@@ -1279,13 +1585,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B9_1",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 2.0,
         "pontok": 2.0,
-        "defaultNextQuestionId": "B10",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_3"
+        ],
+        "condition": [
+            "B1_3_2"
+        ]
     },
     {
         "id": "B9",
@@ -1293,13 +1603,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B9_2",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 2.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B10",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_3"
+        ],
+        "condition": [
+            "B1_3_2"
+        ]
     },
     {
         "id": "B9",
@@ -1307,13 +1621,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B9_3",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 2.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B10",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_3"
+        ],
+        "condition": [
+            "B1_3_2"
+        ]
     },
     {
         "id": "B10",
@@ -1321,13 +1639,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B10_1",
         "answer": "Facebook",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 25.0,
         "pontok": 10.0,
-        "defaultNextQuestionId": "B11",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B10",
@@ -1335,13 +1653,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B10_2",
         "answer": "Egyiken sem",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 25.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "B11",
-        "nextQuestionId": "B12",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B10",
@@ -1349,13 +1667,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B10_3",
         "answer": "Nem tudja",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 25.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B11",
-        "nextQuestionId": "B12",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B10",
@@ -1363,13 +1681,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B10_4",
         "answer": "LinkedIn",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 25.0,
         "pontok": 10.0,
-        "defaultNextQuestionId": "B11",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B10",
@@ -1377,13 +1695,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B10_5",
         "answer": "Instagram",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 25.0,
         "pontok": 10.0,
-        "defaultNextQuestionId": "B11",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B10",
@@ -1391,13 +1709,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B10_6",
         "answer": "YouTube",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 25.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B11",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B10",
@@ -1405,13 +1723,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B10_7",
         "answer": "Egyéb",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 25.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "B11",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": true
+        "contains_Textbox": true,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B10",
@@ -1419,13 +1737,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B10_10",
         "answer": "X (korábban Twitter)",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 25.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "B11",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B10",
@@ -1433,41 +1751,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B10_11",
         "answer": "Pinterest",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 25.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "B11",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
-    },
-    {
-        "id": "B10",
-        "kerdes": "A vállalat (vagy valamely terméke\/szolgáltatása) mely közösségi oldalon rendelkezik saját fiókkal?",
-        "Temakorok": "Digitális Jelenlét",
-        "answer_id": "B10_12",
-        "answer": "tiktok",
-        "Többválasztós-e": 1,
-        "max_point": 25.0,
-        "pontok": 5.0,
-        "defaultNextQuestionId": "B11",
-        "nextQuestionId": null,
-        "is_A7_related": false,
-        "contains_Textbox": false
-    },
-    {
-        "id": "B10",
-        "kerdes": "A vállalat (vagy valamely terméke\/szolgáltatása) mely közösségi oldalon rendelkezik saját fiókkal?",
-        "Temakorok": "Digitális Jelenlét",
-        "answer_id": "B10_13",
-        "answer": "Tik-tok",
-        "Többválasztós-e": 1,
-        "max_point": 25.0,
-        "pontok": 5.0,
-        "defaultNextQuestionId": "B11",
-        "nextQuestionId": null,
-        "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B11",
@@ -1475,13 +1765,23 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B11_1",
         "answer": "Ritkábban, alkalmi jelleggel",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B12",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B10"
+        ],
+        "condition": [
+            "B10_1",
+            "B10_4",
+            "B10_5",
+            "B10_6",
+            "B10_7",
+            "B10_10",
+            "B10_11"
+        ]
     },
     {
         "id": "B11",
@@ -1489,13 +1789,23 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B11_2",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B12",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B10"
+        ],
+        "condition": [
+            "B10_1",
+            "B10_4",
+            "B10_5",
+            "B10_6",
+            "B10_7",
+            "B10_10",
+            "B10_11"
+        ]
     },
     {
         "id": "B11",
@@ -1503,13 +1813,23 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B11_3",
         "answer": "Rendszeresen: legalább havonta",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 8.0,
-        "defaultNextQuestionId": "B12",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B10"
+        ],
+        "condition": [
+            "B10_1",
+            "B10_4",
+            "B10_5",
+            "B10_6",
+            "B10_7",
+            "B10_10",
+            "B10_11"
+        ]
     },
     {
         "id": "B11",
@@ -1517,13 +1837,23 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B11_4",
         "answer": "Rendszeresen: legalább hetente",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 15.0,
-        "defaultNextQuestionId": "B12",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B10"
+        ],
+        "condition": [
+            "B10_1",
+            "B10_4",
+            "B10_5",
+            "B10_6",
+            "B10_7",
+            "B10_10",
+            "B10_11"
+        ]
     },
     {
         "id": "B11",
@@ -1531,13 +1861,23 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B11_5",
         "answer": "2-3 havonta",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "B12",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B10"
+        ],
+        "condition": [
+            "B10_1",
+            "B10_4",
+            "B10_5",
+            "B10_6",
+            "B10_7",
+            "B10_10",
+            "B10_11"
+        ]
     },
     {
         "id": "B11",
@@ -1545,13 +1885,23 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B11_6",
         "answer": "Naponta",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 15.0,
-        "defaultNextQuestionId": "B12",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B10"
+        ],
+        "condition": [
+            "B10_1",
+            "B10_4",
+            "B10_5",
+            "B10_6",
+            "B10_7",
+            "B10_10",
+            "B10_11"
+        ]
     },
     {
         "id": "B12",
@@ -1559,13 +1909,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B12_1",
         "answer": "A cég számára fejlesztett mobilalkalmazás",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 15.0,
         "pontok": 1.0,
-        "defaultNextQuestionId": "B13",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B12",
@@ -1573,13 +1923,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B12_2",
         "answer": "Egyik sem",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 15.0,
         "pontok": 2.0,
-        "defaultNextQuestionId": "B13",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B12",
@@ -1587,13 +1937,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B12_3",
         "answer": "VPN (Virtual Private Network)",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 15.0,
         "pontok": 3.0,
-        "defaultNextQuestionId": "B13",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B12",
@@ -1601,13 +1951,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B12_4",
         "answer": "Nem felhőalapú, saját (fizikai) szerver",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 15.0,
         "pontok": 11.0,
-        "defaultNextQuestionId": "B13",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B12",
@@ -1615,13 +1965,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B12_5",
         "answer": "Felhőalapú szerver\/tárhely",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 15.0,
         "pontok": 15.0,
-        "defaultNextQuestionId": "B13",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B13",
@@ -1629,13 +1979,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B13_1",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 16.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B14",
-        "nextQuestionId": "B15",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B13",
@@ -1643,13 +1993,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B13_2",
         "answer": "Igen, számítógépre telepített rendszert",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 16.0,
         "pontok": 13.0,
-        "defaultNextQuestionId": "B14",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B13",
@@ -1657,13 +2007,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B13_3",
         "answer": "Nem használnak",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 16.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B14",
-        "nextQuestionId": "B15",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B13",
@@ -1671,27 +2021,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B13_4",
         "answer": "Igen, felhőalapú vagy hibrid rendszert",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 16.0,
         "pontok": 16.0,
-        "defaultNextQuestionId": "B14",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
-    },
-    {
-        "id": "B14",
-        "kerdes": "A vállalatirányítási \/ ügyviteli rendszer mely moduljait használják?",
-        "Temakorok": "Digitális Jelenlét",
-        "answer_id": "B14_1",
-        "answer": "",
-        "Többválasztós-e": 1,
-        "max_point": 5.0,
-        "pontok": null,
-        "defaultNextQuestionId": "B15",
-        "nextQuestionId": null,
-        "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B14",
@@ -1699,13 +2035,18 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B14_2",
         "answer": "Bérszámfejtés",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "B15",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B13"
+        ],
+        "condition": [
+            "B13_2",
+            "B13_4"
+        ]
     },
     {
         "id": "B14",
@@ -1713,13 +2054,18 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B14_3",
         "answer": "Pénzügy, számvitel támogatás",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 14.0,
         "pontok": 12.0,
-        "defaultNextQuestionId": "B15",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B13"
+        ],
+        "condition": [
+            "B13_2",
+            "B13_4"
+        ]
     },
     {
         "id": "B14",
@@ -1727,13 +2073,18 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B14_4",
         "answer": "Számlázás",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 26.0,
         "pontok": 21.0,
-        "defaultNextQuestionId": "B15",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B13"
+        ],
+        "condition": [
+            "B13_2",
+            "B13_4"
+        ]
     },
     {
         "id": "B14",
@@ -1741,13 +2092,18 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B14_5",
         "answer": "Könyvelés",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 10.0,
         "pontok": 8.0,
-        "defaultNextQuestionId": "B15",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B13"
+        ],
+        "condition": [
+            "B13_2",
+            "B13_4"
+        ]
     },
     {
         "id": "B14",
@@ -1755,13 +2111,18 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B14_6",
         "answer": "Dokumentum- és iratkezelés",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 6.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "B15",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B13"
+        ],
+        "condition": [
+            "B13_2",
+            "B13_4"
+        ]
     },
     {
         "id": "B14",
@@ -1769,13 +2130,18 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B14_7",
         "answer": "Kontrolling- és döntéstámogatás vagy vezetői információs rendszer",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "B15",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B13"
+        ],
+        "condition": [
+            "B13_2",
+            "B13_4"
+        ]
     },
     {
         "id": "B14",
@@ -1783,13 +2149,18 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B14_8",
         "answer": "Értékesítés támogatása",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 6.0,
         "pontok": 6.0,
-        "defaultNextQuestionId": "B15",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B13"
+        ],
+        "condition": [
+            "B13_2",
+            "B13_4"
+        ]
     },
     {
         "id": "B14",
@@ -1797,13 +2168,18 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B14_9",
         "answer": "Készlet- és raktárkezelés",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "B15",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B13"
+        ],
+        "condition": [
+            "B13_2",
+            "B13_4"
+        ]
     },
     {
         "id": "B14",
@@ -1811,13 +2187,18 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B14_10",
         "answer": "CRM (ügyfélkapcsolat-kezelés)",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 25.0,
         "pontok": 21.0,
-        "defaultNextQuestionId": "B15",
-        "nextQuestionId": "D8",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B13"
+        ],
+        "condition": [
+            "B13_2",
+            "B13_4"
+        ]
     },
     {
         "id": "B14",
@@ -1825,13 +2206,18 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B14_11",
         "answer": "Csoportmunka támogatás",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "B15",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B13"
+        ],
+        "condition": [
+            "B13_2",
+            "B13_4"
+        ]
     },
     {
         "id": "B14",
@@ -1839,13 +2225,18 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B14_12",
         "answer": "Gyártási folyamat tervezése vagy követése",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "B15",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B13"
+        ],
+        "condition": [
+            "B13_2",
+            "B13_4"
+        ]
     },
     {
         "id": "B14",
@@ -1853,13 +2244,18 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B14_13",
         "answer": "Projektmanagement vagy workflow támogatás",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "B15",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B13"
+        ],
+        "condition": [
+            "B13_2",
+            "B13_4"
+        ]
     },
     {
         "id": "B14",
@@ -1867,13 +2263,18 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B14_14",
         "answer": "Egyéb modul",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B15",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": true
+        "contains_Textbox": true,
+        "based_On": [
+            "B13"
+        ],
+        "condition": [
+            "B13_2",
+            "B13_4"
+        ]
     },
     {
         "id": "B14",
@@ -1881,13 +2282,18 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B14_15",
         "answer": "HR támogatás",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 6.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "B15",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B13"
+        ],
+        "condition": [
+            "B13_2",
+            "B13_4"
+        ]
     },
     {
         "id": "B15",
@@ -1895,13 +2301,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B15_1",
         "answer": "Számlázó rendszer",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 26.0,
         "pontok": 21.0,
-        "defaultNextQuestionId": "B16",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B15",
@@ -1909,13 +2315,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B15_2",
         "answer": "Vírusírtó",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 23.0,
         "pontok": 20.0,
-        "defaultNextQuestionId": "B16",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B15",
@@ -1923,13 +2329,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B15_3",
         "answer": "Irodai szoftvercsomag",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "B16",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B15",
@@ -1937,13 +2343,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B15_4",
         "answer": "Könyvelési rendszer",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 10.0,
         "pontok": 8.0,
-        "defaultNextQuestionId": "B16",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B15",
@@ -1951,13 +2357,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B15_5",
         "answer": "Készlet- és raktárkezelő rendszer",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "B16",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B15",
@@ -1965,13 +2371,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B15_6",
         "answer": "Bérszámfejtő rendszer",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "B16",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B15",
@@ -1979,13 +2385,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B15_7",
         "answer": "CRM (ügyfélkapcsolat-kezelő rendszer)",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 25.0,
         "pontok": 21.0,
-        "defaultNextQuestionId": "B16",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B15",
@@ -1993,13 +2399,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B15_8",
         "answer": "Dokumentum- és iratkezelő rendszer",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 6.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "B16",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B15",
@@ -2007,13 +2413,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B15_9",
         "answer": "Pénzügyi vagy számviteli szoftver",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 14.0,
         "pontok": 12.0,
-        "defaultNextQuestionId": "B16",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B15",
@@ -2021,13 +2427,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B15_10",
         "answer": "Projektmanagement vagy workflow támogató rendszer",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "B16",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B15",
@@ -2035,13 +2441,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B15_11",
         "answer": "Értékesítést támogató szoftver",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 6.0,
         "pontok": 6.0,
-        "defaultNextQuestionId": "B16",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B15",
@@ -2049,13 +2455,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B15_12",
         "answer": "Egyikkel sem",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B16",
-        "nextQuestionId": "B17",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B15",
@@ -2063,13 +2469,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B15_13",
         "answer": "Csoportmunka támogató szoftver",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 1.0,
-        "defaultNextQuestionId": "B16",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B15",
@@ -2077,13 +2483,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B15_14",
         "answer": "HR-t támogató rendszer",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 6.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "B16",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B15",
@@ -2091,13 +2497,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B15_15",
         "answer": "Kontrolling- és döntéstámogatás vagy vezetői információs rendszer",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "B16",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B15",
@@ -2105,13 +2511,13 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B15_16",
         "answer": "Gyártási folyamatot tervező vagy követő szoftver",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "B16",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B16",
@@ -2119,13 +2525,31 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B16_1",
         "answer": "Egyiket sem használják felhő-alapú szolgáltatásként",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B17_1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B15"
+        ],
+        "condition": [
+            "B15_1",
+            "B15_2",
+            "B15_3",
+            "B15_4",
+            "B15_5",
+            "B15_6",
+            "B15_7",
+            "B15_8",
+            "B15_9",
+            "B15_10",
+            "B15_11",
+            "B15_13",
+            "B15_14",
+            "B15_15",
+            "B15_16"
+        ]
     },
     {
         "id": "B16",
@@ -2133,13 +2557,31 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B16_2",
         "answer": "Vírusírtó",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 23.0,
         "pontok": 3.0,
-        "defaultNextQuestionId": "B17_1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B15"
+        ],
+        "condition": [
+            "B15_1",
+            "B15_2",
+            "B15_3",
+            "B15_4",
+            "B15_5",
+            "B15_6",
+            "B15_7",
+            "B15_8",
+            "B15_9",
+            "B15_10",
+            "B15_11",
+            "B15_13",
+            "B15_14",
+            "B15_15",
+            "B15_16"
+        ]
     },
     {
         "id": "B16",
@@ -2147,13 +2589,31 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B16_3",
         "answer": "Irodai szoftvercsomag",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 1.0,
-        "defaultNextQuestionId": "B17_1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B15"
+        ],
+        "condition": [
+            "B15_1",
+            "B15_2",
+            "B15_3",
+            "B15_4",
+            "B15_5",
+            "B15_6",
+            "B15_7",
+            "B15_8",
+            "B15_9",
+            "B15_10",
+            "B15_11",
+            "B15_13",
+            "B15_14",
+            "B15_15",
+            "B15_16"
+        ]
     },
     {
         "id": "B16",
@@ -2161,13 +2621,31 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B16_4",
         "answer": "Számlázó rendszer",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 0.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "B17_1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B15"
+        ],
+        "condition": [
+            "B15_1",
+            "B15_2",
+            "B15_3",
+            "B15_4",
+            "B15_5",
+            "B15_6",
+            "B15_7",
+            "B15_8",
+            "B15_9",
+            "B15_10",
+            "B15_11",
+            "B15_13",
+            "B15_14",
+            "B15_15",
+            "B15_16"
+        ]
     },
     {
         "id": "B16",
@@ -2175,13 +2653,31 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B16_5",
         "answer": "Nem tudja, melyiket használják felhő-alapú szolgáltatásként",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B17_1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B15"
+        ],
+        "condition": [
+            "B15_1",
+            "B15_2",
+            "B15_3",
+            "B15_4",
+            "B15_5",
+            "B15_6",
+            "B15_7",
+            "B15_8",
+            "B15_9",
+            "B15_10",
+            "B15_11",
+            "B15_13",
+            "B15_14",
+            "B15_15",
+            "B15_16"
+        ]
     },
     {
         "id": "B16",
@@ -2189,13 +2685,31 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B16_6",
         "answer": "Könyvelési rendszer",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 0.0,
         "pontok": 2.0,
-        "defaultNextQuestionId": "B17_1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B15"
+        ],
+        "condition": [
+            "B15_1",
+            "B15_2",
+            "B15_3",
+            "B15_4",
+            "B15_5",
+            "B15_6",
+            "B15_7",
+            "B15_8",
+            "B15_9",
+            "B15_10",
+            "B15_11",
+            "B15_13",
+            "B15_14",
+            "B15_15",
+            "B15_16"
+        ]
     },
     {
         "id": "B16",
@@ -2203,13 +2717,31 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B16_7",
         "answer": "CRM (ügyfélkapcsolat-kezelő rendszer)",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 4.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "B17_1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B15"
+        ],
+        "condition": [
+            "B15_1",
+            "B15_2",
+            "B15_3",
+            "B15_4",
+            "B15_5",
+            "B15_6",
+            "B15_7",
+            "B15_8",
+            "B15_9",
+            "B15_10",
+            "B15_11",
+            "B15_13",
+            "B15_14",
+            "B15_15",
+            "B15_16"
+        ]
     },
     {
         "id": "B16",
@@ -2217,13 +2749,31 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B16_8",
         "answer": "Bérszámfejtő rendszer",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 1.0,
-        "defaultNextQuestionId": "B17_1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B15"
+        ],
+        "condition": [
+            "B15_1",
+            "B15_2",
+            "B15_3",
+            "B15_4",
+            "B15_5",
+            "B15_6",
+            "B15_7",
+            "B15_8",
+            "B15_9",
+            "B15_10",
+            "B15_11",
+            "B15_13",
+            "B15_14",
+            "B15_15",
+            "B15_16"
+        ]
     },
     {
         "id": "B16",
@@ -2231,13 +2781,31 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B16_9",
         "answer": "Pénzügyi vagy számviteli szoftver",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 0.0,
         "pontok": 2.0,
-        "defaultNextQuestionId": "B17_1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B15"
+        ],
+        "condition": [
+            "B15_1",
+            "B15_2",
+            "B15_3",
+            "B15_4",
+            "B15_5",
+            "B15_6",
+            "B15_7",
+            "B15_8",
+            "B15_9",
+            "B15_10",
+            "B15_11",
+            "B15_13",
+            "B15_14",
+            "B15_15",
+            "B15_16"
+        ]
     },
     {
         "id": "B16",
@@ -2245,27 +2813,31 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B16_10",
         "answer": "Készlet- és raktárkezelő rendszer",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 6.0,
         "pontok": 1.0,
-        "defaultNextQuestionId": "B17_1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
-    },
-    {
-        "id": "B16",
-        "kerdes": "A megjelöltek közül melyiket használják felhő-alapú szolgáltatásként (is)?",
-        "Temakorok": "Digitális Jelenlét",
-        "answer_id": "B16_11",
-        "answer": "",
-        "Többválasztós-e": 1,
-        "max_point": 5.0,
-        "pontok": null,
-        "defaultNextQuestionId": "B17_1",
-        "nextQuestionId": null,
-        "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B15"
+        ],
+        "condition": [
+            "B15_1",
+            "B15_2",
+            "B15_3",
+            "B15_4",
+            "B15_5",
+            "B15_6",
+            "B15_7",
+            "B15_8",
+            "B15_9",
+            "B15_10",
+            "B15_11",
+            "B15_13",
+            "B15_14",
+            "B15_15",
+            "B15_16"
+        ]
     },
     {
         "id": "B16",
@@ -2273,13 +2845,31 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B16_12",
         "answer": "Dokumentum- és iratkezelő rendszer",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 1.0,
-        "defaultNextQuestionId": "B17_1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B15"
+        ],
+        "condition": [
+            "B15_1",
+            "B15_2",
+            "B15_3",
+            "B15_4",
+            "B15_5",
+            "B15_6",
+            "B15_7",
+            "B15_8",
+            "B15_9",
+            "B15_10",
+            "B15_11",
+            "B15_13",
+            "B15_14",
+            "B15_15",
+            "B15_16"
+        ]
     },
     {
         "id": "B16",
@@ -2287,13 +2877,31 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B16_13",
         "answer": "Értékesítést támogató szoftver",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 6.0,
         "pontok": 6.0,
-        "defaultNextQuestionId": "B17_1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B15"
+        ],
+        "condition": [
+            "B15_1",
+            "B15_2",
+            "B15_3",
+            "B15_4",
+            "B15_5",
+            "B15_6",
+            "B15_7",
+            "B15_8",
+            "B15_9",
+            "B15_10",
+            "B15_11",
+            "B15_13",
+            "B15_14",
+            "B15_15",
+            "B15_16"
+        ]
     },
     {
         "id": "B16",
@@ -2301,13 +2909,31 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B16_14",
         "answer": "Csoportmunka támogató szoftver",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 2.0,
-        "defaultNextQuestionId": "B17_1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B15"
+        ],
+        "condition": [
+            "B15_1",
+            "B15_2",
+            "B15_3",
+            "B15_4",
+            "B15_5",
+            "B15_6",
+            "B15_7",
+            "B15_8",
+            "B15_9",
+            "B15_10",
+            "B15_11",
+            "B15_13",
+            "B15_14",
+            "B15_15",
+            "B15_16"
+        ]
     },
     {
         "id": "B16",
@@ -2315,13 +2941,31 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B16_15",
         "answer": "Projektmanagement vagy workflow támogató rendszer",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 1.0,
-        "defaultNextQuestionId": "B17_1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B15"
+        ],
+        "condition": [
+            "B15_1",
+            "B15_2",
+            "B15_3",
+            "B15_4",
+            "B15_5",
+            "B15_6",
+            "B15_7",
+            "B15_8",
+            "B15_9",
+            "B15_10",
+            "B15_11",
+            "B15_13",
+            "B15_14",
+            "B15_15",
+            "B15_16"
+        ]
     },
     {
         "id": "B16",
@@ -2329,13 +2973,31 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B16_16",
         "answer": "Kontrolling- és döntéstámogatás vagy vezetői információs rendszer",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 6.0,
         "pontok": 1.0,
-        "defaultNextQuestionId": "B17_1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B15"
+        ],
+        "condition": [
+            "B15_1",
+            "B15_2",
+            "B15_3",
+            "B15_4",
+            "B15_5",
+            "B15_6",
+            "B15_7",
+            "B15_8",
+            "B15_9",
+            "B15_10",
+            "B15_11",
+            "B15_13",
+            "B15_14",
+            "B15_15",
+            "B15_16"
+        ]
     },
     {
         "id": "B16",
@@ -2343,13 +3005,31 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B16_17",
         "answer": "HR-t támogató rendszer",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 1.0,
-        "defaultNextQuestionId": "B17_1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B15"
+        ],
+        "condition": [
+            "B15_1",
+            "B15_2",
+            "B15_3",
+            "B15_4",
+            "B15_5",
+            "B15_6",
+            "B15_7",
+            "B15_8",
+            "B15_9",
+            "B15_10",
+            "B15_11",
+            "B15_13",
+            "B15_14",
+            "B15_15",
+            "B15_16"
+        ]
     },
     {
         "id": "B16",
@@ -2357,13 +3037,31 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B16_18",
         "answer": "Gyártási folyamatot tervező vagy követő szoftver",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 1.0,
-        "defaultNextQuestionId": "B17_1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B15"
+        ],
+        "condition": [
+            "B15_1",
+            "B15_2",
+            "B15_3",
+            "B15_4",
+            "B15_5",
+            "B15_6",
+            "B15_7",
+            "B15_8",
+            "B15_9",
+            "B15_10",
+            "B15_11",
+            "B15_13",
+            "B15_14",
+            "B15_15",
+            "B15_16"
+        ]
     },
     {
         "id": "B17_1",
@@ -2371,13 +3069,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B17_1_1",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 4.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B17_2",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "B17_1",
@@ -2385,13 +3087,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B17_1_2",
         "answer": "Nem tudja \/ Nem ismeri",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 4.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B17_2",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "B17_1",
@@ -2399,13 +3105,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B17_1_3",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 4.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "B17_2",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "B17_2",
@@ -2413,13 +3123,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B17_2_1",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 4.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B17_3",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "B17_2",
@@ -2427,13 +3141,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B17_2_2",
         "answer": "Nem tudja \/ Nem ismeri",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 4.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B17_3",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "B17_2",
@@ -2441,13 +3159,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B17_2_3",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 4.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "B17_3",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "B17_3",
@@ -2455,13 +3177,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B17_3_1",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 4.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "OTP2",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "B17_3",
@@ -2469,13 +3195,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B17_3_2",
         "answer": "Nem tudja \/ Nem ismeri",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 4.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "OTP2",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "B17_3",
@@ -2483,13 +3213,17 @@
         "Temakorok": "Digitális Jelenlét",
         "answer_id": "B17_3_3",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 4.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "OTP2",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "OTP2",
@@ -2497,13 +3231,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "OTP2_1",
         "answer": "Inkább biztonságban érzi",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "C1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "OTP2",
@@ -2511,13 +3245,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "OTP2_2",
         "answer": "Inkább nem érzi biztonságban",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "C1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "OTP2",
@@ -2525,13 +3259,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "OTP2_3",
         "answer": "Nem tudja megítélni",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "C1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "OTP2",
@@ -2539,13 +3273,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "OTP2_4",
         "answer": "Teljes mértékben biztonságban érzi",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "C1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "OTP2",
@@ -2553,13 +3287,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "OTP2_5",
         "answer": "Egyáltalán nem érzi biztonságban",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "C1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "C1",
@@ -2567,13 +3301,13 @@
         "Temakorok": "Digitális mindennapok",
         "answer_id": "C1_1",
         "answer": "Központi e-mailt vállalati domainnel",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 9.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "C2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "C1",
@@ -2581,13 +3315,13 @@
         "Temakorok": "Digitális mindennapok",
         "answer_id": "C1_2",
         "answer": "Vállalati domain nélküli bármilyen e-mailt",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 9.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "C2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "C1",
@@ -2595,13 +3329,13 @@
         "Temakorok": "Digitális mindennapok",
         "answer_id": "C1_3",
         "answer": "Munkavállalói e-mail(eke)t vállalati domainnel",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 9.0,
         "pontok": 9.0,
-        "defaultNextQuestionId": "C2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "C1",
@@ -2609,13 +3343,13 @@
         "Temakorok": "Digitális mindennapok",
         "answer_id": "C1_4",
         "answer": "Nem használnak e-mailt",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 9.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "C2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "C2",
@@ -2623,13 +3357,17 @@
         "Temakorok": "Digitális mindennapok",
         "answer_id": "C2_1",
         "answer": "Személyes megbeszélésen",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 10.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "C3",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "C2",
@@ -2637,13 +3375,17 @@
         "Temakorok": "Digitális mindennapok",
         "answer_id": "C2_2",
         "answer": "Nem internetalapú telefonon",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 10.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "C3",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "C2",
@@ -2651,13 +3393,17 @@
         "Temakorok": "Digitális mindennapok",
         "answer_id": "C2_3",
         "answer": "Internetalapú (videó)telefon online csevegőeszközön",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 10.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "C3",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "C2",
@@ -2665,27 +3411,17 @@
         "Temakorok": "Digitális mindennapok",
         "answer_id": "C2_4",
         "answer": "E-mailben",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 10.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "C3",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
-    },
-    {
-        "id": "C2",
-        "kerdes": "A digitális eszközt használó munkatársak mely csatorná(ko)n kommunikálnak egymással a vállalati működés során?",
-        "Temakorok": "Digitális mindennapok",
-        "answer_id": "C2_5",
-        "answer": "",
-        "Többválasztós-e": 1,
-        "max_point": 10.0,
-        "pontok": null,
-        "defaultNextQuestionId": "C3",
-        "nextQuestionId": null,
-        "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "C2",
@@ -2693,13 +3429,17 @@
         "Temakorok": "Digitális mindennapok",
         "answer_id": "C2_6",
         "answer": "Irodai kollaboratív csevegő alkalmazásban",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 10.0,
         "pontok": 10.0,
-        "defaultNextQuestionId": "C3",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "C3",
@@ -2707,13 +3447,17 @@
         "Temakorok": "Digitális mindennapok",
         "answer_id": "C3_1",
         "answer": "Mobil adattárolón",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 15.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "C4",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "C3",
@@ -2721,13 +3465,17 @@
         "Temakorok": "Digitális mindennapok",
         "answer_id": "C3_2",
         "answer": "E-mailben, csatolt fájlon keresztül",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 15.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "C4",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "C3",
@@ -2735,13 +3483,17 @@
         "Temakorok": "Digitális mindennapok",
         "answer_id": "C3_5",
         "answer": "A vállalat fizikai szerverén tárolt fájlra hivatkozó link megosztásával",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 15.0,
         "pontok": 12.0,
-        "defaultNextQuestionId": "C4",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "C3",
@@ -2749,13 +3501,17 @@
         "Temakorok": "Digitális mindennapok",
         "answer_id": "C3_6",
         "answer": "Egyéb módon",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 15.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "C4",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": true
+        "contains_Textbox": true,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "C3",
@@ -2763,13 +3519,17 @@
         "Temakorok": "Digitális mindennapok",
         "answer_id": "C3_8",
         "answer": "A vállalat felhő-alapú szerverén\/tárhelyén tárolt fájlra hivatkozó link megosztásával",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 15.0,
         "pontok": 15.0,
-        "defaultNextQuestionId": "C4",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "C4",
@@ -2777,13 +3537,17 @@
         "Temakorok": "Digitális mindennapok",
         "answer_id": "C4_1",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 10.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "D1",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "C4",
@@ -2791,13 +3555,17 @@
         "Temakorok": "Digitális mindennapok",
         "answer_id": "C4_2",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 10.0,
         "pontok": 10.0,
-        "defaultNextQuestionId": "D1",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "C4",
@@ -2805,13 +3573,17 @@
         "Temakorok": "Digitális mindennapok",
         "answer_id": "C4_3",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 10.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "D1",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "D1",
@@ -2819,13 +3591,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D1_1",
         "answer": "Lakosság",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "D2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D1",
@@ -2833,13 +3605,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D1_2",
         "answer": "Magánvállalatok",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "D2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D1",
@@ -2847,27 +3619,27 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D1_3",
         "answer": "Kormányzat \/ önkormányzatok \/ közigazgatás",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "D2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D2",
         "kerdes": "2023 folyamán a vállalat hány vásárló vagy ügyfél számára értékesítette termékét vagy szolgáltatását?",
         "Temakorok": "Értékesítés és marketing",
-        "answer_id": "D2_1",
-        "answer": "Írja be a választ!",
-        "Többválasztós-e": 0,
+        "answer_id": "D2_103",
+        "answer": "2600",
+        "Többválasztós-e": 0.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "D3",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": true
+        "contains_Textbox": true,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D3",
@@ -2875,13 +3647,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D3_1",
         "answer": "Magyarország",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "D4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D3",
@@ -2889,13 +3661,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D3_2",
         "answer": "Külföld",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "D4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D4",
@@ -2903,13 +3675,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D4_1",
         "answer": "Online, internetes",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "D5",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D4",
@@ -2917,13 +3689,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D4_2",
         "answer": "Egyáltalán nem folytattak hirdetési tevékenységet",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "D5",
-        "nextQuestionId": "D6",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D4",
@@ -2931,13 +3703,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D4_3",
         "answer": "Hagyományos, offline",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "D5",
-        "nextQuestionId": "D6",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D5",
@@ -2945,13 +3717,17 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D5_1",
         "answer": "Egyiken sem",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 35.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "D6",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "D4"
+        ],
+        "condition": [
+            "D4_1"
+        ]
     },
     {
         "id": "D5",
@@ -2959,27 +3735,17 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D5_2",
         "answer": "Google Ads \/ Display, banner hirdetés",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 35.0,
         "pontok": 2.0,
-        "defaultNextQuestionId": "D6",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
-    },
-    {
-        "id": "D5",
-        "kerdes": "Az elmúlt egy év során használtak fizetett online hirdetést a következő felületeken?",
-        "Temakorok": "Értékesítés és marketing",
-        "answer_id": "D5_3",
-        "answer": "",
-        "Többválasztós-e": 1,
-        "max_point": 35.0,
-        "pontok": null,
-        "defaultNextQuestionId": "D6",
-        "nextQuestionId": null,
-        "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "D4"
+        ],
+        "condition": [
+            "D4_1"
+        ]
     },
     {
         "id": "D5",
@@ -2987,13 +3753,17 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D5_4",
         "answer": "Facebook",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 35.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "D6",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "D4"
+        ],
+        "condition": [
+            "D4_1"
+        ]
     },
     {
         "id": "D5",
@@ -3001,13 +3771,17 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D5_5",
         "answer": "Google Shopping",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 35.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "D6",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "D4"
+        ],
+        "condition": [
+            "D4_1"
+        ]
     },
     {
         "id": "D5",
@@ -3015,13 +3789,17 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D5_6",
         "answer": "Instagram",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 35.0,
         "pontok": 6.0,
-        "defaultNextQuestionId": "D6",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "D4"
+        ],
+        "condition": [
+            "D4_1"
+        ]
     },
     {
         "id": "D5",
@@ -3029,13 +3807,17 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D5_7",
         "answer": "YouTube",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 35.0,
         "pontok": 7.0,
-        "defaultNextQuestionId": "D6",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "D4"
+        ],
+        "condition": [
+            "D4_1"
+        ]
     },
     {
         "id": "D5",
@@ -3043,13 +3825,17 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D5_8",
         "answer": "LinkedIn",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 35.0,
         "pontok": 8.0,
-        "defaultNextQuestionId": "D6",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "D4"
+        ],
+        "condition": [
+            "D4_1"
+        ]
     },
     {
         "id": "D6",
@@ -3057,13 +3843,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D6_1",
         "answer": "Egyiket sem",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 40.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "OTP1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D6",
@@ -3071,13 +3857,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D6_2",
         "answer": "Keresőoptimalizálást (SEO)",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 40.0,
         "pontok": 10.0,
-        "defaultNextQuestionId": "OTP1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D6",
@@ -3085,13 +3871,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D6_3",
         "answer": "Email-hírlevelet, DM levelet",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 40.0,
         "pontok": 20.0,
-        "defaultNextQuestionId": "OTP1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D6",
@@ -3099,13 +3885,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D6_4",
         "answer": "Szakmai blogot",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 40.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "OTP1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D6",
@@ -3113,13 +3899,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D6_5",
         "answer": "Szponzorált tartalmat online hírportálon, nem vállalati blogon",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 40.0,
         "pontok": 10.0,
-        "defaultNextQuestionId": "OTP1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D6",
@@ -3127,13 +3913,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D6_6",
         "answer": "Egyéb online eszközt",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 40.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "OTP1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": true
+        "contains_Textbox": true,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D6",
@@ -3141,13 +3927,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D6_8",
         "answer": "YouTube videót, vlogot",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 40.0,
         "pontok": 20.0,
-        "defaultNextQuestionId": "OTP1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D6",
@@ -3155,13 +3941,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D6_9",
         "answer": "Podcastot",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 40.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "OTP1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "OTP1",
@@ -3169,13 +3955,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "OTP1_1",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "D7",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "OTP1",
@@ -3183,13 +3969,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "OTP1_2",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "D7",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "OTP1",
@@ -3197,13 +3983,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "OTP1_3",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "D7",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D7",
@@ -3211,13 +3997,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D7_1",
         "answer": "Egyéb",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 51.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "D8",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": true
+        "contains_Textbox": true,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D7",
@@ -3225,13 +4011,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D7_3",
         "answer": "Egyiket sem",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 51.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "D8",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D7",
@@ -3239,13 +4025,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D7_4",
         "answer": "A honlapon árajánlat-kérési \/ foglalási lehetőség",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 51.0,
         "pontok": 27.0,
-        "defaultNextQuestionId": "D8",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D7",
@@ -3253,13 +4039,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D7_5",
         "answer": "Árösszehasonlító oldalakon megjelenés",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 51.0,
         "pontok": 12.0,
-        "defaultNextQuestionId": "D8",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D7",
@@ -3267,13 +4053,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D7_6",
         "answer": "Webshop vagy rendelés\/vásárlási lehetőség a honlapon",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 51.0,
         "pontok": 27.0,
-        "defaultNextQuestionId": "D8",
-        "nextQuestionId": "D9",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D7",
@@ -3281,27 +4067,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D7_8",
         "answer": "Piactér-oldalon megjelenés",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 51.0,
         "pontok": 12.0,
-        "defaultNextQuestionId": "D8",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
-    },
-    {
-        "id": "D8",
-        "kerdes": "Milyen célra használják az ügyfélkapcsolat-kezelési rendszert (CRM)?",
-        "Temakorok": "Értékesítés és marketing",
-        "answer_id": "D8_1",
-        "answer": "",
-        "Többválasztós-e": 1,
-        "max_point": 15.0,
-        "pontok": null,
-        "defaultNextQuestionId": "D9",
-        "nextQuestionId": null,
-        "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "D8",
@@ -3309,13 +4081,17 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D8_2",
         "answer": "Ügyfelek, partnerek nyilvántartása",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 15.0,
         "pontok": 1.0,
-        "defaultNextQuestionId": "D9",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B14"
+        ],
+        "condition": [
+            "B14_10"
+        ]
     },
     {
         "id": "D8",
@@ -3323,13 +4099,17 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D8_3",
         "answer": "E-mail vagy sms kampányok menedzselése",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 15.0,
         "pontok": 3.0,
-        "defaultNextQuestionId": "D9",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B14"
+        ],
+        "condition": [
+            "B14_10"
+        ]
     },
     {
         "id": "D8",
@@ -3337,13 +4117,17 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D8_4",
         "answer": "Riportok készítése",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 15.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "D9",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B14"
+        ],
+        "condition": [
+            "B14_10"
+        ]
     },
     {
         "id": "D8",
@@ -3351,13 +4135,17 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D8_5",
         "answer": "Az ügyfelek szegmentálása demográfia, vásárlási szokások, egyéb tényezők alapján",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 15.0,
         "pontok": 7.0,
-        "defaultNextQuestionId": "D9",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B14"
+        ],
+        "condition": [
+            "B14_10"
+        ]
     },
     {
         "id": "D9",
@@ -3365,13 +4153,17 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D9_2",
         "answer": "Nincs lehetőség online azonnali fizetésre",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 23.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "D10",
-        "nextQuestionId": "E1",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "D9",
@@ -3379,13 +4171,17 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D9_3",
         "answer": "Online bankkártyás fizetés valamely bank fizetési rendszerén keresztül",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 23.0,
         "pontok": 16.0,
-        "defaultNextQuestionId": "D10",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "D9",
@@ -3393,13 +4189,17 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D9_4",
         "answer": "Banki átutalás, előre utalás (Sofort Banking is)",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 23.0,
         "pontok": 7.0,
-        "defaultNextQuestionId": "D10",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "D9",
@@ -3407,27 +4207,35 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D9_5",
         "answer": "Online fizetési közvetítőn, de nem bankon keresztül",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 23.0,
         "pontok": 16.0,
-        "defaultNextQuestionId": "D10",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "D10",
         "kerdes": "2023-ban a bevétel körülbelül hány százaléka keletkezett online vagy webalapú értékesítésből?",
         "Temakorok": "Értékesítés és marketing",
-        "answer_id": "D10_1",
-        "answer": "Írja be a választ!",
-        "Többválasztós-e": 0,
+        "answer_id": "D10_20",
+        "answer": "100.0",
+        "Többválasztós-e": 0.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "E1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": true
+        "contains_Textbox": true,
+        "based_On": [
+            "B1_2"
+        ],
+        "condition": [
+            "B1_2_2"
+        ]
     },
     {
         "id": "E1",
@@ -3435,13 +4243,13 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E1_1",
         "answer": "Vállalati e-mailek fogadására\/küldésére",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 16.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "E2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "E1",
@@ -3449,13 +4257,13 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E1_2",
         "answer": "Egyikre sincs lehetőség",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 16.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "E2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "E1",
@@ -3463,13 +4271,13 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E1_3",
         "answer": "A vállalati szerveren tárolt fájlokhoz hozzáférésre",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 16.0,
         "pontok": 4.0,
-        "defaultNextQuestionId": "E2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "E1",
@@ -3477,13 +4285,13 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E1_4",
         "answer": "Vállalatirányítási \/ ügyviteli rendszerre való belépésre",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 16.0,
         "pontok": 3.0,
-        "defaultNextQuestionId": "E2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "E1",
@@ -3491,13 +4299,13 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E1_5",
         "answer": "Webshop-felületre való belépésre",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 16.0,
         "pontok": 3.0,
-        "defaultNextQuestionId": "E2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "E1",
@@ -3505,13 +4313,13 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E1_6",
         "answer": "Más, vállalatvezetéssel kapcsolatos tevékenységre",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 16.0,
         "pontok": 2.0,
-        "defaultNextQuestionId": "E2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": true
+        "contains_Textbox": true,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "E1",
@@ -3519,13 +4327,13 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E1_9",
         "answer": "Vezetői információs rendszerre való belépésre",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 16.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "E2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "E2",
@@ -3533,13 +4341,13 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E2_1",
         "answer": "Igen, rendszeresen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 15.0,
-        "defaultNextQuestionId": "E3",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "E2",
@@ -3547,13 +4355,13 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E2_2",
         "answer": "Egyáltalán nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "E3",
-        "nextQuestionId": "E4",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "E2",
@@ -3561,13 +4369,13 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E2_3",
         "answer": "Igen, de csak esetleges jelleggel",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 8.0,
-        "defaultNextQuestionId": "E3",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "E3",
@@ -3575,13 +4383,18 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E3_1",
         "answer": "Excel vagy más táblázatkezelő használatával",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 15.0,
         "pontok": 8.0,
-        "defaultNextQuestionId": "E4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "E2"
+        ],
+        "condition": [
+            "E2_1",
+            "E2_3"
+        ]
     },
     {
         "id": "E3",
@@ -3589,13 +4402,18 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E3_3",
         "answer": "Egyéb módon",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 15.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "E4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": true
+        "contains_Textbox": true,
+        "based_On": [
+            "E2"
+        ],
+        "condition": [
+            "E2_1",
+            "E2_3"
+        ]
     },
     {
         "id": "E3",
@@ -3603,13 +4421,18 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E3_5",
         "answer": "Papíralapú összesítéssel",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 15.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "E4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "E2"
+        ],
+        "condition": [
+            "E2_1",
+            "E2_3"
+        ]
     },
     {
         "id": "E3",
@@ -3617,13 +4440,18 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E3_6",
         "answer": "A legfontosabb adatokat egy helyen megjelenítő felületen",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 15.0,
         "pontok": 15.0,
-        "defaultNextQuestionId": "E4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "E2"
+        ],
+        "condition": [
+            "E2_1",
+            "E2_3"
+        ]
     },
     {
         "id": "E3",
@@ -3631,13 +4459,18 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E3_7",
         "answer": "Az adott rendszer\/szoftver saját adatmegjelenítési moduljával",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 15.0,
         "pontok": 12.0,
-        "defaultNextQuestionId": "E4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "E2"
+        ],
+        "condition": [
+            "E2_1",
+            "E2_3"
+        ]
     },
     {
         "id": "E3",
@@ -3645,13 +4478,18 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E3_8",
         "answer": "Nem tudja",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 15.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "E4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "E2"
+        ],
+        "condition": [
+            "E2_1",
+            "E2_3"
+        ]
     },
     {
         "id": "E4",
@@ -3659,13 +4497,13 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E4_1",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "E5",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "E4",
@@ -3673,13 +4511,13 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E4_2",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "E5",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "E5",
@@ -3687,13 +4525,13 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E5_1",
         "answer": "Egyiket sem",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 4.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "F1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "E5",
@@ -3701,13 +4539,13 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E5_2",
         "answer": "Álláshirdetés közzététele álláskereső honlapon",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 4.0,
         "pontok": 2.0,
-        "defaultNextQuestionId": "F1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "E5",
@@ -3715,13 +4553,13 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E5_3",
         "answer": "Álláshirdetés megjelentetése a vállalat honlapján és\/vagy közösségi oldalain",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 4.0,
         "pontok": 2.0,
-        "defaultNextQuestionId": "F1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "E5",
@@ -3729,13 +4567,13 @@
         "Temakorok": "Vállalatvezetés",
         "answer_id": "E5_4",
         "answer": "Az utóbbi egy év során nem hirdettek új állást",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 4.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "F1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "F1",
@@ -3743,13 +4581,17 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "F1_1",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 17.0,
         "pontok": 17.0,
-        "defaultNextQuestionId": "F2",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "F1",
@@ -3757,13 +4599,17 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "F1_2",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 17.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "F2",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "F1",
@@ -3771,13 +4617,17 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "F1_3",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 17.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "F2",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "F2",
@@ -3785,13 +4635,17 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "F2_1",
         "answer": "Igen, a digitális eszköz saját merevlemeze tárolja",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 27.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "F3_1",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "F2",
@@ -3799,13 +4653,17 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "F2_2",
         "answer": "Nem készül biztonsági másolat",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 27.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "F3_1",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "F2",
@@ -3813,13 +4671,17 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "F2_3",
         "answer": "Nem tudja",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 27.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "F3_1",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "F2",
@@ -3827,13 +4689,17 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "F2_4",
         "answer": "Igen, csatlakoztatott pendrive vagy külső merevlemez segítségével",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 27.0,
         "pontok": 10.0,
-        "defaultNextQuestionId": "F3_1",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "F2",
@@ -3841,13 +4707,17 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "F2_5",
         "answer": "Igen, a vállalat saját fizikai szervere tárolja",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 27.0,
         "pontok": 27.0,
-        "defaultNextQuestionId": "F3_1",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "F2",
@@ -3855,13 +4725,17 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "F2_6",
         "answer": "Igen, a vállalati felhő-alapú szerver\/tárhely tárolja",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 27.0,
         "pontok": 22.0,
-        "defaultNextQuestionId": "F3_1",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "F2",
@@ -3869,13 +4743,17 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "F2_8",
         "answer": "Egyéb módon",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 27.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "F3_1",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": true
+        "contains_Textbox": true,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "F3_1",
@@ -3883,13 +4761,17 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "F3_1_1",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 13.0,
         "pontok": 13.0,
-        "defaultNextQuestionId": "F3_2",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "F3_1",
@@ -3897,13 +4779,17 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "F3_1_2",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 13.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "F3_2",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "F3_1",
@@ -3911,13 +4797,17 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "F3_1_3",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 13.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "F3_2",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "F3_2",
@@ -3925,13 +4815,17 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "F3_2_1",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 12.0,
         "pontok": 12.0,
-        "defaultNextQuestionId": "G1_1",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "F3_2",
@@ -3939,13 +4833,17 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "F3_2_2",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 12.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "G1_1",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "F3_2",
@@ -3953,13 +4851,17 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "F3_2_3",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 12.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "G1_1",
-        "nextQuestionId": null,
         "is_A7_related": true,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "A7"
+        ],
+        "condition": [
+            ">0"
+        ]
     },
     {
         "id": "G1_1",
@@ -3967,13 +4869,13 @@
         "Temakorok": "Digitális pénzügy",
         "answer_id": "G1_1_1",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 16.0,
         "pontok": 16.0,
-        "defaultNextQuestionId": "G1_2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "G1_1",
@@ -3981,13 +4883,13 @@
         "Temakorok": "Digitális pénzügy",
         "answer_id": "G1_1_2",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 16.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "G1_2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "G1_1",
@@ -3995,13 +4897,13 @@
         "Temakorok": "Digitális pénzügy",
         "answer_id": "G1_1_3",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 16.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "G1_2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "G1_2",
@@ -4009,13 +4911,13 @@
         "Temakorok": "Digitális pénzügy",
         "answer_id": "G1_2_1",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 14.0,
         "pontok": 14.0,
-        "defaultNextQuestionId": "G2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "G1_2",
@@ -4023,13 +4925,13 @@
         "Temakorok": "Digitális pénzügy",
         "answer_id": "G1_2_2",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 14.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "G2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "G1_2",
@@ -4037,13 +4939,13 @@
         "Temakorok": "Digitális pénzügy",
         "answer_id": "G1_2_3",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 14.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "G2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "G2",
@@ -4051,13 +4953,13 @@
         "Temakorok": "Digitális pénzügy",
         "answer_id": "G2_1",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 10.0,
         "pontok": 10.0,
-        "defaultNextQuestionId": "G3",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "G2",
@@ -4065,13 +4967,13 @@
         "Temakorok": "Digitális pénzügy",
         "answer_id": "G2_2",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 10.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "G3",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "G2",
@@ -4079,13 +4981,13 @@
         "Temakorok": "Digitális pénzügy",
         "answer_id": "G2_3",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 10.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "G3",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "G3",
@@ -4093,13 +4995,13 @@
         "Temakorok": "Digitális pénzügy",
         "answer_id": "G3_1",
         "answer": "Igen",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 10.0,
         "pontok": 10.0,
-        "defaultNextQuestionId": "G4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "G3",
@@ -4107,13 +5009,13 @@
         "Temakorok": "Digitális pénzügy",
         "answer_id": "G3_2",
         "answer": "Nem",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 10.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "G4",
-        "nextQuestionId": "Z1",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "G3",
@@ -4121,27 +5023,31 @@
         "Temakorok": "Digitális pénzügy",
         "answer_id": "G3_3",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 10.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "G4",
-        "nextQuestionId": "Z1",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "G4",
         "kerdes": "A 2023 folyamán kibocsátott számlák körülbelül hány százaléka volt elektronikus számla?",
         "Temakorok": "Digitális pénzügy",
-        "answer_id": "G4_1",
-        "answer": "Írd be a választ!",
-        "Többválasztós-e": 0,
+        "answer_id": "G4_24",
+        "answer": "8.0",
+        "Többválasztós-e": 0.0,
         "max_point": null,
         "pontok": null,
-        "defaultNextQuestionId": "G4",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": true
+        "contains_Textbox": true,
+        "based_On": [
+            "G3"
+        ],
+        "condition": [
+            "G3_1"
+        ]
     },
     {
         "id": "B11",
@@ -4149,13 +5055,23 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "B11_1",
         "answer": "Ritkábban, alkalmi jelleggel",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 5.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B12",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B10"
+        ],
+        "condition": [
+            "B10_1",
+            "B10_4",
+            "B10_5",
+            "B10_6",
+            "B10_7",
+            "B10_10",
+            "B10_11"
+        ]
     },
     {
         "id": "B11",
@@ -4163,13 +5079,23 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "B11_2",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 5.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B12",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B10"
+        ],
+        "condition": [
+            "B10_1",
+            "B10_4",
+            "B10_5",
+            "B10_6",
+            "B10_7",
+            "B10_10",
+            "B10_11"
+        ]
     },
     {
         "id": "B11",
@@ -4177,13 +5103,23 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "B11_3",
         "answer": "Rendszeresen: legalább havonta",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 5.0,
         "pontok": 2.0,
-        "defaultNextQuestionId": "B12",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B10"
+        ],
+        "condition": [
+            "B10_1",
+            "B10_4",
+            "B10_5",
+            "B10_6",
+            "B10_7",
+            "B10_10",
+            "B10_11"
+        ]
     },
     {
         "id": "B11",
@@ -4191,13 +5127,23 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "B11_4",
         "answer": "Rendszeresen: legalább hetente",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 5.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "B12",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B10"
+        ],
+        "condition": [
+            "B10_1",
+            "B10_4",
+            "B10_5",
+            "B10_6",
+            "B10_7",
+            "B10_10",
+            "B10_11"
+        ]
     },
     {
         "id": "B11",
@@ -4205,13 +5151,23 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "B11_5",
         "answer": "2-3 havonta",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 5.0,
         "pontok": 1.0,
-        "defaultNextQuestionId": "B12",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B10"
+        ],
+        "condition": [
+            "B10_1",
+            "B10_4",
+            "B10_5",
+            "B10_6",
+            "B10_7",
+            "B10_10",
+            "B10_11"
+        ]
     },
     {
         "id": "B11",
@@ -4219,13 +5175,23 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "B11_6",
         "answer": "Naponta",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 5.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "B12",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B10"
+        ],
+        "condition": [
+            "B10_1",
+            "B10_4",
+            "B10_5",
+            "B10_6",
+            "B10_7",
+            "B10_10",
+            "B10_11"
+        ]
     },
     {
         "id": "B12",
@@ -4233,13 +5199,13 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "B12_1",
         "answer": "A cég számára fejlesztett mobilalkalmazás",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 8.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B13",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B12",
@@ -4247,13 +5213,13 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "B12_2",
         "answer": "Egyik sem",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 8.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B13",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B12",
@@ -4261,13 +5227,13 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "B12_3",
         "answer": "VPN (Virtual Private Network)",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 8.0,
         "pontok": 8.0,
-        "defaultNextQuestionId": "B13",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B12",
@@ -4275,13 +5241,13 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "B12_4",
         "answer": "Nem felhőalapú, saját (fizikai) szerver",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 8.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B13",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B12",
@@ -4289,13 +5255,13 @@
         "Temakorok": "Informatikai biztonság",
         "answer_id": "B12_5",
         "answer": "Felhőalapú szerver\/tárhely",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 8.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B13",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "C1",
@@ -4303,13 +5269,13 @@
         "Temakorok": "Digitális jelenlét",
         "answer_id": "C1_1",
         "answer": "Központi e-mailt vállalati domainnel",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "C2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "C1",
@@ -4317,13 +5283,13 @@
         "Temakorok": "Digitális jelenlét",
         "answer_id": "C1_2",
         "answer": "Vállalati domain nélküli bármilyen e-mailt",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 2.0,
-        "defaultNextQuestionId": "C2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "C1",
@@ -4331,13 +5297,13 @@
         "Temakorok": "Digitális jelenlét",
         "answer_id": "C1_3",
         "answer": "Munkavállalói e-mail(eke)t vállalati domainnel",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "C2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "C1",
@@ -4345,13 +5311,13 @@
         "Temakorok": "Digitális jelenlét",
         "answer_id": "C1_4",
         "answer": "Nem használnak e-mailt",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 5.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "C2",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B4",
@@ -4359,13 +5325,19 @@
         "Temakorok": "Digitális jelenlét",
         "answer_id": "B4_2",
         "answer": "2-3 havonta",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 10.0,
-        "defaultNextQuestionId": "B5a_1",
-        "nextQuestionId": "B5b_1",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1",
+            "B1_2"
+        ],
+        "condition": [
+            "B1_1_3",
+            "B1_2_2"
+        ]
     },
     {
         "id": "B4",
@@ -4373,13 +5345,19 @@
         "Temakorok": "Digitális jelenlét",
         "answer_id": "B4_3",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B5a_1",
-        "nextQuestionId": "B5b_1",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1",
+            "B1_2"
+        ],
+        "condition": [
+            "B1_1_3",
+            "B1_2_2"
+        ]
     },
     {
         "id": "B4",
@@ -4387,13 +5365,19 @@
         "Temakorok": "Digitális jelenlét",
         "answer_id": "B4_4",
         "answer": "A kialakítás óta nem frissítették",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B5a_1",
-        "nextQuestionId": "B5b_1",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1",
+            "B1_2"
+        ],
+        "condition": [
+            "B1_1_3",
+            "B1_2_2"
+        ]
     },
     {
         "id": "B4",
@@ -4401,13 +5385,19 @@
         "Temakorok": "Digitális jelenlét",
         "answer_id": "B4_5",
         "answer": "Ritkábban, alkalmilag",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 2.0,
-        "defaultNextQuestionId": "B5a_1",
-        "nextQuestionId": "B5b_1",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1",
+            "B1_2"
+        ],
+        "condition": [
+            "B1_1_3",
+            "B1_2_2"
+        ]
     },
     {
         "id": "B4",
@@ -4415,13 +5405,19 @@
         "Temakorok": "Digitális jelenlét",
         "answer_id": "B4_6",
         "answer": "Rendszeresen: legalább hetente",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 15.0,
-        "defaultNextQuestionId": "B5a_1",
-        "nextQuestionId": "B5b_1",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1",
+            "B1_2"
+        ],
+        "condition": [
+            "B1_1_3",
+            "B1_2_2"
+        ]
     },
     {
         "id": "B4",
@@ -4429,13 +5425,19 @@
         "Temakorok": "Digitális jelenlét",
         "answer_id": "B4_7",
         "answer": "Rendszeresen: legalább havonta",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 15.0,
         "pontok": 15.0,
-        "defaultNextQuestionId": "B5a_1",
-        "nextQuestionId": "B5b_1",
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_1",
+            "B1_2"
+        ],
+        "condition": [
+            "B1_1_3",
+            "B1_2_2"
+        ]
     },
     {
         "id": "D7",
@@ -4443,27 +5445,13 @@
         "Temakorok": "Értékesítés és marketing",
         "answer_id": "D7_14",
         "answer": "Szálláshely-foglaló oldal",
-        "Többválasztós-e": 1,
+        "Többválasztós-e": 1.0,
         "max_point": 51.0,
         "pontok": 12.0,
-        "defaultNextQuestionId": "D8",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
-    },
-    {
-        "id": "D9",
-        "kerdes": "Milyen fizetési lehetőség elérhető a webshopban vagy a honlapon történő vásárlás esetén?",
-        "Temakorok": "Értékesítés és marketing",
-        "answer_id": "D9_12",
-        "answer": "Egyéb",
-        "Többválasztós-e": 1,
-        "max_point": 23.0,
-        "pontok": 0.0,
-        "defaultNextQuestionId": "D10",
-        "nextQuestionId": null,
-        "is_A7_related": false,
-        "contains_Textbox": true
+        "contains_Textbox": false,
+        "based_On": [],
+        "condition": []
     },
     {
         "id": "B6b",
@@ -4471,13 +5459,23 @@
         "Temakorok": "Digitális jelenlét",
         "answer_id": "B6b_5",
         "answer": "Szerződéses külső szakember",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 5.0,
         "pontok": 5.0,
-        "defaultNextQuestionId": "Shoptet1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2",
+            "B4"
+        ],
+        "condition": [
+            "B1_2_2",
+            "B4_1",
+            "B4_2",
+            "B4_5",
+            "B4_6",
+            "B4_7"
+        ]
     },
     {
         "id": "B6b",
@@ -4485,13 +5483,23 @@
         "Temakorok": "Digitális jelenlét",
         "answer_id": "B6b_6",
         "answer": "Nincs meghatározva \/ az a vállalati munkatárs, akinek éppen ideje van rá",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 5.0,
         "pontok": 1.0,
-        "defaultNextQuestionId": "Shoptet1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2",
+            "B4"
+        ],
+        "condition": [
+            "B1_2_2",
+            "B4_1",
+            "B4_2",
+            "B4_5",
+            "B4_6",
+            "B4_7"
+        ]
     },
     {
         "id": "B6b",
@@ -4499,13 +5507,23 @@
         "Temakorok": "Digitális jelenlét",
         "answer_id": "B6b_7",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 5.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "Shoptet1",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B1_2",
+            "B4"
+        ],
+        "condition": [
+            "B1_2_2",
+            "B4_1",
+            "B4_2",
+            "B4_5",
+            "B4_6",
+            "B4_7"
+        ]
     },
     {
         "id": "B7b",
@@ -4513,13 +5531,17 @@
         "Temakorok": "Digitális jelenlét",
         "answer_id": "B7b_8",
         "answer": "Nem tudja",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 3.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B8",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": false
+        "contains_Textbox": false,
+        "based_On": [
+            "B5b_2"
+        ],
+        "condition": [
+            "B5b_2_2"
+        ]
     },
     {
         "id": "B7b",
@@ -4527,12 +5549,16 @@
         "Temakorok": "Digitális jelenlét",
         "answer_id": "B7b_9",
         "answer": "Egyéb",
-        "Többválasztós-e": 0,
+        "Többválasztós-e": 0.0,
         "max_point": 3.0,
         "pontok": 0.0,
-        "defaultNextQuestionId": "B8",
-        "nextQuestionId": null,
         "is_A7_related": false,
-        "contains_Textbox": true
+        "contains_Textbox": true,
+        "based_On": [
+            "B5b_2"
+        ],
+        "condition": [
+            "B5b_2_2"
+        ]
     }
 ]

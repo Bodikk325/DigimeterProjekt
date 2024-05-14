@@ -16,10 +16,16 @@ export class ChartService {
   RenderCharts(results : ResultQuestion[], sortedPoints : Point[]) {
     var number = 0;
     results.forEach((element) => {
+      var selected = sortedPoints.filter(x=> x.questionId == element.questionId)[0].ShownPoint
       var second = 0
-      if (sortedPoints[number].ShownPoint != null) {
-        if (typeof (sortedPoints[number].ShownPoint) === "number") {
-          second = (((sortedPoints[number].ShownPoint) as number) / element.maxpoint) * 100;
+      if (selected != null) {
+        if (typeof (selected) === "number") {
+          second = (((selected) as number) / element.maxpoint) * 100;
+          if(element.questionId == "B14")
+            {
+              console.log("Első" + selected)
+              console.log("Masodik "  )
+            }
         }
       }
 

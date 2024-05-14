@@ -41,10 +41,10 @@
         </div>
         <div class="space-y-4">
             <div *ngFor="let valaszopcio of currentResult.results; let i = index">
-                <div class="flex flex-row w-full justify-between items-center mt-32">
+                <div class="flex flex-row w-full justify-between items-center mt-32" *ngIf="(sortedPoints[i].ShownPoint <= valaszopcio.maxpoint) || (((sortedPoints[i].ShownPoint | rounder:valaszopcio.maxpoint) != 0))">
                     <div class="flex flex-col w-[30rem]">
                         <span class="text-lg font-bold">{{valaszopcio.questionText}}</span>
-                        <span class="mt-5">A te válaszod/válaszaid a kérdésre: <span class="font-bold">{{valaszopcio.selectedAnswer}}</span></span>
+                        <span class="mt-5">A te válaszod/válaszaid a kérdésre: <span class="font-bold">{{valaszopcio.selectedAnswerTexts}}</span></span>
                     </div>
                     <div class="w-[40rem] text-sm">
                             <div *ngIf="(valaszopcio?.points ?? 0) >= (sortedPoints[i]?.ShownPoint ?? 0)" class="flex items-center">

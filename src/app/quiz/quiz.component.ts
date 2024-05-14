@@ -8,29 +8,99 @@ import { NotificationType } from '../notification/notification.component';
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
-  styleUrl: './quiz.component.css'
+  styleUrls: ['./quiz.component.css'] // Javított a styleUrl->styleUrls
 })
 export class QuizComponent {
-
   isMessageLoading = false;
-
   isChatVisible = false;
 
-  toggleChat(event: MouseEvent) {
-    event.stopPropagation(); // Megállítjuk az esemény terjedését
+  messages: any[] = [];
+  inputText: string = '';
+  questions: Question[] = [];
+  private _currentQuestionIndex: number = 0;
+
+  constructor(
+    private dataService: DataService,
+    private quizResultsService: QuizResultsService,
+    private chatService: ChatService,
+    private notiService: NotificationService
+  ) {
+    this.messages.push({
+      text: "Kérdésed van esetleg a válaszadással kapcsolatban? Ne habozz kérdezni, segítek ahol tudok!", user: false
+    });
+  }
+
+  ngOnInit(): void {
+    this.dataService.getQuestions().subscribe((res: Question[]) => {
+      this.questions = res;
+    });
+  }
+
+  get currentQuestionIndex(): number {
+    return this._currentQuestionIndex;
+  }
+
+  set currentQuestionIndex(value: number) {
+    this._currentQuestionIndex = value;
+    this.onVariableChange(value);
+  }
+
+  onVariableChange(value: number) {
+
+    if (!this.shouldShowQuestion()) {
+      this.currentQuestionIndex++;
+    }
+  }
+
+
+  shouldShowQuestion() {
+    var boolean = true;
+    var results = [];
+    const currentQuestion = this.questions[this.currentQuestionIndex];
+  
+    if (currentQuestion.based_on != null) {
+      // Iterate over each question that the current question is based on
+      for (let index = 0; index < currentQuestion.based_on.length; index++) {
+        // Get the result for the based_on question
+        var cucc = this.quizResultsService.getContinuedResults().results.filter(x => x.questionId == currentQuestion.based_on[index]);
+        results.push(cucc[0]);
+      }
+  
+      // Iterate over each condition that must be satisfied
+      for (let index = 0; index < currentQuestion.condition.length; index++) {
+        const condition = currentQuestion.condition[index];
+  
+        if (condition === ">0") {
+          // Special case where condition is ">0"
+          if (parseInt(results[index].selectedAnswer[0]) == 0) {
+            boolean = false;
+            break;
+          }
+        } else {
+          // Check if the selected answer contains the condition
+          if (!results[index].selectedAnswer.includes(condition)) {
+            boolean = false;
+            break;
+          }
+        }
+      }
+    }
+    return boolean;
+  }
+
+
+  toggleChat(event: MouseEvent): void {
+    event.stopPropagation();
     this.isChatVisible = !this.isChatVisible;
   }
 
-  onDocumentClick(event: MouseEvent) {
+  onDocumentClick(event: MouseEvent): void {
     if (!this.isChatVisible) return;
     const container = document.querySelector('.chat-container');
     if (event.target instanceof Node && !container!.contains(event.target)) {
       this.isChatVisible = false;
     }
   }
-
-  messages: any[] = [];
-  inputText: string = '';
 
   sendMessage(): void {
     if (this.inputText.trim()) {
@@ -44,54 +114,24 @@ export class QuizComponent {
     }
   }
 
-  questions: Question[] = []
-  currentQuestionIndex: number = 0;
+  nextQuestion(): void {
+    if (this.currentQuestionIndex === 10) {
+      this.quizResultsService.saveQuizResultsAtTheEnd(this.questions);
+    }
 
-  constructor(dataService: DataService, private quizResultsService: QuizResultsService, private chatService : ChatService, private notiService : NotificationService) {
-    dataService.getQuestions().subscribe((res: Question[]) => {
-      this.questions = res.filter(x=> x.id == "A7")
-      console.log(res)
-    })
+    this.quizResultsService.saveQuizResults(this.questions);
 
-    this.messages.push(
-      {
-        text : "Kérdésed van esetleg a válaszadással kapcsolatban? Ne habozz kérdezni, segítek ahol tudok!", user : false
-      }
-    )
-  }
-
-  nextQuestion() {
     const currentQuestion = this.questions[this.currentQuestionIndex];
 
-    if(this.questions[this.currentQuestionIndex].id == "A7")
-      {
-        localStorage.setItem("A7Response", currentQuestion.selectedAnswer as string)
-      }
-
     if (currentQuestion.selectedAnswer) {
-      const selectedAnswer = currentQuestion.answers.find(answer => answer.answer === currentQuestion.selectedAnswer);
-      if (selectedAnswer && selectedAnswer.nextQuestionId) {
-        // Keresd meg a következő kérdést az azonosító alapján
-        const nextQuestionIndex = this.questions.findIndex(q => q.id === selectedAnswer.nextQuestionId);
-        if (nextQuestionIndex !== -1) {
-          this.currentQuestionIndex = nextQuestionIndex;
-        }
-      } else if (currentQuestion.defaultNextQuestionId) {
-        // Ha nincs specifikus válaszhoz kötött útvonal, de van alapértelmezett következő kérdés
-        const defaultNextQuestionIndex = this.questions.findIndex(q => q.id === currentQuestion.defaultNextQuestionId);
-        if (defaultNextQuestionIndex !== -1) {
-          this.currentQuestionIndex = defaultNextQuestionIndex;
-        }
-      } else {
-        // Ha nincs következő kérdés azonosító, lépj a sorban a következőre
-        this.currentQuestionIndex++;
-      }
+      this.currentQuestionIndex++;
     } else {
-      this.notiService.show("Kérlek válaszolj a kérdésre!", NotificationType.error)
+      this.notiService.show("Kérlek válaszolj a kérdésre!", NotificationType.error);
     }
+
   }
 
-  prevQuestion() {
+  prevQuestion(): void {
     if (this.currentQuestionIndex > 0) {
       this.currentQuestionIndex--;
     }

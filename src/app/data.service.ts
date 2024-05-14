@@ -27,13 +27,11 @@ export class DataService {
     const filteredPoints = this.points.filter(point =>
       this.answers.some(answer =>
         {
-          console.log(answer.id)
           answer.id === point.questionId
         } 
       )
     );
 
-    console.log(filteredPoints)
 
     const sortedAnswers = this.answers.sort((a, b) => a.id.localeCompare(b.id));
     const sortedPoints = filteredPoints.sort((a, b) => a.questionId.localeCompare(b.questionId));
@@ -51,7 +49,7 @@ export class DataService {
 
   transformQuestions(data: any[]): Question[] {
     const questionMap = new Map<string, Question>();
-
+    const rawString = [];
     data.forEach(item => {
       if (!questionMap.has(item.id)) {
         questionMap.set(item.id, {
@@ -62,7 +60,9 @@ export class DataService {
           category: item.Temakorok,
           isThereMoreThanOneAnswer : item["Többválasztós-e"],
           defaultNextQuestionId : item["defaultNextQuestionId"],
-          isA7related : item["is_A7_related"]
+          isA7related : item["is_A7_related"],
+          condition : item["condition"],
+          based_on : item["based_On"]
         });
       }
 
@@ -72,7 +72,8 @@ export class DataService {
         points: item.pontok,
         selected: false,
         nextQuestionId : item.nextQuestionId,
-        contains_Textbox : item.contains_Textbox
+        contains_Textbox : item.contains_Textbox,
+        id : item["answer_id"]
       });
 
       // Frissítsük a max pontszámot, ha szükséges
