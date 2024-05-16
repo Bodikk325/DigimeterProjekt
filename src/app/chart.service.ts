@@ -12,24 +12,21 @@ export class ChartService {
 
   constructor() { }
 
-  
-  RenderCharts(results : ResultQuestion[], sortedPoints : Point[]) {
+
+  RenderCharts(results: ResultQuestion[], sortedPoints: Point[]) {
     var number = 0;
     results.forEach((element) => {
-      var selected = sortedPoints.filter(x=> x.questionId == element.questionId)[0].ShownPoint
+      var selected = sortedPoints.filter(x => x.questionId == element.questionId)[0].ShownPoint
       var second = 0
       if (selected != null) {
         if (typeof (selected) === "number") {
           second = (((selected) as number) / element.maxpoint) * 100;
-          if(element.questionId == "B14")
-            {
-              console.log("Első" + selected)
-              console.log("Masodik "  )
-            }
+          if(second < 5) second = 4
         }
       }
 
       var first = (element.points / element.maxpoint) * 100;
+      if(first < 5 && first > 0) first = 4
 
       const options = {
         chart: {
@@ -43,6 +40,13 @@ export class ChartService {
           name: 'pontszám',
           data: [first, second],
         }],
+        tooltip: {
+          y: {
+            formatter: function (value : any) {
+              return value < 5 ? '<5' : value;
+            }
+          }
+        },
         yaxis: {
           labels: {
             formatter: function (value: any) {
@@ -59,7 +63,12 @@ export class ChartService {
         dataLabels: {
           enabled: true,
           formatter: function (val: any) {
-            return (val).toFixed(0) + '%'; // Százalékban formázott értékek, két tizedesjeggyel
+            if (val < 5) {
+              return " < 5%"
+            }
+            else {
+              return (val).toFixed(0) + '%'; // Százalékban formázott értékek, két tizedesjeggyel
+            }
           },
           style: {
             colors: ['#fff'] // Adatcímkék színe
@@ -83,7 +92,7 @@ export class ChartService {
     });
   }
 
-  RenderPieChart(userScore : number, categoryMaxPoint : number, firmAvaragePointByCategory : number) {
+  RenderPieChart(userScore: number, categoryMaxPoint: number, firmAvaragePointByCategory: number) {
 
     var first1 = userScore;
     var second1 = categoryMaxPoint - userScore;
@@ -91,15 +100,9 @@ export class ChartService {
     var first2 = firmAvaragePointByCategory;
     var second2 = categoryMaxPoint - firmAvaragePointByCategory;
 
-    /*
-    console.log(userScore)
-    console.log(firmAvaragePointByCategory)
-    console.log(categoryMaxPoint)
-    */
-
     var chartOptions = {
       series: [first1, second1], // Ide kerülnek az adatok
-      colors: ['#3357FF', '#080729'],
+      colors: ['#0072b5', '#080729'],
       chart: {
         width: 380,
         type: 'pie',

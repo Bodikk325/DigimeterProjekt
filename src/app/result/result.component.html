@@ -1,104 +1,103 @@
-
-
 <div class="container mx-auto px-4 pt-4">
-    <div class="flex flex-wrap justify-start gap-2 z-10"> <!-- Csökkentett margó -->
-        <button [ngClass]="tabname == '' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('')"> <!-- Árnyék hozzáadása -->
-            Összes
-        </button>
-        <button [ngClass]="tabname == 'Digitális pénzügy' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('Digitális pénzügy')">
-            Digitális pénzügy
-        </button>
-        <button [ngClass]="tabname == 'Informatikai biztonság' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('Informatikai biztonság')">
-            Informatikai biztonság
-        </button>
-        <button [ngClass]="tabname == 'Vállalatvezetés' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('Vállalatvezetés')">
-            Vállalatvezetés
-        </button>
-        <button [ngClass]="tabname == 'Értékesítés és marketing' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('Értékesítés és marketing')">
-            Értékesítés és marketing
-        </button>
-        <button [ngClass]="tabname == 'Digitális mindennapok' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('Digitális mindennapok')">
-            Digitális mindennapok
-        </button>
-        <button [ngClass]="tabname == 'Digitális Jelenlét' ? 'selected_tab_button' : 'tab_button'" (click)="changeTab('Digitális Jelenlét')">
-            Digitális Jelenlét
-        </button>
+    <div class="flex flex-wrap justify-start gap-2 z-10">
+      <button class="tab" [ngClass]="tabname == '' ? 'tab_selected' : 'tab'" (click)="changeTab('')">
+        Összes
+      </button>
+      <button class="tab" [ngClass]="tabname == 'Digitális pénzügy' ? 'tab_selected' : 'tab'" (click)="changeTab('Digitális pénzügy')">
+        Digitális pénzügy
+      </button>
+      <button class="tab" [ngClass]="tabname == 'Informatikai biztonság' ? 'tab_selected' : 'tab'" (click)="changeTab('Informatikai biztonság')">
+        Informatikai biztonság
+      </button>
+      <button class="tab" [ngClass]="tabname == 'Vállalatvezetés' ? 'tab_selected' : 'tab'" (click)="changeTab('Vállalatvezetés')">
+        Vállalatvezetés
+      </button>
+      <button class="tab" [ngClass]="tabname == 'Értékesítés és marketing' ? 'tab_selected' : 'tab'" (click)="changeTab('Értékesítés és marketing')">
+        Értékesítés és marketing
+      </button>
+      <button class="tab" [ngClass]="tabname == 'Digitális mindennapok' ? 'tab_selected' : 'tab'" (click)="changeTab('Digitális mindennapok')">
+        Digitális mindennapok
+      </button>
+      <button class="tab" [ngClass]="tabname == 'Digitális Jelenlét' ? 'tab_selected' : 'tab'" (click)="changeTab('Digitális Jelenlét')">
+        Digitális Jelenlét
+      </button>
     </div>
-
-    <div *ngIf="isloaded" class="bg-white shadow-lg big_cont px-8 pb-8 mb-4 border-solid  border-2 border-gray-100 p-6 "> <!-- Erősebb árnyék a tartalmi résznek -->
-        <div class="mb-4 w-1/3">
-            <select [(ngModel)]="selectedValue" (change)="onSelect(selectedValue)"
-                class="block  w-full bg-gray-50 border-solid border-2 border-gray-200 text-gray-700 py-3 rounded leading-tight focus:outline-none px-4">
-                <option selected [value]="'Összes'">Összes</option>
-                <option [value]="'Szakma'">Tevékenységi kör</option>
-                <option [value]="'Regió'">Regió</option>
-                <option [value]="'Munkásszám'">Munkásszám</option>
-            </select>
-        </div>
-        <div class="w-full flex justify-around mt-10">
-            <div id="piechart"></div>
-            <div id="piechart2"></div>
-        </div>
-        <div class="space-y-4">
-            <div *ngFor="let valaszopcio of currentResult.results; let i = index">
-                <div class="flex flex-row w-full justify-between items-center mt-32" *ngIf="(sortedPoints[i].ShownPoint <= valaszopcio.maxpoint) || (((sortedPoints[i].ShownPoint | rounder:valaszopcio.maxpoint) != 0))">
-                    <div class="flex flex-col w-[30rem]">
-                        <span class="text-lg font-bold">{{valaszopcio.questionText}}</span>
-                        <span class="mt-5">A te válaszod/válaszaid a kérdésre: <span class="font-bold">{{valaszopcio.selectedAnswerTexts}}</span></span>
-                    </div>
-                    <div class="w-[40rem] text-sm">
-                            <div *ngIf="(valaszopcio?.points ?? 0) >= (sortedPoints[i]?.ShownPoint ?? 0)" class="flex items-center">
-                            <div class="mess mr-5 flex flex-col justify-end items-end">
-                                <span>A válaszoddal elért pontszám: <span class="font-bold">{{valaszopcio?.points}} pont</span>, ami százalékra átszámítva <span class="font-bold">{{(valaszopcio?.points | rounder:valaszopcio.maxpoint)}}</span></span>
-                                <span>A többi cég átlagos pontszáma: <span class="font-bold">{{sortedPoints[i].ShownPoint}} pont</span>, ami százalékra átszámítva <span class="font-bold">{{ (sortedPoints[i].ShownPoint | rounder:valaszopcio.maxpoint)}}</span></span>
-                                <span>Ez számodra egy jó eredménynek számít!</span>
-                            </div>
-                            <img src="assets/ai_trans.png" class="w-28 rounded-full" alt="">
-                        </div>
-                        <div *ngIf="(valaszopcio?.points ?? 0) < (sortedPoints[i]?.ShownPoint ?? 0)" class="flex items-center">
-                            <div class="mess mr-5 flex flex-col justify-end items-end">
-                                <span>A válaszoddal elért pontszám: <span class="font-bold">{{valaszopcio?.points}} pont</span>, ami százalékra átszámítva <span class="font-bold">{{(valaszopcio?.points | rounder:valaszopcio.maxpoint)}}</span></span>
-                                <span>A többi cég átlagos pontszáma: <span class="font-bold">{{sortedPoints[i].ShownPoint}} pont</span>, ami százalékra átszámítva <span class="font-bold">{{ (sortedPoints[i].ShownPoint | rounder:valaszopcio.maxpoint)}}</span></span>
-                                <span class="text-right">Ez számodra egy nem jó eredmény, ebben a témában van még hova fejlődni..</span>
-                            
-                            </div>
-                            <img src="assets/ai_not_happy.png" class="w-28 rounded-full" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="w-1/2 mx-auto mt-10">
-                    <div [id]="'chart' +  i"></div>
-                </div>
+  
+    <div *ngIf="isloaded" class="bg-white shadow-lg big_cont px-8 pb-8 mb-4 border-2 border-gray-100 p-6">
+      <div class="mb-4 w-full md:w-1/3">
+        <select [(ngModel)]="selectedValue" (change)="onSelect(selectedValue)" class="block w-full bg-gray-50 border-2 border-gray-200 text-gray-700 py-3 rounded leading-tight focus:outline-none px-4">
+          <option selected [value]="'Összes'">Összes</option>
+          <option [value]="'Szakma'">Tevékenységi kör</option>
+          <option [value]="'Regió'">Regió</option>
+          <option [value]="'Munkásszám'">Munkásszám</option>
+        </select>
+      </div>
+      <div class="w-full flex flex-col md:flex-row justify-around mt-10">
+        <div id="piechart" class="w-full md:w-1/2"></div>
+        <div id="piechart2" class="w-full md:w-1/2"></div>
+      </div>
+      <div class="space-y-4">
+        <div *ngFor="let valaszopcio of currentResult.results; let i = index">
+          <div class="flex flex-col md:flex-row w-full justify-between items-center mt-8 md:mt-32">
+            <div class="flex flex-col w-full md:w-[30rem]">
+              <span class="text-lg font-bold">{{valaszopcio.questionText}} + {{valaszopcio.questionId}}</span>
+              <span class="mt-5">A te válaszod/válaszaid a kérdésre: <span class="font-bold">{{valaszopcio.selectedAnswerTexts}}</span></span>
             </div>
+            <div class="w-full md:w-[40rem] text-sm mt-4 md:mt-0">
+              <div *ngIf="valaszopcio.points >= sortedPoints[i].ShownPoint && (sortedPoints[i].ShownPoint != 0)" class="flex items-center">
+                <div class="mess mr-5 flex flex-col justify-end items-end">
+                  <span>A válaszoddal elért pontszám: <span class="font-bold">{{valaszopcio?.points}} pont</span>, ami százalékra átszámítva <span class="font-bold">{{(valaszopcio.points / valaszopcio.maxpoint)}}</span></span>
+                  <span>A többi cég átlagos pontszáma: <span class="font-bold">{{sortedPoints[i].ShownPoint}} pont</span>, ami százalékra átszámítva <span class="font-bold">{{ (sortedPoints[i].ShownPoint / valaszopcio.maxpoint)}}</span></span>
+                  <span>Ez számodra egy jó eredménynek számít!</span>
+                </div>
+                <img src="assets/ai_trans.png" class="w-28 rounded-full" alt="">
+              </div>
+              <div *ngIf="valaszopcio.points < sortedPoints[i].ShownPoint && (sortedPoints[i].ShownPoint != 0)" class="flex items-center">
+                <div class="mess mr-5 flex flex-col justify-end items-end">
+                  <span>A válaszoddal elért pontszám: <span class="font-bold">{{valaszopcio?.points}} pont</span>, ami százalékra átszámítva <span class="font-bold">{{(valaszopcio.points / valaszopcio.maxpoint)}}</span></span>
+                  <span>A többi cég átlagos pontszáma: <span class="font-bold">{{sortedPoints[i].ShownPoint}} pont</span>, ami százalékra átszámítva <span class="font-bold">{{ (sortedPoints[i].ShownPoint / valaszopcio.maxpoint)}}</span></span>
+                  <span class="text-right">Ez számodra egy nem jó eredmény, ebben a témában van még hova fejlődni..</span>
+                </div>
+                <img src="assets/ai_not_happy.png" class="w-28 rounded-full" alt="">
+              </div>
+              <div *ngIf="sortedPoints[i].ShownPoint == 0" class="flex items-center">
+                <div class="mess mr-5 flex flex-col justify-end items-end">
+                  <span>A válaszoddal elért pontszám: <span class="font-bold">{{valaszopcio?.points}} pont</span>, ami százalékra átszámítva <span class="font-bold">{{(valaszopcio.points / valaszopcio.maxpoint)}}</span></span>
+                  <span>Sajnos más cégekről nincs eredményünk.</span>
+                </div>
+                <img src="assets/ai_trans.png" class="w-28 rounded-full" alt="">
+              </div>
+            </div>
+          </div>
+          <div [ngClass]="sortedPoints[i].ShownPoint == 0 ? 'hidden' : 'block'" class="w-full md:w-1/2 mx-auto mt-10">
+            <div [id]="'chart' +  i"></div>
+          </div>
         </div>
-        <!--
-            <p class="font-semibold text-lg">Összpontszám: {{finalResult}}</p>
-        -->
+      </div>
     </div>
-</div>
-
-<div class="app-container"  (document:click)="onDocumentClick($event)">
+  </div>
+  
+  <div class="app-container" (document:click)="onDocumentClick($event)">
     <div class="chat-container" [class.hidden]="!isChatVisible">
       <div class="chat-header">
-        <span style="margin-left: 10px;">
+        <span class="ml-2">
           DIGIMÉTER
         </span>
-        <button style="margin-right: 10px;" class="close-button" (click)="isChatVisible = false">×</button>
-    </div>
-      <div class="messages">
-        <div *ngFor="let message of messages" class="message" [ngClass]="{'user': message.user, 'bot': !message.user}">
+        <button class="close-button mr-2" (click)="isChatVisible = false">×</button>
+      </div>
+      <div class="messages flex-grow overflow-y-auto p-2">
+        <div *ngFor="let message of messages" class="message" [ngClass]="{'user bg-gray-300': message.user, 'bot bg-blue-500 text-white': !message.user}">
           {{ message.text }}
         </div>
         <div class="loader" *ngIf="isMessageLoading">
           <span></span>
           <span></span>
           <span></span>
+        </div>
       </div>
-      </div>
-      <input type="text" [(ngModel)]="inputText" (keyup.enter)="sendMessage()" placeholder="Írj valamit...">
+      <input type="text" [(ngModel)]="inputText" (keyup.enter)="sendMessage()" placeholder="Írj valamit..." class="p-2 border-t border-gray-300">
     </div>
-    <button class="chat-button" [ngClass]="{'shown-button': isChatVisible}" (click)="toggleChat($event)">
-      <img src="assets/ai.png" alt="Chat">
+    <button class="chat-button fixed bottom-4 left-4 w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center overflow-hidden transition-transform transform hover:scale-110 border-2 border-white" (click)="toggleChat($event)">
+      <img src="assets/ai.png" alt="Chat" class="w-full h-full object-cover">
     </button>
-</div>
-
+  </div>

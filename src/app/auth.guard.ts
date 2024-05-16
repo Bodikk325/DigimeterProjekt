@@ -1,32 +1,58 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { CanActivate, Router, CanActivateChild, CanLoad, Route, UrlSegment, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
-import { PLATFORM_ID, Inject } from '@angular/core';
-
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
-  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: any) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  private isUserLoggedIn(): boolean {
     if (isPlatformBrowser(this.platformId)) {
-      // Csak kliensoldalon futtassuk ezt a kódot
-      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      const loggedIn = localStorage.getItem('isLoggedIn');
+      return loggedIn === 'true';
+    }
+    return false;
+  }
 
-      if (isLoggedIn) {
-        this.router.navigate(['home'])
-        return true;
-      } else {
-        this.router.navigate(['']);
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    
+    if (state.url === '/') {
+      if (this.isUserLoggedIn()) {
+        this.router.navigate(['/home']);
         return false;
+      } else {
+        return true;
       }
     } else {
-      // SSR esetén alapértelmezett elágazás
-      // Itt dönthetsz úgy, hogy mindenkit átengedsz, vagy esetlegesen szerveroldali logikát alkalmazol
-      return true; // vagy false, attól függően, hogy milyen viselkedést szeretnél
+      if (this.isUserLoggedIn()) {
+        return true;
+      } else {
+        this.router.navigate(['/']);
+        return false;
+      }
+    }
+  }
+
+  canActivateChild(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    return this.canActivate(next, state);
+  }
+
+  canLoad(
+    route: Route,
+    segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    if (this.isUserLoggedIn()) {
+      return true;
+    } else {
+      this.router.navigate(['/']);
+      return false;
     }
   }
 }

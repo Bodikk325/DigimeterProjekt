@@ -15,7 +15,6 @@ import { HeaderComponent } from './header/header.component';
 import { RounderPipe } from './rounder.pipe';
 import { NotificationComponent } from './notification/notification.component';
 import { FooterComponent } from './footer/footer.component';
-import { AnswerIdToTextConverterPipe } from './answer-id-to-text-converter.pipe';
 
 
 @NgModule({
@@ -29,8 +28,7 @@ import { AnswerIdToTextConverterPipe } from './answer-id-to-text-converter.pipe'
     HeaderComponent,
     RounderPipe,
     NotificationComponent,
-    FooterComponent,
-    AnswerIdToTextConverterPipe,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

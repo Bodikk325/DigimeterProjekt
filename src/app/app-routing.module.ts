@@ -9,12 +9,14 @@ import { StartComponent } from './start/start.component';
 
 const routes: Routes = [
   { path: 'home', 
-  component : HomeComponent
+  component : HomeComponent,
+  canActivate: [AuthGuard]
   },
-  { path: '', component : LoginComponent},
-  {path : 'quiz', component : QuizComponent},
+  { path: '', component : LoginComponent, canActivate: [AuthGuard]},
+  {path : 'quiz', component : QuizComponent, canActivate: [AuthGuard]},
   {path : 'start', component : StartComponent},
-  {path : 'result/:id', component : ResultComponent},
+  {path : 'result/:id', component : ResultComponent, canActivate: [AuthGuard]},
+  { path: '**', redirectTo: ''}
 ];
 
 @NgModule({

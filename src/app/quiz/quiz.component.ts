@@ -115,9 +115,11 @@ export class QuizComponent {
   }
 
   nextQuestion(): void {
-    if (this.currentQuestionIndex === 10) {
+    if (this.currentQuestionIndex === this.questions.length - 2) {
       this.quizResultsService.saveQuizResultsAtTheEnd(this.questions);
     }
+    console.log(this.questions.length)
+    console.log(this.currentQuestionIndex)
 
     this.quizResultsService.saveQuizResults(this.questions);
 

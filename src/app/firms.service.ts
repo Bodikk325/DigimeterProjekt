@@ -93,7 +93,7 @@ export class FirmsService {
     return {
       questionId: item.id,
       Maxpoint: item.max_point,
-      AvaragePoint: item.average_points,
+      AvaragePoint: item["average_points"],
       Budapest: item.Budapest,
       KozepDunantul: item['Közép-Dunántúl'],
       PestMegye: item['Pest megye'],

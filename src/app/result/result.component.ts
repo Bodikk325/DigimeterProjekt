@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Question, QuizResultsService } from '../quizResults.service';
-import { ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FirmsService, Point } from '../firms.service';
 import { DataService } from '../data.service';
 import { MyFirm } from '../myFirm';
@@ -43,12 +43,12 @@ export class ResultComponent {
     if (this.inputText.trim()) {
       this.messages.push({ text: this.inputText, user: true });
       this.isMessageLoading = true;
-      
-      this.chatService.sendMessageResult(this.finalResult, this.firmAvaragePointByCategory, this.categoryMaxPoint,this.inputText, this.tabname).subscribe(response => {
+
+      this.chatService.sendMessageResult(this.finalResult, this.firmAvaragePointByCategory, this.categoryMaxPoint, this.inputText, this.tabname).subscribe(response => {
         this.messages.push({ text: response.choices[0].message.content, user: false });
         this.isMessageLoading = false;
       });
-      
+
       this.inputText = '';
     }
   }
@@ -57,12 +57,12 @@ export class ResultComponent {
   allResults: Result[] = []
   points: number[] = []
   currentResult!: Result
-  newResult : Result = {
+  newResult: Result = {
     id: 0,
     totalPoints: 0,
     results: []
   }
-  newResultQuestion : ResultQuestion[] = []
+  newResultQuestion: ResultQuestion[] = []
   isloaded = false;
   categoryMaxPoint = 0;
   firmAvaragePointByCategory = 0;
@@ -71,21 +71,21 @@ export class ResultComponent {
   firmPoints: Point[] = [];
   comparisonPoints!: Point[];
   sortedAnswers!: Question[];
+  showedFinalResults : any;
   sortedPoints: Point[] = [];
-  finalResult : number = 0;
+  finalResult: number = 0;
   ids: string[] = [];
   tabname = "";
 
-  constructor(private chatService : ChatService,private chartService : ChartService,private quizService: QuizResultsService, private route: ActivatedRoute, private firmService: FirmsService, private dataService: DataService, private authService: AuthService, private countResultService: CountResultService) {
+  constructor(private chatService: ChatService, private chartService: ChartService, private quizService: QuizResultsService, private route: ActivatedRoute, private firmService: FirmsService, private dataService: DataService, private authService: AuthService, private countResultService: CountResultService) {
     this.messages.push(
       {
-        text : "Kérdésed van az eredményekkel kapcsolatban? Nyugodtan tedd azt fel, segítek!", user : false
+        text: "Kérdésed van az eredményekkel kapcsolatban? Nyugodtan tedd azt fel, segítek!", user: false
       }
     )
   }
 
-  ngOnInit()
-  {
+  ngOnInit() {
     this.myFirm = this.firmService.getMyFirmData();
     this.loadQuestions("", "");
   }
@@ -93,78 +93,94 @@ export class ResultComponent {
 
   changeShowPoint(szures: string) {
     var fullPoints = 0;
-    this.firmPoints.forEach(element => {
-      if (this.ids.indexOf(element.questionId) !== -1) {
-        element.ShownPoint = element.AvaragePoint;
+    for (let index = 0; index < this.firmPoints.length; index++) {
+      this.firmPoints[index].ShownPoint = this.firmPoints[index].AvaragePoint;
+        
         if (szures == "Regió") {
-          element.ShownPoint = this.countResultService.FindWhichPointToShow(element, this.myFirm.Region);
+          this.firmPoints[index].ShownPoint = this.countResultService.FindWhichPointToShow(this.firmPoints[index], this.myFirm.Region);
         }
         if (szures == "Munkásszám") {
-          element.ShownPoint = this.countResultService.FindWhichPointToShow(element, this.myFirm.Workers);
+          this.firmPoints[index].ShownPoint = this.countResultService.FindWhichPointToShow(this.firmPoints[index], this.myFirm.Workers);
         }
         if (szures == "Szakma") {
-          element.ShownPoint = this.countResultService.FindWhichPointToShow(element, this.myFirm.Field);
-        }
-        if (element.ShownPoint) {
-          element.ShownPoint = Math.round(element.ShownPoint as number)
+          this.firmPoints[index].ShownPoint = this.countResultService.FindWhichPointToShow(this.firmPoints[index], this.myFirm.Field);
         }
 
-        
-        fullPoints += element.ShownPoint;
 
-        this.sortedPoints.push(element)
-      }
-    });
+        console.log( this.firmPoints[index].questionId + " " + this.firmPoints[index].ShownPoint + " " + this.currentResult.results[index].points + " " + this.currentResult.results[index].maxpoint + " " + this.firmPoints[index].Maxpoint + " " + this.currentResult.results[index].questionId)
 
-    this.firmAvaragePointByCategory = fullPoints
+        fullPoints += this.firmPoints[index].ShownPoint;
+
+        this.sortedPoints.push(this.firmPoints[index])
+      
+    }
+    if (this.tabname != "") {
+      this.firmAvaragePointByCategory = fullPoints
+    }
   }
 
-  filterQuestionsByNull(inputResult : Result) : Result
-  {
-    const filteredQuestions = inputResult.results.filter(q => q.maxpoint !== null);
-    return {
-      ...inputResult, // Az eredeti objektum más attribútumait megtartjuk
-      results: filteredQuestions // Csak a szűrt kérdéseket tartalmazó tömböt állítjuk be
-    };
+  calculateFinalResult(page: string) {
+    this.finalResult = this.currentResult.totalPoints;
+    if (page != "") {
+      this.currentResult.results = this.currentResult.results.filter(x => x.category == page)
+      this.finalResult = this.currentResult.results.reduce((sum, question) => sum + question.points, 0);
+    }
+  }
+
+  getCurrentResult() {
+    this.allResults = this.quizService.getQuizResults();
+    this.currentResult = this.allResults.find(q => q.id == parseInt(this.route.snapshot.paramMap.get('id') ?? "0")) as Result;
+    this.currentResult.results = this.currentResult.results.filter(x=> x.questionId != "B14" && x.questionId != "B15" && x.questionId != "B16")
   }
 
 
-  loadQuestions(text: string, szures: string) {
+  loadQuestions(page: string, comboBoxSelected: string) {
     this.isloaded = false;
     this.sortedPoints = []
     this.firmService.getPoints().subscribe((res: Point[]) => {
 
-      this.firmPoints = res;
-      this.allResults = this.quizService.getQuizResults();
-      this.currentResult = this.allResults.find(q => q.id == parseInt(this.route.snapshot.paramMap.get('id') ?? "0")) as Result;
+
+      this.firmPoints = res.filter(x => x.Maxpoint != null);
+
+      this.getCurrentResult();
+
+      this.currentResult.results = this.currentResult.results.filter(x => x.maxpoint != null)
+
       
-      this.currentResult = this.filterQuestionsByNull(this.currentResult);
 
+      this.calculateFinalResult(page)
 
-      this.finalResult = this.currentResult.totalPoints;
-
-      if (text != "") {
-        this.currentResult.results = this.currentResult.results.filter(x=> x.category == text)
-        this.finalResult = this.currentResult.results.reduce((sum, question) => sum + question.points, 0);
-      }
-
-      const categoryResult = this.getTotalPointsByFirm(text);
+      const categoryResult = this.getTotalPointsByFirm(page);
 
       this.firmAvaragePointByCategory = categoryResult.otherpoint
-      this.categoryMaxPoint = categoryResult.Maxpoint
+      this.categoryMaxPoint = categoryResult.maxpoint
 
-      this.ids = this.currentResult.results.map((element) => element.questionId);
+      this.currentResult.results = this.currentResult.results.filter(item1 =>
+        this.firmPoints.some(item2 => item1.questionId === item2.questionId)
+      );
 
-      this.changeShowPoint(szures);
+      this.firmPoints = this.firmPoints.filter(item2 =>
+        this.currentResult.results.some(item1 => item2.questionId === item1.questionId)
+      );
+
+      this.currentResult.results = this.currentResult.results.sort((a, b) => a.questionId.localeCompare(b.questionId));
+      this.firmPoints = this.firmPoints.sort((a, b) => a.questionId.localeCompare(b.questionId));
+
+      this.changeShowPoint(comboBoxSelected);
 
       this.isloaded = true
+
+      
+
+      console.log(this.currentResult.results)
+      this.showedFinalResults = this.currentResult.results
+      console.log(this.firmPoints)
 
       this.renderCharts();
     })
   }
 
-  renderCharts()
-  {
+  renderCharts() {
     setTimeout(() => {
       this.chartService.RenderCharts(this.currentResult.results, this.sortedPoints)
       this.chartService.RenderPieChart(this.finalResult, this.categoryMaxPoint, this.firmAvaragePointByCategory);
@@ -182,9 +198,32 @@ export class ResultComponent {
     this.loadQuestions(this.tabname, newValue);
   }
 
-  
+
   getTotalPointsByFirm(topicFilter: string): any {
-    
+
+    var list = ["DIGIMÉTER_INDEX", "DIGITÁLIS_PÉNZÜGYEK", "INFORMATIKAI_BIZTONSÁG", "VÁLLALKOZÁSVEZETÉS", "ÉRTÉKESÍTÉS_ÉS_MARKETING",
+      "ÉRTÉKESÍTÉS_ÉS_MARKETING", "DIGITÁLIS_MINDENNAPOK", "DIGITÁLIS_JELENLÉT"
+    ]
+
+    var digimeterIndex = 0;
+
+    list.forEach(tema => {
+      if (tema == "DIGITÁLIS_PÉNZÜGYEK") {
+        digimeterIndex += this.firmPoints.filter(question => question.questionId.includes("DIGIMÉTER_INDEX"))[0].AvaragePoint * 0.16
+      }
+      else if (tema == "INFORMATIKAI_BIZTONSÁG") {
+        digimeterIndex += this.firmPoints.filter(question => question.questionId.includes("INFORMATIKAI_BIZTONSÁG"))[0].AvaragePoint * 0.11
+      }
+      else if (tema == "VÁLLALKOZÁSVEZETÉS") {
+        digimeterIndex += this.firmPoints.filter(question => question.questionId.includes("INFORMATIKAI_BIZTONSÁG"))[0].AvaragePoint * 0.16
+      }
+      else {
+        digimeterIndex += this.firmPoints.filter(question => question.questionId.includes(tema))[0].AvaragePoint * 0.19
+      }
+    });
+
+
+
     var filteredPoints = this.firmPoints;
 
     if (topicFilter == "") {
@@ -230,7 +269,15 @@ export class ResultComponent {
     const totalFirmPoints = filteredPoints[0].AvaragePoint;
     const maximumpoint = filteredPoints[0].Maxpoint;
 
-    return {otherpoint: totalFirmPoints, maxpoint: maximumpoint };
+    if (topicFilter == ""
+    ) {
+      digimeterIndex = Math.floor(digimeterIndex)
+      return { otherpoint: digimeterIndex, maxpoint: maximumpoint };
+    }
+    else {
+      return { otherpoint: totalFirmPoints, maxpoint: maximumpoint };
+    }
+
   }
-  
+
 }

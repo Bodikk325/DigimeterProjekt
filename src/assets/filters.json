@@ -434,7 +434,7 @@
         "Informatikai eszközt használó munkavállalók": null
     },
     {
-        "id": "B1_1",
+        "id": "B1_3",
         "max_point": 15.0,
         "average_points": 5.1079734219,
         "Budapest": 5.5263157895,
@@ -465,7 +465,7 @@
         "Informatikai eszközt használó munkavállalók": null
     },
     {
-        "id": "B1_2",
+        "id": "B1_1",
         "max_point": 15.0,
         "average_points": 10.8139534884,
         "Budapest": 12.7192982456,
@@ -496,7 +496,7 @@
         "Informatikai eszközt használó munkavállalók": null
     },
     {
-        "id": "B1_3",
+        "id": "B1_2",
         "max_point": 5.0,
         "average_points": 0.5149501661,
         "Budapest": 0.6140350877,
@@ -620,37 +620,6 @@
         "Informatikai eszközt használó munkavállalók": null
     },
     {
-        "id": "B5a_1",
-        "max_point": 7.0,
-        "average_points": 0.0552995392,
-        "Budapest": 0.0206896552,
-        "Közép-Dunántúl": 0.0769230769,
-        "Pest megye": 0.0340909091,
-        "Nyugat-Dunántúl": 0.0,
-        "Észak-Magyarország": 0.1153846154,
-        "Dél-Alföld": 0.1428571429,
-        "Észak-Alföld": 0.1666666667,
-        "Dél-Dunántúl": 0.0,
-        "Szálláshely szolgálatatás, vendéglátás": 0.0,
-        "Építőipar": 0.0483870968,
-        "Pénzügyi, biztosítási tevékenység": 0.0,
-        "Adminisztratív és szolgáltatást támogató tevékenység": 0.1153846154,
-        "Kereskedelem, gépjárműjavítás": 0.0272727273,
-        "Ingatlanügyek": 0.0,
-        "Feldolgozóipar": 0.1276595745,
-        "Információ, kommunikáció": 0.0,
-        "Egyéb (közigazgatás, oktatás, egészségügy, szociális ellátás, művészet, egyéb szolgáltatás)": 0.0594059406,
-        "Szakmai, tudományos, műszaki tevékenység, könyvelés": 0.0,
-        "Villamosenergia-, gáz-, gőzellátás, légkondicionálás, vízellátás": 0.0,
-        "Szállítás\/raktározás": 0.0,
-        "Mezőgazdaság, bányászat": 0.25,
-        "5-9 fő": 0.0281690141,
-        "20-49 fő": 0.0,
-        "10-19 fő": 0.0495867769,
-        "50-249 fő": 0.375,
-        "Informatikai eszközt használó munkavállalók": null
-    },
-    {
         "id": "B5a_2",
         "max_point": 7.0,
         "average_points": 0.2211981567,
@@ -682,7 +651,7 @@
         "Informatikai eszközt használó munkavállalók": null
     },
     {
-        "id": "B5a_3",
+        "id": "B5a_1",
         "max_point": 7.0,
         "average_points": 3.5023041475,
         "Budapest": 3.6137931034,
@@ -713,7 +682,7 @@
         "Informatikai eszközt használó munkavállalók": null
     },
     {
-        "id": "B5b_1",
+        "id": "B5a_3",
         "max_point": 7.0,
         "average_points": 1.064516129,
         "Budapest": 1.0,
@@ -775,7 +744,7 @@
         "Informatikai eszközt használó munkavállalók": null
     },
     {
-        "id": "B5b_3",
+        "id": "B5b_1",
         "max_point": 7.0,
         "average_points": 3.4838709677,
         "Budapest": 3.619047619,
@@ -1705,7 +1674,7 @@
         "Informatikai eszközt használó munkavállalók": null
     },
     {
-        "id": "G1_1",
+        "id": "G1_2",
         "max_point": 16.0,
         "average_points": 9.8338870432,
         "Budapest": 9.918128655,
@@ -1736,7 +1705,7 @@
         "Informatikai eszközt használó munkavállalók": null
     },
     {
-        "id": "G1_2",
+        "id": "G1_1",
         "max_point": 14.0,
         "average_points": 12.3023255814,
         "Budapest": 12.3625730994,

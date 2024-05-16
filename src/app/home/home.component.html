@@ -1,19 +1,26 @@
-
-
-<div class="ai-cont">
-  <div class="container">
-    <img src="assets/ai.png" alt="Kép leírása">
-    <p class="mess">Ez itt a főoldal!<br> <br>
-      Itt tudsz majd új kérdőívet kitölteni vagy akár megnézni az előző kitöltéseidnek az eredményét!<br> <br>
+<div class="bg-white text-black font-bold my-20 mx-auto p-4 rounded shadow-lg w-full max-w-3xl">
+  <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6">
+    <img src="assets/ai.png" alt="Kép leírása" class="w-24 md:w-32 rounded-full">
+    <p class="bg-gray-200 p-4 rounded shadow-xl">
+      Ez itt a főoldal!<br><br>
+      Itt tudsz majd új kérdőívet kitölteni vagy akár megnézni az előző kitöltéseidnek az eredményét!<br><br>
       Fontos, hogy mielőtt új kérdőívet töltenél ki azelőtt meg kell adnod a céged adatai!
     </p>
   </div>
 </div>
 
-<div class="flex flex-col lg:flex-row w-[92%] md:w-[90%] xl:w-[90%]  mx-auto justify-around">
-  <div
-    class="max-w-4xl md:h-[40rem] py-16 md:py-5 w-full lg:w-[50%] flex flex-col  p-5 bg-white shadow-lg rounded-lg border-solid border-2 border-gray-100">
-    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Céged adatai</h2>
+<div class="w-full max-w-xs mx-auto mb-14 h-40 shadow-xl p-6 rounded-lg border-l-2 border-solid border-gray-100">
+  <h2 class="text-2xl font-semibold mb-4 text-center">Teszt indítása</h2>
+  <div class="w-full flex justify-center">
+    <button type="button" (click)="checkFirmData()"
+      class="bg-base_blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Teszt
+      kitöltése</button>
+  </div>
+</div>
+
+<div class="flex flex-col lg:flex-row w-11/12 md:w-11/12 xl:w-full mb-20 mx-auto justify-between">
+  <div class="max-w-4xl lg:w-[100%] md:h-[40rem] py-16 md:py-5 w-full flex flex-col p-5 bg-white shadow-xl rounded-lg border-2 border-gray-100">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Céged adatai</h2>
     <form class="px-10">
       <div class="mb-4">
         <label for="region" class="block text-gray-700 text-sm font-bold mb-2">Régió:</label>
@@ -117,42 +124,28 @@
 
       <div class="w-full flex justify-center">
         <button type="button" (click)="saveToFirm()"
-          class="bg-[#1372B6] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Adatok
+          class="bg-base_blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Adatok
           mentése</button>
       </div>
     </form>
   </div>
 
+  <div class="w-[5rem]">
 
-  <div class="md:w-[40%]">
-    <div
-      class="w-full h-[10rem] shadow-lg p-10 rounded-lg  border-l-2 border-solid border-2 border-gray-100">
-      <h2 class="text-2xl font-semibold  mb-4">Teszt indítása</h2>
-      <div class="w-full flex justify-center">
-        <button type="button" (click)="checkFirmData()"
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mx-auto ">Teszt
-          kitöltése</button>
-      </div>
-    </div>
+  </div>
 
-    <div class="md:h-[5rem]">
-
-    </div>
-
-    <div class="w-full md:h-[25rem] shadow-lg py-10 border-solid border-2 border-gray-100 text-black rounded-lg">
-      <h2 class="text-2xl font-semibold mb-4">Eddigi eredmények</h2>
-      <!-- Megváltoztatott rész kezdete: hozzáadtunk egy max-h-[20rem] és overflow-y-auto class-t -->
-      <div *ngIf="results.length != 0" class="max-h-[15rem] border-solid border-t-2 border-b-2 border-gray-300 px-10 mr-2 w-full overflow-y-auto">
-        <div *ngFor="let kitoltes of results" class="rounded-md px-2 py-3 bg-blue-500 cursor-pointer mt-10 text-white"  routerLink="../result/{{kitoltes.id}}">
+  <div class="w-full lg:w-[100%] mt-10 lg:mt-0">
+    <div class="w-full h-full shadow-xl py-10 border-2 border-gray-100 text-black rounded-lg">
+      <h2 class="text-2xl font-semibold mb-4 text-center">Eddigi eredmények</h2>
+      <div *ngIf="results.length != 0" class="max-h-[35rem] border-t-2 border-b-2 border-gray-300 px-10 py-5 w-full overflow-y-auto">
+        <div *ngFor="let kitoltes of results" class="rounded-md px-2 py-3 bg-base_blue hover:bg-blue-700 cursor-pointer mt-10 text-white" routerLink="../result/{{kitoltes.id}}">
           <p>Kitöltés dátuma: <br> <span class="font-bold">{{kitoltes.id | date: 'yyyy-MM-dd'}}</span></p>
           <p class="mt-5">Elért pontszám: <br> <span class="font-bold">{{kitoltes.totalPoints}} pont</span></p>
         </div>
       </div>
-      <!-- Megváltoztatott rész vége -->
       <div *ngIf="results.length == 0">
         <p class="text-center">Még nem töltöttél ki egy kérdőívet sem! Kezdj neki most az elsőnek!</p>
       </div>
     </div>
   </div>
 </div>
-
