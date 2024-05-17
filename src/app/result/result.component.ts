@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, afterNextRender } from '@angular/core';
 import { Question, QuizResultsService } from '../quizResults.service';
 import { ActivatedRoute } from '@angular/router';
 import { FirmsService, Point } from '../firms.service';
@@ -75,6 +75,13 @@ export class ResultComponent {
   finalResult: number = 0;
   ids: string[] = [];
   tabname = "";
+  digitalis_jelenlet_ids = ["B1_1", "B1_2", "B1_3", "B2", "B3", "B4", "B5a_1", "B5a_2", "B5a_3", "B5b_1", "B5b_2", "B5b_3", "B6a", "B6b", "B7a", "B7b", "B8", "B9", "B10", "B11", "C1"];
+  digitalis_mindennapok_ids = ["A6", "A8", "B12", "B17_1", "B17_2", "B17_3", "C1", "C2", "C3", "C4"];
+  vallalkozasvezetes_ids = ["B13", "E1", "E2", "E3", "E5"];
+  ertekesites_es_marketing_ids = ["D8", "B11", "D5", "D6", "D7", "D9"];
+  digitalis_penzugy_ids = ["G1_1", "G1_2", "G2", "G3"];
+  informatikai_biztonsag_ids = ["B12", "F1", "F2", "F3_1", "F3_2"];
+  loadCharts = false;
 
   constructor(private chatService: ChatService, private chartService: ChartService, private quizService: QuizResultsService, private route: ActivatedRoute, private firmService: FirmsService, private dataService: DataService, private authService: AuthService, private countResultService: CountResultService) {
     this.messages.push(
@@ -105,8 +112,6 @@ export class ResultComponent {
         this.firmPoints[index].ShownPoint = this.countResultService.FindWhichPointToShow(this.firmPoints[index], this.myFirm.Field);
       }
 
-
-     
       fullPoints += this.firmPoints[index].ShownPoint;
 
       this.sortedPoints.push(this.firmPoints[index])
@@ -172,9 +177,9 @@ export class ResultComponent {
 
   renderCharts() {
     setTimeout(() => {
-      this.chartService.RenderCharts(this.currentResult.results, this.sortedPoints)
-      this.chartService.RenderPieChart(this.finalResult, this.categoryMaxPoint, this.firmAvaragePointByCategory);
-    }, 500);
+        this.chartService.RenderCharts(this.currentResult.results, this.sortedPoints)
+        this.chartService.RenderPieChart(this.finalResult, this.categoryMaxPoint, this.firmAvaragePointByCategory, this.tabname);
+    }, 1000);
   }
 
   changeTab(tabName: string): void {
@@ -188,14 +193,13 @@ export class ResultComponent {
     this.loadQuestions(this.tabname, newValue);
   }
 
-  calculateDigimeterIndex() : number {
-    console.log(this.currentResult.results)
-    var osszeg1 = this.currentResult.results.filter(x => x.category == "Digitális pénzügy").reduce((sum, score) => sum += score.points , 0) * 0.16
-    var osszeg2 = this.currentResult.results.filter(x => x.category == "Informatikai biztonság").reduce((sum, score) => sum += score.points , 0) * 0.11
-    var osszeg3 = this.currentResult.results.filter(x => x.category == "Vállalatvezetés").reduce((sum, score) => sum += score.points , 0) * 0.16
-    var osszeg4 = this.currentResult.results.filter(x => x.category == "Értékesítés és marketing").reduce((sum, score) => sum += score.points , 0) * 0.19
-    var osszeg5 = this.currentResult.results.filter(x => x.category == "Digitális Jelenlét").reduce((sum, score) => sum += score.points , 0) * 0.19
-    var osszeg6 = this.currentResult.results.filter(x => x.category == "Digitális mindennapok").reduce((sum, score) => sum += score.points , 0) * 0.19
+  calculateDigimeterIndex(): number {
+    var osszeg1 = this.currentResult.results.filter(x => x.category == "Digitális pénzügy" && this.digitalis_penzugy_ids.indexOf(x.questionId) !== -1).reduce((sum, score) => sum += score.points, 0) * 0.16
+    var osszeg2 = this.currentResult.results.filter(x => x.category == "Informatikai biztonság" && this.informatikai_biztonsag_ids.indexOf(x.questionId) !== -1).reduce((sum, score) => sum += score.points, 0) * 0.11
+    var osszeg3 = this.currentResult.results.filter(x => x.category == "Vállalatvezetés" && this.vallalkozasvezetes_ids.indexOf(x.questionId) !== -1).reduce((sum, score) => sum += score.points, 0) * 0.16
+    var osszeg4 = this.currentResult.results.filter(x => x.category == "Értékesítés és marketing" && this.ertekesites_es_marketing_ids.indexOf(x.questionId) !== -1).reduce((sum, score) => sum += score.points, 0) * 0.19
+    var osszeg5 = this.currentResult.results.filter(x => x.category == "Digitális Jelenlét" && this.digitalis_jelenlet_ids.indexOf(x.questionId) !== -1).reduce((sum, score) => sum += score.points, 0) * 0.19
+    var osszeg6 = this.currentResult.results.filter(x => x.category == "Digitális mindennapok" && this.digitalis_mindennapok_ids.indexOf(x.questionId) !== -1).reduce((sum, score) => sum += score.points, 0) * 0.19
 
     return osszeg1 + osszeg2 + osszeg3 + osszeg4 + osszeg5 + osszeg6;
   }

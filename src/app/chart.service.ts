@@ -21,12 +21,22 @@ export class ChartService {
       if (selected != null) {
         if (typeof (selected) === "number") {
           second = (((selected) as number) / element.maxpoint) * 100;
-          if(second < 5) second = 4
+          if (second < 5) second = 4
         }
       }
 
       var first = (element.points / element.maxpoint) * 100;
-      if(first < 5 && first > 0) first = 4
+      if (first < 5 && first > 0) first = 4
+
+      if (Number.isNaN(first)) {
+        first = 0
+      }
+
+      if (Number.isNaN(second)) {
+        second = 0
+      }
+
+      
 
       const options = {
         chart: {
@@ -42,7 +52,7 @@ export class ChartService {
         }],
         tooltip: {
           y: {
-            formatter: function (value : any) {
+            formatter: function (value: any) {
               return value < 5 ? '<5' : (value).toFixed(0) + '%';
             }
           }
@@ -99,18 +109,29 @@ export class ChartService {
       };
 
       const chart = new ApexCharts(document.querySelector("#chart" + number), options);
-      chart.render();
+      if (chart != null) {
+        chart.render();
+      }
+
       number += 1;
     });
   }
 
-  RenderPieChart(userScore: number, categoryMaxPoint: number, firmAvaragePointByCategory: number) {
+  RenderPieChart(userScore: number, categoryMaxPoint: number, firmAvaragePointByCategory: number, tabName: string) {
 
     var first1 = userScore;
     var second1 = categoryMaxPoint - userScore;
 
     var first2 = firmAvaragePointByCategory;
     var second2 = categoryMaxPoint - firmAvaragePointByCategory;
+
+    if (tabName == "Értékesítés és marketing") {
+      first1 = (userScore / categoryMaxPoint) * 100
+      second1 = 100 - first1
+
+      first2 = (firmAvaragePointByCategory / categoryMaxPoint) * 100
+      second2 = 100 - first2
+    }
 
     var chartOptions = {
       series: [first1, second1], // Ide kerülnek az adatok
@@ -121,7 +142,7 @@ export class ChartService {
       },
       tooltip: {
         y: {
-          formatter: function (value : any) {
+          formatter: function (value: any) {
             return Math.round(value) + '%';
           }
         }
@@ -150,7 +171,7 @@ export class ChartService {
       },
       tooltip: {
         y: {
-          formatter: function (value : number) {
+          formatter: function (value: any) {
             return Math.round(value) + '%';
           }
         }
@@ -173,11 +194,11 @@ export class ChartService {
     };
 
     const chart = new ApexCharts(document.querySelector("#piechart"), chartOptions);
-
     const chart2 = new ApexCharts(document.querySelector("#piechart2"), chartOptions2);
 
     chart.render();
     chart2.render();
+
   }
 
 }

@@ -19,6 +19,9 @@ export class FirmSelectedValueToDisplayTextPipe implements PipeTransform {
         case "EszakMagyarorszag":
         return "Észak-Magyarország"
         break;
+        case "Budapest":
+        return "Budapest"
+        break;
         case "DelAlfold":
         return "Dél-Alföld"
         break;

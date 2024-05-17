@@ -29,7 +29,7 @@
         <option selected [value]="'Összes'">Összes</option>
         <option [value]="'Szakma'">Tevékenységi kör</option>
         <option [value]="'Regió'">Regió</option>
-        <option [value]="'Munkásszám'">Munkásszám</option>
+        <option [value]="'Munkásszám'">Foglalkoztatottak száma</option>
       </select>
     </div>
 
@@ -44,7 +44,7 @@
 
     <div class="space-y-4">
       <div *ngFor="let valaszopcio of currentResult.results; let i = index">
-        <div *ngIf="valaszopcio.selectedAnswerTexts.length != 0">
+        <div *ngIf="valaszopcio.selectedAnswer.length != 0">
           
         <div class="flex flex-col md:flex-row w-full justify-between items-center mt-8 md:mt-32">
           <div class="flex flex-col w-full md:w-[30rem]">

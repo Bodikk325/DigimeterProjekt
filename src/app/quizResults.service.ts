@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Result } from "./result";
 import { AuthService } from "./auth.service";
+import { Router } from "@angular/router";
 
 export interface Question {
   id: string;
@@ -28,7 +29,7 @@ export interface Question {
 })
 export class QuizResultsService {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router : Router) { }
 
   quizResults!: Result[];
   currentResult!: Result;
@@ -106,7 +107,8 @@ export class QuizResultsService {
     }
     this.authService.addResultToUser(this.currentResult)
     localStorage.setItem('quizResults', JSON.stringify(existingResults));
-    window.location.href = "result/" + stamp;
+
+    this.router.navigateByUrl("result/" + stamp)
   }
 
 

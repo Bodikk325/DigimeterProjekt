@@ -32,7 +32,7 @@ export class QuizComponent {
 
   ngOnInit(): void {
     this.dataService.getQuestions().subscribe((res: Question[]) => {
-      this.questions = res;
+      this.questions = res
     });
   }
 
@@ -128,7 +128,7 @@ export class QuizComponent {
           }
       }
 
-    if (this.currentQuestionIndex === this.questions.length - 2) {
+    if (this.currentQuestionIndex === this.questions.length - 1) {
       this.quizResultsService.saveQuizResultsAtTheEnd(this.questions);
     }
 

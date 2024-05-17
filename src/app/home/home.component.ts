@@ -33,7 +33,7 @@ export class HomeComponent {
 
   checkFirmData()
   {
-    if(this.myFirm == null || this.myFirm.Field == "" || this.myFirm.Region == "" || this.myFirm.Workers == "")
+    if(this.myFirm == null || this.myFirm.Field == "" || this.myFirm.Region == "" || this.myFirm.Workers == "" || this.myFirm.Capital == "" || this.myFirm.Revenue == "" || this.myFirm.Sector == "")
       {
         this.notiService.show("Nincsenek kitöltve a cégadatok! Kérünk töltsd ki azokat először!", NotificationType.error)
       }
