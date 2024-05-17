@@ -46,7 +46,6 @@ export class QuizComponent {
   }
 
   onVariableChange(value: number) {
-
     if (!this.shouldShowQuestion()) {
       this.currentQuestionIndex++;
     }
@@ -69,9 +68,7 @@ export class QuizComponent {
       // Iterate over each condition that must be satisfied
       for (let index = 0; index < currentQuestion.condition.length; index++) {
         const condition = currentQuestion.condition[index];
-  
         if (condition === ">0") {
-          // Special case where condition is ">0"
           if (parseInt(results[index].selectedAnswer[0]) == 0) {
             boolean = false;
             break;
@@ -115,11 +112,26 @@ export class QuizComponent {
   }
 
   nextQuestion(): void {
+
+
+    if(this.questions[this.currentQuestionIndex].answers.filter(x=> x.contains_Textbox).length != 0)
+      {
+        
+        if(!isNaN(Number(this.questions[this.currentQuestionIndex].selectedAnswer)))
+          {
+            localStorage.setItem("A7", this.questions[this.currentQuestionIndex].selectedAnswer as string)
+          }
+          else
+          {
+            this.notiService.show("Kérünk szám formátumú választ adj meg!", NotificationType.error)
+            return;
+          }
+      }
+
     if (this.currentQuestionIndex === this.questions.length - 2) {
       this.quizResultsService.saveQuizResultsAtTheEnd(this.questions);
     }
-    console.log(this.questions.length)
-    console.log(this.currentQuestionIndex)
+
 
     this.quizResultsService.saveQuizResults(this.questions);
 

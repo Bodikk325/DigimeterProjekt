@@ -43,7 +43,7 @@ export class ChartService {
         tooltip: {
           y: {
             formatter: function (value : any) {
-              return value < 5 ? '<5' : value;
+              return value < 5 ? '<5' : (value).toFixed(0) + '%';
             }
           }
         },
@@ -60,6 +60,18 @@ export class ChartService {
         xaxis: {
           categories: ['Az ön vállalkozása', 'A többi cég a piacon'],
         },
+        responsive: [
+          {
+            breakpoint: 760,
+            options: {
+              chart: {
+                width: '50%'
+              },
+              legend: {
+                position: 'bottom'
+              }
+            }
+          }],
         dataLabels: {
           enabled: true,
           formatter: function (val: any) {
@@ -107,18 +119,27 @@ export class ChartService {
         width: 380,
         type: 'pie',
       },
-      labels: ['A te eredményed', 'Fejlődési lehetőség'], // Adatcímkék
-      responsive: [{
-        breakpoint: 480,
-        options: {
-          chart: {
-            width: 200
-          },
-          legend: {
-            position: 'bottom'
+      tooltip: {
+        y: {
+          formatter: function (value : any) {
+            return Math.round(value) + '%';
           }
         }
-      }]
+      },
+      labels: ['A te eredményed', 'Fejlődési lehetőség'], // Adatcímkék
+      responsive: [
+        {
+          breakpoint: 760,
+          options: {
+            chart: {
+              width: '90%'
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }
+      ]
     };
 
     var chartOptions2 = {
@@ -127,19 +148,28 @@ export class ChartService {
         width: 380,
         type: 'pie',
       },
-      colors: ['#3357FF', '#080729'],
-      labels: ['Más cégek', 'Fejlődési lehetőség'], // Adatcímkék
-      responsive: [{
-        breakpoint: 480,
-        options: {
-          chart: {
-            width: 200
-          },
-          legend: {
-            position: 'bottom'
+      tooltip: {
+        y: {
+          formatter: function (value : number) {
+            return Math.round(value) + '%';
           }
         }
-      }]
+      },
+      colors: ['#0072b5', '#080729'],
+      labels: ['Más cégek', 'Fejlődési lehetőség'], // Adatcímkék
+      responsive: [
+        {
+          breakpoint: 760,
+          options: {
+            chart: {
+              width: '90%'
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }
+      ]
     };
 
     const chart = new ApexCharts(document.querySelector("#piechart"), chartOptions);

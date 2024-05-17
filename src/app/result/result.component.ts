@@ -71,7 +71,6 @@ export class ResultComponent {
   firmPoints: Point[] = [];
   comparisonPoints!: Point[];
   sortedAnswers!: Question[];
-  showedFinalResults : any;
   sortedPoints: Point[] = [];
   finalResult: number = 0;
   ids: string[] = [];
@@ -95,24 +94,23 @@ export class ResultComponent {
     var fullPoints = 0;
     for (let index = 0; index < this.firmPoints.length; index++) {
       this.firmPoints[index].ShownPoint = this.firmPoints[index].AvaragePoint;
-        
-        if (szures == "Regió") {
-          this.firmPoints[index].ShownPoint = this.countResultService.FindWhichPointToShow(this.firmPoints[index], this.myFirm.Region);
-        }
-        if (szures == "Munkásszám") {
-          this.firmPoints[index].ShownPoint = this.countResultService.FindWhichPointToShow(this.firmPoints[index], this.myFirm.Workers);
-        }
-        if (szures == "Szakma") {
-          this.firmPoints[index].ShownPoint = this.countResultService.FindWhichPointToShow(this.firmPoints[index], this.myFirm.Field);
-        }
+
+      if (szures == "Regió") {
+        this.firmPoints[index].ShownPoint = this.countResultService.FindWhichPointToShow(this.firmPoints[index], this.myFirm.Region);
+      }
+      if (szures == "Munkásszám") {
+        this.firmPoints[index].ShownPoint = this.countResultService.FindWhichPointToShow(this.firmPoints[index], this.myFirm.Workers);
+      }
+      if (szures == "Szakma") {
+        this.firmPoints[index].ShownPoint = this.countResultService.FindWhichPointToShow(this.firmPoints[index], this.myFirm.Field);
+      }
 
 
-        console.log( this.firmPoints[index].questionId + " " + this.firmPoints[index].ShownPoint + " " + this.currentResult.results[index].points + " " + this.currentResult.results[index].maxpoint + " " + this.firmPoints[index].Maxpoint + " " + this.currentResult.results[index].questionId)
+     
+      fullPoints += this.firmPoints[index].ShownPoint;
 
-        fullPoints += this.firmPoints[index].ShownPoint;
+      this.sortedPoints.push(this.firmPoints[index])
 
-        this.sortedPoints.push(this.firmPoints[index])
-      
     }
     if (this.tabname != "") {
       this.firmAvaragePointByCategory = fullPoints
@@ -120,7 +118,7 @@ export class ResultComponent {
   }
 
   calculateFinalResult(page: string) {
-    this.finalResult = this.currentResult.totalPoints;
+    this.finalResult = this.calculateDigimeterIndex();
     if (page != "") {
       this.currentResult.results = this.currentResult.results.filter(x => x.category == page)
       this.finalResult = this.currentResult.results.reduce((sum, question) => sum + question.points, 0);
@@ -130,7 +128,7 @@ export class ResultComponent {
   getCurrentResult() {
     this.allResults = this.quizService.getQuizResults();
     this.currentResult = this.allResults.find(q => q.id == parseInt(this.route.snapshot.paramMap.get('id') ?? "0")) as Result;
-    this.currentResult.results = this.currentResult.results.filter(x=> x.questionId != "B14" && x.questionId != "B15" && x.questionId != "B16")
+    this.currentResult.results = this.currentResult.results.filter(x => x.questionId != "B14" && x.questionId != "B15" && x.questionId != "B16")
   }
 
 
@@ -145,8 +143,6 @@ export class ResultComponent {
       this.getCurrentResult();
 
       this.currentResult.results = this.currentResult.results.filter(x => x.maxpoint != null)
-
-      
 
       this.calculateFinalResult(page)
 
@@ -170,12 +166,6 @@ export class ResultComponent {
 
       this.isloaded = true
 
-      
-
-      console.log(this.currentResult.results)
-      this.showedFinalResults = this.currentResult.results
-      console.log(this.firmPoints)
-
       this.renderCharts();
     })
   }
@@ -196,6 +186,18 @@ export class ResultComponent {
   onSelect(newValue: string) {
     this.selectedValue = newValue;
     this.loadQuestions(this.tabname, newValue);
+  }
+
+  calculateDigimeterIndex() : number {
+    console.log(this.currentResult.results)
+    var osszeg1 = this.currentResult.results.filter(x => x.category == "Digitális pénzügy").reduce((sum, score) => sum += score.points , 0) * 0.16
+    var osszeg2 = this.currentResult.results.filter(x => x.category == "Informatikai biztonság").reduce((sum, score) => sum += score.points , 0) * 0.11
+    var osszeg3 = this.currentResult.results.filter(x => x.category == "Vállalatvezetés").reduce((sum, score) => sum += score.points , 0) * 0.16
+    var osszeg4 = this.currentResult.results.filter(x => x.category == "Értékesítés és marketing").reduce((sum, score) => sum += score.points , 0) * 0.19
+    var osszeg5 = this.currentResult.results.filter(x => x.category == "Digitális Jelenlét").reduce((sum, score) => sum += score.points , 0) * 0.19
+    var osszeg6 = this.currentResult.results.filter(x => x.category == "Digitális mindennapok").reduce((sum, score) => sum += score.points , 0) * 0.19
+
+    return osszeg1 + osszeg2 + osszeg3 + osszeg4 + osszeg5 + osszeg6;
   }
 
 
@@ -266,8 +268,9 @@ export class ResultComponent {
         question.questionId.includes("DIGITÁLIS_JELENLÉT")
       );
     }
+
     const totalFirmPoints = filteredPoints[0].AvaragePoint;
-    const maximumpoint = filteredPoints[0].Maxpoint;
+    var maximumpoint = filteredPoints[0].Maxpoint;
 
     if (topicFilter == ""
     ) {

@@ -178,8 +178,8 @@
         "pontok": 0.0,
         "is_A7_related": false,
         "contains_Textbox": false,
-        "based_On": [],
-        "condition": []
+        "based_On": ["A7"],
+        "condition": [ ">0" ]
     },
     {
         "id": "B1_1",
@@ -875,7 +875,7 @@
         "max_point": 5.0,
         "pontok": 1.0,
         "is_A7_related": false,
-        "contains_Textbox": true,
+        "contains_Textbox": false,
         "based_On": [
             "B1_1",
             "B3"
@@ -971,7 +971,7 @@
         "max_point": 5.0,
         "pontok": 1.0,
         "is_A7_related": false,
-        "contains_Textbox": true,
+        "contains_Textbox": false,
         "based_On": [
             "B1_2",
             "B4"
@@ -1139,7 +1139,7 @@
         "max_point": null,
         "pontok": null,
         "is_A7_related": false,
-        "contains_Textbox": true,
+        "contains_Textbox": false,
         "based_On": [
             "B1_2"
         ],
@@ -1373,7 +1373,7 @@
         "max_point": 3.0,
         "pontok": 0.0,
         "is_A7_related": false,
-        "contains_Textbox": true,
+        "contains_Textbox": false,
         "based_On": [
             "B5a_1"
         ],
@@ -1727,7 +1727,7 @@
         "max_point": 25.0,
         "pontok": 5.0,
         "is_A7_related": false,
-        "contains_Textbox": true,
+        "contains_Textbox": false,
         "based_On": [],
         "condition": []
     },
@@ -2267,7 +2267,7 @@
         "max_point": 5.0,
         "pontok": 0.0,
         "is_A7_related": false,
-        "contains_Textbox": true,
+        "contains_Textbox": false,
         "based_On": [
             "B13"
         ],
@@ -3505,7 +3505,7 @@
         "max_point": 15.0,
         "pontok": 0.0,
         "is_A7_related": true,
-        "contains_Textbox": true,
+        "contains_Textbox": false,
         "based_On": [
             "A7"
         ],
@@ -3917,7 +3917,7 @@
         "max_point": 40.0,
         "pontok": 5.0,
         "is_A7_related": false,
-        "contains_Textbox": true,
+        "contains_Textbox": false,
         "based_On": [],
         "condition": []
     },
@@ -4001,7 +4001,7 @@
         "max_point": 51.0,
         "pontok": 0.0,
         "is_A7_related": false,
-        "contains_Textbox": true,
+        "contains_Textbox": false,
         "based_On": [],
         "condition": []
     },
@@ -4317,7 +4317,7 @@
         "max_point": 16.0,
         "pontok": 2.0,
         "is_A7_related": false,
-        "contains_Textbox": true,
+        "contains_Textbox": false,
         "based_On": [],
         "condition": []
     },
@@ -4406,7 +4406,7 @@
         "max_point": 15.0,
         "pontok": 0.0,
         "is_A7_related": false,
-        "contains_Textbox": true,
+        "contains_Textbox": false,
         "based_On": [
             "E2"
         ],
@@ -4747,7 +4747,7 @@
         "max_point": 27.0,
         "pontok": 0.0,
         "is_A7_related": true,
-        "contains_Textbox": true,
+        "contains_Textbox": false,
         "based_On": [
             "A7"
         ],
@@ -5553,7 +5553,7 @@
         "max_point": 3.0,
         "pontok": 0.0,
         "is_A7_related": false,
-        "contains_Textbox": true,
+        "contains_Textbox": false,
         "based_On": [
             "B5b_2"
         ],

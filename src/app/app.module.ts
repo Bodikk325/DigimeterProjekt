@@ -15,6 +15,7 @@ import { HeaderComponent } from './header/header.component';
 import { RounderPipe } from './rounder.pipe';
 import { NotificationComponent } from './notification/notification.component';
 import { FooterComponent } from './footer/footer.component';
+import { FirmSelectedValueToDisplayTextPipe } from './firm-selected-value-to-display-text.pipe';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { FooterComponent } from './footer/footer.component';
     HeaderComponent,
     RounderPipe,
     NotificationComponent,
-    FooterComponent
+    FooterComponent,
+    FirmSelectedValueToDisplayTextPipe
   ],
   imports: [
     BrowserModule,

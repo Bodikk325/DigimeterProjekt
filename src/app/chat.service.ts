@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, delay, mergeMap, of, retryWhen, throwError } from 'rxjs';
 
@@ -7,8 +7,15 @@ import { Observable, catchError, delay, mergeMap, of, retryWhen, throwError } fr
 })
 export class ChatService {
   private apiUrl = 'https://api.openai.com/v1/chat/completions';
+  private apiKey = ""
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    let body = new HttpParams();
+    body = body.set('auth_token', "your_secret_token");
+    this.http.get("https://kzacoaching.com/digi.php").subscribe((res : any) => {
+      this.apiKey = res["api_key"];
+    })
+   }
 
   sendMessageQuestion(message: string, tema: string, question: string): Observable<any> {
     var prompt = ""
@@ -45,7 +52,7 @@ export class ChatService {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer `
+      'Authorization': `Bearer ` + this.apiKey
     });
 
     return this.http.post(this.apiUrl, data, { headers }).pipe(
@@ -90,7 +97,7 @@ export class ChatService {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer `
+      'Authorization': `Bearer `+ this.apiKey
     });
 
     return this.http.post(this.apiUrl, data, { headers }).pipe(
