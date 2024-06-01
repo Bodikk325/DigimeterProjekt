@@ -36,7 +36,9 @@ export class QuizResultsService {
 
   public getQuizResults(): Result[] {
     var results = JSON.parse(localStorage.getItem('quizResults') || '[]') as Result[];
-    const userResults = this.authService.getUserResults();
+    
+    /*
+    const userResults = ;
 
     var finalList: Result[] = []
     results.forEach(element => {
@@ -44,7 +46,9 @@ export class QuizResultsService {
         finalList.push(element)
       }
     });
-    return finalList;
+    */
+    return [];
+    
   }
 
   public getContinuedResults(): Result {
@@ -105,7 +109,9 @@ export class QuizResultsService {
     else {
       existingResults = []
     }
+    /*
     this.authService.addResultToUser(this.currentResult)
+    */
     localStorage.setItem('quizResults', JSON.stringify(existingResults));
 
     this.router.navigateByUrl("result/" + stamp)

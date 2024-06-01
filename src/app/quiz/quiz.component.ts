@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Question, QuizResultsService } from '../quizResults.service';
 import { DataService } from '../data.service';
 import { ChatService } from '../chat.service';
 import { NotificationService } from '../notification.service';
 import { NotificationType } from '../notification/notification.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-quiz',
@@ -11,6 +13,9 @@ import { NotificationType } from '../notification/notification.component';
   styleUrls: ['./quiz.component.css'] // Javított a styleUrl->styleUrls
 })
 export class QuizComponent {
+
+  
+
   isMessageLoading = false;
   isChatVisible = false;
 
@@ -23,7 +28,9 @@ export class QuizComponent {
     private dataService: DataService,
     private quizResultsService: QuizResultsService,
     private chatService: ChatService,
-    private notiService: NotificationService
+    private notiService: NotificationService,
+    private route: ActivatedRoute,
+    private router : Router
   ) {
     this.messages.push({
       text: "Kérdésed van esetleg a válaszadással kapcsolatban? Ne habozz kérdezni, segítek ahol tudok!", user: false
@@ -31,7 +38,8 @@ export class QuizComponent {
   }
 
   ngOnInit(): void {
-    this.dataService.getQuestions().subscribe((res: Question[]) => {
+
+    this.dataService.getQuestions(this.route.snapshot.paramMap.get('topic') ?? "").subscribe((res: Question[]) => {
       this.questions = res
     });
   }
@@ -112,44 +120,42 @@ export class QuizComponent {
   }
 
   nextQuestion(): void {
-
-
-    if(this.questions[this.currentQuestionIndex].answers.filter(x=> x.contains_Textbox).length != 0)
-      {
-        
-        if(!isNaN(Number(this.questions[this.currentQuestionIndex].selectedAnswer)))
-          {
-            localStorage.setItem("A7", this.questions[this.currentQuestionIndex].selectedAnswer as string)
-          }
-          else
-          {
-            this.notiService.show("Kérünk szám formátumú választ adj meg!", NotificationType.error)
+    // Ellenőrzés a textboxra és szám formátumú válaszra
+    if (this.questions[this.currentQuestionIndex].answers.filter(x => x.contains_Textbox).length != 0) {
+        if (!isNaN(Number(this.questions[this.currentQuestionIndex].selectedAnswer))) {
+            localStorage.setItem("A7", this.questions[this.currentQuestionIndex].selectedAnswer as string);
+        } else {
+            this.notiService.show("Please provide a numeric answer!", NotificationType.error);
             return;
-          }
-      }
-
-    if (this.currentQuestionIndex === this.questions.length - 1) {
-      this.quizResultsService.saveQuizResultsAtTheEnd(this.questions);
+        }
     }
 
+    // Mentés a quiz végén
+    if (this.currentQuestionIndex === this.questions.length - 1) {
+        this.quizResultsService.saveQuizResultsAtTheEnd(this.questions);
+    }
 
+    // Mentés a kérdések állapotának
     this.quizResultsService.saveQuizResults(this.questions);
 
     const currentQuestion = this.questions[this.currentQuestionIndex];
 
+    // Lépj a következő kérdésre, ha van válasz
     if (currentQuestion.selectedAnswer) {
-      this.currentQuestionIndex++;
+        this.currentQuestionIndex++;
     } else {
-      this.notiService.show("Kérlek válaszolj a kérdésre!", NotificationType.error);
+        this.notiService.show("Please answer the question!", NotificationType.error);
+        return;
     }
 
-  }
-
-  prevQuestion(): void {
-    if (this.currentQuestionIndex > 0) {
-      this.currentQuestionIndex--;
+    // Ellenőrizd, hogy a második kérdésnél vagyunk-e (index 1)
+    if (this.currentQuestionIndex === 2) { // Második kérdés utáni index
+        this.allowNavigation = true;
+        this.router.navigateByUrl(""); // Navigáció a második kérdés után
+    } else {
+        this.allowNavigation = false;
     }
-  }
+}
 
   canMoveToNextQuestion(): boolean {
     return !!this.questions[this.currentQuestionIndex]?.selectedAnswer;
@@ -166,4 +172,34 @@ export class QuizComponent {
       question.selectedAnswer = (question.selectedAnswer as string[]).filter(a => a !== answer.answer);
     }
   }
+
+
+  allowNavigation = false;
+
+  canDeactivate(): Observable<boolean> | boolean {
+    if (this.allowNavigation) {
+      return true;
+    }
+    const confirmDeactivate = window.confirm('Are you sure you want to leave this page?');
+    return of(confirmDeactivate);
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    if (!this.allowNavigation) {
+      const confirmationMessage = 'Are you sure you want to reload this page?';
+      $event.returnValue = confirmationMessage; // A legtöbb böngésző figyelmen kívül hagyja ezt.
+      return confirmationMessage;
+    }
+    else 
+    {
+      return ""
+    }
+  }
+
+  // Ezt a metódust hívd meg amikor a gombot megnyomod
+  enableNavigation() {
+    this.allowNavigation = true;
+  }
+
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, afterNextRender } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { MyFirm } from './myFirm';
@@ -46,10 +46,8 @@ export class FirmsService {
   points: Point[] = [
   ]
 
-  firmsList: MyFirm[] = [];
-
   newFirm: MyFirm = {
-    UserName: (this.authService.getCurrentUser() as User).username,
+    UserName: "",
     Region: '',
     Field: '',
     Workers: '',
@@ -59,28 +57,27 @@ export class FirmsService {
   }
 
   constructor(private http: HttpClient, private authService : AuthService) {
-      const firmsData = localStorage.getItem('MyFirmsList');
-      this.firmsList = firmsData ? JSON.parse(firmsData) as MyFirm[] : [];
+      
   }
 
-  getMyFirmData(): MyFirm {
-    return this.firmsList.find(x => x.UserName == this.authService.getCurrentUser().username) ?? this.newFirm
+  saveMyFirmData(myFirm : MyFirm)
+  {
+    let body = new HttpParams();
+    body = body.set('userId', localStorage.getItem("currentUser") ?? "");
+    body = body.set('region', myFirm.Region);
+    body = body.set('field', myFirm.Field);
+    body = body.set('employees', myFirm.Workers);
+    body = body.set('capital', myFirm.Capital);
+    body = body.set('sector', myFirm.Sector);
+    body = body.set('revenue', myFirm.Revenue);
+    return this.http.post("http://localhost/updateMyFirm.php", body);
   }
 
-  saveFirmToList(myFirm: MyFirm) {
-    var selected = this.firmsList.find(x => x.UserName == myFirm.UserName);
-    if (selected == null) {
-      this.firmsList.push(myFirm)
-    }
-    else {
-      this.update(myFirm)
-    }
-
-    this.saveListToLocalStorage();
-  }
-
-  saveListToLocalStorage() {
-    localStorage.setItem("MyFirmsList", JSON.stringify(this.firmsList))
+  getFirmData()
+  {
+    let body = new HttpParams();
+    body = body.set('userId', localStorage.getItem("currentUser") ?? "");
+    return this.http.post("http://localhost/getMyFirmData.php", body);
   }
 
   getPoints(): Observable<Point[]> {
@@ -121,12 +118,5 @@ export class FirmsService {
       otvenketszaznegyvenkilenc: item['50-249 fő'],
       ShownPoint: 0
     };
-  }
-
-  private update(newItem: MyFirm) {
-    let indexToUpdate = this.firmsList.findIndex(item => item.UserName === newItem.UserName);
-    this.firmsList[indexToUpdate] = newItem;
-
-    this.firmsList = Object.assign([], this.firmsList);
   }
 }

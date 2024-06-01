@@ -1,63 +1,74 @@
-<div class="flex justify-center relative">
-  <div *ngIf="questions[currentQuestionIndex] as currentQuestion"
-    class="mx-auto w-full max-w-4xl h-screen max-h-[80vh] p-4 m-4 bg-[#f4f4f4] rounded-lg shadow-lg flex flex-col">
-    <h2 class="text-xl font-bold text-blue-900 mb-6 mt-6 mx-5">
-      Kérdés : {{currentQuestion.question}}
-    </h2>
-    <div class="flex-1 overflow-auto mb-6">
-      <ul class="list-none pl-0 space-y-4">
-        <li *ngFor="let answer of currentQuestion.answers" class="flex items-start">
-          <div *ngIf="!currentQuestion.isThereMoreThanOneAnswer" class="flex items-center p-4 m-4">
-            <input type="radio" *ngIf="!answer.contains_Textbox" [value]="answer.id" [(ngModel)]="currentQuestion.selectedAnswer" name="answer"
-              class="form-radio h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500 focus:ring-offset-0">
-            <label *ngIf="!answer.contains_Textbox" class="ml-3 text-md text-gray-800">{{answer.answer}}</label>
-            <label *ngIf="answer.contains_Textbox" class="ml-3 text-md text-gray-800">Írja be a választ a mezőbe!</label>
-            <input type="text" *ngIf="answer.contains_Textbox" [value]="answer.answer" [(ngModel)]="currentQuestion.selectedAnswer" name="answer"
-              class="ml-10 h-10 w-[20rem] border-black">
-          </div>
-          <div *ngIf="currentQuestion.isThereMoreThanOneAnswer" class="flex items-center p-4 m-4">
-            <input type="checkbox" *ngIf="!answer.contains_Textbox" [value]="answer.id" [(ngModel)]="answer.selected"
-              (change)="updateSelectedAnswers(currentQuestion, answer)"
-              class="form-checkbox h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500 focus:ring-offset-0">
-            <label *ngIf="!answer.contains_Textbox" class="ml-3 text-md text-gray-800">{{answer.answer}}</label>
-            <label *ngIf="answer.contains_Textbox" class="ml-3 text-md text-gray-800">Írja be a választ a mezőbe!</label>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="flex justify-between p-4 m-4">
-      <button (click)="nextQuestion()" [disabled]="!canMoveToNextQuestion()"
-        class="bg-base_blue hover:bg-blue-600 disabled:opacity-50 text-white font-semibold py-2 px-4 rounded-md">
-        Következő
-      </button>
-    </div>
-  </div>
-</div>
-
-
-
-
-<div class="app-container"  (document:click)="onDocumentClick($event)">
-  <div class="chat-container" [class.hidden]="!isChatVisible">
-    <div class="chat-header">
-      <span style="margin-left: 10px;">
-        DIGIMÉTER
-      </span>
-      <button style="margin-right: 10px;" class="close-button" (click)="isChatVisible = false">×</button>
-  </div>
-    <div class="messages">
-      <div *ngFor="let message of messages" class="message" [ngClass]="{'user': message.user, 'bot': !message.user}">
-        {{ message.text }}
+@defer (when questions) {
+  <div class="flex justify-center relative">
+    <div *ngIf="questions[currentQuestionIndex] as currentQuestion"
+      class="mx-auto w-full max-w-4xl h-screen max-h-[80vh] p-6 m-4 bg-white rounded-lg shadow-xl flex flex-col">
+      <h2 class="text-2xl font-semibold text-blue-700 mb-8 mt-8 mx-6">
+        Kérdés : {{currentQuestion.question}}
+      </h2>
+      <div class="flex-1 overflow-auto mb-8">
+        <ul class="list-none pl-0 space-y-6">
+          <li *ngFor="let answer of currentQuestion.answers" class="flex items-start">
+            <div *ngIf="!currentQuestion.isThereMoreThanOneAnswer" class="flex items-center p-4">
+              <input type="radio" *ngIf="!answer.contains_Textbox" [value]="answer.id"
+                [(ngModel)]="currentQuestion.selectedAnswer" name="answer"
+                class="form-radio h-6 w-6 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0">
+              <label *ngIf="!answer.contains_Textbox" class="ml-4 text-lg text-gray-700">{{answer.answer}}</label>
+              <label *ngIf="answer.contains_Textbox" class="ml-4 text-lg text-gray-700">Írja be a választ a mezőbe!</label>
+              <input type="text" *ngIf="answer.contains_Textbox" [value]="answer.answer"
+                [(ngModel)]="currentQuestion.selectedAnswer" name="answer"
+                class="ml-10 h-12 w-[20rem] border border-gray-300 rounded-lg p-2">
+            </div>
+            <div *ngIf="currentQuestion.isThereMoreThanOneAnswer" class="flex items-center p-4">
+              <input type="checkbox" *ngIf="!answer.contains_Textbox" [value]="answer.id" [(ngModel)]="answer.selected"
+                (change)="updateSelectedAnswers(currentQuestion, answer)"
+                class="form-checkbox h-6 w-6 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0">
+              <label *ngIf="!answer.contains_Textbox" class="ml-4 text-lg text-gray-700">{{answer.answer}}</label>
+              <label *ngIf="answer.contains_Textbox" class="ml-4 text-lg text-gray-700">Írja be a választ a mezőbe!</label>
+            </div>
+          </li>
+        </ul>
       </div>
-      <div class="loader" *ngIf="isMessageLoading">
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="flex justify-between p-4 mt-8">
+        <button (click)="nextQuestion()" [disabled]="!canMoveToNextQuestion()"
+          class="bg-blue-500 hover:bg-blue-600 disabled:opacity-50 text-white font-semibold py-3 px-6 rounded-lg">
+          Következő
+        </button>
+      </div>
     </div>
-    </div>
-    <input type="text" class="aiinput" [(ngModel)]="inputText" (keyup.enter)="sendMessage()" placeholder="Írj valamit...">
   </div>
-  <button class="chat-button" [ngClass]="{'shown-button': isChatVisible}" (click)="toggleChat($event)">
-    <img src="assets/ai.png" alt="Chat">
-  </button>
-</div>
+  
+  <div class="app-container" (document:click)="onDocumentClick($event)">
+    <div class="chat-container" [class.hidden]="!isChatVisible">
+      <div class="chat-header">
+        <span style="margin-left: 10px;">
+          DIGIMÉTER
+        </span>
+        <button style="margin-right: 10px;" class="close-button" (click)="isChatVisible = false">×</button>
+      </div>
+      <div class="messages">
+        <div *ngFor="let message of messages" class="message" [ngClass]="{'user': message.user, 'bot': !message.user}">
+          {{ message.text }}
+        </div>
+        <div class="loader" *ngIf="isMessageLoading">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <input type="text" class="aiinput" [(ngModel)]="inputText" (keyup.enter)="sendMessage()"
+        placeholder="Írj valamit...">
+    </div>
+    <button class="chat-button" [ngClass]="{'shown-button': isChatVisible}" (click)="toggleChat($event)">
+      <img src="assets/ai.png" alt="Chat">
+    </button>
+  </div>
+}
+@loading ( minimum 2s) {
+  <div class="z-[200] flex flex-col justify-center items-center h-full w-full top-0 left-0 absolute bg-white">
+    <app-loader-black></app-loader-black>
+    <p  class=" mt-10 font-bold text-xl text-black ">Hasznos info: </p>
+    <p class="mt-2 font-bold text-xl text-black">Vannak olyan kérdések, amik egy előző kérdés válaszára épülnek, ezért változhat fent a kérdés számláló!</p>
+  </div>
+}
+
+

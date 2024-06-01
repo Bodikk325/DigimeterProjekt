@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, importProvidersFrom } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import {MatTabsModule} from '@angular/material/tabs';
 import { AppRoutingModule } from './app-routing.module';
@@ -7,7 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuizComponent } from './quiz/quiz.component';
 import { ResultComponent } from './result/result.component';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { HttpClientXsrfModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { StartComponent } from './start/start.component';
@@ -16,6 +16,9 @@ import { RounderPipe } from './rounder.pipe';
 import { NotificationComponent } from './notification/notification.component';
 import { FooterComponent } from './footer/footer.component';
 import { FirmSelectedValueToDisplayTextPipe } from './firm-selected-value-to-display-text.pipe';
+import { FloatingIconComponent } from './floating-icon/floating-icon.component';
+import { LoaderComponent } from './loader/loader.component';
+import { LoaderBlackComponent } from './loader-black/loader-black.component';
 
 
 @NgModule({
@@ -30,7 +33,10 @@ import { FirmSelectedValueToDisplayTextPipe } from './firm-selected-value-to-dis
     RounderPipe,
     NotificationComponent,
     FooterComponent,
-    FirmSelectedValueToDisplayTextPipe
+    FirmSelectedValueToDisplayTextPipe,
+    FloatingIconComponent,
+    LoaderComponent,
+    LoaderBlackComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +48,7 @@ import { FirmSelectedValueToDisplayTextPipe } from './firm-selected-value-to-dis
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient(withFetch())
+    provideHttpClient(withFetch()),
   ],
   bootstrap: [AppComponent]
 })

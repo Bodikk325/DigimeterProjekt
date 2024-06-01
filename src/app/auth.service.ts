@@ -5,14 +5,19 @@ import { User } from './user';
 import { Result } from './result';
 import { NotificationService } from './notification.service';
 import { NotificationType } from './notification/notification.component';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
+import { CsrfService } from './csrf.service';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { error, log } from 'console';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private router: Router, private notificationService : NotificationService) { }
+  private apiUrl = 'http://localhost/';
+
+  constructor(private router: Router, private notificationService : NotificationService, private csrfService : CsrfService, private http : HttpClient) { }
 
   currentUser! : User;
   users! : User[];
@@ -25,74 +30,124 @@ export class AuthService {
   private loginFormSubject = new BehaviorSubject<boolean>(true);
   loginFormState = this.loginFormSubject.asObservable();
 
+  private loadingButtonSubject = new BehaviorSubject<boolean>(false);
+  loadingButtonState = this.loadingButtonSubject.asObservable();
+
+  private isErrorSubject = new BehaviorSubject<boolean>(false);
+  isErrorState = this.isErrorSubject.asObservable();
+
   showLoginForm(show: boolean): void {
     this.loginFormSubject.next(show);
   }
 
-  getCurrentUser() : User
+  isButtonLoading(loading : boolean)
+  {
+    this.loadingButtonSubject.next(loading);
+  }
+
+  getCurrentUser() : string
   {
     const currentUser = localStorage.getItem("currentUser")
-    return currentUser ? JSON.parse(currentUser) as User : this.newUser;
+    return currentUser ?? "";
   }
 
-  onLoginSubmit(loginForm: FormGroup): void {
-    const { username, password } = loginForm.value;
-    this.users = JSON.parse(localStorage.getItem('users') || '[]');
-    this.currentUser = this.users.find((u: any) => u.username === username && u.password === password) as User;
-    if (this.currentUser) {
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
-      this.router.navigate(['/home']);
-    } else {
-      this.notificationService.show("Helytelen felhasználónév vagy jelszó!", NotificationType.error)
-    }
-  }
-
+  
   addResultToUser(result : Result)
   {
-    this.users = JSON.parse(localStorage.getItem('users') || '[]');
-    this.currentUser = this.users.find((u) => u.username === this.getCurrentUser().username) as User;
     this.currentUser.results.push(result.id);
     localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
     this.update(this.currentUser);
     localStorage.setItem('users', JSON.stringify(this.users))
   }
+  
 
+  
   private update(newItem: User) {
     let indexToUpdate = this.users.findIndex(item => item.username === newItem.username);
     this.users[indexToUpdate] = newItem;
 
     this.users = Object.assign([], this.users);
   }
+  
 
+  
   getUserResults() : number[]
   {
-    this.users = JSON.parse(localStorage.getItem('users') || '[]');
-    this.currentUser = this.users.find((u) => u.username === this.getCurrentUser().username) as User;
     return this.currentUser.results
+  }
+  
+  onLoginSubmit(loginForm: FormGroup): void {
+
+    this.isErrorSubject.next(false);
+
+    const { username, password } = loginForm.value;
+
+    if(username == "" || password == "")
+      {
+        this.notificationService.show("Kérünk, hogy érvényes adatokat adj meg!", NotificationType.error);
+        return;
+      }
+
+    let body = new HttpParams();
+    body = body.set('username', username);
+    body = body.set('password', password);
+
+    this.isButtonLoading(true);
+
+    this.http.post('http://localhost/login.php', body, {withCredentials: true}).subscribe(
+      (result : any) => {
+        localStorage.setItem('currentUser', result)
+        this.isButtonLoading(false);
+        this.router.navigate(['/home']);
+      },
+      (_) => {
+        this.notificationService.show("Helytelen felhasználónév vagy jelszó!", NotificationType.error)
+        this.isButtonLoading(false);
+        this.isErrorSubject.next(true);
+      }
+    );
   }
 
   onRegisterSubmit(registerForm: FormGroup): void {
+
+    this.isErrorSubject.next(false);
+
     const { username, password, confirmPassword } = registerForm.value;
-    this.newUser.password = registerForm.value["password"]
-    this.newUser.username = registerForm.value["username"]
-    this.newUser.results = []
+
     if (password == "" || username == "") {
       this.notificationService.show("Kérünk tölts ki minden adatot!", NotificationType.error)
       return;
     }
+
     if (password !== confirmPassword) {
       this.notificationService.show("Nem egyeznek a jelszavak!", NotificationType.error)
       return;
     }
-    this.users = JSON.parse(localStorage.getItem('users') || '[]');
-    if (this.users.some((u: any) => u.username === username)) {
-      this.notificationService.show("A felhasználónév már foglalt.", NotificationType.error)
-      return;
-    }
-    this.users.push(this.newUser);
-    localStorage.setItem('users', JSON.stringify(this.users));
-    this.notificationService.show("Sikeres regisztráció!", NotificationType.positivie)
-    this.showLoginForm(true);
+
+    this.isButtonLoading(true);
+
+    let body = new HttpParams();
+    body = body.set('username', username);
+    body = body.set('password', password);
+    this.http.post('http://localhost/register.php', body, {withCredentials: true}).subscribe(
+      (result) => {
+        this.notificationService.show("Sikeres regisztráció!", NotificationType.positivie)
+        this.showLoginForm(true);
+        this.isButtonLoading(false);
+      },
+      (error) => {
+        if(error.status == 409)
+          {
+            this.notificationService.show("A felhasználónév már foglalt.", NotificationType.error)
+            this.isButtonLoading(false);
+            this.isErrorSubject.next(true);
+          } 
+          else {
+            this.notificationService.show("Valami hiba történt, kérünk próbáld újra később!", NotificationType.error)
+            this.isButtonLoading(false);
+            this.isErrorSubject.next(true);
+          }
+        }
+    );
   }
 }

@@ -1,51 +1,21 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Question } from './quizResults.service';
-import { Point } from './firms.service';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  private answers: Question[] = [];
-  private points: Point[] = [];
 
   constructor(private http : HttpClient) { }
 
-  // A két lista beállítása
-  setAnswers(answers: Question[]): void {
-    this.answers = answers;
-  }
-
-  setPoints(points: Point[]): void {
-    this.points = points;
-  }
-
-  // Szűrés és rendezés
-  getFilteredAndSortedData(): { sortedAnswers: Question[], sortedPoints: Point[] } {
-    const filteredPoints = this.points.filter(point =>
-      this.answers.some(answer =>
-        {
-          answer.id === point.questionId
-        } 
-      )
-    );
-
-
-    const sortedAnswers = this.answers.sort((a, b) => a.id.localeCompare(b.id));
-    const sortedPoints = filteredPoints.sort((a, b) => a.questionId.localeCompare(b.questionId));
-
-    return { sortedAnswers, sortedPoints };
-  }
-
-  getQuestions(): Observable<Question[]> {
+  getQuestions(topic : string): Observable<Question[]> {
     // Az elérési út a fájlhoz az assets mappán belül
-    return this.http.get<any[]>('assets/questions.json').pipe(
+    return this.http.get<any[]>("http://localhost/readQuestions.php?topic=" + topic).pipe(
       map(data => this.transformQuestions(data))
     );
   }
-
 
   transformQuestions(data: any[]): Question[] {
     const questionMap = new Map<string, Question>();
@@ -84,5 +54,4 @@ export class DataService {
 
     return Array.from(questionMap.values());
   }
-
 }

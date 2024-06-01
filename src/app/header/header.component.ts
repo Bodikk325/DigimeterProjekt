@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, afterNextRender } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,8 +7,22 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   menuOpen = false;
+  showLogOut = false;
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
   }
+
+  /**
+   *
+   */
+  constructor() {
+    afterNextRender(() => {
+      if(localStorage.getItem("currentUser") != null)
+        {
+          this.showLogOut = true;
+        }
+    })
+  }
+
 }

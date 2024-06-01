@@ -92,7 +92,9 @@ export class ResultComponent {
   }
 
   ngOnInit() {
+    /*
     this.myFirm = this.firmService.getMyFirmData();
+    */
     this.loadQuestions("", "");
   }
 
@@ -142,7 +144,7 @@ export class ResultComponent {
     this.sortedPoints = []
     this.firmService.getPoints().subscribe((res: Point[]) => {
 
-
+      
       this.firmPoints = res.filter(x => x.Maxpoint != null);
 
       this.getCurrentResult();

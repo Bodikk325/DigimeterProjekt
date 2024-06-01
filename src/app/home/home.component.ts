@@ -14,16 +14,50 @@ import { NotificationService } from '../notification.service';
 })
 export class HomeComponent {
 
-  myFirm!: MyFirm;
+  myFirm: MyFirm = {
+    UserName: '',
+    Region: '',
+    Field: '',
+    Workers: '',
+    Sector: '',
+    Capital: '',
+    Revenue: ''
+  };
+
+  messages = [
+    "Ez itt a főoldal!",
+    "Itt tudsz majd új kérdőívet kitölteni vagy akár megnézni az előző kitöltéseidnek az eredményét!",
+    "Fontos, hogy mielőtt új kérdőívet töltenél ki azelőtt meg kell adnod a céged adatai!"
+  ]
+
+  isLoading = false;
 
   saveToFirm() {
-    this.firmService.saveFirmToList(this.myFirm)
-    this.notiService.show("Cégadatok sikeresen mentve!", NotificationType.positivie)
+
+    this.isLoading = true;
+
+    this.firmService.saveMyFirmData(this.myFirm).subscribe(
+      (result) => {
+        this.notiService.show("Cégadatok sikeresen mentve!", NotificationType.positivie)
+        this.isLoading = false;
+      }
+    )
   }
 
   ngOnInit() {
     this.results = this.quizResultService.getQuizResults();
-    this.myFirm = this.firmService.getMyFirmData();
+
+    this.firmService.getFirmData().subscribe(
+      (result : any) => {
+        this.myFirm.Capital = result.capital
+        this.myFirm.Revenue = result.revenue
+        this.myFirm.Region = result.region
+        this.myFirm.Workers = result.employees
+        this.myFirm.Sector = result.sector
+        this.myFirm.Field = result.field
+      }
+    );
+    
   }
 
   results: Result[] = []
@@ -39,9 +73,8 @@ export class HomeComponent {
       }
       else
       {
-        this.router.navigate(['../quiz'])
+        this.router.navigate(['../quiz', ""])
       }
   }
-
 
 }

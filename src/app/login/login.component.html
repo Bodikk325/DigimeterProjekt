@@ -1,33 +1,46 @@
-<div class="bg-white text-black font-bold my-20 mx-auto p-4 rounded shadow-lg w-full max-w-3xl">
-  <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6">
-    <img src="assets/ai.png" alt="Kép leírása" class="w-24 md:w-32 rounded-full">
-    <p class="bg-gray-200 p-4 rounded shadow-lg">
-      Kezdjük azzal, hogy létrehozunk neked egy fiókot!<br><br>
-      Ez azért fontos, hogy le tudjuk neked menteni az előző kitöltéseidnek eredményeit. Ezeket később vissza tudod majd keresni és össze tudod hasonlítani majd egy előző eredménnyel.<br><br>
-      Amennyiben van már fiókod, úgy csak szimplán jelentkezz be!
-    </p>
+<div class="w-full md:w-[20rem] xl:w-[35rem]">
+
+  <div *ngIf="loginShown" class="border-t-2 border-solid border-gray-100 relative bg-white text-black p-6 rounded shadow-2xl w-full mx-auto">
+    <form [formGroup]="loginForm" (ngSubmit)="authService.onLoginSubmit(loginForm)" class="space-y-4">
+      <input class="input-field w-full p-2 border rounded" formControlName="username" placeholder="Felhasználónév">
+      <input class="input-field w-full p-2 border rounded" formControlName="password" type="password"
+        placeholder="Jelszó">
+      <p class="text-right mt-2 text-gray-600 hover:text-black cursor-pointer" (click)="toggleForm()">Még nincs fiókom..
+      </p>
+      <div class="w-full flex justify-center">
+        <button class="button bg-base_blue text-white p-2 rounded w-full font-bold" type="submit">Bejelentkezés</button>
+      </div>
+    </form>
+
+    <!-- Elsötétítő réteg és betöltési animáció -->
+    <div *ngIf="isLoading" class="absolute inset-0 bg-black rounded bg-opacity-65 flex items-center justify-center">
+      <div class="loader">
+        <!-- Betöltési animáció helye -->
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loginShown" class="relative bg-white text-black p-6 rounded shadow-2xl w-full  mx-auto">
+    <form [formGroup]="registerForm" (ngSubmit)="authService.onRegisterSubmit(registerForm);" class="space-y-4">
+      <input class="input-field w-full p-2 border rounded" formControlName="username" placeholder="Felhasználónév">
+      <input class="input-field w-full p-2 border rounded" formControlName="password" type="password"
+        placeholder="Jelszó">
+      <input class="input-field w-full p-2 border rounded" formControlName="confirmPassword" type="password"
+        placeholder="Jelszó megerősítése">
+      <p class="text-right mt-2 text-gray-600 hover:text-black cursor-pointer" (click)="toggleForm()">Már van fiókom!
+      </p>
+      <div class="w-full flex justify-center">
+        <button class="button bg-base_blue text-white p-2 h-[2.5rem] w-full rounded font-bold" type="submit">
+          <span>Regisztráció</span>
+        </button>
+      </div>
+    </form>
+
+    <!-- Elsötétítő réteg és betöltési animáció -->
+    <div *ngIf="isLoading" class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+      <app-loader></app-loader>
+    </div>
   </div>
 </div>
 
-<div *ngIf="loginShown" class="bg-white text-black p-6 rounded shadow-lg w-full max-w-md mx-auto">
-  <form [formGroup]="loginForm" (ngSubmit)="authService.onLoginSubmit(loginForm)" class="space-y-4">
-    <input class="input-field w-full p-2 border rounded" formControlName="username" placeholder="Felhasználónév">
-    <input class="input-field w-full p-2 border rounded" formControlName="password" type="password" placeholder="Jelszó">
-    <p class="text-right mt-2 text-gray-600 hover:text-black cursor-pointer" (click)="toggleForm()">Még nincs fiókom..</p>
-    <div class="w-full flex justify-center">
-      <button class="button bg-base_blue text-white p-2 rounded" type="submit">Bejelentkezés</button>
-    </div>
-  </form>
-</div>
-
-<div *ngIf="!loginShown" class="bg-white text-black p-6 rounded shadow-lg w-full max-w-md mx-auto">
-  <form [formGroup]="registerForm" (ngSubmit)="authService.onRegisterSubmit(registerForm);" class="space-y-4">
-    <input class="input-field w-full p-2 border rounded" formControlName="username" placeholder="Felhasználónév">
-    <input class="input-field w-full p-2 border rounded" formControlName="password" type="password" placeholder="Jelszó">
-    <input class="input-field w-full p-2 border rounded" formControlName="confirmPassword" type="password" placeholder="Jelszó megerősítése">
-    <p class="text-right mt-2 text-gray-600 hover:text-black cursor-pointer" (click)="toggleForm()">Már van fiókom!</p>
-    <div class="w-full flex justify-center">
-      <button class="button bg-base_blue text-white p-2 rounded" type="submit">Regisztráció</button>
-    </div>
-  </form>
-</div>
+<app-floating-icon tutorialName="loginTutorial" [messages]="messages"></app-floating-icon>
