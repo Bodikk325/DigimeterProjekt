@@ -81,7 +81,7 @@ export class FirmsService {
   }
 
   getPoints(): Observable<Point[]> {
-    return this.http.get<any[]>('assets/filters.json').pipe(
+    return this.http.get<any[]>('http://localhost/readFilters.php').pipe(
       map(data => data.map(item => this.transformToPoints(item)))
     );
   }

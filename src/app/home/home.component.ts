@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, afterNextRender } from '@angular/core';
 import { Question, QuizResultsService } from '../quizResults.service';
 import { MyFirm } from '../myFirm';
 import { FirmsService } from '../firms.service';
@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { Result } from '../result';
 import { NotificationComponent, NotificationType } from '../notification/notification.component';
 import { NotificationService } from '../notification.service';
+
+
 
 @Component({
   selector: 'app-home',
@@ -32,6 +34,18 @@ export class HomeComponent {
 
   isLoading = false;
 
+  constructor(private notiService : NotificationService,private quizResultService: QuizResultsService, private firmService: FirmsService, private router : Router) {
+
+    afterNextRender(() => {
+      this.quizResultService.getResultsForUser().subscribe(
+        (result) => {
+          this.results = result;
+        }
+      );
+    })
+
+  }
+
   saveToFirm() {
 
     this.isLoading = true;
@@ -43,9 +57,11 @@ export class HomeComponent {
       }
     )
   }
+ 
+  
 
   ngOnInit() {
-    this.results = this.quizResultService.getQuizResults();
+    
 
     this.firmService.getFirmData().subscribe(
       (result : any) => {
@@ -62,8 +78,7 @@ export class HomeComponent {
 
   results: Result[] = []
 
-  constructor(private notiService : NotificationService,private quizResultService: QuizResultsService, private firmService: FirmsService, private router : Router) {
-  }
+  
 
   checkFirmData()
   {

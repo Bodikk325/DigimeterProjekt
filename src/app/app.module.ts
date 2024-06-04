@@ -19,6 +19,7 @@ import { FirmSelectedValueToDisplayTextPipe } from './firm-selected-value-to-dis
 import { FloatingIconComponent } from './floating-icon/floating-icon.component';
 import { LoaderComponent } from './loader/loader.component';
 import { LoaderBlackComponent } from './loader-black/loader-black.component';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { LoaderBlackComponent } from './loader-black/loader-black.component';
     FirmSelectedValueToDisplayTextPipe,
     FloatingIconComponent,
     LoaderComponent,
-    LoaderBlackComponent
+    LoaderBlackComponent,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,

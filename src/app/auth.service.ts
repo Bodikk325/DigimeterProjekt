@@ -2,20 +2,16 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from './user';
-import { Result } from './result';
 import { NotificationService } from './notification.service';
 import { NotificationType } from './notification/notification.component';
-import { BehaviorSubject, Observable, switchMap } from 'rxjs';
+import { BehaviorSubject} from 'rxjs';
 import { CsrfService } from './csrf.service';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { error, log } from 'console';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
-  private apiUrl = 'http://localhost/';
 
   constructor(private router: Router, private notificationService : NotificationService, private csrfService : CsrfService, private http : HttpClient) { }
 
@@ -43,37 +39,6 @@ export class AuthService {
   isButtonLoading(loading : boolean)
   {
     this.loadingButtonSubject.next(loading);
-  }
-
-  getCurrentUser() : string
-  {
-    const currentUser = localStorage.getItem("currentUser")
-    return currentUser ?? "";
-  }
-
-  
-  addResultToUser(result : Result)
-  {
-    this.currentUser.results.push(result.id);
-    localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
-    this.update(this.currentUser);
-    localStorage.setItem('users', JSON.stringify(this.users))
-  }
-  
-
-  
-  private update(newItem: User) {
-    let indexToUpdate = this.users.findIndex(item => item.username === newItem.username);
-    this.users[indexToUpdate] = newItem;
-
-    this.users = Object.assign([], this.users);
-  }
-  
-
-  
-  getUserResults() : number[]
-  {
-    return this.currentUser.results
   }
   
   onLoginSubmit(loginForm: FormGroup): void {

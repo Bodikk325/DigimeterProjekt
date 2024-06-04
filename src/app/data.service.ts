@@ -29,8 +29,6 @@ export class DataService {
           maxpoint: item.max_point,
           category: item.Temakorok,
           isThereMoreThanOneAnswer : item["Többválasztós-e"],
-          defaultNextQuestionId : item["defaultNextQuestionId"],
-          isA7related : item["is_A7_related"],
           condition : item["condition"],
           based_on : item["based_On"]
         });
@@ -41,7 +39,6 @@ export class DataService {
         answer: item.answer,
         points: item.pontok,
         selected: false,
-        nextQuestionId : item.nextQuestionId,
         contains_Textbox : item.contains_Textbox,
         id : item["answer_id"]
       });

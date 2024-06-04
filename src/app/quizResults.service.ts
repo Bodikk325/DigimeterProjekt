@@ -1,7 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Result } from "./result";
-import { AuthService } from "./auth.service";
 import { Router } from "@angular/router";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { NotificationService } from "./notification.service";
+import { NotificationType } from "./notification/notification.component";
+import { Observable } from "rxjs";
 
 export interface Question {
   id: string;
@@ -11,17 +14,16 @@ export interface Question {
     answer: string;
     points: number;
     selected?: boolean;
-    nextQuestionId?: string;
-    contains_Textbox: boolean // Következő kérdés azonosítója, ha ez a válasz kiválasztásra kerül
+    contains_Textbox: boolean;
+    textBoxAnswer? : string;
   }[];
   selectedAnswer?: string | string[];
+  textBoxAnswer? : string;
   maxpoint: number;
   isThereMoreThanOneAnswer: boolean;
-  isA7related: boolean,
   category: string;
   based_on: string[];
   condition: string[];
-  defaultNextQuestionId?: string; // Ez az alapértelmezett következő kérdés azonosítója, ha nincs külön meghatározva a válaszban
 }
 
 @Injectable({
@@ -29,26 +31,13 @@ export interface Question {
 })
 export class QuizResultsService {
 
-  constructor(private authService: AuthService, private router : Router) { }
+  constructor(private notificationService : NotificationService, private router : Router, private http : HttpClient) { }
 
   quizResults!: Result[];
   currentResult!: Result;
 
   public getQuizResults(): Result[] {
-    var results = JSON.parse(localStorage.getItem('quizResults') || '[]') as Result[];
-    
-    /*
-    const userResults = ;
-
-    var finalList: Result[] = []
-    results.forEach(element => {
-      if (userResults.indexOf(element.id) !== -1) {
-        finalList.push(element)
-      }
-    });
-    */
     return [];
-    
   }
 
   public getContinuedResults(): Result {
@@ -57,11 +46,10 @@ export class QuizResultsService {
   }
 
   public saveQuizResults(questions: Question[]) {
-    const stamp = new Date().getTime();
-  
     this.currentResult = {
-      id: stamp, // Timestamp, mint egyedi azonosító
-      totalPoints: questions.reduce((total, q) => total + this.getPointsForSelectedAnswer(q.id, questions).points, 0), // Összpontszám számítás
+      resultType : "",
+      time : new Date().getTime(),
+      id: "stamp", // Timestamp, mint egyedi azonosító
       results: questions.map(q => {
         const { points, selectedAnswerTexts } = this.getPointsForSelectedAnswer(q.id, questions);
         return {
@@ -80,12 +68,13 @@ export class QuizResultsService {
     localStorage.setItem('contQuizResult', JSON.stringify(this.currentResult));
   }
 
-  public saveQuizResultsAtTheEnd(questions: Question[]) {
+  public saveQuizResultsAtTheEnd(questions: Question[], resultType : string) {
     var stamp = new Date().getTime();
-
+    
     this.currentResult = {
-      id: stamp, // Timestamp, mint egyedi azonosító
-      totalPoints: this.calculateTotalPoints(questions), // Összpontszám számítás
+      id : "0",
+      resultType : "",
+      time: stamp, // Timestamp, mint egyedi azonosító
       results: questions.map(q => {
         const { points, selectedAnswerTexts } = this.getPointsForSelectedAnswer(q.id, questions);
         return {
@@ -101,20 +90,53 @@ export class QuizResultsService {
       })
     };
 
-    // Meglévő eredmények lekérése és frissítése
-    var existingResults = JSON.parse(localStorage.getItem('quizResults') || '[]') as Result[];
-    if (existingResults != null) {
-      existingResults.push(this.currentResult);
-    }
-    else {
-      existingResults = []
-    }
-    /*
-    this.authService.addResultToUser(this.currentResult)
-    */
-    localStorage.setItem('quizResults', JSON.stringify(existingResults));
+    this.saveToDatabase(JSON.stringify(this.currentResult), resultType).subscribe(
+      (result) => 
+        {
+          this.router.navigateByUrl("result/" + stamp);
+        },
+      (error) => {
+        this.notificationService.show("Valami hiba történt az adatbázisban, nem sikerült a mentés.. Újratöltés...", NotificationType.error)
+      }
+    )
+  }
 
-    this.router.navigateByUrl("result/" + stamp)
+  getResultsForUser() : Observable<any>
+  {
+    let body = new HttpParams();
+    body = body.set('userId', localStorage.getItem("currentUser") ?? "");
+
+    return this.http.post("http://localhost/getResultsForUser.php", body, {withCredentials : true});
+  }
+
+  getResultForUser(resultId : string) : Observable<any>
+  {
+    let body = new HttpParams();
+    body = body.set('resultId', resultId);
+
+    return this.http.post("http://localhost/getResultForUser.php", body, {withCredentials : true});
+  }
+
+  saveToDatabase(quizResult : string, resultType : string) : Observable<any>
+  {
+    let body = new HttpParams();
+    body = body.set('id', localStorage.getItem("currentUser") ?? "");
+    body = body.set('result', quizResult);
+    body = body.set('date', new Date().getTime());
+    body = body.set('resultType', resultType);
+
+    return this.http.post("http://localhost/saveResult.php", body, {withCredentials : true});
+  }
+
+  calculateDigimeterIndex(currentResult : Result, page : string)
+  {
+    let body = new HttpParams();
+    body = body.set('currentResult', JSON.stringify(currentResult));
+    body = body.set('page', page);
+
+    console.log(page)
+
+    return this.http.post("http://localhost/calculateDigimiterIndex.php", body, {withCredentials : true});
   }
 
 
@@ -146,10 +168,6 @@ export class QuizResultsService {
     totalPoints = Math.min(totalPoints, question.maxpoint);
   
     return { points: totalPoints, selectedAnswerTexts };
-  }
-  
-  private calculateTotalPoints(questions: Question[]): number {
-    return questions.reduce((total, question) => total + this.getPointsForSelectedAnswer(question.id, questions).points, 0);
   }
 
 }

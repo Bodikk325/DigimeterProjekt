@@ -1,4 +1,5 @@
 import { Component, afterNextRender } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -13,10 +14,16 @@ export class HeaderComponent {
     this.menuOpen = !this.menuOpen;
   }
 
+  logOut()
+  {
+    localStorage.removeItem("currentUser");
+    this.router.navigateByUrl("login")
+  }
+
   /**
    *
    */
-  constructor() {
+  constructor(private router : Router) {
     afterNextRender(() => {
       if(localStorage.getItem("currentUser") != null)
         {

@@ -12,7 +12,8 @@ export interface ResultQuestion
 
 export interface Result 
 {
-    id : number,
-    totalPoints : number,
+    id : string,
+    resultType : string,
+    time : number,
     results : ResultQuestion[]
 }

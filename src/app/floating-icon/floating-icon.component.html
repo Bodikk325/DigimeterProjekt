@@ -1,20 +1,27 @@
 <div class="app-container" (document:click)="onDocumentClick($event)">
-    <div class="chat-container" [ngClass]="{'hidden': !isChatVisible, 'visible': isChatVisible}">
-      <div class="chat-header">
-        <span style="margin-left: 10px;">
-          DIGIMÉTER
-        </span>
-        <button style="margin-right: 10px;" class="close-button" (click)="isChatVisible = false">×</button>
-      </div>
-      <div class="messages" id="scrollable" #scrollable>
-        @for (message of shownMessages; track $index) {
-            <div class="message bot">
-                {{message}}
-            </div>
-        }
+  <div class="chat-container" [ngClass]="{'hidden': !isChatVisible, 'visible': isChatVisible}">
+    <div class="chat-header">
+      <span style="margin-left: 10px;">
+        DIGIMÉTER
+      </span>
+      <button style="margin-right: 10px;" class="close-button" (click)="isChatVisible = false">×</button>
+    </div>
+    <div class="messages" id="scrollable" #scrollable>
+      <div *ngFor="let message of shownMessages;" [ngClass]="{'message bot': message !== typingIndicator, 'typing-indicator-container': message === typingIndicator}">
+        <ng-container *ngIf="message === 'typing-indicator'; else textMessage">
+          <div class="typing-indicator">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </ng-container>
+        <ng-template #textMessage>
+          {{message}}
+        </ng-template>
       </div>
     </div>
-    <button class="chat-button" [ngClass]="{'shown-button': isChatVisible}" (click)="toggleChat($event)">
-      <img src="assets/ai.png" alt="Chat">
-    </button>
   </div>
+  <button class="chat-button" [ngClass]="{'shown-button': isChatVisible}" (click)="toggleChat($event)">
+    <img src="assets/ai.png" alt="Chat">
+  </button>
+</div>

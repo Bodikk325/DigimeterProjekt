@@ -1,5 +1,3 @@
-
-
 export interface MyFirm
 {
     UserName : string,
@@ -9,5 +7,4 @@ export interface MyFirm
     Sector : string, 
     Capital : string,
     Revenue : string,
-    
 }

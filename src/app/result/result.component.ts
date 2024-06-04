@@ -7,7 +7,6 @@ import { MyFirm } from '../myFirm';
 import { AuthService } from '../auth.service';
 import { CountResultService } from '../count-result.service';
 import { Result, ResultQuestion } from '../result';
-import { ChartService } from '../chart.service';
 import { ChatService } from '../chat.service';
 
 @Component({
@@ -19,51 +18,19 @@ export class ResultComponent {
 
   myFirm!: MyFirm;
 
-  isMessageLoading = false;
-
-  isChatVisible = false;
-
-  toggleChat(event: MouseEvent) {
-    event.stopPropagation(); // Megállítjuk az esemény terjedését
-    this.isChatVisible = !this.isChatVisible;
-  }
-
-  onDocumentClick(event: MouseEvent) {
-    if (!this.isChatVisible) return;
-    const container = document.querySelector('.chat-container');
-    if (event.target instanceof Node && !container!.contains(event.target)) {
-      this.isChatVisible = false;
-    }
-  }
-
-  messages: any[] = [];
-  inputText: string = '';
-
-  sendMessage(): void {
-    if (this.inputText.trim()) {
-      this.messages.push({ text: this.inputText, user: true });
-      this.isMessageLoading = true;
-
-      this.chatService.sendMessageResult(this.finalResult, this.firmAvaragePointByCategory, this.categoryMaxPoint, this.inputText, this.tabname).subscribe(response => {
-        this.messages.push({ text: response.choices[0].message.content, user: false });
-        this.isMessageLoading = false;
-      });
-
-      this.inputText = '';
-    }
-  }
+  
 
 
   allResults: Result[] = []
   points: number[] = []
   currentResult!: Result
   newResult: Result = {
-    id: 0,
-    totalPoints: 0,
-    results: []
+    id: "0",
+    results: [],
+    time: 0,
+    resultType : ""
   }
   newResultQuestion: ResultQuestion[] = []
-  isloaded = false;
   categoryMaxPoint = 0;
   firmAvaragePointByCategory = 0;
   sum: number = 0;
@@ -75,27 +42,27 @@ export class ResultComponent {
   finalResult: number = 0;
   ids: string[] = [];
   tabname = "";
-  digitalis_jelenlet_ids = ["B1_1", "B1_2", "B1_3", "B2", "B3", "B4", "B5a_1", "B5a_2", "B5a_3", "B5b_1", "B5b_2", "B5b_3", "B6a", "B6b", "B7a", "B7b", "B8", "B9", "B10", "B11", "C1"];
-  digitalis_mindennapok_ids = ["A6", "A8", "B12", "B17_1", "B17_2", "B17_3", "C1", "C2", "C3", "C4"];
-  vallalkozasvezetes_ids = ["B13", "E1", "E2", "E3", "E5"];
-  ertekesites_es_marketing_ids = ["D8", "B11", "D5", "D6", "D7", "D9"];
-  digitalis_penzugy_ids = ["G1_1", "G1_2", "G2", "G3"];
-  informatikai_biztonsag_ids = ["B12", "F1", "F2", "F3_1", "F3_2"];
-  loadCharts = false;
+  
 
-  constructor(private chatService: ChatService, private chartService: ChartService, private quizService: QuizResultsService, private route: ActivatedRoute, private firmService: FirmsService, private dataService: DataService, private authService: AuthService, private countResultService: CountResultService) {
+  constructor(private chatService: ChatService, private quizService: QuizResultsService, private route: ActivatedRoute, private firmService: FirmsService, private dataService: DataService, private authService: AuthService, private countResultService: CountResultService) {
     this.messages.push(
       {
         text: "Kérdésed van az eredményekkel kapcsolatban? Nyugodtan tedd azt fel, segítek!", user: false
       }
     )
-  }
 
-  ngOnInit() {
-    /*
-    this.myFirm = this.firmService.getMyFirmData();
-    */
-    this.loadQuestions("", "");
+    
+
+    this.quizService.getResultForUser(this.route.snapshot.paramMap.get('id') ?? "0").subscribe(
+      (result) => {
+        this.currentResult = result[0];
+        if(this.route.snapshot.paramMap.get('id') != "")
+          {
+            this.loadQuestions("", "");
+          }
+      }
+    )
+
   }
 
 
@@ -125,31 +92,24 @@ export class ResultComponent {
   }
 
   calculateFinalResult(page: string) {
-    this.finalResult = this.calculateDigimeterIndex();
     if (page != "") {
-      this.currentResult.results = this.currentResult.results.filter(x => x.category == page)
       this.finalResult = this.currentResult.results.reduce((sum, question) => sum + question.points, 0);
+      console.log(this.finalResult)
     }
-  }
-
-  getCurrentResult() {
-    this.allResults = this.quizService.getQuizResults();
-    this.currentResult = this.allResults.find(q => q.id == parseInt(this.route.snapshot.paramMap.get('id') ?? "0")) as Result;
-    this.currentResult.results = this.currentResult.results.filter(x => x.questionId != "B14" && x.questionId != "B15" && x.questionId != "B16")
+    else 
+    {
+      this.finalResult = this.calculateDigimeterIndex();
+    }
   }
 
 
   loadQuestions(page: string, comboBoxSelected: string) {
-    this.isloaded = false;
+
     this.sortedPoints = []
+
     this.firmService.getPoints().subscribe((res: Point[]) => {
 
-      
-      this.firmPoints = res.filter(x => x.Maxpoint != null);
-
-      this.getCurrentResult();
-
-      this.currentResult.results = this.currentResult.results.filter(x => x.maxpoint != null)
+      this.firmPoints = res
 
       this.calculateFinalResult(page)
 
@@ -158,42 +118,41 @@ export class ResultComponent {
       this.firmAvaragePointByCategory = categoryResult.otherpoint
       this.categoryMaxPoint = categoryResult.maxpoint
 
-      this.currentResult.results = this.currentResult.results.filter(item1 =>
-        this.firmPoints.some(item2 => item1.questionId === item2.questionId)
-      );
+      this.sortDownTheLists();
 
-      this.firmPoints = this.firmPoints.filter(item2 =>
-        this.currentResult.results.some(item1 => item2.questionId === item1.questionId)
-      );
-
-      this.currentResult.results = this.currentResult.results.sort((a, b) => a.questionId.localeCompare(b.questionId));
-      this.firmPoints = this.firmPoints.sort((a, b) => a.questionId.localeCompare(b.questionId));
+      console.log(this.firmPoints)
+      console.log(this.currentResult.results)
 
       this.changeShowPoint(comboBoxSelected);
 
-      this.isloaded = true
-
-      this.renderCharts();
+      
     })
   }
 
-  renderCharts() {
-    setTimeout(() => {
-        this.chartService.RenderCharts(this.currentResult.results, this.sortedPoints)
-        this.chartService.RenderPieChart(this.finalResult, this.categoryMaxPoint, this.firmAvaragePointByCategory, this.tabname);
-    }, 1000);
+  sortDownTheLists()
+  {
+    this.currentResult.results = this.currentResult.results.filter(item1 =>
+      this.firmPoints.some(item2 => item1.questionId === item2.questionId)
+    );
+
+    this.firmPoints = this.firmPoints.filter(item2 =>
+      this.currentResult.results.some(item1 => item2.questionId === item1.questionId)
+    );
+
+    this.currentResult.results = this.currentResult.results.sort((a, b) => a.questionId.localeCompare(b.questionId));
+    this.firmPoints = this.firmPoints.sort((a, b) => a.questionId.localeCompare(b.questionId));
   }
 
-  changeTab(tabName: string): void {
-    this.tabname = tabName;
-    this.selectedValue = "Összes"
-    this.loadQuestions(tabName, this.tabname);
-  }
+ 
 
-  onSelect(newValue: string) {
-    this.selectedValue = newValue;
-    this.loadQuestions(this.tabname, newValue);
-  }
+
+
+  digitalis_jelenlet_ids = ["B1_1", "B1_2", "B1_3", "B2", "B3", "B4", "B5a_1", "B5a_2", "B5a_3", "B5b_1", "B5b_2", "B5b_3", "B6a", "B6b", "B7a", "B7b", "B8", "B9", "B10", "B11", "C1"];
+  digitalis_mindennapok_ids = ["A6", "A8", "B12", "B17_1", "B17_2", "B17_3", "C1", "C2", "C3", "C4"];
+  vallalkozasvezetes_ids = ["B13", "E1", "E2", "E3", "E5"];
+  ertekesites_es_marketing_ids = ["D8", "B11", "D5", "D6", "D7", "D9"];
+  digitalis_penzugy_ids = ["G1_1", "G1_2", "G2", "G3"];
+  informatikai_biztonsag_ids = ["B12", "F1", "F2", "F3_1", "F3_2"];
 
   calculateDigimeterIndex(): number {
     var osszeg1 = this.currentResult.results.filter(x => x.category == "Digitális pénzügy" && this.digitalis_penzugy_ids.indexOf(x.questionId) !== -1).reduce((sum, score) => sum += score.points, 0) * 0.16
@@ -205,6 +164,7 @@ export class ResultComponent {
 
     return osszeg1 + osszeg2 + osszeg3 + osszeg4 + osszeg5 + osszeg6;
   }
+
 
 
   getTotalPointsByFirm(topicFilter: string): any {
@@ -288,5 +248,64 @@ export class ResultComponent {
     }
 
   }
+
+
+
+
+
+
+
+
+
+
+  changeTab(tabName: string): void {
+    this.tabname = tabName;
+    this.selectedValue = "Összes"
+    this.loadQuestions(tabName, this.tabname);
+  }
+
+  onSelect(newValue: string) {
+    this.selectedValue = newValue;
+    this.loadQuestions(this.tabname, newValue);
+  }
+
+
+
+  isMessageLoading = false;
+
+  isChatVisible = false;
+
+  toggleChat(event: MouseEvent) {
+    event.stopPropagation(); // Megállítjuk az esemény terjedését
+    this.isChatVisible = !this.isChatVisible;
+  }
+
+  onDocumentClick(event: MouseEvent) {
+    if (!this.isChatVisible) return;
+    const container = document.querySelector('.chat-container');
+    if (event.target instanceof Node && !container!.contains(event.target)) {
+      this.isChatVisible = false;
+    }
+  }
+
+  messages: any[] = [];
+  inputText: string = '';
+
+  sendMessage(): void {
+    if (this.inputText.trim()) {
+      this.messages.push({ text: this.inputText, user: true });
+      this.isMessageLoading = true;
+
+      this.chatService.sendMessageResult(this.finalResult, this.firmAvaragePointByCategory, this.categoryMaxPoint, this.inputText, this.tabname).subscribe(response => {
+        this.messages.push({ text: response.choices[0].message.content, user: false });
+        this.isMessageLoading = false;
+      });
+
+      this.inputText = '';
+    }
+  }
+
+  
+
 
 }
