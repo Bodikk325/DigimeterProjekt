@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, afterNextRender } from '@angular/core';
 import { Question, QuizResultsService } from '../quizResults.service';
 import { DataService } from '../data.service';
 import { ChatService } from '../chat.service';
@@ -17,8 +17,13 @@ export class QuizComponent {
   isMessageLoading = false;
   isChatVisible = false;
   messages: any[] = [];
+  questionCount = 0;
+  answered_questions = 0;
   inputText: string = '';
   questions: Question[] = [];
+  filteredQuestions: Question[] = [];
+  BQuestionNoAnswer = false;
+  isQuizDone = false;
   private _currentQuestionIndex: number = 0;
 
   constructor(
@@ -29,6 +34,9 @@ export class QuizComponent {
     private route: ActivatedRoute,
     private router: Router
   ) {
+    afterNextRender(() => {
+      localStorage.removeItem("A7answer")
+    })
     this.messages.push({
       text: "Kérdésed van esetleg a válaszadással kapcsolatban? Ne habozz kérdezni, segítek ahol tudok!", user: false
     });
@@ -37,6 +45,7 @@ export class QuizComponent {
   ngOnInit(): void {
     this.dataService.getQuestions(this.route.snapshot.paramMap.get('topic') ?? "").subscribe((res: Question[]) => {
       this.questions = res;
+      this.filteredQuestions = res;
     });
   }
 
@@ -50,59 +59,159 @@ export class QuizComponent {
   }
 
   onVariableChange(value: number) {
+
+  }
+  
+  B14Change()
+  {
+    if(this.BQuestionNoAnswer)
+      {
+        this.filteredQuestions[this.currentQuestionIndex].textBoxAnswer = "Egyik sem"
+      }
+    else 
+    {
+      this.filteredQuestions[this.currentQuestionIndex].textBoxAnswer = undefined
+    }
   }
 
-  shouldShowQuestion() {
-    var boolean = true;
-    var results = [];
-    const currentQuestion = this.questions[this.currentQuestionIndex];
+  onRadioChange(currentQuestion : Question) {
+    currentQuestion.textBoxAnswer = undefined;
+  }
 
-    if (currentQuestion.based_on != null) {
-      for (let index = 0; index < currentQuestion.based_on.length; index++) {
-        var cucc = this.quizResultsService.getContinuedResults().results.filter(x => x.questionId == currentQuestion.based_on[index]);
-        results.push(cucc[0]);
+  onTextBoxChange(currentQuestion : Question)
+  {
+    console.log("textChange")
+    currentQuestion.selectedAnswer = undefined
+  }
+
+
+  checkingTheConditions() {
+
+    if(this.BQuestionNoAnswer && this.filteredQuestions[this.currentQuestionIndex].id == "B15")
+      {
+        this.questions = this.questions.filter(x=> x.id != "B16")
       }
 
-      for (let index = 0; index < currentQuestion.condition.length; index++) {
-        const condition = currentQuestion.condition[index];
-        if (condition === ">0") {
-          if (parseInt(results[index].selectedAnswer[0]) == 0) {
-            boolean = false;
-            break;
+
+    this.filteredQuestions = this.questions.filter(question => {
+      if (question.based_on.length === 0) {
+        return true;
+      }
+
+      const conditionsMet = question.based_on.every(basedOnId => {
+        if(basedOnId == "A7")
+          {
+            if(localStorage.getItem("A7answer") == "0")
+              {
+                return false;
+              }
           }
-        } else {
-          if (!results[index].selectedAnswer.includes(condition)) {
-            boolean = false;
-            break;
+        const basedOnQuestion = this.questions.find(x => x.id === basedOnId);
+        if (basedOnQuestion) {
+          const selectedAnswers = Array.isArray(basedOnQuestion.selectedAnswer) ? basedOnQuestion.selectedAnswer : [basedOnQuestion.selectedAnswer];
+
+          if (!selectedAnswers || selectedAnswers.length === 0 || selectedAnswers[0] == undefined) {
+            // If selectedAnswer is null or empty, don't remove the question
+            return true;
           }
+          return selectedAnswers.some(answer => question.condition.includes(answer as string));
+        }
+        return true;
+      });
+
+      if (conditionsMet) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+
+
+  checkTheNumberFormatForQuestions() : boolean
+  {
+    if(this.filteredQuestions[this.currentQuestionIndex].id == "A7")
+      {
+        
+        if(isNaN(Number(this.filteredQuestions[this.currentQuestionIndex].textBoxAnswer)))
+          {
+            this.notiService.show("Kérlek szám formátumú választ adj meg!", NotificationType.error)
+            return false;
+          }
+        localStorage.setItem("A7answer", this.filteredQuestions[this.currentQuestionIndex].textBoxAnswer ?? "0")
+      }
+
+    if(this.filteredQuestions[this.currentQuestionIndex].id == "D2")
+      {
+        if(isNaN(Number(this.filteredQuestions[this.currentQuestionIndex].textBoxAnswer)))
+          {
+            this.notiService.show("Kérlek szám formátumú választ adj meg!", NotificationType.error)
+            return false;
+          }
+      }
+
+      if(this.filteredQuestions[this.currentQuestionIndex].id == "A8")
+        {
+          if(isNaN(Number(this.filteredQuestions[this.currentQuestionIndex].textBoxAnswer)))
+            {
+              this.notiService.show("Kérlek szám formátumú választ adj meg!", NotificationType.error)
+              return false;
+            }
+        }
+        
+    if(this.filteredQuestions[this.currentQuestionIndex].id == "D10")
+      {
+        if(isNaN(Number(this.filteredQuestions[this.currentQuestionIndex].textBoxAnswer)))
+          {
+            this.notiService.show("Kérlek szám formátumú választ adj meg!", NotificationType.error)
+            return false;
+          }
+        else 
+        {
+          if(Number(this.filteredQuestions[this.currentQuestionIndex].textBoxAnswer) > 100 || Number(this.filteredQuestions[this.currentQuestionIndex].textBoxAnswer) < 0)
+            {
+              this.notiService.show("Kérlek egy százalékos értéket adj meg! (0-100)", NotificationType.error)
+              return false;
+            }
         }
       }
-    }
-    return boolean;
+    if(this.filteredQuestions[this.currentQuestionIndex].id == "G4")
+      {
+        if(isNaN(Number(this.filteredQuestions[this.currentQuestionIndex].textBoxAnswer)))
+          {
+            this.notiService.show("Kérlek szám formátumú választ adj meg!", NotificationType.error)
+            return false;
+          }
+        else 
+        {
+          if(Number(this.filteredQuestions[this.currentQuestionIndex].textBoxAnswer) > 100 || Number(this.filteredQuestions[this.currentQuestionIndex].textBoxAnswer) < 0)
+            {
+              this.notiService.show("Kérlek egy százalékos értéket adj meg! (0-100)", NotificationType.error)
+              return false;
+            }
+        }
+      }
+      return true;
   }
 
   nextQuestion(): void {
 
-    const currentQuestion = this.questions[this.currentQuestionIndex];
-
-    if (currentQuestion.textBoxAnswer != null) {
-      if (isNaN(Number(currentQuestion.textBoxAnswer))) {
-        this.notiService.show("Please provide a numeric answer!", NotificationType.error);
+    if(!this.checkTheNumberFormatForQuestions())
+      {
         return;
       }
-    }
 
-    this.quizResultsService.saveQuizResults(this.questions);
+    this.quizResultsService.saveQuizResults(this.filteredQuestions);
 
-    if (this.currentQuestionIndex === this.questions.length - 1) {
-      this.quizResultsService.saveQuizResultsAtTheEnd(this.questions, this.route.snapshot.paramMap.get('topic') ?? "");
-    }
-    
-    if (currentQuestion.selectedAnswer || currentQuestion.textBoxAnswer) {
-      this.currentQuestionIndex++;
-    } else {
-      this.notiService.show("Please answer the question!", NotificationType.error);
-      return;
+    this.checkingTheConditions();
+
+    this.BQuestionNoAnswer = false;
+
+    this.currentQuestionIndex++
+
+    if (this.currentQuestionIndex == this.filteredQuestions.length) {
+      this.isQuizDone = true;
+      this.quizResultsService.saveQuizResultsAtTheEnd(this.filteredQuestions, this.route.snapshot.paramMap.get('topic') ?? "");
     }
 
     // Ellenőrizd, hogy a második kérdésnél vagyunk-e (index 1)
@@ -114,46 +223,36 @@ export class QuizComponent {
     } */
   }
 
-  canMoveToNextQuestion(): boolean {
-    return !!this.questions[this.currentQuestionIndex]?.selectedAnswer || !!this.questions[this.currentQuestionIndex]?.textBoxAnswer ;
-  }
-
-  updateSelectedAnswers(question: Question, answer: { answer: string, points: number, selected?: boolean }): void {
-    if (!question.selectedAnswer) {
-      question.selectedAnswer = [];
-    }
-
-    if (answer.selected && !(question.selectedAnswer as string[]).includes(answer.answer)) {
-      (question.selectedAnswer as string[]).push(answer.answer);
-    } else if (!answer.selected) {
-      question.selectedAnswer = (question.selectedAnswer as string[]).filter(a => a !== answer.answer);
-    }
+  canMoveToTheNextQuestion(): boolean {
+    return !!this.filteredQuestions[this.currentQuestionIndex]?.selectedAnswer || !!this.filteredQuestions[this.currentQuestionIndex]?.textBoxAnswer;
   }
 
   allowNavigation = false;
 
-  canDeactivate(): Observable<boolean> | boolean {
-    if (this.allowNavigation) {
-      return true;
-    }
-    const confirmDeactivate = window.confirm('Are you sure you want to leave this page?');
-    return of(confirmDeactivate);
+  textInput: string | null = null;
+
+  onTextChange(value: string): void {
+    this.textInput = value === '' ? null : value;
+    this.filteredQuestions[this.currentQuestionIndex].textBoxAnswer = this.textInput ?? undefined;
+    
   }
 
-  @HostListener('window:beforeunload', ['$event'])
-  unloadNotification($event: any) {
-    if (!this.allowNavigation) {
-      const confirmationMessage = 'Are you sure you want to reload this page?';
-      $event.returnValue = confirmationMessage; // A legtöbb böngésző figyelmen kívül hagyja ezt.
-      return confirmationMessage;
-    } else {
-      return ""
+  updateSelectedAnswers(question: Question, answer: { id: string, points: number, selected?: boolean }): void {
+    if (!question.selectedAnswer) {
+      question.selectedAnswer = [];
+    }
+
+    if (answer.selected && !(question.selectedAnswer as string[]).includes(answer.id)) {
+      (question.selectedAnswer as string[]).push(answer.id);
+    } else if (!answer.selected) {
+      question.selectedAnswer = (question.selectedAnswer as string[]).filter(a => a !== answer.id);
+      // Remove selectedAnswer property if the array is empty
+      if ((question.selectedAnswer as string[]).length === 0) {
+        delete question.selectedAnswer;
+      }
     }
   }
 
-  enableNavigation() {
-    this.allowNavigation = true;
-  }
 
   toggleChat(event: MouseEvent): void {
     event.stopPropagation();

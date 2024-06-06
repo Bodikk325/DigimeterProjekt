@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+
+import { Component, OnInit, Input, ElementRef, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 
 declare var d3: any;
 
@@ -8,80 +9,71 @@ declare var d3: any;
   styleUrl: './bar-chart.component.css'
 })
 export class BarChartComponent {
-
-  private data = [
-    {"Framework": "Vue", "Stars": "166443", "Released": "2014"},
-    {"Framework": "React", "Stars": "150793", "Released": "2013"},
-    {"Framework": "Angular", "Stars": "62342", "Released": "2016"},
-    {"Framework": "Backbone", "Stars": "27647", "Released": "2010"},
-    {"Framework": "Ember", "Stars": "21471", "Released": "2011"},
-  ];
+  @Input() data: any;
+ 
   private svg: any;
-  private margin = 50;
-  private width = 750;
-  private height = 600;
-  // The radius of the pie chart is half the smallest side
-  private radius = Math.min(this.width, this.height) / 2 - this.margin;
-  private colors: any;
+  private margin = { top: 20, right: 30, bottom: 40, left: 40 };
+  private width!: number;
+  private height!: number;
+
+  constructor(private el: ElementRef) { }
 
   ngOnInit(): void {
-    this.createSvg();
-    this.createColors();
-    this.drawChart();
-}
-
-
-    private createSvg(): void {
-      this.svg = d3.select("figure#pie")
-      .append("svg")
-      .attr("width", this.width)
-      .attr("height", this.height)
-      .append("g")
-      .attr(
-        "transform",
-        "translate(" + this.width / 2 + "," + this.height / 2 + ")"
-      );
+    this.createChart();
   }
 
-  private createColors(): void {
-    this.colors = d3.scaleOrdinal()
-    .domain(this.data.map(d => d.Stars.toString()))
-    .range(["#c7d3ec", "#a5b8db", "#879cc4", "#677795", "#5a6782"]);
-}
+  ngAfterViewInit(): void {
+    this.createChart();
+  }
 
-private drawChart(): void {
-  // Compute the position of each group on the pie:
-  const pie = d3.pie().value((d: any) => Number(d.Stars));
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data']) {
+      this.createChart();
+    }
+  }
 
-  // Build the pie chart
-  this.svg
-  .selectAll('pieces')
-  .data(pie(this.data))
-  .enter()
-  .append('path')
-  .attr('d', d3.arc()
-    .innerRadius(0)
-    .outerRadius(this.radius)
-  )
-  .attr('fill', (d: any, i: any) => (this.colors(i)))
-  .attr("stroke", "#121926")
-  .style("stroke-width", "1px");
+  private createChart(): void {
+    const element = this.el.nativeElement.querySelector('.chart-container');
+    element.innerHTML = ''; // Clear previous chart
 
-  // Add labels
-  const labelLocation = d3.arc()
-  .innerRadius(100)
-  .outerRadius(this.radius);
+    this.width = element.offsetWidth - this.margin.left - this.margin.right;
+    this.height = element.offsetHeight - this.margin.top - this.margin.bottom;
 
-  this.svg
-  .selectAll('pieces')
-  .data(pie(this.data))
-  .enter()
-  .append('text')
-  .text((d: any)=> d.data.Framework)
-  .attr("transform", (d: any) => "translate(" + labelLocation.centroid(d) + ")")
-  .style("text-anchor", "middle")
-  .style("font-size", 15);
-}
+    this.svg = d3.select(element)
+      .append('svg')
+      .attr('width', this.width + this.margin.left + this.margin.right)
+      .attr('height', this.height + this.margin.top + this.margin.bottom)
+      .append('g')
+      .attr('transform', `translate(${this.margin.left},${this.margin.top})`);
 
+    const x = d3.scaleBand()
+      .domain(this.data.map((d:any) => d.category))
+      .range([0, this.width])
+      .padding(0.1);
+
+    const y = d3.scaleLinear()
+      .domain([0, 100])
+      .nice()
+      .range([this.height, 0]);
+
+    this.svg.append('g')
+      .attr('class', 'x-axis')
+      .attr('transform', `translate(0,${this.height})`)
+      .call(d3.axisBottom(x));
+
+    this.svg.append('g')
+      .attr('class', 'y-axis')
+      .call(d3.axisLeft(y));
+
+    this.svg.selectAll('.bar')
+      .data(this.data)
+      .enter().append('rect')
+      .attr('class', 'bar')
+      .attr('x', (d:any) => x(d.category))
+      .attr('y', (d:any) => y(d.value))
+      .attr('width', x.bandwidth())
+      .attr('height', (d:any) => this.height - y(d.value))
+      .attr('fill', 'steelblue');
+  }
   
 }

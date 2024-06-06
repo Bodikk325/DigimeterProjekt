@@ -1,3 +1,5 @@
+import { RegionData } from "./result/result.component";
+
 export interface ResultQuestion
 {
     category : string,
@@ -7,6 +9,9 @@ export interface ResultQuestion
     questionText : string,
     selectedAnswer : string[],
     selectedAnswerTexts: string[];
+    textBoxAnswer? : string
+    shownPoint : number,
+    regionData : RegionData
 }
 
 

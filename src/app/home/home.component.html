@@ -68,7 +68,7 @@
         </p>
       </div>
     </div>
-    <div [routerLink]="['/quiz', 'Digitális jelenlét']"
+    <div [routerLink]="['/quiz', 'Digitális Jelenlét']"
       class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
       <img src="../../assets/digitalisjelenletTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
       <div class="p-4">
@@ -91,13 +91,13 @@
         <select id="region" [(ngModel)]="myFirm.Region" name="region" required
           class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
           <option value="Budapest">Budapest</option>
-          <option value="KozepDunantul">Közép-Dunántúl</option>
-          <option value="PestMegye">Pest megye</option>
-          <option value="NyugatDunantul">Nyugat-Dunántúl</option>
-          <option value="EszakMagyarorszag">Észak-Magyarország</option>
-          <option value="DelAlfold">Dél-Alföld</option>
-          <option value="EszakAlfold">Észak-Alföld</option>
-          <option value="DelDunantul">Dél-Dunántúl</option>
+          <option value="Közép-Dunántúl">Közép-Dunántúl</option>
+          <option value="Pest megye">Pest megye</option>
+          <option value="Nyugat-Dunántúl">Nyugat-Dunántúl</option>
+          <option value="Észak-Magyarország">Észak-Magyarország</option>
+          <option value="Dél-Alföld">Dél-Alföld</option>
+          <option value="Észak-Alföld">Észak-Alföld</option>
+          <option value="Dél-Dunántúl">Dél-Dunántúl</option>
         </select>
       </div>
 
@@ -105,19 +105,19 @@
         <label for="field" class="block text-gray-700 text-sm font-bold mb-2">Tevékenységi kör:</label>
         <select id="field" [(ngModel)]="myFirm.Field" name="field" required
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-          <option value="Szallashely">Szálláshely szolgálatatás, vendéglátás</option>
-          <option value="Epitoipar">Építőipar</option>
-          <option value="Kereskedelem">Kereskedelem, gépjárműjavítás</option>
-          <option value="Ingatlan">Ingatlanügyek</option>
-          <option value="Informacio">Információ, kommunikáció</option>
-          <option value="Feldolgozoipar">Feldolgozóipar</option>
-          <option value="Mezogazdasag">Mezőgazdaság, bányászat</option>
-          <option value="Villamosenergia">Villamosenergia-, gáz-, gőzellátás, légkondicionálás, vízellátás</option>
-          <option value="Szallitas">Szállítás/raktározás</option>
-          <option value="Szakmai">Szakmai, tudományos, műszaki tevékenység, könyvelés</option>
-          <option value="Penzugy">Pénzügyi, biztosítási tevékenység</option>
-          <option value="Adminisztrativ">Adminisztratív és szolgáltatást támogató tevékenység</option>
-          <option value="Egyeb">Egyéb (közigazgatás, oktatás, egészségügy, szociális ellátás, művészet, egyéb
+          <option value="Szálláshely szolgálatatás, vendéglátás">Szálláshely szolgálatatás, vendéglátás</option>
+          <option value="Építőipar">Építőipar</option>
+          <option value="Kereskedelem, gépjárműjavítás">Kereskedelem, gépjárműjavítás</option>
+          <option value="Ingatlanügyek">Ingatlanügyek</option>
+          <option value="Információ, kommunikáció">Információ, kommunikáció</option>
+          <option value="Feldolgozóipar">Feldolgozóipar</option>
+          <option value="Mezőgazdaság, bányászat">Mezőgazdaság, bányászat</option>
+          <option value=">Villamosenergia-, gáz-, gőzellátás, légkondicionálás, vízellátás">Villamosenergia-, gáz-, gőzellátás, légkondicionálás, vízellátás</option>
+          <option value="Szállítás/raktározás">Szállítás/raktározás</option>
+          <option value="Szakmai, tudományos, műszaki tevékenység, könyvelés">Szakmai, tudományos, műszaki tevékenység, könyvelés</option>
+          <option value="Pénzügyi, biztosítási tevékenység">Pénzügyi, biztosítási tevékenység</option>
+          <option value="Adminisztratív és szolgáltatást támogató tevékenység">Adminisztratív és szolgáltatást támogató tevékenység</option>
+          <option value="Egyéb (közigazgatás, oktatás, egészségügy, szociális ellátás, művészet, egyéb szolgáltatás)">Egyéb (közigazgatás, oktatás, egészségügy, szociális ellátás, művészet, egyéb
             szolgáltatás)</option>
         </select>
       </div>
@@ -126,10 +126,10 @@
         <label for="workers" class="block text-gray-700 text-sm font-bold mb-2">Foglalkoztatottak száma:</label>
         <select id="workers" [(ngModel)]="myFirm.Workers" name="workers" required
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-          <option value="otkilenc">5-9 fő</option>
-          <option value="husznegyvenkilenc">10-19 fő</option>
-          <option value="tiztizenkilenc">20-49 fő</option>
-          <option value="otvenketszaznegyvenkilenc">50-249 fő</option>
+          <option value="5-9 fő">5-9 fő</option>
+          <option value="10-19 fő">10-19 fő</option>
+          <option value="20-49 fő">20-49 fő</option>
+          <option value="50-249 fő">50-249 fő</option>
         </select>
       </div>
 

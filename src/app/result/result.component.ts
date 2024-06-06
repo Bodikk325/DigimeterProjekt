@@ -9,6 +9,40 @@ import { CountResultService } from '../count-result.service';
 import { Result, ResultQuestion } from '../result';
 import { ChatService } from '../chat.service';
 
+export interface RegionData {
+  id: string;
+  max_point: number;
+  average_points: number;
+  Budapest: number;
+  "Dél-Alföld": number;
+  "Dél-Dunántúl": number;
+  "Egyéb (közigazgatás, oktatás, egészségügy, szociális ellátás, művészet, egyéb szolgáltatás)": number;
+  Feldolgozóipar: number;
+  "Informatikai eszközt használó munkavállalók": number | null;
+  "Információ, kommunikáció": number;
+  Ingatlanügyek: number;
+  "Kereskedelem, gépjárműjavítás": number;
+  "Közép-Dunántúl": number;
+  "Mezőgazdaság, bányászat": number;
+  "Nyugat-Dunántúl": number;
+  "Pest megye": number;
+  "Pénzügyi, biztosítási tevékenység": number;
+  "Szakmai, tudományos, műszaki tevékenység, könyvelés": number;
+  "Szálláshely szolgálatatás, vendéglátás": number;
+  "Szállítás/raktározás": number;
+  "Villamosenergia-, gáz-, gőzellátás, légkondicionálás, vízellátás": number;
+  Építőipar: number;
+  "Észak-Alföld": number;
+  "Észak-Magyarország": number;
+  "5-9 fő": number;
+  "10-19 fő": number;
+  "20-49 fő": number;
+  "50-249 fő": number;
+  "Adminisztratív és szolgáltatást támogató tevékenység": number;
+  [key: string]: number | string | null; // Index signature
+}
+
+
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
@@ -16,9 +50,17 @@ import { ChatService } from '../chat.service';
 })
 export class ResultComponent {
 
-  myFirm!: MyFirm;
+  myFirm: MyFirm = {
+    UserName: '',
+    Region: '',
+    Field: '',
+    Workers: '',
+    Sector: '',
+    Capital: '',
+    Revenue: ''
+  };
 
-  
+
 
 
   allResults: Result[] = []
@@ -28,7 +70,7 @@ export class ResultComponent {
     id: "0",
     results: [],
     time: 0,
-    resultType : ""
+    resultType: ""
   }
   newResultQuestion: ResultQuestion[] = []
   categoryMaxPoint = 0;
@@ -37,12 +79,45 @@ export class ResultComponent {
   selectedValue: string = "Összes";
   firmPoints: Point[] = [];
   comparisonPoints!: Point[];
+  regionData: RegionData = {
+    id: '',
+    max_point: 0,
+    average_points: 0,
+    Budapest: 0,
+    'Dél-Alföld': 0,
+    'Dél-Dunántúl': 0,
+    'Egyéb (közigazgatás, oktatás, egészségügy, szociális ellátás, művészet, egyéb szolgáltatás)': 0,
+    Feldolgozóipar: 0,
+    'Informatikai eszközt használó munkavállalók': null,
+    'Információ, kommunikáció': 0,
+    Ingatlanügyek: 0,
+    'Kereskedelem, gépjárműjavítás': 0,
+    'Közép-Dunántúl': 0,
+    'Mezőgazdaság, bányászat': 0,
+    'Nyugat-Dunántúl': 0,
+    'Pest megye': 0,
+    'Pénzügyi, biztosítási tevékenység': 0,
+    'Szakmai, tudományos, műszaki tevékenység, könyvelés': 0,
+    'Szálláshely szolgálatatás, vendéglátás': 0,
+    'Szállítás/raktározás': 0,
+    'Villamosenergia-, gáz-, gőzellátás, légkondicionálás, vízellátás': 0,
+    Építőipar: 0,
+    'Észak-Alföld': 0,
+    'Észak-Magyarország': 0,
+    '5-9 fő': 0,
+    '10-19 fő': 0,
+    '20-49 fő': 0,
+    '50-249 fő': 0,
+    'Adminisztratív és szolgáltatást támogató tevékenység': 0
+  }
+
+
   sortedAnswers!: Question[];
   sortedPoints: Point[] = [];
   finalResult: number = 0;
   ids: string[] = [];
   tabname = "";
-  
+
 
   constructor(private chatService: ChatService, private quizService: QuizResultsService, private route: ActivatedRoute, private firmService: FirmsService, private dataService: DataService, private authService: AuthService, private countResultService: CountResultService) {
     this.messages.push(
@@ -51,222 +126,70 @@ export class ResultComponent {
       }
     )
 
-    
+    this.firmService.getFirmData().subscribe((res: any) => {
 
-    this.quizService.getResultForUser(this.route.snapshot.paramMap.get('id') ?? "0").subscribe(
-      (result) => {
-        this.currentResult = result[0];
-        if(this.route.snapshot.paramMap.get('id') != "")
-          {
-            this.loadQuestions("", "");
-          }
-      }
-    )
-
-  }
-
-
-  changeShowPoint(szures: string) {
-    var fullPoints = 0;
-    for (let index = 0; index < this.firmPoints.length; index++) {
-      this.firmPoints[index].ShownPoint = this.firmPoints[index].AvaragePoint;
-
-      if (szures == "Regió") {
-        this.firmPoints[index].ShownPoint = this.countResultService.FindWhichPointToShow(this.firmPoints[index], this.myFirm.Region);
-      }
-      if (szures == "Munkásszám") {
-        this.firmPoints[index].ShownPoint = this.countResultService.FindWhichPointToShow(this.firmPoints[index], this.myFirm.Workers);
-      }
-      if (szures == "Szakma") {
-        this.firmPoints[index].ShownPoint = this.countResultService.FindWhichPointToShow(this.firmPoints[index], this.myFirm.Field);
-      }
-
-      fullPoints += this.firmPoints[index].ShownPoint;
-
-      this.sortedPoints.push(this.firmPoints[index])
-
-    }
-    if (this.tabname != "") {
-      this.firmAvaragePointByCategory = fullPoints
-    }
-  }
-
-  calculateFinalResult(page: string) {
-    if (page != "") {
-      this.finalResult = this.currentResult.results.reduce((sum, question) => sum + question.points, 0);
-      console.log(this.finalResult)
-    }
-    else 
-    {
-      this.finalResult = this.calculateDigimeterIndex();
-    }
-  }
-
-
-  loadQuestions(page: string, comboBoxSelected: string) {
-
-    this.sortedPoints = []
-
-    this.firmService.getPoints().subscribe((res: Point[]) => {
-
-      this.firmPoints = res
-
-      this.calculateFinalResult(page)
-
-      const categoryResult = this.getTotalPointsByFirm(page);
-
-      this.firmAvaragePointByCategory = categoryResult.otherpoint
-      this.categoryMaxPoint = categoryResult.maxpoint
-
-      this.sortDownTheLists();
-
-      console.log(this.firmPoints)
-      console.log(this.currentResult.results)
-
-      this.changeShowPoint(comboBoxSelected);
-
-      
+      this.myFirm.Region = res['region']
+      this.myFirm.Workers = res['employees']
+      this.myFirm.Field = res['field']
     })
+
+    this.subscribe("");
+
+
+
   }
 
-  sortDownTheLists()
-  {
-    this.currentResult.results = this.currentResult.results.filter(item1 =>
-      this.firmPoints.some(item2 => item1.questionId === item2.questionId)
+  subscribe(topic: string) {
+    this.quizService.getFinalResult(this.route.snapshot.paramMap.get('id') ?? "0", topic).subscribe(
+      (result: Result) => {
+        this.currentResult = result;
+        // Ellenőrizd, hogy az eredmény tartalmazza a results tömböt
+        if (Array.isArray(this.currentResult.results)) {
+          this.currentResult.results = this.currentResult.results.filter((x) => x.questionId != "B14" && x.questionId != "B15" && x.questionId != "B16");
+          this.changeShowPoint();
+          console.log(this.currentResult)
+        } else {
+          console.error("Invalid results format", this.currentResult.results[20]);
+        }
+      },
+      (error) => {
+        console.error("Error fetching results", error);
+      }
     );
-
-    this.firmPoints = this.firmPoints.filter(item2 =>
-      this.currentResult.results.some(item1 => item2.questionId === item1.questionId)
-    );
-
-    this.currentResult.results = this.currentResult.results.sort((a, b) => a.questionId.localeCompare(b.questionId));
-    this.firmPoints = this.firmPoints.sort((a, b) => a.questionId.localeCompare(b.questionId));
-  }
-
- 
-
-
-
-  digitalis_jelenlet_ids = ["B1_1", "B1_2", "B1_3", "B2", "B3", "B4", "B5a_1", "B5a_2", "B5a_3", "B5b_1", "B5b_2", "B5b_3", "B6a", "B6b", "B7a", "B7b", "B8", "B9", "B10", "B11", "C1"];
-  digitalis_mindennapok_ids = ["A6", "A8", "B12", "B17_1", "B17_2", "B17_3", "C1", "C2", "C3", "C4"];
-  vallalkozasvezetes_ids = ["B13", "E1", "E2", "E3", "E5"];
-  ertekesites_es_marketing_ids = ["D8", "B11", "D5", "D6", "D7", "D9"];
-  digitalis_penzugy_ids = ["G1_1", "G1_2", "G2", "G3"];
-  informatikai_biztonsag_ids = ["B12", "F1", "F2", "F3_1", "F3_2"];
-
-  calculateDigimeterIndex(): number {
-    var osszeg1 = this.currentResult.results.filter(x => x.category == "Digitális pénzügy" && this.digitalis_penzugy_ids.indexOf(x.questionId) !== -1).reduce((sum, score) => sum += score.points, 0) * 0.16
-    var osszeg2 = this.currentResult.results.filter(x => x.category == "Informatikai biztonság" && this.informatikai_biztonsag_ids.indexOf(x.questionId) !== -1).reduce((sum, score) => sum += score.points, 0) * 0.11
-    var osszeg3 = this.currentResult.results.filter(x => x.category == "Vállalatvezetés" && this.vallalkozasvezetes_ids.indexOf(x.questionId) !== -1).reduce((sum, score) => sum += score.points, 0) * 0.16
-    var osszeg4 = this.currentResult.results.filter(x => x.category == "Értékesítés és marketing" && this.ertekesites_es_marketing_ids.indexOf(x.questionId) !== -1).reduce((sum, score) => sum += score.points, 0) * 0.19
-    var osszeg5 = this.currentResult.results.filter(x => x.category == "Digitális Jelenlét" && this.digitalis_jelenlet_ids.indexOf(x.questionId) !== -1).reduce((sum, score) => sum += score.points, 0) * 0.19
-    var osszeg6 = this.currentResult.results.filter(x => x.category == "Digitális mindennapok" && this.digitalis_mindennapok_ids.indexOf(x.questionId) !== -1).reduce((sum, score) => sum += score.points, 0) * 0.19
-
-    return osszeg1 + osszeg2 + osszeg3 + osszeg4 + osszeg5 + osszeg6;
   }
 
 
 
-  getTotalPointsByFirm(topicFilter: string): any {
+  changeShowPoint() {
+    this.currentResult.results.forEach(result => {
+      if (this.selectedValue == "Összes") {
+        result.shownPoint = result.regionData.average_points;
+      }
+      else if (this.selectedValue == "Szakma") {
+        result.shownPoint = result.regionData[this.myFirm.Field] as number;
+      }
+      else if (this.selectedValue == "Munkásszám") {
+        result.shownPoint = result.regionData[this.myFirm.Workers] as number;
+      }
+      else if (this.selectedValue == "Regió") {
+        result.shownPoint = result.regionData[this.myFirm.Region] as number;
+      }
 
-    var list = ["DIGIMÉTER_INDEX", "DIGITÁLIS_PÉNZÜGYEK", "INFORMATIKAI_BIZTONSÁG", "VÁLLALKOZÁSVEZETÉS", "ÉRTÉKESÍTÉS_ÉS_MARKETING",
-      "ÉRTÉKESÍTÉS_ÉS_MARKETING", "DIGITÁLIS_MINDENNAPOK", "DIGITÁLIS_JELENLÉT"
-    ]
-
-    var digimeterIndex = 0;
-
-    list.forEach(tema => {
-      if (tema == "DIGITÁLIS_PÉNZÜGYEK") {
-        digimeterIndex += this.firmPoints.filter(question => question.questionId.includes("DIGIMÉTER_INDEX"))[0].AvaragePoint * 0.16
-      }
-      else if (tema == "INFORMATIKAI_BIZTONSÁG") {
-        digimeterIndex += this.firmPoints.filter(question => question.questionId.includes("INFORMATIKAI_BIZTONSÁG"))[0].AvaragePoint * 0.11
-      }
-      else if (tema == "VÁLLALKOZÁSVEZETÉS") {
-        digimeterIndex += this.firmPoints.filter(question => question.questionId.includes("INFORMATIKAI_BIZTONSÁG"))[0].AvaragePoint * 0.16
-      }
-      else {
-        digimeterIndex += this.firmPoints.filter(question => question.questionId.includes(tema))[0].AvaragePoint * 0.19
-      }
     });
-
-
-
-    var filteredPoints = this.firmPoints;
-
-    if (topicFilter == "") {
-      filteredPoints = this.firmPoints.filter(question =>
-        question.questionId.includes("DIGIMÉTER_INDEX")
-      );
-    }
-
-    if (topicFilter == "Digitális pénzügy") {
-      filteredPoints = this.firmPoints.filter(question =>
-        question.questionId.includes("DIGITÁLIS_PÉNZÜGYEK")
-      );
-    }
-
-    if (topicFilter == "Informatikai biztonság") {
-      filteredPoints = this.firmPoints.filter(question =>
-        question.questionId.includes("INFORMATIKAI_BIZTONSÁG")
-      );
-    }
-
-    if (topicFilter == "Vállalatvezetés") {
-      filteredPoints = this.firmPoints.filter(question =>
-        question.questionId.includes("VÁLLALKOZÁSVEZETÉS")
-      );
-    }
-
-    if (topicFilter == "Értékesítés és marketing") {
-      filteredPoints = this.firmPoints.filter(question =>
-        question.questionId.includes("ÉRTÉKESÍTÉS_ÉS_MARKETING")
-      );
-    }
-
-    if (topicFilter == "Digitális mindennapok") {
-      filteredPoints = this.firmPoints.filter(question =>
-        question.questionId.includes("DIGITÁLIS_MINDENNAPOK")
-      );
-    }
-    if (topicFilter == "Digitális Jelenlét") {
-      filteredPoints = this.firmPoints.filter(question =>
-        question.questionId.includes("DIGITÁLIS_JELENLÉT")
-      );
-    }
-
-    const totalFirmPoints = filteredPoints[0].AvaragePoint;
-    var maximumpoint = filteredPoints[0].Maxpoint;
-
-    if (topicFilter == ""
-    ) {
-      digimeterIndex = Math.floor(digimeterIndex)
-      return { otherpoint: digimeterIndex, maxpoint: maximumpoint };
-    }
-    else {
-      return { otherpoint: totalFirmPoints, maxpoint: maximumpoint };
-    }
-
   }
-
-
-
-
-
-
-
-
 
 
   changeTab(tabName: string): void {
     this.tabname = tabName;
+    this.subscribe(tabName)
+    
     this.selectedValue = "Összes"
-    this.loadQuestions(tabName, this.tabname);
+
   }
 
   onSelect(newValue: string) {
     this.selectedValue = newValue;
-    this.loadQuestions(this.tabname, newValue);
+    this.changeShowPoint()
   }
 
 
@@ -305,7 +228,7 @@ export class ResultComponent {
     }
   }
 
-  
+
 
 
 }

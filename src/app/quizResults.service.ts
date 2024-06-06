@@ -5,6 +5,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { NotificationService } from "./notification.service";
 import { NotificationType } from "./notification/notification.component";
 import { Observable } from "rxjs";
+import { RegionData } from "./result/result.component";
 
 export interface Question {
   id: string;
@@ -35,6 +36,37 @@ export class QuizResultsService {
 
   quizResults!: Result[];
   currentResult!: Result;
+  regionData : RegionData = {
+    id: "",
+    max_point: 0,
+    average_points: 0,
+    Budapest: 0,
+    "Dél-Alföld": 0,
+    "Dél-Dunántúl": 0,
+    "Egyéb (közigazgatás, oktatás, egészségügy, szociális ellátás, művészet, egyéb szolgáltatás)": 0,
+    Feldolgozóipar: 0,
+    "Informatikai eszközt használó munkavállalók": null,
+    "Információ, kommunikáció": 0,
+    Ingatlanügyek: 0,
+    "Kereskedelem, gépjárműjavítás": 0,
+    "Közép-Dunántúl": 0,
+    "Mezőgazdaság, bányászat": 0,
+    "Nyugat-Dunántúl": 0,
+    "Pest megye": 0,
+    "Pénzügyi, biztosítási tevékenység": 0,
+    "Szakmai, tudományos, műszaki tevékenység, könyvelés": 0,
+    "Szálláshely szolgálatatás, vendéglátás": 0,
+    "Szállítás/raktározás": 0,
+    "Villamosenergia-, gáz-, gőzellátás, légkondicionálás, vízellátás": 0,
+    Építőipar: 0,
+    "Észak-Alföld": 0,
+    "Észak-Magyarország": 0,
+    "5-9 fő": 0,
+    "10-19 fő": 0,
+    "20-49 fő": 0,
+    "50-249 fő": 0,
+    "Adminisztratív és szolgáltatást támogató tevékenység": 0
+  }
 
   public getQuizResults(): Result[] {
     return [];
@@ -53,8 +85,11 @@ export class QuizResultsService {
       results: questions.map(q => {
         const { points, selectedAnswerTexts } = this.getPointsForSelectedAnswer(q.id, questions);
         return {
+          shownPoint : 0,
+          regionData : this.regionData,
           questionId: q.id,
           questionText: q.question,
+          textBoxAnswer : q.textBoxAnswer,
           maxpoint: q.maxpoint,
           // Győződjünk meg róla, hogy selectedAnswer mindig string tömb
           selectedAnswer: Array.isArray(q.selectedAnswer) ? q.selectedAnswer : (q.selectedAnswer ? [q.selectedAnswer] : []),
@@ -68,17 +103,28 @@ export class QuizResultsService {
     localStorage.setItem('contQuizResult', JSON.stringify(this.currentResult));
   }
 
+  generateGUID(): string {
+    const s4 = () => {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return `${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
+  }
+
   public saveQuizResultsAtTheEnd(questions: Question[], resultType : string) {
     var stamp = new Date().getTime();
     
     this.currentResult = {
-      id : "0",
-      resultType : "",
+      id : this.generateGUID(),
+      resultType : resultType,
       time: stamp, // Timestamp, mint egyedi azonosító
       results: questions.map(q => {
         const { points, selectedAnswerTexts } = this.getPointsForSelectedAnswer(q.id, questions);
         return {
           questionId: q.id,
+          regionData : this.regionData,
+          shownPoint : 0,
           questionText: q.question,
           maxpoint: q.maxpoint,
           // Győződjünk meg róla, hogy selectedAnswer mindig string tömb
@@ -90,10 +136,10 @@ export class QuizResultsService {
       })
     };
 
-    this.saveToDatabase(JSON.stringify(this.currentResult), resultType).subscribe(
+    this.saveToDatabase(JSON.stringify(this.currentResult), resultType, this.currentResult.id).subscribe(
       (result) => 
         {
-          this.router.navigateByUrl("result/" + stamp);
+          this.router.navigateByUrl("result/" + this.currentResult.id);
         },
       (error) => {
         this.notificationService.show("Valami hiba történt az adatbázisban, nem sikerült a mentés.. Újratöltés...", NotificationType.error)
@@ -117,11 +163,21 @@ export class QuizResultsService {
     return this.http.post("http://localhost/getResultForUser.php", body, {withCredentials : true});
   }
 
-  saveToDatabase(quizResult : string, resultType : string) : Observable<any>
+  getFinalResult(resultId : string, category : string) : Observable<any>
+  {
+    let body = new HttpParams();
+    body = body.set('resultId', resultId);
+    body = body.set('category', category);
+
+    return this.http.post("http://localhost/getFinalResult.php", body, {withCredentials : true});
+  }
+
+  saveToDatabase(quizResult : string, resultType : string, id : string) : Observable<any>
   {
     let body = new HttpParams();
     body = body.set('id', localStorage.getItem("currentUser") ?? "");
     body = body.set('result', quizResult);
+    body = body.set('resultId', id);
     body = body.set('date', new Date().getTime());
     body = body.set('resultType', resultType);
 
@@ -134,7 +190,6 @@ export class QuizResultsService {
     body = body.set('currentResult', JSON.stringify(currentResult));
     body = body.set('page', page);
 
-    console.log(page)
 
     return this.http.post("http://localhost/calculateDigimiterIndex.php", body, {withCredentials : true});
   }
