@@ -1,9 +1,12 @@
 <div *ngIf="!isQuizDone">
 
 
-  <div class="w-full">
-    <span>{{filteredQuestions.length}} / {{currentQuestionIndex + 1}}</span>
+  <div class="w-full flex justify-end mt-5">
+    <span class="p-4 border-solid border-2 rounded-lg shadow-md border-gray-400 text-xl text-right">
+      Kérdésszám: {{currentQuestionIndex + 1}} / {{filteredQuestions.length}}  
+    </span>
   </div>
+
   <div class="flex justify-center relative">
     
     <div *ngIf="filteredQuestions[currentQuestionIndex] as currentQuestion"

@@ -80,6 +80,8 @@ export class QuizResultsService {
   public saveQuizResults(questions: Question[]) {
     this.currentResult = {
       resultType : "",
+      finalScore : 0,
+      compared_list : this.regionData,
       time : new Date().getTime(),
       id: "stamp", // Timestamp, mint egyedi azonosító
       results: questions.map(q => {
@@ -118,6 +120,8 @@ export class QuizResultsService {
     this.currentResult = {
       id : this.generateGUID(),
       resultType : resultType,
+      compared_list : this.regionData,
+      finalScore : 0,
       time: stamp, // Timestamp, mint egyedi azonosító
       results: questions.map(q => {
         const { points, selectedAnswerTexts } = this.getPointsForSelectedAnswer(q.id, questions);

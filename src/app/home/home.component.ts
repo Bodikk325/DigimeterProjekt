@@ -6,8 +6,18 @@ import { Router } from '@angular/router';
 import { Result } from '../result';
 import { NotificationComponent, NotificationType } from '../notification/notification.component';
 import { NotificationService } from '../notification.service';
+import { NumberCardModule } from '@swimlane/ngx-charts';
 
 
+export interface MainPageResult
+{
+  average_points : number,
+  date : number,
+  finalScore : number,
+  max_point : number,
+  resultId : string,
+  resultType : string
+}
 
 @Component({
   selector: 'app-home',
@@ -26,6 +36,8 @@ export class HomeComponent {
     Revenue: ''
   };
 
+  results : MainPageResult[] = []
+
   messages = [
     "Ez itt a főoldal!",
     "Itt tudsz majd új kérdőívet kitölteni vagy akár megnézni az előző kitöltéseidnek az eredményét!",
@@ -40,6 +52,7 @@ export class HomeComponent {
       this.quizResultService.getResultsForUser().subscribe(
         (result) => {
           this.results = result;
+          console.log(this.results)
         }
       );
     })
@@ -76,7 +89,6 @@ export class HomeComponent {
     
   }
 
-  results: Result[] = []
 
   
 

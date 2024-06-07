@@ -1,20 +1,20 @@
-
-import { Component, OnInit, Input, ElementRef, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, OnChanges, SimpleChanges, AfterViewInit, HostListener } from '@angular/core';
 
 declare var d3: any;
 
 @Component({
   selector: 'app-bar-chart',
   templateUrl: './bar-chart.component.html',
-  styleUrl: './bar-chart.component.css'
+  styleUrls: ['./bar-chart.component.css']
 })
-export class BarChartComponent {
+export class BarChartComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() data: any;
- 
+
   private svg: any;
   private margin = { top: 20, right: 30, bottom: 40, left: 40 };
   private width!: number;
   private height!: number;
+  private colors = d3.scaleOrdinal(d3.schemeCategory10); // Use D3's paired color scheme
 
   constructor(private el: ElementRef) { }
 
@@ -32,6 +32,11 @@ export class BarChartComponent {
     }
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.createChart();
+  }
+
   private createChart(): void {
     const element = this.el.nativeElement.querySelector('.chart-container');
     element.innerHTML = ''; // Clear previous chart
@@ -41,13 +46,13 @@ export class BarChartComponent {
 
     this.svg = d3.select(element)
       .append('svg')
-      .attr('width', this.width + this.margin.left + this.margin.right)
-      .attr('height', this.height + this.margin.top + this.margin.bottom)
+      .attr('viewBox', `0 0 ${this.width + this.margin.left + this.margin.right} ${this.height + this.margin.top + this.margin.bottom}`)
+      .attr('preserveAspectRatio', 'xMidYMid meet')
       .append('g')
       .attr('transform', `translate(${this.margin.left},${this.margin.top})`);
 
     const x = d3.scaleBand()
-      .domain(this.data.map((d:any) => d.category))
+      .domain(this.data.map((d: any) => d.category))
       .range([0, this.width])
       .padding(0.1);
 
@@ -69,11 +74,26 @@ export class BarChartComponent {
       .data(this.data)
       .enter().append('rect')
       .attr('class', 'bar')
-      .attr('x', (d:any) => x(d.category))
-      .attr('y', (d:any) => y(d.value))
+      .attr('x', (d: any) => x(d.category))
+      .attr('y', this.height)  // Start position for animation
       .attr('width', x.bandwidth())
-      .attr('height', (d:any) => this.height - y(d.value))
-      .attr('fill', 'steelblue');
+      .attr('height', 0)  // Start height for animation
+      .attr('fill', (d: any, i: number) => this.colors(i))
+      .transition()  // Start transition
+      .duration(800)  // Duration of the animation in milliseconds
+      .attr('y', (d: any) => y(d.value))
+      .attr('height', (d: any) => this.height - y(d.value));
+
+    this.svg.selectAll('.label')
+      .data(this.data)
+      .enter().append('text')
+      .attr('class', 'label')
+      .attr('x', (d: any) => x(d.category) + x.bandwidth() / 2)
+      .attr('y', this.height)  // Start position for animation
+      .attr('text-anchor', 'middle')
+      .text((d: any) => Math.round(d.value) + "%")
+      .transition()  // Start transition
+      .duration(800)  // Duration of the animation in milliseconds
+      .attr('y', (d: any) => y(d.value) - 5);
   }
-  
 }

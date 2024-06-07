@@ -203,15 +203,27 @@
   </div>
 
   <div class="w-full lg:w-[100%] mt-10 lg:mt-0">
-    <div class="w-full h-full shadow-xl py-10 border-2 border-gray-100 text-black rounded-lg">
+    <div class="w-full h-full shadow-xl py-5 border-2 border-gray-100 text-black rounded-lg">
       <h2 class="text-2xl font-semibold mb-4 text-center">Eddigi eredmények</h2>
       <div *ngIf="results.length != 0"
         class="max-h-[35rem] border-t-2 border-b-2 border-gray-300 px-10 py-5 w-full overflow-y-auto">
         <div *ngFor="let kitoltes of results"
-          class="rounded-md px-2 py-3 bg-base_blue hover:bg-blue-700 cursor-pointer mt-10 text-white"
-          routerLink="../result/{{kitoltes.id}}">
-          <p>Kitöltés dátuma: <br> <span class="font-bold">{{kitoltes.time | date: 'yyyy-MM-dd'}}</span></p>
-          <p class="mt-5">Elért pontszám: <br> <span class="font-bold">pont</span></p>
+          class="rounded-md shadow-md hover:shadow-lg hover:bg-slate-100 px-2  border-solid border-2 border-base_blue  cursor-pointer mt-10 text-white"
+          routerLink="../result/{{kitoltes.resultId}}">
+          <div class="flex flex-col justify-center items-center">
+            <div class="w-full py-2 flex flex-col">
+              <span class="text-black">Kitöltés dátuma: <span class="font-bold">{{kitoltes.date| date: 'yyyy-MM-dd'}}</span></span>
+              <span class="text-black mt-2">Témakör: <span class="font-bold">{{kitoltes.resultType == "" ? 'Összes' : kitoltes.resultType}}</span></span>
+              <span class="text-black mt-2">Eredmény: </span>
+            </div>
+            <div class="chart-container mx-auto ">
+              <app-home-pie-chart
+          [data1]="[
+            { category: 'az ön cége', value: 70 },
+            { category: 'fejlődési lehetőség', value: 30 },
+            ]" ></app-home-pie-chart>
+            </div>
+          </div>
         </div>
       </div>
       <div *ngIf="results.length == 0">

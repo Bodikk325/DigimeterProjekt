@@ -1,4 +1,7 @@
-.chart-container {
-    width: 15%;
-    height: 300px;
-  }
+
+
+.label {
+  font-weight: bold;
+   /* Adjust size as needed */
+  fill: black; /* Color of the text */
+}

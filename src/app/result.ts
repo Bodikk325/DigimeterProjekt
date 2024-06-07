@@ -17,6 +17,8 @@ export interface ResultQuestion
 
 export interface Result 
 {
+    compared_list : RegionData
+    finalScore : number,
     id : string,
     resultType : string,
     time : number,

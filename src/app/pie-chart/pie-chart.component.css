@@ -1,0 +1,27 @@
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .chart-container {
+    flex-direction: row;
+  }
+}
+
+.pie-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width is handled by the svg's 50% width */
+  padding: 10px; /* Add some padding if necessary */
+}
+
+svg {
+  display: block; /* Make sure SVG is block-level for centering */
+  margin: 0 auto; /* Center the SVG */
+}

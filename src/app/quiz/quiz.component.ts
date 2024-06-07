@@ -122,6 +122,7 @@ export class QuizComponent {
       if (conditionsMet) {
         return true;
       } else {
+        this.notiService.show("Pár kérdés eltávolításra került a válaszaid alapján!", NotificationType.information)
         return false;
       }
     });

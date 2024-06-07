@@ -23,7 +23,7 @@
     </button>
   </div>
 
-  <div class="bg-white shadow-lg big_cont px-4 pb-8 mb-4 border-2 border-gray-100 p-4">
+  <div class="bg-white container shadow-lg big_cont px-4 pb-8 mb-4 border-2 border-gray-100 p-4">
     <div class="mb-4 w-full md:w-1/3">
       <select [(ngModel)]="selectedValue" (change)="onSelect(selectedValue)" class="block w-full bg-gray-50 border-2 border-gray-200 text-gray-700 py-3 rounded leading-tight focus:outline-none px-4">
         <option selected [value]="'Összes'">Összes</option>
@@ -37,44 +37,65 @@
     <div class="ml-3" *ngIf="selectedValue== 'Regió'">Jelenleg a/az <span class="font-bold">{{myFirm.Region}}</span> székhellyel rendelkező vállalkozások adatai látszanak!</div>
     <div class="ml-3" *ngIf="selectedValue== 'Munkásszám'">Jelenleg a/az <span class="font-bold">{{myFirm.Workers}}t</span> foglalkoztató vállalkozások adatai látszanak!</div>
 
-    <div class="flex flex-col md:flex-row justify-center mt-10">
-      <div id="piechart" class="w-full flex justify-center"></div>
-      <div id="piechart2" class="w-full flex justify-center"></div>
+    <div class="chart-container my-20">
+      <app-pie-chart [showLegend]="true" [data1]="dataForPieChart1" [data2]="dataForPieChart2"></app-pie-chart>
     </div>
 
     <div class="space-y-4">
       <div *ngIf="currentResult && currentResult.results && currentResult.results.length > 0">
         <div *ngFor="let valaszopcio of currentResult.results; let i = index">
-          
-          <div class="flex flex-col md:flex-row w-full justify-between items-center mt-8 md:mt-32">
-            <div class="flex flex-col w-full md:w-[30rem]">
+          <div class="flex flex-col md:flex-row w-full justify-between items-center mt-8 md:mt-32 text-[0.8rem] lg:text-[1.2rem]">
+            <div class="flex flex-col w-full md:w-[30rem] mb-5">
               <span class="text-lg font-bold">{{valaszopcio.questionText}}</span>
               <span *ngIf="valaszopcio.selectedAnswerTexts.length != 0 || valaszopcio.textBoxAnswer != null">A te válaszod/válaszaid a kérdésre:</span>
-              <span *ngIf="valaszopcio.selectedAnswerTexts.length != 0" class="mt-5"><span class="font-bold">{{valaszopcio.selectedAnswerTexts}}</span></span>
-              <span *ngIf="valaszopcio.textBoxAnswer != null" class="mt-5"><span class="font-bold">{{valaszopcio.selectedAnswerTexts}}</span></span>
+              <span *ngIf="valaszopcio.selectedAnswerTexts.length != 0" class="mt-5">
+                <span class="font-bold">
+                  @for (item of valaszopcio.selectedAnswerTexts; track $index) {
+                    <p>
+                      {{item}}
+                    </p>
+                  }
+                </span>
+              </span>
+              <span *ngIf="valaszopcio.textBoxAnswer != null" class="mt-5"><span class="font-bold">{{valaszopcio.textBoxAnswer}}</span></span>
               <span *ngIf="valaszopcio.selectedAnswerTexts.length == 0" class="mt-5">Erre a kérdésre nem tudtál választ adni, mivel a kérdés előfeltételei nem teljesültek.</span>
             </div>
 
-            <div class="w-full md:w-[40rem] text-[1rem] mt-4 md:mt-0">
-              <div *ngIf="valaszopcio.points >= valaszopcio.shownPoint && (valaszopcio.shownPoint != 0)" class="flex flex-col justify-between lg:flex-row items-center bg-white shadow-lg">
+            <div class="w-full md:w-[40rem] text-[0.7rem] md:text-[1rem] lg:text-[1.2rem] mt-4 md:mt-0">
+              <div *ngIf="valaszopcio.points >= valaszopcio.shownPoint && (valaszopcio.shownPoint != 0)" class="flex p-2 flex-col justify-between lg:flex-row items-center bg-white shadow-lg">
                 <div class="p-5 mr-5 flex flex-col justify-between items-start">
                   <span>A válaszoddal elért pontszám: <span class="font-bold">{{valaszopcio?.points}} pont</span> / <span class="font-bold">{{(valaszopcio.points | rounder:valaszopcio.maxpoint)}}</span></span>
                   <span class="mt-2">A többi cég átlagos pontszáma: <span class="font-bold">{{valaszopcio.shownPoint | number:'1.0-1'}} pont</span> / <span class="font-bold">{{ (valaszopcio.shownPoint |rounder:valaszopcio.maxpoint)}}</span></span>
                   <span class="mt-2">Ez számodra egy jó eredménynek számít!</span>
                 </div>
-                <img src="assets/ai_trans.png" class="w-28 rounded-full" alt="">
+                <img src="assets/ai_trans.png" class="w-14 md:w-28 rounded-full" alt="">
               </div>
             </div>
 
             <div *ngIf="valaszopcio.points < valaszopcio.shownPoint && (valaszopcio.shownPoint != 0)" class="flex flex-col justify-between lg:flex-row items-center bg-white shadow-lg p-5 rounded-md">
-              <div class="p-5 mr-5 flex flex-col justify-between items-start">
+              <div class="p-5 mr-5 flex flex-col justify-between items-start  text-[0.7rem] md:text-[1rem] lg:text-[1.2rem]">
                 <span>A válaszoddal elért pontszám: <span class="font-bold">{{valaszopcio?.points }} pont</span> / <span class="font-bold">{{(valaszopcio.points | rounder:valaszopcio.maxpoint)}}</span></span>
                 <span class="mt-2">A többi cég átlagos pontszáma: <span class="font-bold">{{valaszopcio.shownPoint | number:'1.0-1'}} pont</span> / <span class="font-bold">{{ (valaszopcio.shownPoint |rounder:valaszopcio.maxpoint)}}</span></span>
                 <span class="mt-2"> Ez számodra egy nem jó eredmény, ebben a témában van még hova fejlődni..</span>
               </div>
-              <img src="assets/ai_not_happy.png" class="w-28 rounded-full" alt="">
+              <img src="assets/ai_not_happy.png" class=" w-14 md:w-28 rounded-full" alt="">
             </div>
           </div>
+          @defer (on viewport; on timer(5s)) {
+            <div class="w-full mx-auto text-[0.5rem]">
+              <app-bar-chart [data]="[
+                { category: 'Ön cége', value: (valaszopcio.points / valaszopcio.maxpoint) * 100},
+                { category: 'Más vállalkozások', value: (valaszopcio.shownPoint / valaszopcio.maxpoint) * 100 }
+                ]">
+                </app-bar-chart>
+              </div>
+          }
+          @placeholder {
+            <div></div>
+          }
+
+          <div class="h-1 mx-auto my-32 rounded bg-base_blue opacity-10 shadow-lg w-1/2"></div>
+
         </div>
       </div>
       <p class="text-center">Vannak olyan kérdések amelyek nem jelentek meg a kérdőívben, mivel előfeltételeik nem teljesültek. Ezekre a kérdésekre automatikusan 0 pont jár.</p>
@@ -111,10 +132,4 @@
   </button>
 </div>
 
-<div *ngFor="let valaszopcio of currentResult.results; let i = index">
-    <div>{{valaszopcio.questionText}}</div>
-    <app-bar-chart [data]="[
-              { category: 'Ön cége', value: valaszopcio.points },
-              { category: 'Más vállalkozások', value: valaszopcio.shownPoint }
-            ]"></app-bar-chart>
-</div>
+

@@ -8,6 +8,7 @@ import { AuthService } from '../auth.service';
 import { CountResultService } from '../count-result.service';
 import { Result, ResultQuestion } from '../result';
 import { ChatService } from '../chat.service';
+import { max } from 'rxjs';
 
 export interface RegionData {
   id: string;
@@ -60,18 +61,21 @@ export class ResultComponent {
     Revenue: ''
   };
 
+  dataForPieChart1 = [
+    { category: 'az ön cége', value: 0 },
+    { category: 'fejlődési lehetőség', value: 0 },
+  ];
 
+  dataForPieChart2 = [
+    { category: 'konkurens cégek', value: 0 },
+    { category: 'fejlődési lehetőség', value: 0 },
+  ];
 
 
   allResults: Result[] = []
   points: number[] = []
-  currentResult!: Result
-  newResult: Result = {
-    id: "0",
-    results: [],
-    time: 0,
-    resultType: ""
-  }
+  
+  
   newResultQuestion: ResultQuestion[] = []
   categoryMaxPoint = 0;
   firmAvaragePointByCategory = 0;
@@ -110,7 +114,23 @@ export class ResultComponent {
     '50-249 fő': 0,
     'Adminisztratív és szolgáltatást támogató tevékenység': 0
   }
+  newResult: Result = {
+    id: "0",
+    results: [],
+    time: 0,
+    resultType: "",
+    finalScore: 0,
+    compared_list: this.regionData
+  }
 
+  currentResult: Result = {
+    compared_list: this.regionData,
+    finalScore: 0,
+    id: '',
+    resultType: '',
+    time: 0,
+    results: []
+  }
 
   sortedAnswers!: Question[];
   sortedPoints: Point[] = [];
@@ -133,23 +153,53 @@ export class ResultComponent {
       this.myFirm.Field = res['field']
     })
 
+  }
+
+  ngOnInit()
+  {
     this.subscribe("");
+  }
 
-
-
+  getMaxPoint(): number | string {
+    const firstItem = this.currentResult?.compared_list?.[0];
+    if (firstItem && typeof firstItem === 'object' && 'max_point' in firstItem) {
+      return firstItem["maxpoint"];
+    } else {
+      return "default value";
+    }
   }
 
   subscribe(topic: string) {
     this.quizService.getFinalResult(this.route.snapshot.paramMap.get('id') ?? "0", topic).subscribe(
-      (result: Result) => {
+      (result : Result) => {
         this.currentResult = result;
+        console.log(this.currentResult)
         // Ellenőrizd, hogy az eredmény tartalmazza a results tömböt
         if (Array.isArray(this.currentResult.results)) {
           this.currentResult.results = this.currentResult.results.filter((x) => x.questionId != "B14" && x.questionId != "B15" && x.questionId != "B16");
           this.changeShowPoint();
-          console.log(this.currentResult)
+
+          var maxpoint = 0;
+          var avarage = 0;
+
+          const firstItem = this.currentResult?.compared_list?.[0];
+          if (firstItem && typeof firstItem === 'object' && 'max_point' in firstItem) {
+            maxpoint = firstItem["max_point"]
+            avarage = firstItem["average_points"]
+          }
+          
+          this.dataForPieChart1 = [
+            { category: 'az ön cége', value: this.currentResult.finalScore },
+            { category: 'fejlődési lehetőség', value: maxpoint - this.currentResult.finalScore  },
+          ];
+        
+          this.dataForPieChart2 = [
+            { category: 'konkurens cégek', value: avarage },
+            { category: 'fejlődési lehetőség', value: maxpoint - avarage },
+          ]; 
+
         } else {
-          console.error("Invalid results format", this.currentResult.results[20]);
+          console.error("Invalid results format", this.currentResult.results);
         }
       },
       (error) => {

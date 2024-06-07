@@ -20,6 +20,8 @@ import { FloatingIconComponent } from './floating-icon/floating-icon.component';
 import { LoaderComponent } from './loader/loader.component';
 import { LoaderBlackComponent } from './loader-black/loader-black.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { HomePieChartComponent } from './home-pie-chart/home-pie-chart.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { BarChartComponent } from './bar-chart/bar-chart.component';
     FloatingIconComponent,
     LoaderComponent,
     LoaderBlackComponent,
-    BarChartComponent
+    BarChartComponent,
+    PieChartComponent,
+    HomePieChartComponent
   ],
   imports: [
     BrowserModule,
