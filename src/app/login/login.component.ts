@@ -12,6 +12,7 @@ export class LoginComponent {
   private authSubscription!: Subscription;
   private loadingSubscription!: Subscription;
   private errorSubscription!: Subscription;
+
   messages = [
     "Hé, itt vagyok, itt lent!",
     "Kezdjük azzal, hogy létrehozunk neked egy fiókot!",
@@ -32,7 +33,7 @@ export class LoginComponent {
 
     this.manageForms();
 
-    this.managaSubscriptions();
+    this.manageSubscriptions();
 
   }
 
@@ -50,7 +51,7 @@ export class LoginComponent {
     });
   }
 
-  private managaSubscriptions()
+  private manageSubscriptions()
   {
     this.authSubscription = this.authService.loginFormState.subscribe(show => {
       this.loginShown = show;

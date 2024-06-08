@@ -41,7 +41,7 @@ export class HomePieChartComponent {
     element.innerHTML = ''; // Clear previous chart
   
     // Create a container for the pie chart
-    const container = d3.select(element).append('div').attr('class', 'pie-container w-full');
+    const container = d3.select(element).append('div').attr('class', 'pie-container w-2/3 mx-auto');
   
     this.createPieChart(container, this.data1);
   }

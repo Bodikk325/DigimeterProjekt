@@ -54,7 +54,7 @@ button:disabled {
 .chat-container {
   position: fixed;
   bottom: 75px;
-  left: 75px;
+  left: 20px;
   width: 400px;
   height: 500px;
   max-width: 90%;
@@ -253,4 +253,11 @@ input:focus {
   40% {
     transform: scale(1);
   }
+}
+
+@media only screen and (min-width: 600px) {
+  .chat-container {
+    left: 75px;
+  }
+  
 }

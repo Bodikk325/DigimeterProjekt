@@ -268,21 +268,5 @@ export class ResultComponent {
   messages: any[] = [];
   inputText: string = '';
 
-  sendMessage(): void {
-    if (this.inputText.trim()) {
-      this.messages.push({ text: this.inputText, user: true });
-      this.isMessageLoading = true;
-
-      this.chatService.sendMessageResult(this.finalResult, this.firmAvaragePointByCategory, this.categoryMaxPoint, this.inputText, this.tabname).subscribe(response => {
-        this.messages.push({ text: response.choices[0].message.content, user: false });
-        this.isMessageLoading = false;
-      });
-
-      this.inputText = '';
-    }
-  }
-
-
-
-
+  
 }

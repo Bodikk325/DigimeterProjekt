@@ -1,23 +1,13 @@
 import { Component, afterNextRender } from '@angular/core';
-import { Question, QuizResultsService } from '../quizResults.service';
+import { QuizResultsService } from '../quizResults.service';
 import { MyFirm } from '../myFirm';
 import { FirmsService } from '../firms.service';
 import { Router } from '@angular/router';
-import { Result } from '../result';
-import { NotificationComponent, NotificationType } from '../notification/notification.component';
+import { NotificationType } from '../notification/notification.component';
 import { NotificationService } from '../notification.service';
-import { NumberCardModule } from '@swimlane/ngx-charts';
+import { MainPageResult } from '../models/MainPageResult';
+import { Subscription } from 'rxjs';
 
-
-export interface MainPageResult
-{
-  average_points : number,
-  date : number,
-  finalScore : number,
-  max_point : number,
-  resultId : string,
-  resultType : string
-}
 
 @Component({
   selector: 'app-home',
@@ -26,56 +16,68 @@ export interface MainPageResult
 })
 export class HomeComponent {
 
-  myFirm: MyFirm = {
-    UserName: '',
-    Region: '',
-    Field: '',
-    Workers: '',
-    Sector: '',
-    Capital: '',
-    Revenue: ''
-  };
+  private resultForUserSubscription!: Subscription;
+  private saveFirmSubscription!: Subscription;
+  private getFirmDataSubscription!: Subscription;
 
-  results : MainPageResult[] = []
+  myFirm!: MyFirm;
 
-  messages = [
-    "Ez itt a főoldal!",
-    "Itt tudsz majd új kérdőívet kitölteni vagy akár megnézni az előző kitöltéseidnek az eredményét!",
-    "Fontos, hogy mielőtt új kérdőívet töltenél ki azelőtt meg kell adnod a céged adatai!"
-  ]
+  results!: MainPageResult[];
 
-  isLoading = false;
+  isMainPageLoaded!: boolean;
 
-  constructor(private notiService : NotificationService,private quizResultService: QuizResultsService, private firmService: FirmsService, private router : Router) {
+  messages!: string[];
+
+  isLoading!: boolean;
+
+  constructor(private notiService: NotificationService, private quizResultService: QuizResultsService, private firmService: FirmsService, private router: Router) {
+
+    this.messages = [
+      "Ez itt a főoldal!",
+      "Itt tudsz majd új kérdőívet kitölteni vagy akár megnézni az előző kitöltéseidnek az eredményét!",
+      "Fontos, hogy mielőtt új kérdőívet töltenél ki azelőtt meg kell adnod a céged adatai!"
+    ]
+
+    this.myFirm = {
+      UserName: "",
+      Capital: "",
+      Field: "",
+      Region: "",
+      Revenue: "",
+      Sector: "",
+      Workers: ""
+    }
+
+    this.isLoading = false;
+    this.isMainPageLoaded = false;
 
     afterNextRender(() => {
-      this.quizResultService.getResultsForUser().subscribe(
+      this.resultForUserSubscription = this.quizResultService.getResultsForUser().subscribe(
         (result) => {
           this.results = result;
-          console.log(this.results)
+          this.isMainPageLoaded = true;
         }
       );
     })
-
   }
 
   saveToFirm() {
 
     this.isLoading = true;
 
-    this.firmService.saveMyFirmData(this.myFirm).subscribe(
-      (result) => {
+    this.saveFirmSubscription = this.firmService.saveMyFirmData(this.myFirm).subscribe(
+      (_) => {
         this.notiService.show("Cégadatok sikeresen mentve!", NotificationType.positivie)
         this.isLoading = false;
       }
     )
+
   }
- 
-  
 
   ngOnInit() {
-    this.firmService.getFirmData().subscribe(
-      (result : any) => {
+
+    this.getFirmDataSubscription = this.firmService.getFirmData().subscribe(
+      (result: any) => {
         this.myFirm.Capital = result.capital
         this.myFirm.Revenue = result.revenue
         this.myFirm.Region = result.region
@@ -84,22 +86,28 @@ export class HomeComponent {
         this.myFirm.Field = result.field
       }
     );
-    
+
   }
 
+  checkFirmDataAndThenGoToQuiz() {
+    if (this.myFirm == null || this.myFirm.Field == "" || this.myFirm.Region == "" || this.myFirm.Workers == "" || this.myFirm.Capital == "" || this.myFirm.Revenue == "" || this.myFirm.Sector == "") {
+      this.notiService.show("Nincsenek kitöltve a cégadatok! Kérünk töltsd ki azokat először!", NotificationType.error)
+    }
+    else {
+      this.router.navigate(['../quiz', ""])
+    }
+  }
 
-  
-
-  checkFirmData()
-  {
-    if(this.myFirm == null || this.myFirm.Field == "" || this.myFirm.Region == "" || this.myFirm.Workers == "" || this.myFirm.Capital == "" || this.myFirm.Revenue == "" || this.myFirm.Sector == "")
-      {
-        this.notiService.show("Nincsenek kitöltve a cégadatok! Kérünk töltsd ki azokat először!", NotificationType.error)
-      }
-      else
-      {
-        this.router.navigate(['../quiz', ""])
-      }
+  ngOnDestroy() {
+    if (this.resultForUserSubscription != null) {
+      this.resultForUserSubscription.unsubscribe();
+    }
+    if (this.saveFirmSubscription != null) {
+      this.saveFirmSubscription.unsubscribe();
+    }
+    if (this.getFirmDataSubscription != null) {
+      this.getFirmDataSubscription.unsubscribe();
+    }
   }
 
 }

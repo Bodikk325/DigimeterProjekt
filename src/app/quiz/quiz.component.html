@@ -8,7 +8,6 @@
   </div>
 
   <div class="flex justify-center relative">
-    
     <div *ngIf="filteredQuestions[currentQuestionIndex] as currentQuestion"
     class="mx-auto w-full max-w-4xl h-screen max-h-[80vh] p-6 m-4 bg-white rounded-lg shadow-xl flex flex-col">
     <h2 class="text-2xl font-semibold text-blue-700 mb-8 mt-8 mx-6">
@@ -59,39 +58,14 @@
   </div>
 </div>
 
-<div class="app-container" (document:click)="onDocumentClick($event)">
-  <div class="chat-container" [class.hidden]="!isChatVisible">
-    <div class="chat-header">
-      <span style="margin-left: 10px;">
-        DIGIMÉTER
-      </span>
-      <button style="margin-right: 10px;" class="close-button" (click)="isChatVisible = false">×</button>
-    </div>
-    <div class="messages">
-      <div *ngFor="let message of messages" class="message" [ngClass]="{'user': message.user, 'bot': !message.user}">
-        {{ message.text }}
-      </div>
-      <div class="loader" *ngIf="isMessageLoading">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-    <input type="text" class="aiinput" [(ngModel)]="inputText" (keyup.enter)="sendMessage()"
-      placeholder="Írj valamit...">
-  </div>
-  <button class="chat-button" [ngClass]="{'shown-button': isChatVisible}" (click)="toggleChat($event)">
-    <img src="assets/ai.png" alt="Chat">
-  </button>
-</div>
+<app-ai-chat *ngIf="filteredQuestions[currentQuestionIndex] as currentQuestion" [question]="filteredQuestions[currentQuestionIndex].question" [category]="filteredQuestions[currentQuestionIndex].category" [type] = "'quiz'"></app-ai-chat>
 
 </div>
-
 
 <div *ngIf="isQuizDone">
   <div class="z-[200] flex flex-col justify-center items-center h-full w-full top-0 left-0 absolute bg-white">
     <app-loader-black></app-loader-black>
-    <p  class=" mt-10 font-bold text-xl text-black ">Adatok mentése a szerverre..</p>
+    <p class=" mt-10 font-bold text-xl text-black ">Adatok mentése a szerverre..</p>
     <p class="mt-2 font-bold text-xl text-black">Kis türelem, hamarosan továbbirányítunk a kiértékelésre!</p>
   </div>
 </div>

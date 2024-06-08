@@ -22,6 +22,7 @@ import { LoaderBlackComponent } from './loader-black/loader-black.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { HomePieChartComponent } from './home-pie-chart/home-pie-chart.component';
+import { AiChatComponent } from './ai-chat/ai-chat.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { HomePieChartComponent } from './home-pie-chart/home-pie-chart.component
     LoaderBlackComponent,
     BarChartComponent,
     PieChartComponent,
-    HomePieChartComponent
+    HomePieChartComponent,
+    AiChatComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,12 @@
 <div *ngIf="isLoaded">
-
-
-
   <div class="w-full mx-auto px-4 pt-4">
-    <div class="flex flex-wrap justify-start gap-2 z-10" *ngIf="currentResult.resultType == ''">
+    <a href="home">
+      <button type="button"
+        class="bg-base_blue mb-10 hover:bg-blue-700 text-white font-bold p-4 mt-5 text-lg rounded focus:outline-none focus:shadow-outline">
+        Vissza a főoldalra
+      </button>
+    </a>
+    <div class="flex flex-wrap justify-start w-full gap-2 z-10" *ngIf="currentResult.resultType == ''">
       <button class="tab" [ngClass]="tabname == '' ? 'tab_selected' : 'tab'" (click)="changeTab('')">
         Összes
       </button>
@@ -134,41 +137,13 @@
       </div>
     </div>
   </div>
-
-  <div class="app-container" (document:click)="onDocumentClick($event)">
-    <div class="chat-container" [class.hidden]="!isChatVisible">
-      <div class="chat-header">
-        <span class="ml-2">
-          DIGIMÉTER
-        </span>
-        <button class="close-button mr-2" (click)="isChatVisible = false">×</button>
-      </div>
-      <div class="messages flex-grow overflow-y-auto p-2">
-        <div *ngFor="let message of messages" class="message"
-          [ngClass]="{'user bg-gray-300': message.user, 'bot bg-blue-500 text-white': !message.user}">
-          {{ message.text }}
-        </div>
-        <div class="loader" *ngIf="isMessageLoading">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-      <input type="text" [(ngModel)]="inputText" (keyup.enter)="sendMessage()" placeholder="Írj valamit..."
-        class="p-2 border-t border-gray-300">
-    </div>
-    <button
-      class="chat-button fixed bottom-4 left-4 w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center overflow-hidden transition-transform transform hover:scale-110 border-2 border-white"
-      (click)="toggleChat($event)">
-      <img src="assets/ai.png" alt="Chat" class="w-full h-full object-cover">
-    </button>
-  </div>
 </div>
 
 <div *ngIf="!isLoaded">
   <div class="z-[200] flex flex-col justify-center items-center h-full w-full top-0 left-0 absolute bg-white">
     <app-loader-black></app-loader-black>
     <p class=" mt-10 font-bold text-xl text-black ">Eredményed betöltése...</p>
-    <p class="mt-2 font-bold text-xl text-black">Ne próbáld meg saját magad kiszámolni a végeredményt, a DIGIMÉTER különleges számításokat alkalmaz a legjobb eredmény eléréséért!</p>
+    <p class="mt-2 font-bold text-xl text-black">Ne próbáld meg saját magad kiszámolni a végeredményt, a DIGIMÉTER
+      különleges számításokat alkalmaz a legjobb eredmény eléréséért!</p>
   </div>
 </div>

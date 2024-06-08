@@ -1,12 +1,10 @@
-import { Component, HostListener, afterNextRender } from '@angular/core';
+import { Component, afterNextRender } from '@angular/core';
 import { Question, QuizResultsService } from '../quizResults.service';
 import { DataService } from '../data.service';
 import { ChatService } from '../chat.service';
 import { NotificationService } from '../notification.service';
 import { NotificationType } from '../notification/notification.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { Result } from '../result';
 
 @Component({
   selector: 'app-quiz',
@@ -14,12 +12,10 @@ import { Result } from '../result';
   styleUrls: ['./quiz.component.css'] // Javított a styleUrl->styleUrls
 })
 export class QuizComponent {
-  isMessageLoading = false;
-  isChatVisible = false;
-  messages: any[] = [];
+  
   questionCount = 0;
   answered_questions = 0;
-  inputText: string = '';
+  
   questions: Question[] = [];
   filteredQuestions: Question[] = [];
   BQuestionNoAnswer = false;
@@ -29,17 +25,12 @@ export class QuizComponent {
   constructor(
     private dataService: DataService,
     private quizResultsService: QuizResultsService,
-    private chatService: ChatService,
     private notiService: NotificationService,
     private route: ActivatedRoute,
-    private router: Router
   ) {
     afterNextRender(() => {
       localStorage.removeItem("A7answer")
     })
-    this.messages.push({
-      text: "Kérdésed van esetleg a válaszadással kapcsolatban? Ne habozz kérdezni, segítek ahol tudok!", user: false
-    });
   }
 
   removeDuplicateAnswers(questions: Question[]): Question[] {
@@ -59,7 +50,6 @@ export class QuizComponent {
     this.dataService.getQuestions(this.route.snapshot.paramMap.get('topic') ?? "").subscribe((res: Question[]) => {
       this.questions = this.removeDuplicateAnswers(res);
       this.filteredQuestions = this.removeDuplicateAnswers(res);
-      console.log(this.filteredQuestions)
     });
   }
 
@@ -94,7 +84,6 @@ export class QuizComponent {
 
   onTextBoxChange(currentQuestion : Question)
   {
-    console.log("textChange")
     currentQuestion.selectedAnswer = undefined
   }
 
@@ -269,29 +258,6 @@ export class QuizComponent {
   }
 
 
-  toggleChat(event: MouseEvent): void {
-    event.stopPropagation();
-    this.isChatVisible = !this.isChatVisible;
-  }
-
-  onDocumentClick(event: MouseEvent): void {
-    if (!this.isChatVisible) return;
-    const container = document.querySelector('.chat-container');
-    if (event.target instanceof Node && !container!.contains(event.target)) {
-      this.isChatVisible = false;
-    }
-  }
-
-  sendMessage(): void {
-    if (this.inputText.trim()) {
-      this.messages.push({ text: this.inputText, user: true });
-      this.isMessageLoading = true;
-      this.chatService.sendMessageQuestion(this.inputText, this.questions[this.currentQuestionIndex].category, this.questions[this.currentQuestionIndex].question).subscribe(response => {
-        this.messages.push({ text: response.choices[0].message.content, user: false });
-        this.isMessageLoading = false;
-      });
-      this.inputText = '';
-    }
-  }
+  
 
 }

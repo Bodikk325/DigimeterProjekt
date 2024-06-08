@@ -1,5 +1,5 @@
-import { Component, afterNextRender } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectorRef, Component, afterNextRender } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,30 +7,28 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  menuOpen = false;
-  showLogOut = false;
+  menuOpen! : boolean;
+  showLogOut! : boolean;
+  authService! : AuthService;
+  private cdRef!: ChangeDetectorRef;
+
+  constructor(authService : AuthService, cdRef: ChangeDetectorRef) {
+    this.authService = authService;
+    this.menuOpen = false;
+    this.showLogOut = false;
+    this.cdRef = cdRef;
+
+    afterNextRender(() => this.initializeAfterNextRenderVariables())
+  }
+
+
+  initializeAfterNextRenderVariables()
+  {
+    this.showLogOut = this.authService.checkIfUserIsLoggedIn()
+    this.cdRef.detectChanges()
+  }
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
   }
-
-  logOut()
-  {
-    localStorage.removeItem("currentUser");
-    window.location.href = "login"
-    this.showLogOut = false;
-  }
-
-  /**
-   *
-   */
-  constructor(private router : Router) {
-    afterNextRender(() => {
-      if(localStorage.getItem("currentUser") != null)
-        {
-          this.showLogOut = true;
-        }
-    })
-  }
-
 }

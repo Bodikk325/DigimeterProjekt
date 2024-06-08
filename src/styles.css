@@ -2,11 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.mat-theme-loaded-marker {
+  display: none;
+}
+
 html {
   font-family: "Open Sans", sans-serif;
 }
-
-
 
 * {
   margin: 0;
