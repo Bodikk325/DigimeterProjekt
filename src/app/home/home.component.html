@@ -83,7 +83,7 @@
 
 <div class=" flex flex-col lg:flex-row w-11/12 md:w-11/12 xl:w-full mb-10 mx-auto justify-between mt-20">
   <div
-    class="relative max-w-4xl lg:w-[100%] md:h-[40rem] py-16 md:py-5 w-full flex flex-col p-5 bg-white shadow-xl rounded-lg border-2 border-gray-100">
+    class="relative max-w-4xl   lg:w-[100%]  py-16 md:py-5 w-full flex flex-col p-5 bg-white shadow-xl rounded-lg border-2 border-gray-100">
     <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Céged adatai</h2>
     <form class="px-10">
       <div class="mb-4">
@@ -202,7 +202,7 @@
 
   </div>
 
-  <div class="w-full lg:w-[100%] mt-10 lg:mt-0">
+  <div class="w-full h-full lg:w-[100%] mt-10 lg:mt-0">
     <div class="w-full h-full shadow-xl py-5 border-2 border-gray-100 text-black rounded-lg">
       <h2 class="text-2xl font-semibold mb-4 text-center">Eddigi eredmények</h2>
       <div *ngIf="results.length != 0"
@@ -212,15 +212,15 @@
           routerLink="../result/{{kitoltes.resultId}}">
           <div class="flex flex-col justify-center items-center">
             <div class="w-full py-2 flex flex-col">
-              <span class="text-black">Kitöltés dátuma: <span class="font-bold">{{kitoltes.date| date: 'yyyy-MM-dd'}}</span></span>
-              <span class="text-black mt-2">Témakör: <span class="font-bold">{{kitoltes.resultType == "" ? 'Összes' : kitoltes.resultType}}</span></span>
+              <span class="text-black">Kitöltés dátuma: <span class="font-bold">{{kitoltes.date | date:'yyyy-MM-dd'}}</span></span>
+              <span class="text-black mt-2">Témakör: <span class="font-bold">{{kitoltes.resultType == "" ? 'Teljes quiz' : kitoltes.resultType}}</span></span>
               <span class="text-black mt-2">Eredmény: </span>
             </div>
-            <div class="chart-container mx-auto ">
+            <div class="chart-container mx-auto mt-10">
               <app-home-pie-chart
           [data1]="[
-            { category: 'az ön cége', value: 70 },
-            { category: 'fejlődési lehetőség', value: 30 },
+            { category: 'az ön cége', value: kitoltes.finalScore },
+            { category: 'fejlődési lehetőség', value: kitoltes.max_point - kitoltes.finalScore },
             ]" ></app-home-pie-chart>
             </div>
           </div>

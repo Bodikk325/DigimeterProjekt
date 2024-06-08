@@ -74,8 +74,6 @@ export class HomeComponent {
   
 
   ngOnInit() {
-    
-
     this.firmService.getFirmData().subscribe(
       (result : any) => {
         this.myFirm.Capital = result.capital

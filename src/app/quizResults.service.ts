@@ -82,7 +82,7 @@ export class QuizResultsService {
       resultType : "",
       finalScore : 0,
       compared_list : this.regionData,
-      time : new Date().getTime(),
+      time : new Date().toDateString(),
       id: "stamp", // Timestamp, mint egyedi azonosító
       results: questions.map(q => {
         const { points, selectedAnswerTexts } = this.getPointsForSelectedAnswer(q.id, questions);
@@ -115,7 +115,7 @@ export class QuizResultsService {
   }
 
   public saveQuizResultsAtTheEnd(questions: Question[], resultType : string) {
-    var stamp = new Date().getTime();
+    var stamp = new Date().toDateString();
     
     this.currentResult = {
       id : this.generateGUID(),
@@ -182,7 +182,7 @@ export class QuizResultsService {
     body = body.set('id', localStorage.getItem("currentUser") ?? "");
     body = body.set('result', quizResult);
     body = body.set('resultId', id);
-    body = body.set('date', new Date().getTime());
+    body = body.set('date', new Date().toDateString());
     body = body.set('resultType', resultType);
 
     return this.http.post("http://localhost/saveResult.php", body, {withCredentials : true});

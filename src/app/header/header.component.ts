@@ -17,7 +17,8 @@ export class HeaderComponent {
   logOut()
   {
     localStorage.removeItem("currentUser");
-    this.router.navigateByUrl("login")
+    window.location.href = "login"
+    this.showLogOut = false;
   }
 
   /**

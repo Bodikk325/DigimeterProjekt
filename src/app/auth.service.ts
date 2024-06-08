@@ -63,7 +63,7 @@ export class AuthService {
       (result : any) => {
         localStorage.setItem('currentUser', result)
         this.isButtonLoading(false);
-        this.router.navigate(['/home']);
+        location.href = "home"
       },
       (_) => {
         this.notificationService.show("Helytelen felhasználónév vagy jelszó!", NotificationType.error)

@@ -21,6 +21,6 @@ export interface Result
     finalScore : number,
     id : string,
     resultType : string,
-    time : number,
+    time : string,
     results : ResultQuestion[]
 }

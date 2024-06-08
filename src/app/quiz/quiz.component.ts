@@ -42,10 +42,24 @@ export class QuizComponent {
     });
   }
 
+  removeDuplicateAnswers(questions: Question[]): Question[] {
+    return questions.map(question => {
+      const uniqueAnswers = question.answers.filter((answer, index, self) =>
+        index === self.findIndex(a => a.id === answer.id)
+      );
+
+      return {
+        ...question,
+        answers: uniqueAnswers
+      };
+    });
+  }
+
   ngOnInit(): void {
     this.dataService.getQuestions(this.route.snapshot.paramMap.get('topic') ?? "").subscribe((res: Question[]) => {
-      this.questions = res;
-      this.filteredQuestions = res;
+      this.questions = this.removeDuplicateAnswers(res);
+      this.filteredQuestions = this.removeDuplicateAnswers(res);
+      console.log(this.filteredQuestions)
     });
   }
 

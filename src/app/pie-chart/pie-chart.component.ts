@@ -90,7 +90,16 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
       .attr('transform', (d: any) => `translate(${arc.centroid(d)})`)
       .attr('dy', '0.35em')
       .attr('text-anchor', 'middle')
-      .text((d: any) => `${Math.round((d.data.value / total) * 100)}%`)
+      .text((d: any) => {
+        const percentage = (d.data.value / total) * 100;
+        if (percentage < 5) {
+          return '<5%';
+        } else if (percentage > 95) {
+          return '>95%';
+        } else {
+          return `${Math.round(percentage)}%`;
+        }
+      })
       .style('font-weight', 'bold');
   
     if (this.showLegend) {

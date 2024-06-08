@@ -26,7 +26,7 @@ export class HomePieChartComponent {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['data1'] || changes['data2']) {
+    if (changes['data1']) {
       this.createCharts();
     }
   }
@@ -40,17 +40,17 @@ export class HomePieChartComponent {
     const element = this.el.nativeElement.querySelector('.chart-container');
     element.innerHTML = ''; // Clear previous chart
   
-    // Create two separate containers for the pie charts
-    const container1 = d3.select(element).append('div').attr('class', 'pie-container w-full ');
+    // Create a container for the pie chart
+    const container = d3.select(element).append('div').attr('class', 'pie-container w-full');
   
-    this.createPieChart(container1, this.data1);
+    this.createPieChart(container, this.data1);
   }
-
+  
   private createPieChart(container: any, data: any): void {
     const svg = container.append('svg')
       .attr('width', '100%')
-      .attr('height', this.height)
-      .attr('viewBox', `0 0 ${this.width} ${this.height}`)
+      .attr('height', this.height + 50) // Increase height for legend
+      .attr('viewBox', `0 0 ${this.width + 200} ${this.height + 50}`) // Increase viewBox for legend
       .append('g')
       .attr('transform', `translate(${this.width / 2},${this.height / 2})`);
   
@@ -70,7 +70,7 @@ export class HomePieChartComponent {
     arcs.append('path')
       .attr('d', arc)
       .attr('fill', (d: any, i: number) => color(i))
-      .each(function (this: any, d: any) { this._current = d; }) // Store the initial angles
+      .each(function (this: any, d: any) { this._current = d; })
       .transition()
       .duration(800)
       .attrTween('d', function (d: any) {
@@ -86,18 +86,26 @@ export class HomePieChartComponent {
       .attr('transform', (d: any) => `translate(${arc.centroid(d)})`)
       .attr('dy', '0.35em')
       .attr('text-anchor', 'middle')
-      .text((d: any) => `${Math.round((d.data.value / total) * 100)}%`)
+      .text((d: any) => {
+        const percentage = (d.data.value / total) * 100;
+        if (percentage < 5) {
+          return '<5%';
+        } else if (percentage > 95) {
+          return '>95%';
+        } else {
+          return `${Math.round(percentage)}%`;
+        }
+      })
       .style('font-weight', 'bold');
   
-    
-      this.createLegend(svg, data, color);
-    
+    // Ensure the legend creation is called after the arcs
+    this.createLegend(svg, data, color);
   }
-
+  
   private createLegend(svg: any, data: any, color: any): void {
     const legend = svg.append('g')
       .attr('class', 'legend')
-      .attr('transform', `translate(${this.width / 2 + 20}, 0)`); // Módosított transzformáció
+      .attr('transform', `translate(${this.width / 2 + 20}, ${this.height / 2 - data.length * 20 / 2})`); // Adjust position
   
     const legendItems = legend.selectAll('.legend-item')
       .data(data)
@@ -119,11 +127,4 @@ export class HomePieChartComponent {
       .style('font-size', '12px')
       .style('text-anchor', 'start');
   }
-  
-  
-  
-  
-  
-  
-  
 }

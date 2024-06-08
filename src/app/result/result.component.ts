@@ -117,7 +117,7 @@ export class ResultComponent {
   newResult: Result = {
     id: "0",
     results: [],
-    time: 0,
+    time: "",
     resultType: "",
     finalScore: 0,
     compared_list: this.regionData
@@ -128,7 +128,7 @@ export class ResultComponent {
     finalScore: 0,
     id: '',
     resultType: '',
-    time: 0,
+    time: "",
     results: []
   }
 
@@ -137,6 +137,7 @@ export class ResultComponent {
   finalResult: number = 0;
   ids: string[] = [];
   tabname = "";
+  isLoaded = false;
 
 
   constructor(private chatService: ChatService, private quizService: QuizResultsService, private route: ActivatedRoute, private firmService: FirmsService, private dataService: DataService, private authService: AuthService, private countResultService: CountResultService) {
@@ -170,13 +171,14 @@ export class ResultComponent {
   }
 
   subscribe(topic: string) {
+    this.isLoaded = false;
     this.quizService.getFinalResult(this.route.snapshot.paramMap.get('id') ?? "0", topic).subscribe(
       (result : Result) => {
         this.currentResult = result;
         console.log(this.currentResult)
         // Ellenőrizd, hogy az eredmény tartalmazza a results tömböt
         if (Array.isArray(this.currentResult.results)) {
-          this.currentResult.results = this.currentResult.results.filter((x) => x.questionId != "B14" && x.questionId != "B15" && x.questionId != "B16");
+          ;
           this.changeShowPoint();
 
           var maxpoint = 0;
@@ -197,6 +199,8 @@ export class ResultComponent {
             { category: 'konkurens cégek', value: avarage },
             { category: 'fejlődési lehetőség', value: maxpoint - avarage },
           ]; 
+
+          this.isLoaded = true;
 
         } else {
           console.error("Invalid results format", this.currentResult.results);

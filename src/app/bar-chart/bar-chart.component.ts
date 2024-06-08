@@ -54,7 +54,7 @@ export class BarChartComponent implements OnInit, OnChanges, AfterViewInit {
     const x = d3.scaleBand()
       .domain(this.data.map((d: any) => d.category))
       .range([0, this.width])
-      .padding(0.1);
+      .padding(0.2); // Add padding between bars
 
     const y = d3.scaleLinear()
       .domain([0, 100])
