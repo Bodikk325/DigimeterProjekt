@@ -149,7 +149,7 @@
 </div>
 </div>
 
-<app-ai-chat [type] = "'result'" [category]="currentResult.resultType" [maxPoint]="currentResult.compared_list.max_point" [userPoint]="currentResult.finalScore"></app-ai-chat>
+<app-ai-chat [type] = "'result'" [category]="currentResult.resultType" [maxPoint]="maxPoint" [userPoint]="currentResult.finalScore"></app-ai-chat>
 
 <div *ngIf="isLoaded">
 

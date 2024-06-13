@@ -54,6 +54,7 @@ export class ResultComponent {
   firmAvaragePointByCategory = 0;
   sum: number = 0;
   selectedValue: string = "Összes";
+  maxPoint = 0;
   firmPoints: Point[] = [];
   comparisonPoints!: Point[];
   regionData: RegionData = {
@@ -163,6 +164,8 @@ export class ResultComponent {
             maxpoint = firstItem["max_point"]
             avarage = firstItem["average_points"]
           }
+
+          this.maxPoint = maxpoint;
 
           this.isLoaded = false;
 
