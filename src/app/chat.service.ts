@@ -10,6 +10,8 @@ export class ChatService {
     
   }
 
+  url = "https://kzacoaching.com/"
+
   sendMessage(category : string, message : string, question : string, type : string, userPoint : number, maxPoint : number)
   {
     let body = new HttpParams();
@@ -19,7 +21,7 @@ export class ChatService {
     body = body.set('type', type);
     body = body.set('userPoint', userPoint);
     body = body.set('maxPoint', maxPoint);
-    return this.http.post("http://localhost/chat.php", body, {withCredentials : true});
+    return this.http.post(this.url + "chat.php", body, {withCredentials : true});
   }
 
 }

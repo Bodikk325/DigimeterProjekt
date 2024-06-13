@@ -12,6 +12,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class AuthService {
 
+  url = "https://kzacoaching.com/"
+
   currentUser!: User;
   users!: User[];
   newUser!: User;
@@ -67,7 +69,7 @@ export class AuthService {
 
     this.isButtonLoading(true);
 
-    this.http.post('http://localhost/login.php', body, { withCredentials: true }).subscribe(
+    this.http.post(this.url + 'login.php', body, { withCredentials: true }).subscribe(
       (result: any) => {
         localStorage.setItem('currentUser', result)
         this.isButtonLoading(false);
@@ -102,7 +104,7 @@ export class AuthService {
     let body = new HttpParams();
     body = body.set('username', username);
     body = body.set('password', password);
-    this.http.post('http://localhost/register.php', body, { withCredentials: true }).subscribe(
+    this.http.post(this.url + 'register.php', body, { withCredentials: true }).subscribe(
       (result) => {
         this.notificationService.show("Sikeres regisztráció!", NotificationType.positivie)
         this.showLoginForm(true);

@@ -8,11 +8,13 @@ import { Question } from './models/Question';
 })
 export class DataService {
 
+  url = "https://kzacoaching.com/"
+
   constructor(private http : HttpClient) { }
 
   getQuestions(topic : string): Observable<Question[]> {
     // Az elérési út a fájlhoz az assets mappán belül
-    return this.http.get<any[]>("http://localhost/readQuestions.php?topic=" + topic).pipe(
+    return this.http.get<any[]>(this.url + "readQuestions.php?topic=" + topic).pipe(
       map(data => this.transformQuestions(data))
     );
   }

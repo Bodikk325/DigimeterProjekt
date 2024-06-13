@@ -13,6 +13,8 @@ import { Point } from './models/Point';
 })
 export class FirmsService {
 
+  url = "https://kzacoaching.com/"
+
   points: Point[] = [
   ]
 
@@ -40,18 +42,18 @@ export class FirmsService {
     body = body.set('capital', myFirm.Capital);
     body = body.set('sector', myFirm.Sector);
     body = body.set('revenue', myFirm.Revenue);
-    return this.http.post("http://localhost/updateMyFirm.php", body, {withCredentials : true});
+    return this.http.post(this.url + "updateMyFirm.php", body, {withCredentials : true});
   }
 
   getFirmData()
   {
     let body = new HttpParams();
     body = body.set('userId', localStorage.getItem("currentUser") ?? "");
-    return this.http.post("http://localhost/getMyFirmData.php", body, {withCredentials : true});
+    return this.http.post(this.url + "getMyFirmData.php", body, {withCredentials : true});
   }
 
   getPoints(): Observable<Point[]> {
-    return this.http.get<any[]>('http://localhost/readFilters.php').pipe(
+    return this.http.get<any[]>(this.url + "readFilters.php").pipe(
       map(data => data.map(item => this.transformToPoints(item)))
     );
   }

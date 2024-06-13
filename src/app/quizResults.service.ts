@@ -16,6 +16,8 @@ import { MainPageResult } from "./models/MainPageResult";
 })
 export class QuizResultsService {
 
+  private url = "https://kzacoaching.com/";
+
   constructor(private notificationService : NotificationService, private router : Router, private http : HttpClient) { }
 
   quizResults!: Result[];
@@ -140,7 +142,7 @@ export class QuizResultsService {
     let body = new HttpParams();
     body = body.set('userId', localStorage.getItem("currentUser") ?? "");
 
-    return this.http.post("http://localhost/getResultsForUser.php", body, {withCredentials : true});
+    return this.http.post(this.url + "getResultsForUser.php", body, {withCredentials : true});
   }
 
   getResultForUser(resultId : string) : Observable<any>
@@ -148,7 +150,7 @@ export class QuizResultsService {
     let body = new HttpParams();
     body = body.set('resultId', resultId);
 
-    return this.http.post("http://localhost/getResultForUser.php", body, {withCredentials : true});
+    return this.http.post(this.url + "getResultForUser.php", body, {withCredentials : true});
   }
 
   getFinalResult(resultId : string, category : string) : Observable<any>
@@ -157,7 +159,7 @@ export class QuizResultsService {
     body = body.set('resultId', resultId);
     body = body.set('category', category);
 
-    return this.http.post("http://localhost/getFinalResult.php", body, {withCredentials : true});
+    return this.http.post(this.url + "getFinalResult.php", body, {withCredentials : true});
   }
 
   saveToDatabase(quizResult : string, resultType : string, id : string) : Observable<any>
@@ -169,7 +171,7 @@ export class QuizResultsService {
     body = body.set('date', new Date().toDateString());
     body = body.set('resultType', resultType);
 
-    return this.http.post("http://localhost/saveResult.php", body, {withCredentials : true});
+    return this.http.post(this.url + "saveResult.php", body, {withCredentials : true});
   }
 
   calculateDigimeterIndex(currentResult : Result, page : string)
@@ -178,7 +180,7 @@ export class QuizResultsService {
     body = body.set('currentResult', JSON.stringify(currentResult));
     body = body.set('page', page);
 
-    return this.http.post("http://localhost/calculateDigimiterIndex.php", body, {withCredentials : true});
+    return this.http.post(this.url + "calculateDigimiterIndex.php", body, {withCredentials : true});
   }
 
   removeResults(resultId : string) : Observable<MainPageResult[]>
@@ -187,7 +189,7 @@ export class QuizResultsService {
     body = body.set('resultId', resultId);
     body = body.set('userId', localStorage.getItem("currentUser") ?? "");
 
-    return this.http.post<MainPageResult[]>("http://localhost/removeResult.php", body, {withCredentials : true});
+    return this.http.post<MainPageResult[]>(this.url + "removeResult.php", body, {withCredentials : true});
   }
 
 
