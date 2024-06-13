@@ -13,9 +13,9 @@ const routes: Routes = [
   component : HomeComponent,
   canActivate: [AuthGuard]
   },
-  { path: '', component : LoginComponent, canActivate: [AuthGuard]},
+  { path: 'login', component : LoginComponent, canActivate: [AuthGuard]},
   {path : 'quiz/:topic', component : QuizComponent, canActivate: [AuthGuard], canDeactivate: [PendingChangesGuard] },
-  {path : 'start', component : StartComponent},
+  {path : '', component : StartComponent},
   {path : 'result/:id', component : ResultComponent, canActivate: [AuthGuard]},
   { path: '**', redirectTo: ''}
 ];
