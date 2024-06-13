@@ -40,14 +40,14 @@ export class FirmsService {
     body = body.set('capital', myFirm.Capital);
     body = body.set('sector', myFirm.Sector);
     body = body.set('revenue', myFirm.Revenue);
-    return this.http.post("http://localhost/updateMyFirm.php", body);
+    return this.http.post("http://localhost/updateMyFirm.php", body, {withCredentials : true});
   }
 
   getFirmData()
   {
     let body = new HttpParams();
     body = body.set('userId', localStorage.getItem("currentUser") ?? "");
-    return this.http.post("http://localhost/getMyFirmData.php", body);
+    return this.http.post("http://localhost/getMyFirmData.php", body, {withCredentials : true});
   }
 
   getPoints(): Observable<Point[]> {

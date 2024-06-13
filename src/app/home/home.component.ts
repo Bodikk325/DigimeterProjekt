@@ -135,8 +135,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.isLoading = true;
 
     this.saveFirmSubscription = this.firmService.saveMyFirmData(this.myFirm).subscribe(
-      (_) => {
+      (result) => {
         this.notiService.show("Cégadatok sikeresen mentve!", NotificationType.positivie);
+        this.isLoading = false;
+      },
+      (error) => {
+        this.notiService.show("Valami hiba történt, kérlek próbáld meg később!", NotificationType.error);
         this.isLoading = false;
       }
     )
