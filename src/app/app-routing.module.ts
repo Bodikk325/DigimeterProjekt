@@ -6,6 +6,7 @@ import { ResultComponent } from './result/result.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { StartComponent } from './start/start.component';
+import { PendingChangesGuard } from './pending-changes-guard.guard';
 
 const routes: Routes = [
   { path: 'home', 
@@ -13,7 +14,7 @@ const routes: Routes = [
   canActivate: [AuthGuard]
   },
   { path: '', component : LoginComponent, canActivate: [AuthGuard]},
-  {path : 'quiz/:topic', component : QuizComponent, canActivate: [AuthGuard]},
+  {path : 'quiz/:topic', component : QuizComponent, canActivate: [AuthGuard], canDeactivate: [PendingChangesGuard] },
   {path : 'start', component : StartComponent},
   {path : 'result/:id', component : ResultComponent, canActivate: [AuthGuard]},
   { path: '**', redirectTo: ''}

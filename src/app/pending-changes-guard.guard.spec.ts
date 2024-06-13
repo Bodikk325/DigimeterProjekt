@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { CanActivateFn } from '@angular/router';
 
-import { quizDeactivateGuard } from './quiz-deactivate.guard';
+import { pendingChangesGuardGuard } from './pending-changes-guard.guard';
 
-describe('quizDeactivateGuard', () => {
+describe('pendingChangesGuardGuard', () => {
   const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => quizDeactivateGuard(...guardParameters));
+      TestBed.runInInjectionContext(() => pendingChangesGuardGuard(...guardParameters));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
-import { Question } from './quizResults.service';
 import { HttpClient } from '@angular/common/http';
+import { Question } from './models/Question';
 
 @Injectable({
   providedIn: 'root'

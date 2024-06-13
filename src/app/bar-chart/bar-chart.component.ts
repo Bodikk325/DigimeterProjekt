@@ -18,7 +18,10 @@ export class BarChartComponent implements OnInit, OnChanges, AfterViewInit {
 
   constructor(private el: ElementRef) {
     this.margin = { top: 20, right: 30, bottom: 40, left: 40 }
-    this.colors = d3.scaleOrdinal(d3.schemeCategory10)
+
+    const customColors = ['#775ad2', '#0072b5'];
+
+    this.colors = d3.scaleOrdinal(customColors)
    }
 
   ngOnInit(): void {

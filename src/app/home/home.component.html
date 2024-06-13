@@ -1,7 +1,4 @@
-<div *ngIf="isMainPageLoaded">
-
-
-
+@defer (when (myFirm.Capital != null && results != null)) {
 <div class="container mt-32 mb-32 mx-auto">
   <div
     class="flex flex-col justify-around lg:flex-row items-center lg:items-start mb-14 h-auto shadow-xl p-6 rounded-lg border-l-2 border-solid border-gray-100">
@@ -9,7 +6,7 @@
       <h2 class="text-2xl font-semibold mb-4 text-center ">Rajta, töltsük ki a kérdőívet és lássuk mennyire is
         digitalizált a vállalkozásod!</h2>
       <div class="w-full flex justify-center lg:justify-center">
-        <button type="button" (click)="checkFirmDataAndThenGoToQuiz()"
+        <button type="button" (click)="goToThemeBasedQuiz('Teljes')"
           class="bg-base_blue mb-10 hover:bg-blue-700 text-white font-bold p-4 mt-5 text-xl rounded focus:outline-none focus:shadow-outline">
           Teszt kitöltése
         </button>
@@ -27,7 +24,7 @@
       témakör specifikusan:</span>
   </div>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-    <div [routerLink]="['/quiz', 'Digitális pénzügy']"
+    <div (click)="goToThemeBasedQuiz('Digitális pénzügy')"
       class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
       <img src="../../assets/digitalispenzugyekTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
       <div class="p-4">
@@ -35,7 +32,7 @@
         <p class="text-gray-700">A vállalati pénzügyek digitalizációjának áttekintése</p>
       </div>
     </div>
-    <div [routerLink]="['/quiz', 'Informatikai biztonság']"
+    <div (click)="goToThemeBasedQuiz('Informatikai biztonság')"
       class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
       <img src="../../assets/informatikaibiztonsagTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
       <div class="p-4">
@@ -43,7 +40,7 @@
         <p class="text-gray-700">A biztonság az egyik legfontosabb szempont a kibervilágban</p>
       </div>
     </div>
-    <div [routerLink]="['/quiz', 'Vállalatvezetés']"
+    <div (click)="goToThemeBasedQuiz('Vállalatvezetés')"
       class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
       <img src="../../assets/vallalatvezetesTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
       <div class="p-4">
@@ -51,7 +48,7 @@
         <p class="text-gray-700">A digitalizációs eszközök megkönnyíthetik az irányítást</p>
       </div>
     </div>
-    <div [routerLink]="['/quiz', 'Értékesítés és marketing']"
+    <div (click)="goToThemeBasedQuiz('Értékesítés és marketing')"
       class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
       <img src="../../assets/ertekesitesesmarketingTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
       <div class="p-4">
@@ -60,7 +57,7 @@
           nekünk</p>
       </div>
     </div>
-    <div [routerLink]="['/quiz', 'Digitális mindennapok']"
+    <div (click)="goToThemeBasedQuiz('Digitális mindennapok')"
       class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
       <img src="../../assets/digitalismindennapokTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
       <div class="p-4">
@@ -69,7 +66,7 @@
         </p>
       </div>
     </div>
-    <div [routerLink]="['/quiz', 'Digitális jelenlét']"
+    <div (click)="goToThemeBasedQuiz('Digitális jelenlét')"
       class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
       <img src="../../assets/digitalisjelenletTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
       <div class="p-4">
@@ -205,14 +202,16 @@
 
   </div>
 
-  <div class="w-full h-full lg:w-[100%] mt-10 lg:mt-0">
+  <div class="relative w-full h-full lg:w-[100%] mt-10 lg:mt-0">
     <div class="w-full h-full shadow-xl py-5 border-2 border-gray-100 text-black rounded-lg">
       <h2 class="text-2xl font-semibold mb-4 text-center">Eddigi eredmények</h2>
       <div *ngIf="results.length != 0"
         class="max-h-[35rem] border-t-2 border-b-2 border-gray-300 px-10 py-5 w-full overflow-y-auto">
         <div *ngFor="let kitoltes of results"
-          class="rounded-md shadow-md hover:shadow-lg hover:bg-slate-100 px-2  border-solid border-2 border-base_blue  cursor-pointer mt-10 text-white"
-          routerLink="../result/{{kitoltes.resultId}}">
+          class="rounded-md relative shadow-md hover:shadow-lg hover:bg-slate-100 px-2  border-solid border-2 border-base_blue   mt-10 text-white"
+          >
+          <img (click)="removeResultDialogShow(kitoltes)" class="absolute w-10 h-10 right-2 top-2 cursor-pointer" src="assets/trash.svg" alt="">
+          <div routerLink="../result/{{kitoltes.resultId}}" class="cursor-pointer">
           <div class="flex flex-col justify-center items-center">
             <div class="w-full py-2 flex flex-col">
               <span class="text-black">Kitöltés dátuma: <span class="font-bold">{{kitoltes.date |
@@ -228,6 +227,7 @@
             ]"></app-home-pie-chart>
             </div>
           </div>
+          </div>
         </div>
       </div>
       <div *ngIf="results.length == 0">
@@ -235,12 +235,38 @@
         <!-- <app-bar-chart></app-bar-chart> -->
       </div>
     </div>
+    <div *ngIf="isResultsLoading" class="absolute inset-0 bg-black rounded bg-opacity-65 flex items-center justify-center">
+      <app-loader></app-loader>
+    </div>
+    <div *ngIf="showDialog" class="absolute inset-0 bg-black rounded bg-opacity-65 flex items-center justify-center">
+      <div class="w-4/5 py-5 px-2 bg-white border-solid border-2 border-gray-400  text-black rounded-lg shadow-lg flex flex-col justify-center items-center">
+        <svg class="mb-2" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="24" transform="matrix(-1 0 0 1 48 0)" fill="#D1971B"/>
+          <path d="M30.7651 15.2439C28.4955 11.3128 27.3607 9.34722 25.863 8.71764C24.6665 8.21469 23.3179 8.21469 22.1215 8.71764C20.6238 9.34722 19.4889 11.3128 17.2193 15.2439L11.7192 24.7703C9.44961 28.7014 8.3148 30.6669 8.51842 32.2788C8.68109 33.5664 9.35538 34.7344 10.3892 35.5191C11.6833 36.5013 13.9529 36.5013 18.4921 36.5013H29.4923C34.0316 36.5013 36.3012 36.5013 37.5953 35.5191C38.6291 34.7344 39.3034 33.5664 39.466 32.2788C39.6697 30.6669 38.5349 28.7014 36.2652 24.7703L30.7651 15.2439Z" fill="white"/>
+          <rect width="3.09817" height="11.419" rx="1.54909" transform="matrix(-1 0 0 1 25.5319 15.4894)" fill="#D1971B"/>
+          <rect width="3.09817" height="3.09817" rx="1.54909" transform="matrix(-1 0 0 1 25.5319 29.1215)" fill="#D1971B"/>
+        </svg>
+          <span class="px-10 font-bold">Biztos törlöd ezt az eredményed?</span>
+          <div class="w-full flex flex-row justify-around items-center mt-5">
+            <button type="button" (click)="selectedOptionForDelete('Back', selectedResult)"
+          class="bg-base_blue text-sm lg:text-xl w-1/3 hover:bg-blue-700 text-white font-bold p-4 rounded focus:outline-none focus:shadow-outline">
+          Vissza
+          </button>
+          <button type="button" (click)="selectedOptionForDelete('Delete', selectedResult)"
+          class="bg-white hover:bg-gray-200 border-2 w-1/3 border-gray-400 border-solid text-black font-bold p-4 text-sm lg:text-xl rounded focus:outline-none focus:shadow-outline">
+          Törlés
+          </button>
+          </div>
+      </div>
+    </div>
   </div>
 </div>
 
 <app-floating-icon tutorialName="homeTutorial" [messages]="messages"></app-floating-icon>
+}
 
-</div>
+
+@placeholder {
 
 <div *ngIf="!isMainPageLoaded">
   <div class="z-[200] flex flex-col justify-center items-center h-full w-full top-0 left-0 absolute bg-white">
@@ -249,3 +275,4 @@
     <p class="mt-2 font-bold text-xl text-black">Töltsd ki az adataidat, mielőtt quiz-t töltenél ki!</p>
   </div>
 </div>
+}

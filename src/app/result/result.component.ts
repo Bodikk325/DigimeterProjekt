@@ -1,47 +1,19 @@
 import { Component, afterNextRender } from '@angular/core';
-import { Question, QuizResultsService } from '../quizResults.service';
+import { QuizResultsService } from '../quizResults.service';
 import { ActivatedRoute } from '@angular/router';
-import { FirmsService, Point } from '../firms.service';
+import { FirmsService } from '../firms.service';
 import { DataService } from '../data.service';
-import { MyFirm } from '../myFirm';
 import { AuthService } from '../auth.service';
-import { CountResultService } from '../count-result.service';
-import { Result, ResultQuestion } from '../result';
 import { ChatService } from '../chat.service';
 import { max } from 'rxjs';
+import { Result } from '../models/Result';
+import { ResultQuestion } from '../models/ResultQuestion';
+import { RegionData } from '../models/RegionData';
+import { Question } from '../models/Question';
+import { MyFirm } from '../models/MyFirm';
+import { Point } from '../models/Point';
 
-export interface RegionData {
-  id: string;
-  max_point: number;
-  average_points: number;
-  Budapest: number;
-  "Dél-Alföld": number;
-  "Dél-Dunántúl": number;
-  "Egyéb (közigazgatás, oktatás, egészségügy, szociális ellátás, művészet, egyéb szolgáltatás)": number;
-  Feldolgozóipar: number;
-  "Informatikai eszközt használó munkavállalók": number | null;
-  "Információ, kommunikáció": number;
-  Ingatlanügyek: number;
-  "Kereskedelem, gépjárműjavítás": number;
-  "Közép-Dunántúl": number;
-  "Mezőgazdaság, bányászat": number;
-  "Nyugat-Dunántúl": number;
-  "Pest megye": number;
-  "Pénzügyi, biztosítási tevékenység": number;
-  "Szakmai, tudományos, műszaki tevékenység, könyvelés": number;
-  "Szálláshely szolgálatatás, vendéglátás": number;
-  "Szállítás/raktározás": number;
-  "Villamosenergia-, gáz-, gőzellátás, légkondicionálás, vízellátás": number;
-  Építőipar: number;
-  "Észak-Alföld": number;
-  "Észak-Magyarország": number;
-  "5-9 fő": number;
-  "10-19 fő": number;
-  "20-49 fő": number;
-  "50-249 fő": number;
-  "Adminisztratív és szolgáltatást támogató tevékenység": number;
-  [key: string]: number | string | null; // Index signature
-}
+
 
 
 @Component({
@@ -74,8 +46,9 @@ export class ResultComponent {
 
   allResults: Result[] = []
   points: number[] = []
-  
-  
+
+  isLoaded = false;
+
   newResultQuestion: ResultQuestion[] = []
   categoryMaxPoint = 0;
   firmAvaragePointByCategory = 0;
@@ -137,27 +110,29 @@ export class ResultComponent {
   finalResult: number = 0;
   ids: string[] = [];
   tabname = "";
-  isLoaded = false;
 
 
-  constructor(private chatService: ChatService, private quizService: QuizResultsService, private route: ActivatedRoute, private firmService: FirmsService, private dataService: DataService, private authService: AuthService, private countResultService: CountResultService) {
+  constructor(private quizService: QuizResultsService, private route: ActivatedRoute, private firmService: FirmsService) {
     this.messages.push(
       {
         text: "Kérdésed van az eredményekkel kapcsolatban? Nyugodtan tedd azt fel, segítek!", user: false
       }
     )
 
-    this.firmService.getFirmData().subscribe((res: any) => {
+    afterNextRender(() => {
 
-      this.myFirm.Region = res['region']
-      this.myFirm.Workers = res['employees']
-      this.myFirm.Field = res['field']
+
+      this.firmService.getFirmData().subscribe((res: any) => {
+
+        this.myFirm.Region = res['region']
+        this.myFirm.Workers = res['employees']
+        this.myFirm.Field = res['field']
+      })
     })
 
   }
 
-  ngOnInit()
-  {
+  ngOnInit() {
     this.subscribe("");
   }
 
@@ -171,11 +146,10 @@ export class ResultComponent {
   }
 
   subscribe(topic: string) {
-    this.isLoaded = false;
+    this.isLoaded = true;
     this.quizService.getFinalResult(this.route.snapshot.paramMap.get('id') ?? "0", topic).subscribe(
-      (result : Result) => {
+      (result: Result) => {
         this.currentResult = result;
-        console.log(this.currentResult)
         // Ellenőrizd, hogy az eredmény tartalmazza a results tömböt
         if (Array.isArray(this.currentResult.results)) {
           ;
@@ -189,18 +163,20 @@ export class ResultComponent {
             maxpoint = firstItem["max_point"]
             avarage = firstItem["average_points"]
           }
-          
+
+          this.isLoaded = false;
+
           this.dataForPieChart1 = [
             { category: 'az ön cége', value: this.currentResult.finalScore },
-            { category: 'fejlődési lehetőség', value: maxpoint - this.currentResult.finalScore  },
+            { category: 'fejlődési lehetőség', value: maxpoint - this.currentResult.finalScore },
           ];
-        
+
           this.dataForPieChart2 = [
             { category: 'konkurens cégek', value: avarage },
             { category: 'fejlődési lehetőség', value: maxpoint - avarage },
-          ]; 
+          ];
 
-          this.isLoaded = true;
+          
 
         } else {
           console.error("Invalid results format", this.currentResult.results);
@@ -236,7 +212,7 @@ export class ResultComponent {
   changeTab(tabName: string): void {
     this.tabname = tabName;
     this.subscribe(tabName)
-    
+
     this.selectedValue = "Összes"
 
   }
@@ -268,5 +244,5 @@ export class ResultComponent {
   messages: any[] = [];
   inputText: string = '';
 
-  
+
 }

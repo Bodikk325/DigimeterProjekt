@@ -41,15 +41,32 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
   private createCharts(): void {
     const element = this.el.nativeElement.querySelector('.chart-container');
     element.innerHTML = ''; // Clear previous chart
-  
+
     // Create two separate containers for the pie charts
     const container1 = d3.select(element).append('div').attr('class', 'pie-container w-full lg:w-1/2');
     const container2 = d3.select(element).append('div').attr('class', 'pie-container w-full lg:w-1/2');
-  
-    this.createPieChart(container1, this.data1);
-    this.createPieChart(container2, this.data2);
+
+    this.createPieChart(container1, this.adjustData(this.data1));
+    this.createPieChart(container2, this.adjustData(this.data2));
   }
-  
+
+  private adjustData(data: any): any {
+    const total = data.reduce((acc: any, curr: any) => acc + curr.value, 0);
+    const minValue = total * 0.05; // 5% of the total
+    let adjustedData = data.map((d: any) => ({
+      category: d.category,
+      value: Math.max(d.value, minValue)
+    }));
+
+    const adjustedTotal = adjustedData.reduce((acc: any, curr: any) => acc + curr.value, 0);
+    const scalingFactor = total / adjustedTotal;
+
+    return adjustedData.map((d: any) => ({
+      category: d.category,
+      value: d.value * scalingFactor
+    }));
+  }
+
   private createPieChart(container: any, data: any): void {
     const svg = container.append('svg')
       .attr('width', '100%')
@@ -57,24 +74,27 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
       .attr('viewBox', `0 0 ${this.width} ${this.height}`)
       .append('g')
       .attr('transform', `translate(${this.width / 2},${this.height / 2})`);
-  
-    const color = d3.scaleOrdinal(d3.schemeCategory10);
-  
+
+      const customColors = ['#775ad2', '#0072b5']; // Add your custom colors here
+      const color = d3.scaleOrdinal(customColors);
+
     const pie = d3.pie().value((d: any) => d.value).sort(null);
-  
+
     const arc = d3.arc()
       .innerRadius(0)
       .outerRadius(this.radius);
-  
+
     const arcs = svg.selectAll('arc')
       .data(pie(data))
       .enter().append('g')
       .attr('class', 'arc');
-  
+
     arcs.append('path')
       .attr('d', arc)
       .attr('fill', (d: any, i: number) => color(i))
       .each(function (this: any, d: any) { this._current = d; }) // Store the initial angles
+      .attr('stroke', 'white') // Add border to the pie slices
+      .attr('stroke-width', '2px') // Set the border width
       .transition()
       .duration(800)
       .attrTween('d', function (d: any) {
@@ -83,9 +103,9 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
           return arc(interpolate(t));
         };
       });
-  
+
     const total = data.reduce((acc: any, curr: any) => acc + curr.value, 0);
-  
+
     arcs.append('text')
       .attr('transform', (d: any) => `translate(${arc.centroid(d)})`)
       .attr('dy', '0.35em')
@@ -100,8 +120,9 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
           return `${Math.round(percentage)}%`;
         }
       })
-      .style('font-weight', 'bold');
-  
+      .style('font-weight', 'bold')
+      .style('fill', 'white');
+
     if (this.showLegend) {
       this.createLegend(svg, data, color);
     }
@@ -129,7 +150,7 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
       .attr('x', 20)
       .attr('y', 10)
       .text((d: any) => d.category)
-      .style('font-size', '12px')
+      .style('font-size', '10px')
       .style('text-anchor', 'start');
   }
 }

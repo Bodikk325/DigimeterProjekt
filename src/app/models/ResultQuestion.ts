@@ -1,4 +1,4 @@
-import { RegionData } from "./result/result.component";
+import { RegionData } from "./RegionData";
 
 export interface ResultQuestion
 {
@@ -12,15 +12,4 @@ export interface ResultQuestion
     textBoxAnswer? : string
     shownPoint : number,
     regionData : RegionData
-}
-
-
-export interface Result 
-{
-    compared_list : RegionData
-    finalScore : number,
-    id : string,
-    resultType : string,
-    time : string,
-    results : ResultQuestion[]
 }

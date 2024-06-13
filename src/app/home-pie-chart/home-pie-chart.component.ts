@@ -43,18 +43,36 @@ export class HomePieChartComponent {
     // Create a container for the pie chart
     const container = d3.select(element).append('div').attr('class', 'pie-container w-2/3 mx-auto');
   
-    this.createPieChart(container, this.data1);
+    this.createPieChart(container, this.adjustData(this.data1));
+  }
+
+  private adjustData(data: any): any {
+    const total = data.reduce((acc: any, curr: any) => acc + curr.value, 0);
+    const minValue = total * 0.05; // 5% of the total
+    let adjustedData = data.map((d: any) => ({
+      category: d.category,
+      value: Math.max(d.value, minValue)
+    }));
+
+    const adjustedTotal = adjustedData.reduce((acc: any, curr: any) => acc + curr.value, 0);
+    const scalingFactor = total / adjustedTotal;
+
+    return adjustedData.map((d: any) => ({
+      category: d.category,
+      value: d.value * scalingFactor
+    }));
   }
   
   private createPieChart(container: any, data: any): void {
     const svg = container.append('svg')
       .attr('width', '100%')
       .attr('height', this.height + 50) // Increase height for legend
-      .attr('viewBox', `0 0 ${this.width + 200} ${this.height + 50}`) // Increase viewBox for legend
+      .attr('viewBox', `0 0 ${this.width + 200} ${this.height + 50}`) // Increase viewBox for legen
       .append('g')
       .attr('transform', `translate(${this.width / 2},${this.height / 2})`);
   
-    const color = d3.scaleOrdinal(d3.schemeCategory10);
+    const customColors = ['#775ad2', '#0072b5']; // Add your custom colors here
+    const color = d3.scaleOrdinal(customColors);
   
     const pie = d3.pie().value((d: any) => d.value).sort(null);
   
@@ -70,6 +88,8 @@ export class HomePieChartComponent {
     arcs.append('path')
       .attr('d', arc)
       .attr('fill', (d: any, i: number) => color(i))
+      .attr('stroke', 'white') // Add border to the pie slices
+      .attr('stroke-width', '2px') // Set the border width
       .each(function (this: any, d: any) { this._current = d; })
       .transition()
       .duration(800)
@@ -96,7 +116,8 @@ export class HomePieChartComponent {
           return `${Math.round(percentage)}%`;
         }
       })
-      .style('font-weight', 'bold');
+      .style('font-weight', 'bold')
+      .style('fill', 'white'); // Change the label color to white
   
     // Ensure the legend creation is called after the arcs
     this.createLegend(svg, data, color);
@@ -111,6 +132,8 @@ export class HomePieChartComponent {
       .data(data)
       .enter().append('g')
       .attr('class', 'legend-item')
+      
+      .style('font-weight', 'bold')
       .attr('transform', (d: any, i: number) => `translate(0, ${i * 20})`);
   
     legendItems.append('rect')
@@ -118,13 +141,13 @@ export class HomePieChartComponent {
       .attr('y', 0)
       .attr('width', 10)
       .attr('height', 10)
-      .style('fill', (d: any, i: number) => color(i));
+      .style('fill', (d: any, i: number) => color(i))
   
     legendItems.append('text')
       .attr('x', 20)
       .attr('y', 10)
       .text((d: any) => d.category)
-      .style('font-size', '12px')
+      .style('font-size', '18px')
       .style('text-anchor', 'start');
   }
 }

@@ -1,42 +1,12 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, afterNextRender } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { MyFirm } from './myFirm';
 import { LogarithmicScale } from 'chart.js';
 import { AuthService } from './auth.service';
-import { User } from './user';
+import { MyFirm } from './models/MyFirm';
+import { Point } from './models/Point';
 
-export interface Point {
-  questionId: string,
-  Maxpoint: number,
-  AvaragePoint: number,
-  Budapest: number | undefined,
-  KozepDunantul: number | undefined,
-  PestMegye: number | undefined,
-  NyugatDunantul: number | undefined,
-  EszakMagyarorszag: number | undefined,
-  DelAlfold: number | undefined,
-  EszakAlfold: number | undefined,
-  DelDunantul: number | undefined,
-  Szallashely: number | undefined,
-  Epitoipar: number | undefined,
-  Penzugy: number | undefined,
-  Adminisztrativ: number | undefined,
-  Kereskedelem: number | undefined,
-  Ingatlan: number | undefined,
-  Feldolgozoipar: number | undefined,
-  Informacio: number | undefined,
-  Egyeb: number | undefined,
-  Szakmai: number | undefined,
-  Villamosenergia: number | undefined,
-  Szallitas: number | undefined,
-  Mezogazdasag: number | undefined,
-  otkilenc: number | undefined,
-  husznegyvenkilenc: number | undefined,
-  tiztizenkilenc: number | undefined,
-  otvenketszaznegyvenkilenc: number | undefined,
-  ShownPoint: number
-}
+
 
 @Injectable({
   providedIn: 'root'
@@ -56,7 +26,7 @@ export class FirmsService {
     Revenue: ''
   }
 
-  constructor(private http: HttpClient, private authService : AuthService) {
+  constructor(private http: HttpClient) {
       
   }
 

@@ -1,31 +1,15 @@
 import { Injectable } from "@angular/core";
-import { Result } from "./result";
 import { Router } from "@angular/router";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { NotificationService } from "./notification.service";
 import { NotificationType } from "./notification/notification.component";
 import { Observable } from "rxjs";
-import { RegionData } from "./result/result.component";
+import { Question } from "./models/Question";
+import { Result } from "./models/Result";
+import { RegionData } from "./models/RegionData";
+import { MainPageResult } from "./models/MainPageResult";
 
-export interface Question {
-  id: string;
-  question: string;
-  answers: {
-    id: string,
-    answer: string;
-    points: number;
-    selected?: boolean;
-    contains_Textbox: boolean;
-    textBoxAnswer? : string;
-  }[];
-  selectedAnswer?: string | string[];
-  textBoxAnswer? : string;
-  maxpoint: number;
-  isThereMoreThanOneAnswer: boolean;
-  category: string;
-  based_on: string[];
-  condition: string[];
-}
+
 
 @Injectable({
   providedIn: 'root'
@@ -194,8 +178,16 @@ export class QuizResultsService {
     body = body.set('currentResult', JSON.stringify(currentResult));
     body = body.set('page', page);
 
-
     return this.http.post("http://localhost/calculateDigimiterIndex.php", body, {withCredentials : true});
+  }
+
+  removeResults(resultId : string) : Observable<MainPageResult[]>
+  {
+    let body = new HttpParams();
+    body = body.set('resultId', resultId);
+    body = body.set('userId', localStorage.getItem("currentUser") ?? "");
+
+    return this.http.post<MainPageResult[]>("http://localhost/removeResult.php", body, {withCredentials : true});
   }
 
 
