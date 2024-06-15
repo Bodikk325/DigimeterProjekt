@@ -8,6 +8,7 @@ import { MyFirm } from '../models/MyFirm';
 import { isPlatformBrowser } from '@angular/common';
 import { NotificationService } from '../services/notification.service';
 import { FirmsService } from '../services/firms.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,8 @@ export class HomeComponent implements OnDestroy {
   private saveFirmSubscription!: Subscription;
   private getFirmDataSubscription!: Subscription;
   private removeResultSubscription!: Subscription;
+
+  authService : AuthService;
 
   myFirm!: MyFirm;
 
@@ -37,7 +40,7 @@ export class HomeComponent implements OnDestroy {
 
   isLoading: boolean = false;
 
-  constructor(private notiService: NotificationService, private quizResultService: QuizResultsService, private firmService: FirmsService, private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(authService : AuthService,private notiService: NotificationService, private quizResultService: QuizResultsService, private firmService: FirmsService, private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {
 
     this.messages = [
       "Ez itt a főoldal!",
@@ -54,6 +57,8 @@ export class HomeComponent implements OnDestroy {
       Sector: "",
       Workers: ""
     }
+
+    this.authService = authService;
 
     this.initializeComponent();
   }
