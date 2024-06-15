@@ -23,6 +23,7 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { HomePieChartComponent } from './home-pie-chart/home-pie-chart.component';
 import { AiChatComponent } from './ai-chat/ai-chat.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
+import { LoadingComponent } from './loading/loading.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { TooltipComponent } from './tooltip/tooltip.component';
     PieChartComponent,
     HomePieChartComponent,
     AiChatComponent,
-    TooltipComponent
+    TooltipComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,1 @@
+export var httpUrl : string = "http://localhost/";

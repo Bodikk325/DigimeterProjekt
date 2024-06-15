@@ -2,12 +2,13 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { NotificationService } from "./notification.service";
-import { NotificationType } from "./notification/notification.component";
+import { NotificationType } from "../notification/notification.component";
 import { Observable } from "rxjs";
-import { Question } from "./models/Question";
-import { Result } from "./models/Result";
-import { RegionData } from "./models/RegionData";
-import { MainPageResult } from "./models/MainPageResult";
+import { Question } from "../models/Question";
+import { Result } from "../models/Result";
+import { RegionData } from "../models/RegionData";
+import { MainPageResult } from "../models/MainPageResult";
+import { httpUrl } from "../variables";
 
 
 
@@ -16,7 +17,7 @@ import { MainPageResult } from "./models/MainPageResult";
 })
 export class QuizResultsService {
 
-  private url = "https://kzacoaching.com/";
+  url = httpUrl;
 
   constructor(private notificationService : NotificationService, private router : Router, private http : HttpClient) { }
 

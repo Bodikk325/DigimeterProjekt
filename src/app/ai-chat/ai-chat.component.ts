@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, ViewChild, AfterViewChecked } from '@angular/core';
-import { ChatService } from '../chat.service';
+import { ChatService } from '../services/chat.service';
 
 @Component({
   selector: 'app-ai-chat',

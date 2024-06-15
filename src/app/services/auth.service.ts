@@ -1,18 +1,19 @@
-import { Injectable, afterNextRender } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from './user';
-import { NotificationService } from './notification.service';
-import { NotificationType } from './notification/notification.component';
+import { NotificationType } from '../notification/notification.component';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { User } from '../models/User';
+import { NotificationService } from './notification.service';
+import { httpUrl } from '../variables';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  url = "https://kzacoaching.com/"
+  url = httpUrl;
 
   currentUser!: User;
   users!: User[];
@@ -37,7 +38,7 @@ export class AuthService {
 
   logOut() {
     localStorage.removeItem("currentUser")
-    location.href = "login"
+    this.router.navigateByUrl("login");
   }
 
   checkIfUserIsLoggedIn(): boolean {
@@ -73,7 +74,7 @@ export class AuthService {
       (result: any) => {
         localStorage.setItem('currentUser', result)
         this.isButtonLoading(false);
-        location.href = "home"
+        this.router.navigateByUrl("home")
       },
       (_) => {
         this.notificationService.show("Helytelen felhasználónév vagy jelszó!", NotificationType.error)

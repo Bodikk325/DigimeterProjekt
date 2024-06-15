@@ -2,9 +2,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, afterNextRender } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { LogarithmicScale } from 'chart.js';
-import { AuthService } from './auth.service';
-import { MyFirm } from './models/MyFirm';
-import { Point } from './models/Point';
+import { Point } from '../models/Point';
+import { MyFirm } from '../models/MyFirm';
+import { httpUrl } from '../variables';
 
 
 
@@ -13,7 +13,7 @@ import { Point } from './models/Point';
 })
 export class FirmsService {
 
-  url = "https://kzacoaching.com/"
+  url = httpUrl;
 
   points: Point[] = [
   ]

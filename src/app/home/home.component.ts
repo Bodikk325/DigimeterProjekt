@@ -1,20 +1,20 @@
 import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
-import { QuizResultsService } from '../quizResults.service';
-import { FirmsService } from '../firms.service';
+import { QuizResultsService } from '../services/quizResults.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { NotificationType } from '../notification/notification.component';
-import { NotificationService } from '../notification.service';
 import { MainPageResult } from '../models/MainPageResult';
 import { Subscription } from 'rxjs';
 import { MyFirm } from '../models/MyFirm';
 import { isPlatformBrowser } from '@angular/common';
+import { NotificationService } from '../services/notification.service';
+import { FirmsService } from '../services/firms.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnDestroy {
 
   private resultForUserSubscription!: Subscription;
   private saveFirmSubscription!: Subscription;
@@ -55,22 +55,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       Workers: ""
     }
 
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        isPlatformBrowser(this.platformId)
-    {
-      this.initializeComponent();
-    }
-      }
-    });
+    this.initializeComponent();
   }
 
-  ngOnInit() {
-    isPlatformBrowser(this.platformId)
-    {
-      this.initializeComponent();
-    }
-  }
 
   initializeComponent() {
     this.isMainPageLoaded = false;

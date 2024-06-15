@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { ApplicationRef, ComponentFactoryResolver, EmbeddedViewRef } from '@angular/core';
-import { NotificationComponent, NotificationType } from './notification/notification.component';
+import { NotificationComponent, NotificationType } from '../notification/notification.component';
 
 @Injectable({
   providedIn: 'root'

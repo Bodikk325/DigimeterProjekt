@@ -1,9 +1,8 @@
 import { Component, HostListener, afterNextRender } from '@angular/core';
-import { ChatService } from './chat.service';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { Subscription, filter } from 'rxjs';
-import { NotificationService } from './notification.service';
-import { CsrfService } from './csrf.service';
+import { CsrfService } from './services/csrf.service';
+import { LoadingService } from './services/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -13,14 +12,29 @@ import { CsrfService } from './csrf.service';
 export class AppComponent {
   title = 'DigimeterProjekt';
   csrfSubscribe! : Subscription;
+
+  loading = false;
   /**
    *
    */
-  constructor(private csrfService : CsrfService) {
+  constructor(private csrfService : CsrfService, private router : Router, private loadingService : LoadingService) {
+    
     afterNextRender(() => {
       this.csrfSubscribe = this.csrfService.getCsrfToken().subscribe();
     })
   }
+
+  ngOnInit() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.loadingService.setLoading(true);
+      } else if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
+        this.loadingService.setLoading(false);
+      }
+    });
+  }
+
+  
 
   ngOnDestroy()
   {

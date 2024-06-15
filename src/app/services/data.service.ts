@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Question } from './models/Question';
+import { Question } from '../models/Question';
+import { httpUrl } from '../variables';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  url = "https://kzacoaching.com/"
+  url = httpUrl;
 
   constructor(private http : HttpClient) { }
 

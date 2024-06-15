@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core'
+import { httpUrl } from '../variables';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class ChatService {
     
   }
 
-  url = "https://kzacoaching.com/"
+  url = httpUrl;
 
   sendMessage(category : string, message : string, question : string, type : string, userPoint : number, maxPoint : number)
   {

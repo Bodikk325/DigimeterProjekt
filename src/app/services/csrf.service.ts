@@ -1,15 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { httpUrl } from '../variables';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CsrfService {
 
-  private csrfToken: string = '';
-
-  url = "https://kzacoaching.com/"
+  url = httpUrl;
 
   constructor(private http: HttpClient) { }
 

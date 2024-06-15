@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, afterNextRender } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-header',

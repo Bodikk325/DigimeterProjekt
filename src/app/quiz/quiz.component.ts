@@ -1,12 +1,12 @@
 import { Component, HostListener, afterNextRender } from '@angular/core';
-import { QuizResultsService } from '../quizResults.service';
-import { DataService } from '../data.service';
-import { ChatService } from '../chat.service';
-import { NotificationService } from '../notification.service';
+import { QuizResultsService } from '../services/quizResults.service';
+import { ChatService } from '../services/chat.service';
 import { NotificationType } from '../notification/notification.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Question } from '../models/Question';
 import { CanComponentDeactivate } from '../pending-changes-guard.guard';
+import { DataService } from '../services/data.service';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-quiz',

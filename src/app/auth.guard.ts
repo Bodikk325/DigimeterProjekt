@@ -1,34 +1,36 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { CanActivate, Router, CanActivateChild, CanLoad, Route, UrlSegment, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
+import { LoadingService } from './services/loading.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate{
+export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: any) {}
+  constructor(
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: any,
+    private loadingService: LoadingService
+  ) {}
 
-  private isUserLoggedIn(): boolean {
-    if (isPlatformBrowser(this.platformId)) {
+  private async isUserLoggedIn(): Promise<boolean> {
       const loggedIn = localStorage.getItem('currentUser');
       return loggedIn !== "" && loggedIn !== null;
-    }
-    return false;
+    
   }
 
-  canActivate(
+  async canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean {
-    const isLoggedIn = this.isUserLoggedIn();
+    state: RouterStateSnapshot): Promise<boolean> {
+    this.loadingService.setLoading(true);
+    const isLoggedIn = await this.isUserLoggedIn();
+    this.loadingService.setLoading(false);
 
     if (state.url === '/login' && isLoggedIn) {
-      // If user is logged in and trying to access the login page, redirect to home
       this.router.navigate(['/home']);
       return false;
     } else if (state.url !== '/login' && !isLoggedIn) {
-      // If user is not logged in and trying to access a protected route, redirect to login
       this.router.navigate(['/login']);
       return false;
     }

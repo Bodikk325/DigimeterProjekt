@@ -1,17 +1,13 @@
 import { Component, afterNextRender } from '@angular/core';
-import { QuizResultsService } from '../quizResults.service';
+import { QuizResultsService } from '../services/quizResults.service';
 import { ActivatedRoute } from '@angular/router';
-import { FirmsService } from '../firms.service';
-import { DataService } from '../data.service';
-import { AuthService } from '../auth.service';
-import { ChatService } from '../chat.service';
-import { max } from 'rxjs';
 import { Result } from '../models/Result';
 import { ResultQuestion } from '../models/ResultQuestion';
 import { RegionData } from '../models/RegionData';
 import { Question } from '../models/Question';
 import { MyFirm } from '../models/MyFirm';
 import { Point } from '../models/Point';
+import { FirmsService } from '../services/firms.service';
 
 
 
@@ -121,10 +117,7 @@ export class ResultComponent {
     )
 
     afterNextRender(() => {
-
-
       this.firmService.getFirmData().subscribe((res: any) => {
-
         this.myFirm.Region = res['region']
         this.myFirm.Workers = res['employees']
         this.myFirm.Field = res['field']
