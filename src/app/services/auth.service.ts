@@ -2,11 +2,14 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotificationType } from '../notification/notification.component';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { User } from '../models/User';
 import { NotificationService } from './notification.service';
 import { httpUrl } from '../variables';
+import { Result } from '../models/Result';
+import { ResultQuestion } from '../models/ResultQuestion';
+import { Question } from '../models/Question';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +24,9 @@ export class AuthService {
 
   private loginFormSubject = new BehaviorSubject<boolean>(true);
   loginFormState = this.loginFormSubject.asObservable();
+
+  private confirmAddressSubject = new BehaviorSubject<string>("Loading");
+  confirmAddressState = this.confirmAddressSubject.asObservable();
 
   private loadingButtonSubject = new BehaviorSubject<boolean>(false);
   loadingButtonState = this.loadingButtonSubject.asObservable();
@@ -55,6 +61,12 @@ export class AuthService {
 
   onLoginSubmit(loginForm: FormGroup): void {
 
+    if(loginForm.invalid)
+      {
+        this.notificationService.show("Nem helyes formátúm!", NotificationType.error);
+        return;
+      }
+
     this.isErrorSubject.next(false);
 
     const { username, password } = loginForm.value;
@@ -76,19 +88,71 @@ export class AuthService {
         this.isButtonLoading(false);
         this.router.navigateByUrl("home")
       },
-      (_) => {
-        this.notificationService.show("Helytelen felhasználónév vagy jelszó!", NotificationType.error)
+      (error) => {
+        if(error.error.message == "NotConfirmed")
+          {
+            this.notificationService.show("Ez az email cím még nincs aktiválva, nézd meg a levelesládád!", NotificationType.error)
+          }
+          else
+          {
+            this.notificationService.show("Helytelen felhasználónév vagy jelszó!", NotificationType.error)
+          }
         this.isButtonLoading(false);
         this.isErrorSubject.next(true);
       }
     );
   }
 
+  confirmEmailAddress(token : string)
+  {
+    let body = new HttpParams();
+    body = body.set('token', token);
+    this.http.post(this.url + 'confirmEmail.php', body, { withCredentials: true }).subscribe(
+      {
+        next : () => {
+          this.confirmAddressSubject.next("Success");
+        },
+        error : (error) => {
+          this.confirmAddressSubject.next("Failure");
+        }
+      }
+    )
+  }
+
+  
+
+  saveContQuiz(cont_quiz : Question[]) : Observable<any>
+  {
+    let body = new HttpParams();
+    body = body.set('id', localStorage.getItem('currentUser') ?? "");
+    body = body.set('cont_result', JSON.stringify(cont_quiz));
+    return this.http.post(this.url + "saveContResult.php", body, {withCredentials : true})
+  }
+
+  getContQuiz() : Observable<any>
+  {
+    let body = new HttpParams();
+    body = body.set('id', localStorage.getItem('currentUser') ?? "");
+    return this.http.post(this.url + "getContQuiz.php", body, {withCredentials : true})
+  }
+
+
   onRegisterSubmit(registerForm: FormGroup): void {
+
+    if(registerForm.invalid)
+      {
+        this.notificationService.show("Nem helyes formátúm!", NotificationType.error);
+        return;
+      }
 
     this.isErrorSubject.next(false);
 
-    const { username, password, confirmPassword } = registerForm.value;
+    const { username, password, confirmPassword, acceptedTerms } = registerForm.value;
+
+    if (acceptedTerms !== true) {
+      this.notificationService.show("Kerünk, hogy fogadd el az adatvédelmi nyilatkozatot!", NotificationType.error)
+      return;
+    }
 
     if (password == "" || username == "") {
       this.notificationService.show("Kérünk tölts ki minden adatot!", NotificationType.error)
@@ -100,6 +164,7 @@ export class AuthService {
       return;
     }
 
+    
     this.isButtonLoading(true);
 
     let body = new HttpParams();

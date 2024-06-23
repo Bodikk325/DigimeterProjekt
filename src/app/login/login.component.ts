@@ -16,8 +16,8 @@ export class LoginComponent {
   messages = [
     "Hé, itt vagyok, itt lent!",
     "Kezdjük azzal, hogy létrehozunk neked egy fiókot!",
-    "Ez azért fontos, hogy le tudjuk neked menteni az előző kitöltéseidnek eredményeit.",
-    "Ezeket később vissza tudod majd keresni és össze tudod hasonlítani majd egy előző eredménnyel.",
+    "Ez azért fontos, hogy el tudjuk neked menteni az előző válaszaid. Így egyrészt nem kell újrakezdened a kérdőívet, ha nem lenne időd egyszerre megválaszolni az összes kérdést.",
+    "Másrészt, ha készen vagy, bármikor visszajöhetsz, megnézheted a válaszaid és beszélgethetsz velem a digitalizációs tennivalókról ezek kapcsán. ",
     "Amennyiben van már fiókod, úgy csak szimplán jelentkezz be!"
   ]
 
@@ -37,22 +37,21 @@ export class LoginComponent {
 
   }
 
-  private manageForms()
-  {
+  private manageForms() {
     this.loginForm = new FormGroup({
-      username: new FormControl('', [Validators.required]),
+      username: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required])
     });
 
     this.registerForm = new FormGroup({
-      username: new FormControl('', [Validators.required]),
+      username: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
-      confirmPassword: new FormControl('', [Validators.required])
+      confirmPassword: new FormControl('', [Validators.required]),
+      acceptedTerms: new FormControl(false, [Validators.required])
     });
   }
 
-  private manageSubscriptions()
-  {
+  private manageSubscriptions() {
     this.authSubscription = this.authService.loginFormState.subscribe(show => {
       this.loginShown = show;
     });

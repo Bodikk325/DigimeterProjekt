@@ -1,4 +1,4 @@
-@defer (when (myFirm.Capital != null && results != null)) {
+@defer (when (myFirm.Capital != null && results != null && contQuizQuestions != null)) {
 <div class="container mt-16 mb-32 mx-auto">
   <div class="w-full flex justify-end">
     <button (click)="authService.logOut()"
@@ -11,10 +11,14 @@
     <div class="w-1/3 h-full flex flex-col justify-center items-center mt-10">
       <h2 class="text-2xl font-semibold mb-4 text-center ">Rajta, töltsük ki a kérdőívet és lássuk mennyire is
         digitalizált a vállalkozásod!</h2>
-      <div class="w-full flex justify-center lg:justify-center">
+      <div class="w-full flex flex-col justify-center lg:justify-center">
         <button type="button" (click)="goToThemeBasedQuiz('Teljes')"
           class="bg-base_blue mb-10 hover:bg-blue-700 text-white font-bold p-4 mt-5 text-xl rounded focus:outline-none focus:shadow-outline">
-          Teszt kitöltése
+          Digiméter kérdőív kitöltése
+        </button>
+        <button type="button" (click)="goToThemeBasedQuiz('Continue')" *ngIf="contQuizQuestions.length != 0"
+          class="bg-base_blue mb-10 hover:bg-blue-700 text-white font-bold p-4 mt-5 text-xl rounded focus:outline-none focus:shadow-outline">
+          Előző teszt folytatása
         </button>
       </div>
     </div>
@@ -26,43 +30,13 @@
 
 <div class="container mx-auto px-10">
   <div class="container mb-10 mx-auto">
-    <span class="font-bold text-xl ">Vagy ha nincs kedved az összes kérdésen végigmenni, akkor kitöltheted a tesztet
-      témakör specifikusan:</span>
+    <span class="font-bold text-xl ">Vagy, ha nincs kedved az összes kérdésen egyszerre végigmenni, akkor kitöltheted a
+      kérdőívet témakörönként is:</span>
   </div>
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-    <div (click)="goToThemeBasedQuiz('Digitális pénzügy')"
-      class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
-      <img src="../../assets/digitalispenzugyekTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
-      <div class="p-4">
-        <h2 class="text-xl font-semibold mb-2">Digitális pénzügyek</h2>
-        <p class="text-gray-700">A vállalati pénzügyek digitalizációjának áttekintése</p>
-      </div>
-    </div>
-    <div (click)="goToThemeBasedQuiz('Informatikai biztonság')"
-      class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
-      <img src="../../assets/informatikaibiztonsagTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
-      <div class="p-4">
-        <h2 class="text-xl font-semibold mb-2">Informatikai biztonság</h2>
-        <p class="text-gray-700">A biztonság az egyik legfontosabb szempont a kibervilágban</p>
-      </div>
-    </div>
-    <div (click)="goToThemeBasedQuiz('Vállalatvezetés')"
-      class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
-      <img src="../../assets/vallalatvezetesTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
-      <div class="p-4">
-        <h2 class="text-xl font-semibold mb-2">Vállalatvezetés</h2>
-        <p class="text-gray-700">A digitalizációs eszközök megkönnyíthetik az irányítást</p>
-      </div>
-    </div>
-    <div (click)="goToThemeBasedQuiz('Értékesítés és marketing')"
-      class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
-      <img src="../../assets/ertekesitesesmarketingTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
-      <div class="p-4">
-        <h2 class="text-xl font-semibold mb-2">Értékesítés és marketing</h2>
-        <p class="text-gray-700">A bevételszerzés a vállalat legfontosabb szempontja, a digitalizáció ebben is segít
-          nekünk</p>
-      </div>
-    </div>
+
+
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 xl:grid-rows-3 xl:w-2/3 xl:mx-auto gap-x-12 gap-y-6">
     <div (click)="goToThemeBasedQuiz('Digitális mindennapok')"
       class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
       <img src="../../assets/digitalismindennapokTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
@@ -77,7 +51,40 @@
       <img src="../../assets/digitalisjelenletTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
       <div class="p-4">
         <h2 class="text-xl font-semibold mb-2">Digitális jelenlét</h2>
-        <p class="text-gray-700">Jelenlétünk nem csak fizikai hanem digitális formában is mérhető</p>
+        <p class="text-gray-700">Jelenlétünk nem csak fizikai, hanem digitális formában is mérhető</p>
+      </div>
+    </div>
+    <div (click)="goToThemeBasedQuiz('Értékesítés és marketing')"
+      class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
+      <img src="../../assets/ertekesitesesmarketingTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
+      <div class="p-4">
+        <h2 class="text-xl font-semibold mb-2">Értékesítés és marketing</h2>
+        <p class="text-gray-700">A bevételszerzés a vállalat legfontosabb feladata, a digitalizáció ebben is segít
+          nekünk</p>
+      </div>
+    </div>
+    <div (click)="goToThemeBasedQuiz('Vállalatvezetés')"
+      class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
+      <img src="../../assets/vallalatvezetesTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
+      <div class="p-4">
+        <h2 class="text-xl font-semibold mb-2">Vállalatvezetés</h2>
+        <p class="text-gray-700">A digitalizációs eszközök megkönnyíthetik az irányítást</p>
+      </div>
+    </div>
+    <div (click)="goToThemeBasedQuiz('Informatikai biztonság')"
+      class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
+      <img src="../../assets/informatikaibiztonsagTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
+      <div class="p-4">
+        <h2 class="text-xl font-semibold mb-2">Informatikai biztonság</h2>
+        <p class="text-gray-700">A biztonság az egyik legfontosabb szempont a kibervilágban</p>
+      </div>
+    </div>
+    <div (click)="goToThemeBasedQuiz('Digitális pénzügy')"
+      class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
+      <img src="../../assets/digitalispenzugyekTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
+      <div class="p-4">
+        <h2 class="text-xl font-semibold mb-2">Digitális pénzügyek</h2>
+        <p class="text-gray-700">A vállalati pénzügyek digitalizációjának áttekintése</p>
       </div>
     </div>
   </div>
@@ -87,19 +94,21 @@
   <div
     class="relative max-w-4xl   lg:w-[100%]  py-16 md:py-5 w-full flex flex-col p-5 bg-white shadow-xl rounded-lg border-2 border-gray-100">
     <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Céged adatai</h2>
+    <p class="w-[90%] mx-auto text-gray-800 mb-4 text-center">Ez alapján tudod majd hozzámérni magad a Digiméter kutatás
+      eredményeihez. Az adataidat csak Te láthatod, mások nem tudják hozzád mérni magukat</p>
     <form class="px-10">
       <div class="mb-4">
         <label for="region" class="block text-gray-700 text-sm font-bold mb-2">Régió:</label>
         <select id="region" [(ngModel)]="myFirm.Region" name="region" required
           class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
           <option value="Budapest">Budapest</option>
-          <option value="Közép-Dunántúl">Közép-Dunántúl</option>
-          <option value="Pest megye">Pest megye</option>
-          <option value="Nyugat-Dunántúl">Nyugat-Dunántúl</option>
-          <option value="Észak-Magyarország">Észak-Magyarország</option>
           <option value="Dél-Alföld">Dél-Alföld</option>
-          <option value="Észak-Alföld">Észak-Alföld</option>
           <option value="Dél-Dunántúl">Dél-Dunántúl</option>
+          <option value="Észak-Alföld">Észak-Alföld</option>
+          <option value="Észak-Magyarország">Észak-Magyarország</option>
+          <option value="Közép-Dunántúl">Közép-Dunántúl</option>
+          <option value="Nyugat-Dunántúl">Nyugat-Dunántúl</option>
+          <option value="Pest megye">Pest megye</option>
         </select>
       </div>
 
@@ -107,24 +116,23 @@
         <label for="field" class="block text-gray-700 text-sm font-bold mb-2">Tevékenységi kör:</label>
         <select id="field" [(ngModel)]="myFirm.Field" name="field" required
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-          <option value="Szálláshely szolgálatatás, vendéglátás">Szálláshely szolgálatatás, vendéglátás</option>
+          <option value="Adminisztratív és szolgáltatást támogató tevékenység">Adminisztratív és szolgáltatást támogató
+            tevékenység</option>
           <option value="Építőipar">Építőipar</option>
-          <option value="Kereskedelem, gépjárműjavítás">Kereskedelem, gépjárműjavítás</option>
+          <option value="Feldolgozóipar">Feldolgozóipar</option>
           <option value="Ingatlanügyek">Ingatlanügyek</option>
           <option value="Információ, kommunikáció">Információ, kommunikáció</option>
-          <option value="Feldolgozóipar">Feldolgozóipar</option>
+          <option value="Kereskedelem, gépjárműjavítás">Kereskedelem, gépjárműjavítás</option>
           <option value="Mezőgazdaság, bányászat">Mezőgazdaság, bányászat</option>
-          <option value=">Villamosenergia-, gáz-, gőzellátás, légkondicionálás, vízellátás">Villamosenergia-, gáz-,
-            gőzellátás, légkondicionálás, vízellátás</option>
+          <option value="Pénzügyi, biztosítási tevékenység">Pénzügyi, biztosítási tevékenység</option>
+          <option value="Szálláshely szolgálatatás, vendéglátás">Szálláshely szolgáltatás, vendéglátás</option>
           <option value="Szállítás/raktározás">Szállítás/raktározás</option>
           <option value="Szakmai, tudományos, műszaki tevékenység, könyvelés">Szakmai, tudományos, műszaki tevékenység,
             könyvelés</option>
-          <option value="Pénzügyi, biztosítási tevékenység">Pénzügyi, biztosítási tevékenység</option>
-          <option value="Adminisztratív és szolgáltatást támogató tevékenység">Adminisztratív és szolgáltatást támogató
-            tevékenység</option>
+          <option value="Villamosenergia-, gáz-, gőzellátás, légkondicionálás, vízellátás">Villamosenergia-, gáz-,
+            gőzellátás, légkondicionálás, vízellátás</option>
           <option value="Egyéb (közigazgatás, oktatás, egészségügy, szociális ellátás, művészet, egyéb szolgáltatás)">
-            Egyéb (közigazgatás, oktatás, egészségügy, szociális ellátás, művészet, egyéb
-            szolgáltatás)</option>
+            Egyéb (közigazgatás, oktatás, egészségügy, szociális ellátás, művészet, egyéb szolgáltatás)</option>
         </select>
       </div>
 
@@ -143,26 +151,27 @@
         <label for="capital" class="block text-gray-700 text-sm font-bold mb-2">A cég székhelye:</label>
         <select id="capital" [(ngModel)]="myFirm.Capital" name="capital" required
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-          <option value="0">Budapest</option>
-          <option value="1">Komárom-Esztergom</option>
-          <option value="2">Pest</option>
-          <option value="3">Vas</option>
-          <option value="4">Zala</option>
-          <option value="5">Heves</option>
+          <option value="13">Baranya</option>
           <option value="6">Bács-Kiskun</option>
-          <option value="7">Csongrád-Csanád</option>
-          <option value="8">Szabolcs-Szatmár-Bereg</option>
-          <option value="9">Fejér</option>
           <option value="10">Békés</option>
           <option value="11">Borsod-Abaúj-Zemplén</option>
-          <option value="12">Jász-Nagykun-Szolnok</option>
-          <option value="13">Baranya</option>
-          <option value="14">Tolna</option>
+          <option value="0">Budapest</option>
+          <option value="7">Csongrád-Csanád</option>
+          <option value="9">Fejér</option>
           <option value="15">Győr-Moson-Sopron</option>
+          <option value="5">Heves</option>
           <option value="16">Hajdú-Bihar</option>
-          <option value="17">Veszprém</option>
-          <option value="18">Somogy</option>
+          <option value="12">Jász-Nagykun-Szolnok</option>
+          <option value="1">Komárom-Esztergom</option>
           <option value="19">Nógrád</option>
+          <option value="2">Pest</option>
+          <option value="18">Somogy</option>
+          <option value="8">Szabolcs-Szatmár-Bereg</option>
+          <option value="14">Tolna</option>
+          <option value="3">Vas</option>
+          <option value="17">Veszprém</option>
+          <option value="4">Zala</option>
+
         </select>
       </div>
 
@@ -170,10 +179,10 @@
         <label for="sector" class="block text-gray-700 text-sm font-bold mb-2">Szektor:</label>
         <select id="sector" [(ngModel)]="myFirm.Sector" name="sector" required
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-          <option value="0">Szolgáltatás</option>
           <option value="1">Ipar</option>
           <option value="2">Kereskedelem</option>
           <option value="3">Mezőgazdaság</option>
+          <option value="0">Szolgáltatás</option>
         </select>
       </div>
 
@@ -181,13 +190,13 @@
         <label for="revenue" class="block text-gray-700 text-sm font-bold mb-2">Árbevétel:</label>
         <select id="revenue" [(ngModel)]="myFirm.Revenue" name="revenue" required
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-          <option value="0">100-199 millió Ft</option>
-          <option value="1">500-999 millió Ft</option>
-          <option value="2">200-499 millió Ft</option>
-          <option value="3">3-10 milliárd Ft</option>
-          <option value="4">50-99 millió Ft</option>
           <option value="5">Kevesebb mint 50 millió Ft</option>
+          <option value="4">50-99 millió Ft</option>
+          <option value="0">100-199 millió Ft</option>
+          <option value="2">200-499 millió Ft</option>
+          <option value="1">500-999 millió Ft</option>
           <option value="6">1-2 milliárd Ft</option>
+          <option value="3">3-10 milliárd Ft</option>
           <option value="7">11-18 milliárd Ft</option>
         </select>
       </div>
@@ -214,25 +223,24 @@
       <div *ngIf="results.length != 0"
         class="max-h-[35rem] border-t-2 border-b-2 border-gray-300 px-10 py-5 w-full overflow-y-auto">
         <div *ngFor="let kitoltes of results"
-          class="rounded-md relative shadow-md hover:shadow-lg hover:bg-slate-100 px-2  border-solid border-2 border-base_blue   mt-10 text-white"
-          >
-          <img (click)="removeResultDialogShow(kitoltes)" class="absolute w-10 h-10 right-2 top-2 cursor-pointer" src="assets/trash.svg" alt="">
+          class="rounded-md relative shadow-md hover:shadow-lg hover:bg-slate-100 px-2  border-solid border-2 border-base_blue   mt-10 text-white">
+          <img (click)="removeResultDialogShow(kitoltes)" class="absolute w-10 h-10 right-2 top-2 cursor-pointer"
+            src="assets/trash.svg" alt="">
           <div routerLink="../result/{{kitoltes.resultId}}" class="cursor-pointer">
-          <div class="flex flex-col justify-center items-center">
-            <div class="w-full py-2 flex flex-col">
-              <span class="text-black">Kitöltés dátuma: <span class="font-bold">{{kitoltes.date |
-                  date:'yyyy-MM-dd'}}</span></span>
-              <span class="text-black mt-2">Témakör: <span class="font-bold">{{kitoltes.resultType == "" ? 'Teljes quiz'
-                  : kitoltes.resultType}}</span></span>
-              <span class="text-black mt-2">Eredmény: </span>
-            </div>
-            <div class="chart-container mx-auto ">
-              <app-home-pie-chart [data1]="[
+            <div class="flex flex-col justify-center items-center">
+              <div class="w-full py-2 flex flex-col">
+                <span class="text-black">Kitöltés dátuma: <span class="font-bold">{{kitoltes.date |
+                    date:'yyyy-MM-dd'}}</span></span>
+                <span class="text-black mt-2">Témakör: <span class="font-bold">{{kitoltes.resultType == "" ? 'Teljes quiz' : kitoltes.resultType}}</span></span>
+                <span class="text-black mt-2">Eredmény: </span>
+              </div>
+              <div class="chart-container mx-auto ">
+                <app-home-pie-chart [data1]="[
             { category: 'az ön cége', value: kitoltes.finalScore },
             { category: 'fejlődési lehetőség', value: kitoltes.max_point - kitoltes.finalScore },
             ]"></app-home-pie-chart>
+              </div>
             </div>
-          </div>
           </div>
         </div>
       </div>
@@ -241,28 +249,34 @@
         <!-- <app-bar-chart></app-bar-chart> -->
       </div>
     </div>
-    <div *ngIf="isResultsLoading" class="absolute inset-0 bg-black rounded bg-opacity-65 flex items-center justify-center">
+    <div *ngIf="isResultsLoading"
+      class="absolute inset-0 bg-black rounded bg-opacity-65 flex items-center justify-center">
       <app-loader></app-loader>
     </div>
     <div *ngIf="showDialog" class="absolute inset-0 bg-black rounded bg-opacity-65 flex items-center justify-center">
-      <div class="w-4/5 py-5 px-2 bg-white border-solid border-2 border-gray-400  text-black rounded-lg shadow-lg flex flex-col justify-center items-center">
+      <div
+        class="w-4/5 py-5 px-2 bg-white border-solid border-2 border-gray-400  text-black rounded-lg shadow-lg flex flex-col justify-center items-center">
         <svg class="mb-2" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="24" cy="24" r="24" transform="matrix(-1 0 0 1 48 0)" fill="#D1971B"/>
-          <path d="M30.7651 15.2439C28.4955 11.3128 27.3607 9.34722 25.863 8.71764C24.6665 8.21469 23.3179 8.21469 22.1215 8.71764C20.6238 9.34722 19.4889 11.3128 17.2193 15.2439L11.7192 24.7703C9.44961 28.7014 8.3148 30.6669 8.51842 32.2788C8.68109 33.5664 9.35538 34.7344 10.3892 35.5191C11.6833 36.5013 13.9529 36.5013 18.4921 36.5013H29.4923C34.0316 36.5013 36.3012 36.5013 37.5953 35.5191C38.6291 34.7344 39.3034 33.5664 39.466 32.2788C39.6697 30.6669 38.5349 28.7014 36.2652 24.7703L30.7651 15.2439Z" fill="white"/>
-          <rect width="3.09817" height="11.419" rx="1.54909" transform="matrix(-1 0 0 1 25.5319 15.4894)" fill="#D1971B"/>
-          <rect width="3.09817" height="3.09817" rx="1.54909" transform="matrix(-1 0 0 1 25.5319 29.1215)" fill="#D1971B"/>
+          <circle cx="24" cy="24" r="24" transform="matrix(-1 0 0 1 48 0)" fill="#D1971B" />
+          <path
+            d="M30.7651 15.2439C28.4955 11.3128 27.3607 9.34722 25.863 8.71764C24.6665 8.21469 23.3179 8.21469 22.1215 8.71764C20.6238 9.34722 19.4889 11.3128 17.2193 15.2439L11.7192 24.7703C9.44961 28.7014 8.3148 30.6669 8.51842 32.2788C8.68109 33.5664 9.35538 34.7344 10.3892 35.5191C11.6833 36.5013 13.9529 36.5013 18.4921 36.5013H29.4923C34.0316 36.5013 36.3012 36.5013 37.5953 35.5191C38.6291 34.7344 39.3034 33.5664 39.466 32.2788C39.6697 30.6669 38.5349 28.7014 36.2652 24.7703L30.7651 15.2439Z"
+            fill="white" />
+          <rect width="3.09817" height="11.419" rx="1.54909" transform="matrix(-1 0 0 1 25.5319 15.4894)"
+            fill="#D1971B" />
+          <rect width="3.09817" height="3.09817" rx="1.54909" transform="matrix(-1 0 0 1 25.5319 29.1215)"
+            fill="#D1971B" />
         </svg>
-          <span class="px-10 font-bold">Biztos törlöd ezt az eredményed?</span>
-          <div class="w-full flex flex-row justify-around items-center mt-5">
-            <button type="button" (click)="selectedOptionForDelete('Back', selectedResult)"
-          class="bg-base_blue text-sm lg:text-xl w-1/3 hover:bg-blue-700 text-white font-bold p-4 rounded focus:outline-none focus:shadow-outline">
-          Vissza
+        <span class="px-10 font-bold">Biztos törlöd ezt az eredményed?</span>
+        <div class="w-full flex flex-row justify-around items-center mt-5">
+          <button type="button" (click)="selectedOptionForDelete('Back', selectedResult)"
+            class="bg-base_blue text-sm lg:text-xl w-1/3 hover:bg-blue-700 text-white font-bold p-4 rounded focus:outline-none focus:shadow-outline">
+            Vissza
           </button>
           <button type="button" (click)="selectedOptionForDelete('Delete', selectedResult)"
-          class="bg-white hover:bg-gray-200 border-2 w-1/3 border-gray-400 border-solid text-black font-bold p-4 text-sm lg:text-xl rounded focus:outline-none focus:shadow-outline">
-          Törlés
+            class="bg-white hover:bg-gray-200 border-2 w-1/3 border-gray-400 border-solid text-black font-bold p-4 text-sm lg:text-xl rounded focus:outline-none focus:shadow-outline">
+            Törlés
           </button>
-          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -276,11 +290,11 @@
 
 @placeholder {
 
-<div *ngIf="!isMainPageLoaded">
+<div>
   <div class="z-[200] flex flex-col justify-center items-center h-full w-full top-0 left-0 absolute bg-white">
     <app-loader-black></app-loader-black>
     <p class=" mt-10 font-bold text-xl text-black ">Betöltés...</p>
-    <p class="mt-2 font-bold text-xl text-black">Töltsd ki az adataidat, mielőtt quiz-t töltenél ki!</p>
+    <p class="mt-2 font-bold text-xl text-black">Töltsd ki az adataidat, mielőtt elindítanád a Digiméter kérdőívet!</p>
   </div>
 </div>
 }

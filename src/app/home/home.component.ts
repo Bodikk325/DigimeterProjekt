@@ -9,6 +9,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { NotificationService } from '../services/notification.service';
 import { FirmsService } from '../services/firms.service';
 import { AuthService } from '../services/auth.service';
+import { Question } from '../models/Question';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +22,7 @@ export class HomeComponent implements OnDestroy {
   private saveFirmSubscription!: Subscription;
   private getFirmDataSubscription!: Subscription;
   private removeResultSubscription!: Subscription;
+  private getUserContQuizSubscription!: Subscription;
 
   authService : AuthService;
 
@@ -30,9 +32,13 @@ export class HomeComponent implements OnDestroy {
 
   selectedResult! : MainPageResult;
 
+  contQuizQuestions! : Question[];
+
   isMainPageLoaded: boolean = false;
 
   isResultsLoading : boolean = false;
+
+  isContQuizLoading : boolean = false;
 
   showDialog : boolean = false;
 
@@ -45,7 +51,8 @@ export class HomeComponent implements OnDestroy {
     this.messages = [
       "Ez itt a főoldal!",
       "Itt tudsz majd új kérdőívet kitölteni vagy akár megnézni az előző kitöltéseidnek az eredményét!",
-      "Fontos, hogy mielőtt új kérdőívet töltenél ki azelőtt meg kell adnod a céged adatai!"
+      "Fontos, hogy mielőtt új kérdőívet töltenél ki azelőtt meg kell adnod a céged adatait!",
+      "Ehhez gördíts le a lap aljára ezen a képernyőn!"
     ]
 
     this.myFirm = {
@@ -66,6 +73,26 @@ export class HomeComponent implements OnDestroy {
 
   initializeComponent() {
     this.isMainPageLoaded = false;
+
+    this.getUserContQuizSubscription = this.authService.getContQuiz().subscribe(
+      {
+        next : (result) => {
+          this.isContQuizLoading = true;
+          if(JSON.parse(result['cont_result']) == null)
+            {
+              this.contQuizQuestions = []
+            }
+          else 
+          {
+            this.contQuizQuestions = JSON.parse(result['cont_result'])
+          }
+        },
+        error : () => {
+          this.notiService.show("Valami hiba a mentett kérdőív állapot beolvasása során!", NotificationType.error)
+          this.isContQuizLoading = true;
+        }
+      }
+    )
 
     this.getFirmDataSubscription = this.firmService.getFirmData().subscribe(
       (result: any) => {
@@ -139,7 +166,7 @@ export class HomeComponent implements OnDestroy {
   }
 
   goToThemeBasedQuiz(category: string) {
-    if (!this.myFirm.Field || !this.myFirm.Region || !this.myFirm.Workers || !this.myFirm.Capital || !this.myFirm.Revenue || !this.myFirm.Sector) {
+    if (this.myFirm.Field == "" || this.myFirm.Region == ""  || this.myFirm.Workers == ""  || this.myFirm.Capital == ""  || this.myFirm.Revenue == ""  || this.myFirm.Sector == "" ) {
       this.notiService.show("Nincsenek kitöltve a cégadatok! Kérünk töltsd ki azokat először!", NotificationType.error);
     } else {
       this.router.navigate(['quiz', category]);
@@ -147,7 +174,7 @@ export class HomeComponent implements OnDestroy {
   }
 
   checkFirmDataAndThenGoToQuiz() {
-    if (!this.myFirm.Field || !this.myFirm.Region || !this.myFirm.Workers || !this.myFirm.Capital || !this.myFirm.Revenue || !this.myFirm.Sector) {
+    if (this.myFirm.Field == ""  || this.myFirm.Region == ""  || this.myFirm.Workers == ""  || this.myFirm.Capital == ""  || this.myFirm.Revenue == ""  || this.myFirm.Sector == "" ) {
       this.notiService.show("Nincsenek kitöltve a cégadatok! Kérünk töltsd ki azokat először!", NotificationType.error);
     } else {
       this.router.navigate(['quiz' , ""]);
@@ -166,6 +193,9 @@ export class HomeComponent implements OnDestroy {
     }
     if (this.removeResultSubscription) {
       this.removeResultSubscription.unsubscribe();
+    }
+    if (this.getUserContQuizSubscription) {
+      this.getUserContQuizSubscription.unsubscribe();
     }
   }
 }

@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { StartComponent } from './start/start.component';
 import { PendingChangesGuard } from './pending-changes-guard.guard';
+import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 
 const routes: Routes = [
   { path: 'home', 
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path : 'quiz/:topic', component : QuizComponent, canActivate: [AuthGuard], canDeactivate: [PendingChangesGuard] },
   {path : '', component : StartComponent},
   {path : 'result/:id', component : ResultComponent, canActivate: [AuthGuard]},
+  {path : 'confirmEmail/:token', component : ConfirmEmailComponent},
   { path: '**', redirectTo: ''}
 ];
 

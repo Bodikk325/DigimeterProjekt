@@ -7,6 +7,7 @@ import { Question } from '../models/Question';
 import { CanComponentDeactivate } from '../pending-changes-guard.guard';
 import { DataService } from '../services/data.service';
 import { NotificationService } from '../services/notification.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-quiz',
@@ -23,6 +24,7 @@ export class QuizComponent implements CanComponentDeactivate {
   BQuestionNoAnswer = false;
   removedQuestions = false;
   isQuizInProgress = true;
+  isLoaded = false;
   currentQuestionIndex: number = 0;
 
   constructor(
@@ -30,7 +32,8 @@ export class QuizComponent implements CanComponentDeactivate {
     private quizResultsService: QuizResultsService,
     private notiService: NotificationService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     afterNextRender(() => {
       localStorage.removeItem("A7answer")
@@ -51,10 +54,30 @@ export class QuizComponent implements CanComponentDeactivate {
   }
 
   ngOnInit(): void {
-    this.dataService.getQuestions(this.route.snapshot.paramMap.get('topic') ?? "").subscribe((res: Question[]) => {
-      this.questions = this.removeDuplicateAnswers(res);
-      this.filteredQuestions = this.removeDuplicateAnswers(res);
-    });
+    if ((this.route.snapshot.paramMap.get('topic') ?? "") == "Continue") {
+      this.authService.getContQuiz().subscribe(
+        {
+          next: (quiz) => {
+            console.log(JSON.parse(quiz["cont_result"]))
+            this.filteredQuestions = JSON.parse(quiz["cont_result"]);
+            this.questions = this.filteredQuestions;
+            this.currentQuestionIndex = this.countSelectedAnswers();
+            this.isLoaded = true;
+          }
+        }
+      )
+    }
+    else {
+      this.dataService.getQuestions(this.route.snapshot.paramMap.get('topic') ?? "").subscribe((res: Question[]) => {
+        this.questions = this.removeDuplicateAnswers(res);
+        this.filteredQuestions = this.removeDuplicateAnswers(res);
+        this.isLoaded = true;
+      });
+    }
+  }
+
+  countSelectedAnswers(): number {
+    return this.filteredQuestions.filter(question => (question.selectedAnswer !== null && question.selectedAnswer !== undefined) ||  (question.textBoxAnswer !== null && question.textBoxAnswer !== undefined)).length;
   }
 
   B14Change() {
@@ -86,7 +109,7 @@ export class QuizComponent implements CanComponentDeactivate {
       this.questions = this.questions.filter(x => x.id != "B16")
     }
 
-    if (this.currentQuestionIndex == 0) {
+    if (this.currentQuestionIndex == 0 && this.route.snapshot.paramMap.get('topic') != "Continue") {
       this.questions[0] = this.filteredQuestions[0];
     }
 
@@ -183,7 +206,16 @@ export class QuizComponent implements CanComponentDeactivate {
       return;
     }
 
-    this.quizResultsService.saveQuizResults(this.filteredQuestions);
+    if(this.route.snapshot.paramMap.get('topic') == "Teljes" || this.route.snapshot.paramMap.get('topic') == "Continue")
+      {   
+        this.authService.saveContQuiz(this.filteredQuestions).subscribe({
+          next: () => {
+            console.log("Sikeres mentés")
+          },
+        error: (error) => {
+        }
+      })
+    }
 
     this.checkingTheConditions();
 

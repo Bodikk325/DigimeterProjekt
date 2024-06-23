@@ -1,0 +1,27 @@
+<div *ngIf="state == 'Loading'">
+    <div class="z-[200] flex flex-col justify-center items-center h-full w-full top-0 left-0 absolute bg-white">
+        <app-loader-black></app-loader-black>
+        <p class=" mt-10 font-bold text-xl text-black ">Betöltés...</p>
+        <p class="mt-2 font-bold text-xl text-black">Éppen hitelesítjük az email címed!</p>
+    </div>
+</div>
+<div *ngIf="state == 'Success'">
+    <div class="z-[200] flex flex-col justify-center items-center h-full w-full top-0 left-0 absolute bg-white">
+        <svg  width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM11.7682 15.6402L16.7682 9.64018L15.2318 8.35982L10.9328 13.5186L8.70711 11.2929L7.29289 12.7071L10.2929 15.7071L11.0672 16.4814L11.7682 15.6402Z" fill="#2f8039"/>
+            </svg>
+        <p class=" mt-2 font-bold text-xl text-black ">Sikeres hitelesítés</p>
+        <a href="login" class="w-[90%] md:w-1/2 lg:w-1/3 xl:w-1/4 mt-5">
+            <button class="bg-blue-500 text-white py-2 px-4 rounded-full w-full">Vissza a bejelentkezéshez!</button>
+        </a>
+    </div>
+</div>
+<div *ngIf="state == 'Failure'">
+    <div class="z-[200] flex flex-col justify-center items-center h-full w-full top-0 left-0 absolute bg-white">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM7.29289 16.7071C6.90237 16.3166 6.90237 15.6834 7.29289 15.2929L10.5858 12L7.29289 8.70711C6.90237 8.31658 6.90237 7.68342 7.29289 7.29289C7.68342 6.90237 8.31658 6.90237 8.70711 7.29289L12 10.5858L15.2929 7.29289C15.6834 6.90237 16.3166 6.90237 16.7071 7.29289C17.0976 7.68342 17.0976 8.31658 16.7071 8.70711L13.4142 12L16.7071 15.2929C17.0976 15.6834 17.0976 16.3166 16.7071 16.7071C16.3166 17.0976 15.6834 17.0976 15.2929 16.7071L12 13.4142L8.70711 16.7071C8.31658 17.0976 7.68342 17.0976 7.29289 16.7071Z" fill="#d61818"/>
+          </svg>
+        <p class=" mt-2 font-bold text-xl text-black ">Sikertelen hitelesítés...</p>
+        <p class="mt-2  text-xl text-black">Probáld meg később vagy vedd fel a kapcsolatot velünk itt: infodigimeter.hu</p>
+    </div>
+</div>

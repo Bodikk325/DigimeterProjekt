@@ -26,7 +26,7 @@ export class AiChatComponent implements AfterViewChecked {
     this.isChatVisible = false;
 
     this.messages.push({
-      text: "Kérdésed van esetleg? Ne habozz kérdezni, segítek ahol tudok!", user: false
+      text: "Kérdésed van esetleg? Ne habozz kérdezni, segítek, ahol tudok!", user: false
     });
   }
 

@@ -40,7 +40,7 @@
 
   <div class="bg-white container big_cont px-4 pb-8 mb- p-4">
     <div class="mb-4 w-full md:w-1/3">
-      <span class="font-bold mb-5">Szürés:</span>
+      <span class="font-bold mb-5">Szűrés: válasszon, hogy mely cégekhez szeretné hozzámérni magát:</span>
       <select [(ngModel)]="selectedValue" (change)="onSelect(selectedValue)"
         class="block w-full bg-gray-50 border-solid border-2 border-gray-200 text-gray-700 py-3 rounded-lg leading-tight focus:outline-none px-4">
         <option selected [value]="'Összes'">Összes</option>
@@ -156,7 +156,7 @@
   <div class="z-[200] flex flex-col justify-center items-center h-full w-full top-0 left-0 absolute bg-white">
     <app-loader-black></app-loader-black>
   <p class=" mt-10 font-bold text-xl text-black ">Eredményed betöltése...</p>
-<p class="mt-2 font-bold text-xl text-black">Ne próbáld meg saját magad kiszámolni a végeredményt, a DIGIMÉTER
+<p class="mt-2 font-bold text-xl text-black">Ne próbáld meg saját magad kiszámolni a végeredményt, a Digiméter
   különleges számításokat alkalmaz a legjobb eredmény eléréséért!</p>
 </div>
 

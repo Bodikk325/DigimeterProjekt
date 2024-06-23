@@ -1,3 +1,7 @@
+@defer (when isLoaded) {
+
+
+
 <div *ngIf="isQuizInProgress">
 
   <div class="w-full flex flex-row justify-between mt-5">
@@ -38,7 +42,7 @@
     <div *ngIf="filteredQuestions[currentQuestionIndex] as currentQuestion"
       class="mx-auto w-full max-w-4xl h-screen max-h-[80vh] p-6 m-4 bg-white rounded-lg shadow-xl flex flex-col">
       <h2 class="text-2xl font-semibold text-blue-700 mb-8 mt-8 mx-6">
-        Kérdés : {{currentQuestion.question}}
+        Kérdés:{{currentQuestion.question}}
       </h2>
       <div class="flex-1 overflow-auto mb-8">
         <ul class="list-none pl-0 space-y-6">
@@ -52,8 +56,7 @@
               <input type="text" *ngIf="item.contains_Textbox" [value]="item.answer"
                 [(ngModel)]="currentQuestion.textBoxAnswer" name="answer" (input)="onTextBoxChange(currentQuestion)"
                 class="ml-10 h-12 border-2 w-[20rem] border-solid border-gray-300 rounded-lg p-2">
-              <label *ngIf="item.contains_Textbox" class="ml-4 text-lg text-gray-700">Vagy írja be a választ a
-                mezőbe!</label>
+              <label *ngIf="item.contains_Textbox" class="ml-4 text-lg text-gray-700">Egyéb, éspedig</label>
             </div>
             <div *ngIf="currentQuestion.isThereMoreThanOneAnswer" class="flex items-center p-4">
               <input type="checkbox" *ngIf="!item.contains_Textbox" [value]="item.id" [(ngModel)]="item.selected"
@@ -63,8 +66,7 @@
               <input type="text" *ngIf="item.contains_Textbox" [value]="item.textBoxAnswer"
                 [(ngModel)]="currentQuestion.textBoxAnswer" name="answer"
                 class="ml-10 border-solid border-2 h-12 w-[20rem]  border-gray-300 rounded-lg p-2">
-              <label *ngIf="item.contains_Textbox" class="ml-4 text-lg text-gray-700">Vagy írja be a választ a
-                mezőbe!</label>
+              <label *ngIf="item.contains_Textbox" class="ml-4 text-lg text-gray-700">Egyéb, éspedig</label>
 
             </div>
           </li>
@@ -101,3 +103,16 @@
     <p class="mt-2 font-bold text-xl text-black">Kis türelem, hamarosan továbbirányítunk a kiértékelésre!</p>
   </div>
 </div>
+
+}
+
+@placeholder {
+
+  <div>
+    <div class="z-[200] flex flex-col justify-center items-center h-full w-full top-0 left-0 absolute bg-white">
+      <app-loader-black></app-loader-black>
+      <p class=" mt-10 font-bold text-xl text-black ">Betöltés...</p>
+      <p class="mt-2 font-bold text-xl text-black">Töltsd ki az adataidat, mielőtt elindítanád a Digiméter kérdőívet!</p>
+    </div>
+  </div>
+  }
