@@ -120,7 +120,7 @@ export class QuizResultsService {
   getResultsForUser() : Observable<MainPageResult[]>
   {
     let body = new HttpParams();
-    body = body.set('userId', AuthServiceHelper.getJwtToken());
+    body = body.set('jwt', AuthServiceHelper.getJwtToken());
 
     return this.http.post<MainPageResult[]>(this.url + "getResultsForUser.php", body, {withCredentials : true});
   }
@@ -138,6 +138,7 @@ export class QuizResultsService {
     let body = new HttpParams();
     body = body.set('resultId', resultId);
     body = body.set('category', category);
+    body = body.set('jwt', AuthServiceHelper.getJwtToken());
 
     return this.http.post<Result>(this.url + "getFinalResult.php", body, {withCredentials : true});
   }
@@ -145,7 +146,7 @@ export class QuizResultsService {
   saveToDatabase(quizResult : string, resultType : string, id : string) : Observable<any>
   {
     let body = new HttpParams();
-    body = body.set('id', localStorage.getItem("currentUser") ?? "");
+    body = body.set('jwt', AuthServiceHelper.getJwtToken());
     body = body.set('result', quizResult);
     body = body.set('resultId', id);
     body = body.set('date', new Date().toDateString());
@@ -158,11 +159,8 @@ export class QuizResultsService {
   {
     let body = new HttpParams();
     body = body.set('resultId', resultId);
-    body = body.set('userId', localStorage.getItem("currentUser") ?? "");
+    body = body.set('jwt', AuthServiceHelper.getJwtToken());
 
     return this.http.post<MainPageResult[]>(this.url + "removeResult.php", body, {withCredentials : true});
   }
-
-  
-
 }

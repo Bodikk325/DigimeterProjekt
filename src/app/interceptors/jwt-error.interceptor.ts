@@ -31,7 +31,7 @@ export const jwtErrorInterceptor: HttpInterceptorFn = (req, next) => {
           location.href = "login"
         }, 3000);
       }
-      if (error.error == "SessionHiba") {
+      if (error.error == "LejartSession") {
         notificationService.show("Lejárt a munkamenet, kijelentkezés...", NotificationType.error)
         localStorage.removeItem("currentUser")
         setTimeout(() => {

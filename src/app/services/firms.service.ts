@@ -4,6 +4,7 @@ import { Observable, map } from 'rxjs';
 import { Point } from '../models/Point';
 import { MyFirm } from '../models/MyFirm';
 import { httpUrl } from '../variables';
+import { AuthServiceHelper } from '../helpers/authServiceHelper';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class FirmsService {
   saveMyFirmData(myFirm : MyFirm)
   {
     let body = new HttpParams();
-    body = body.set('userId', localStorage.getItem("currentUser") ?? "");
+    body = body.set('jwt', AuthServiceHelper.getJwtToken());
     body = body.set('region', myFirm.Region);
     body = body.set('field', myFirm.Field);
     body = body.set('employees', myFirm.Workers);
@@ -44,7 +45,7 @@ export class FirmsService {
   getFirmData()
   {
     let body = new HttpParams();
-    body = body.set('userId', localStorage.getItem("currentUser") ?? "");
+    body = body.set('jwt', AuthServiceHelper.getJwtToken());
     return this.http.post(this.url + "getMyFirmData.php", body, {withCredentials : true});
   }
 

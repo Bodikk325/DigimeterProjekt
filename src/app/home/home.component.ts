@@ -85,6 +85,11 @@ export class HomeComponent implements OnDestroy {
 
   }
 
+  sendEmail()
+  {
+    
+  }
+
   //#region for managing subscriptions
 
   manageSubscriptions() {

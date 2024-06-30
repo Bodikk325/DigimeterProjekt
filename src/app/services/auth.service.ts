@@ -73,7 +73,7 @@ export class AuthService {
 
   saveContQuiz(cont_quiz: Question[]): Observable<any> {
     let body = new HttpParams();
-    body = body.set('id', AuthServiceHelper.getJwtToken());
+    body = body.set('jwt', AuthServiceHelper.getJwtToken());
     body = body.set('cont_result', JSON.stringify(cont_quiz));
     return this.http.post(this.url + "saveContResult.php", body, { withCredentials: true })
   }
@@ -184,6 +184,23 @@ export class AuthService {
         }
       }
     );
+  }
+
+  sendEmail()
+  {
+    let body = new HttpParams();
+    body = body.set('username', "username");
+    return this.http.post(this.url + "sendEmail.php", body).subscribe(
+      {
+        next : (_) => {
+          console.log("oksa")
+        },
+        error : (error) => 
+          {
+            console.log(error)
+          }
+      }
+    )
   }
 
 }

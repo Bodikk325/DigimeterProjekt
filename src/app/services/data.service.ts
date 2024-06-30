@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Question } from '../models/Question';
 import { httpUrl } from '../variables';
+import { AuthServiceHelper } from '../helpers/authServiceHelper';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,10 @@ export class DataService {
   }
 
   getQuestions(topic: string): Observable<Question[]> {
-    return this.http.get<any[]>(this.url + "readQuestions.php?topic=" + topic, { withCredentials: true }).pipe(
+    let body = new HttpParams();
+    body = body.set('jwt', AuthServiceHelper.getJwtToken());
+    body = body.set('topic', topic);
+    return this.http.post<any[]>(this.url + "readQuestions.php", body , { withCredentials: true }).pipe(
       map(data => this.transformQuestions(data))
     );
   }

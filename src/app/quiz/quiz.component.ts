@@ -65,7 +65,6 @@ export class QuizComponent implements CanComponentDeactivate {
       this.getContQuizSubscription = this.authService.getContQuiz().subscribe(
         {
           next: (quiz : Question[]) => {
-            console.log(quiz)
             this.filteredQuestions = quiz;
             this.questions = this.filteredQuestions;
             this.currentQuestionIndex = QuestionHelpers.countSelectedAnswers(this.filteredQuestions);
@@ -154,8 +153,6 @@ export class QuizComponent implements CanComponentDeactivate {
 
 
     this.currentQuestionIndex++
-
-    console.log(this.filteredQuestions)
 
     if (this.currentQuestionIndex == this.filteredQuestions.length) {
       this.isQuizInProgress = false;
