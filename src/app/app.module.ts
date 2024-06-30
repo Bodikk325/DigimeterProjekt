@@ -7,7 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuizComponent } from './quiz/quiz.component';
 import { ResultComponent } from './result/result.component';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { StartComponent } from './start/start.component';
@@ -25,6 +25,7 @@ import { AiChatComponent } from './ai-chat/ai-chat.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { LoadingComponent } from './loading/loading.component';
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
+import { jwtErrorInterceptor } from './interceptors/jwt-error.interceptor';
 
 
 @NgModule({
@@ -60,7 +61,7 @@ import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptors([jwtErrorInterceptor])),
   ],
   bootstrap: [AppComponent]
 })

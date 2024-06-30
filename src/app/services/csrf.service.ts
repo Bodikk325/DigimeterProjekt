@@ -8,9 +8,11 @@ import { httpUrl } from '../variables';
 })
 export class CsrfService {
 
-  url = httpUrl;
+  url: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.url = httpUrl;
+  }
 
   getCsrfToken(): Observable<any> {
     return this.http.get(this.url + "csrf.php", { withCredentials: true });

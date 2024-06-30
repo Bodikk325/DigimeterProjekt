@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, afterNextRender } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -7,25 +7,15 @@ import { AuthService } from '../services/auth.service';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+
   menuOpen! : boolean;
   showLogOut! : boolean;
   authService! : AuthService;
-  private cdRef!: ChangeDetectorRef;
 
-  constructor(authService : AuthService, cdRef: ChangeDetectorRef) {
+  constructor(authService : AuthService) {
     this.authService = authService;
     this.menuOpen = false;
     this.showLogOut = false;
-    this.cdRef = cdRef;
-
-    afterNextRender(() => this.initializeAfterNextRenderVariables())
-  }
-
-
-  initializeAfterNextRenderVariables()
-  {
-    this.showLogOut = this.authService.checkIfUserIsLoggedIn()
-    this.cdRef.detectChanges()
   }
 
   toggleMenu() {

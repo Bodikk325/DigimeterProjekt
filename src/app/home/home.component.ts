@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
 import { QuizResultsService } from '../services/quizResults.service';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { NotificationType } from '../notification/notification.component';
 import { MainPageResult } from '../models/MainPageResult';
 import { Subscription } from 'rxjs';
 import { MyFirm } from '../models/MyFirm';
-import { isPlatformBrowser } from '@angular/common';
 import { NotificationService } from '../services/notification.service';
 import { FirmsService } from '../services/firms.service';
 import { AuthService } from '../services/auth.service';
 import { Question } from '../models/Question';
+import { Result } from '../models/Result';
 
 @Component({
   selector: 'app-home',
@@ -24,29 +24,23 @@ export class HomeComponent implements OnDestroy {
   private removeResultSubscription!: Subscription;
   private getUserContQuizSubscription!: Subscription;
 
-  authService : AuthService;
+  authService: AuthService;
+  myFirm: MyFirm;
+  results: MainPageResult[];
+  selectedResult: MainPageResult;
+  contQuizQuestions: Question[];
 
-  myFirm!: MyFirm;
+  isResultRemoveLoading: boolean;
 
-  results!: MainPageResult[];
+  isContQuizLoaded: boolean;
+  isFirmDataLoaded: boolean;
+  isResultsLoaded : boolean;
 
-  selectedResult! : MainPageResult;
+  isFirmSavingLoading : boolean;
+  showDialog: boolean;
+  messages: string[];
 
-  contQuizQuestions! : Question[];
-
-  isMainPageLoaded: boolean = false;
-
-  isResultsLoading : boolean = false;
-
-  isContQuizLoading : boolean = false;
-
-  showDialog : boolean = false;
-
-  messages: string[] = [];
-
-  isLoading: boolean = false;
-
-  constructor(authService : AuthService,private notiService: NotificationService, private quizResultService: QuizResultsService, private firmService: FirmsService, private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(authService: AuthService, private notiService: NotificationService, private quizResultService: QuizResultsService, private firmService: FirmsService, private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {
 
     this.messages = [
       "Ez itt a főoldal!",
@@ -54,6 +48,26 @@ export class HomeComponent implements OnDestroy {
       "Fontos, hogy mielőtt új kérdőívet töltenél ki azelőtt meg kell adnod a céged adatait!",
       "Ehhez gördíts le a lap aljára ezen a képernyőn!"
     ]
+
+    this.results = []
+    this.selectedResult = {
+        average_points: 0,
+        date: 0,
+        finalScore: 0,
+        max_point: 0,
+        resultId: '',
+        resultType: ''
+    }
+    this.contQuizQuestions = []
+    this.isResultRemoveLoading = false;
+
+
+    this.isContQuizLoaded = false;
+    this.isFirmDataLoaded = false;
+    this.isResultsLoaded = false;
+
+    this.isFirmSavingLoading = false;
+    this.showDialog = false;
 
     this.myFirm = {
       UserName: "",
@@ -67,106 +81,115 @@ export class HomeComponent implements OnDestroy {
 
     this.authService = authService;
 
-    this.initializeComponent();
+    this.manageSubscriptions();
+
   }
 
+  //#region for managing subscriptions
 
-  initializeComponent() {
-    this.isMainPageLoaded = false;
+  manageSubscriptions() {
 
     this.getUserContQuizSubscription = this.authService.getContQuiz().subscribe(
       {
-        next : (result) => {
-          this.isContQuizLoading = true;
-          if(JSON.parse(result['cont_result']) == null)
-            {
-              this.contQuizQuestions = []
-            }
-          else 
-          {
-            this.contQuizQuestions = JSON.parse(result['cont_result'])
+        next: (result) => {
+          this.isContQuizLoaded = true;
+          if (result == null) {
+            this.contQuizQuestions = []
+          }
+          else {
+            this.contQuizQuestions = result
           }
         },
-        error : () => {
-          this.notiService.show("Valami hiba a mentett kérdőív állapot beolvasása során!", NotificationType.error)
-          this.isContQuizLoading = true;
+        error: (_) => {
+            this.isContQuizLoaded = true;
+            this.contQuizQuestions = []
         }
       }
     )
 
     this.getFirmDataSubscription = this.firmService.getFirmData().subscribe(
-      (result: any) => {
-        this.myFirm.Capital = result.capital;
-        this.myFirm.Revenue = result.revenue;
-        this.myFirm.Region = result.region;
-        this.myFirm.Workers = result.employees;
-        this.myFirm.Sector = result.sector;
-        this.myFirm.Field = result.field;
-        this.checkMainPageLoaded();
+      {
+        next: (result : any) => {
+          this.isFirmDataLoaded = true;
+          this.myFirm.Capital = result.capital;
+          this.myFirm.Revenue = result.revenue;
+          this.myFirm.Region = result.region;
+          this.myFirm.Workers = result.employees;
+          this.myFirm.Sector = result.sector;
+          this.myFirm.Field = result.field;
+        },
+        error : (_) => {
+          this.isFirmDataLoaded = true;
+          this.myFirm = {
+            UserName: "",
+            Capital: "",
+            Field: "",
+            Region: "",
+            Revenue: "",
+            Sector: "",
+            Workers: ""
+          }
+        }
       }
     );
 
     this.resultForUserSubscription = this.quizResultService.getResultsForUser().subscribe(
-      (result) => {
-        this.results = result;
-        this.checkMainPageLoaded();
+      {
+        next : (results : MainPageResult[]) => {
+          this.isResultsLoaded = true;
+          this.results = results
+        },
+        error : (_) => {
+          this.isResultsLoaded = true;
+          this.results = [];
+        }
       }
     );
   }
 
-  checkMainPageLoaded() {
-    if (this.myFirm && this.results) {
-      this.isMainPageLoaded = true;
-    }
-  }
+  //#endregion
 
-  selectedOptionForDelete(option : string, result : MainPageResult)
-  {
-    if(option == "Back")
-      {
-        this.showDialog = false;
-      }
-      else 
-      {
-        this.showDialog = false;
-        this.removeResult(result);
-      }
-  }
+  //#region methods for the removeResult and the saveFirm data functions
 
-  removeResultDialogShow(result : MainPageResult)
-  {
-    this.selectedResult = result;
-    this.showDialog = true;
-  }
 
-  removeResult(result : MainPageResult)
-  {
-    this.isResultsLoading = true;
+  removeResult(result: MainPageResult) {
+    this.isResultRemoveLoading = true;
     this.removeResultSubscription = this.quizResultService.removeResults(result.resultId).subscribe(
-      (res) => {
-        this.results = res;
-        this.isResultsLoading = false;
+      {
+        next: (result) => {
+          this.results = result;
+          this.isResultRemoveLoading = false;
+        },
+        error: (_) => {
+
+        }
       }
     )
   }
 
   saveToFirm() {
-    this.isLoading = true;
+    this.isFirmSavingLoading = true;
 
     this.saveFirmSubscription = this.firmService.saveMyFirmData(this.myFirm).subscribe(
-      (result) => {
-        this.notiService.show("Cégadatok sikeresen mentve!", NotificationType.positivie);
-        this.isLoading = false;
-      },
-      (error) => {
-        this.notiService.show("Valami hiba történt, kérlek próbáld meg később!", NotificationType.error);
-        this.isLoading = false;
+      {
+        next: (_) => {
+          this.notiService.show("Cégadatok sikeresen mentve!", NotificationType.positivie);
+          this.isFirmSavingLoading = false;
+        },
+        error: (_) => {
+          this.notiService.show("Valami hiba történt, kérlek próbáld meg később!", NotificationType.error);
+          this.isFirmSavingLoading = false;
+        }
       }
     )
   }
 
+  //#endregion
+
+  //#region for the validation of the firm data
+
   goToThemeBasedQuiz(category: string) {
-    if (this.myFirm.Field == "" || this.myFirm.Region == ""  || this.myFirm.Workers == ""  || this.myFirm.Capital == ""  || this.myFirm.Revenue == ""  || this.myFirm.Sector == "" ) {
+    if (this.myFirm.Field == "" || this.myFirm.Region == "" || this.myFirm.Workers == "" || this.myFirm.Capital == "" || this.myFirm.Revenue == "" || this.myFirm.Sector == "") {
       this.notiService.show("Nincsenek kitöltve a cégadatok! Kérünk töltsd ki azokat először!", NotificationType.error);
     } else {
       this.router.navigate(['quiz', category]);
@@ -174,12 +197,37 @@ export class HomeComponent implements OnDestroy {
   }
 
   checkFirmDataAndThenGoToQuiz() {
-    if (this.myFirm.Field == ""  || this.myFirm.Region == ""  || this.myFirm.Workers == ""  || this.myFirm.Capital == ""  || this.myFirm.Revenue == ""  || this.myFirm.Sector == "" ) {
+    if (this.myFirm.Field == "" || this.myFirm.Region == "" || this.myFirm.Workers == "" || this.myFirm.Capital == "" || this.myFirm.Revenue == "" || this.myFirm.Sector == "") {
       this.notiService.show("Nincsenek kitöltve a cégadatok! Kérünk töltsd ki azokat először!", NotificationType.error);
     } else {
-      this.router.navigate(['quiz' , ""]);
+      this.router.navigate(['quiz', ""]);
     }
   }
+
+  //#endregion
+
+  //#region for the result delete dialog
+
+
+  selectedOptionForDelete(option: string, result: MainPageResult) {
+    if (option == "Back") {
+      this.showDialog = false;
+    }
+    else {
+      this.showDialog = false;
+      this.removeResult(result);
+    }
+  }
+
+  removeResultDialogShow(result: MainPageResult) {
+    this.selectedResult = result;
+    this.showDialog = true;
+  }
+
+  //#endregion
+
+
+  //#region for the ngOnDestroy
 
   ngOnDestroy() {
     if (this.resultForUserSubscription) {
@@ -198,4 +246,6 @@ export class HomeComponent implements OnDestroy {
       this.getUserContQuizSubscription.unsubscribe();
     }
   }
+
+  //#endregion
 }

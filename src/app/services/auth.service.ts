@@ -7,9 +7,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { User } from '../models/User';
 import { NotificationService } from './notification.service';
 import { httpUrl } from '../variables';
-import { Result } from '../models/Result';
-import { ResultQuestion } from '../models/ResultQuestion';
 import { Question } from '../models/Question';
+import { AuthServiceHelper } from '../helpers/authServiceHelper';
+
 
 @Injectable({
   providedIn: 'root'
@@ -42,14 +42,7 @@ export class AuthService {
     }
   }
 
-  logOut() {
-    localStorage.removeItem("currentUser")
-    this.router.navigateByUrl("login");
-  }
-
-  checkIfUserIsLoggedIn(): boolean {
-    return localStorage.getItem("currentUser") != null;
-  }
+  //#region functions for the ui
 
   showLoginForm(show: boolean): void {
     this.loginFormSubject.next(show);
@@ -59,13 +52,39 @@ export class AuthService {
     this.loadingButtonSubject.next(loading);
   }
 
-  onLoginSubmit(loginForm: FormGroup): void {
+  //#endregion
 
-    if(loginForm.invalid)
+
+
+  confirmEmailAddress(token: string) {
+    let body = new HttpParams();
+    body = body.set('token', token);
+    this.http.post(this.url + 'confirmEmail.php', body, { withCredentials: true }).subscribe(
       {
-        this.notificationService.show("Nem helyes formátúm!", NotificationType.error);
-        return;
+        next: () => {
+          this.confirmAddressSubject.next("Success");
+        },
+        error: (_) => {
+          this.confirmAddressSubject.next("Failure");
+        }
       }
+    )
+  }
+
+  saveContQuiz(cont_quiz: Question[]): Observable<any> {
+    let body = new HttpParams();
+    body = body.set('id', AuthServiceHelper.getJwtToken());
+    body = body.set('cont_result', JSON.stringify(cont_quiz));
+    return this.http.post(this.url + "saveContResult.php", body, { withCredentials: true })
+  }
+
+  getContQuiz(): Observable<Question[]> {
+    let body = new HttpParams();
+    body = body.set('id', AuthServiceHelper.getJwtToken());
+    return this.http.post<Question[]>(this.url + "getContQuiz.php", body, { withCredentials: true })
+  }
+
+  onLoginSubmit(loginForm: FormGroup) {
 
     this.isErrorSubject.next(false);
 
@@ -76,6 +95,11 @@ export class AuthService {
       return;
     }
 
+    if (loginForm.invalid) {
+      this.notificationService.show("Nem helyes formátúm! Kérünk email címet adj meg a megfelelő helyre!", NotificationType.error);
+      return;
+    }
+
     let body = new HttpParams();
     body = body.set('username', username);
     body = body.set('password', password);
@@ -83,76 +107,35 @@ export class AuthService {
     this.isButtonLoading(true);
 
     this.http.post(this.url + 'login.php', body, { withCredentials: true }).subscribe(
-      (result: any) => {
-        localStorage.setItem('currentUser', result)
-        this.isButtonLoading(false);
-        this.router.navigateByUrl("home")
-      },
-      (error) => {
-        if(error.error.message == "NotConfirmed")
-          {
+      {
+        next: (result) => {
+          localStorage.setItem('currentUser', result as string)
+          this.isButtonLoading(false);
+          this.router.navigateByUrl("home")
+        },
+        error: (error) => {
+          if (error.error.message == "NotConfirmed") {
             this.notificationService.show("Ez az email cím még nincs aktiválva, nézd meg a levelesládád!", NotificationType.error)
           }
-          else
-          {
+          else {
             this.notificationService.show("Helytelen felhasználónév vagy jelszó!", NotificationType.error)
           }
-        this.isButtonLoading(false);
-        this.isErrorSubject.next(true);
+          this.isButtonLoading(false);
+          this.isErrorSubject.next(true);
+        }
       }
     );
   }
 
-  confirmEmailAddress(token : string)
-  {
-    let body = new HttpParams();
-    body = body.set('token', token);
-    this.http.post(this.url + 'confirmEmail.php', body, { withCredentials: true }).subscribe(
-      {
-        next : () => {
-          this.confirmAddressSubject.next("Success");
-        },
-        error : (error) => {
-          this.confirmAddressSubject.next("Failure");
-        }
-      }
-    )
+  logOut() {
+    localStorage.removeItem("currentUser")
+    this.router.navigateByUrl("login");
   }
 
-  
-
-  saveContQuiz(cont_quiz : Question[]) : Observable<any>
-  {
-    let body = new HttpParams();
-    body = body.set('id', localStorage.getItem('currentUser') ?? "");
-    body = body.set('cont_result', JSON.stringify(cont_quiz));
-    return this.http.post(this.url + "saveContResult.php", body, {withCredentials : true})
-  }
-
-  getContQuiz() : Observable<any>
-  {
-    let body = new HttpParams();
-    body = body.set('id', localStorage.getItem('currentUser') ?? "");
-    return this.http.post(this.url + "getContQuiz.php", body, {withCredentials : true})
-  }
-
-
-  onRegisterSubmit(registerForm: FormGroup): void {
-
-    if(registerForm.invalid)
-      {
-        this.notificationService.show("Nem helyes formátúm!", NotificationType.error);
-        return;
-      }
-
+  onRegisterSubmit(registerForm: FormGroup) {
     this.isErrorSubject.next(false);
 
     const { username, password, confirmPassword, acceptedTerms } = registerForm.value;
-
-    if (acceptedTerms !== true) {
-      this.notificationService.show("Kerünk, hogy fogadd el az adatvédelmi nyilatkozatot!", NotificationType.error)
-      return;
-    }
 
     if (password == "" || username == "") {
       this.notificationService.show("Kérünk tölts ki minden adatot!", NotificationType.error)
@@ -164,30 +147,43 @@ export class AuthService {
       return;
     }
 
-    
+    if (registerForm.invalid) {
+      this.notificationService.show("Nem helyes formátúm!", NotificationType.error);
+      return;
+    }
+
+    if (acceptedTerms !== true) {
+      this.notificationService.show("Kerünk, hogy fogadd el az adatvédelmi nyilatkozatot!", NotificationType.error)
+      return;
+    }
+
     this.isButtonLoading(true);
 
     let body = new HttpParams();
     body = body.set('username', username);
     body = body.set('password', password);
+
     this.http.post(this.url + 'register.php', body, { withCredentials: true }).subscribe(
-      (result) => {
-        this.notificationService.show("Sikeres regisztráció!", NotificationType.positivie)
-        this.showLoginForm(true);
-        this.isButtonLoading(false);
-      },
-      (error) => {
-        if (error.status == 409) {
-          this.notificationService.show("A felhasználónév már foglalt.", NotificationType.error)
+      {
+        next : (_) => {
+          this.notificationService.show("Sikeres regisztráció!", NotificationType.positivie)
+          this.showLoginForm(true);
           this.isButtonLoading(false);
-          this.isErrorSubject.next(true);
-        }
-        else {
-          this.notificationService.show("Valami hiba történt, kérünk próbáld újra később!", NotificationType.error)
-          this.isButtonLoading(false);
-          this.isErrorSubject.next(true);
+        },
+        error : (error) => {
+          if (error.status == 409) {
+            this.notificationService.show("A felhasználónév már foglalt.", NotificationType.error)
+            this.isButtonLoading(false);
+            this.isErrorSubject.next(true);
+          }
+          else {
+            this.notificationService.show("Valami hiba történt, kérünk próbáld újra később!", NotificationType.error)
+            this.isButtonLoading(false);
+            this.isErrorSubject.next(true);
+          }
         }
       }
     );
   }
+
 }

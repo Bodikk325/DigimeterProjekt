@@ -1,21 +1,17 @@
 @defer (when isLoaded) {
-
-
-
 <div *ngIf="isQuizInProgress">
-
-  <div class="w-full flex flex-row justify-between mt-5">
+  <div class="w-full px-1 flex flex-col lg:flex-row justify-between mt-5">
     <div>
       <a routerLink="../../home">
-        <button 
-          class="bg-white font-bold hover:bg-gray-200 border-solid border-2 border-gray-400 disabled:opacity-50 text-black py-3 px-6 rounded-lg">
+        <button
+          class="bg-white text-sm lg:text-lg font-bold hover:bg-gray-200 border-solid border-2 border-gray-400 disabled:opacity-50 text-black py-3 px-6 rounded-lg">
           Vissza a főoldalra
         </button>
       </a>
     </div>
-    <div class="w-full flex justify-end ">
+    <div class="w-full flex lg:justify-end mt-2 lg:mt-0">
       <span
-        class="p-4 flex flex-row justify-center items-center border-solid border-2 rounded-lg shadow-md border-gray-400 text-xl text-right">
+        class="p-2 lg:p-4 flex flex-row justify-center items-center border-solid border-2 rounded-lg shadow-md border-gray-400 text-sm lg:text-xl text-right">
         <div *ngIf="removedQuestions" class="mr-2" (mouseenter)="tooltip.show()" (mouseleave)="tooltip.hide()">
           <svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="24" cy="24" r="24" transform="matrix(-1 0 0 1 48 0)" fill="#D1971B" />
@@ -38,47 +34,82 @@
     </div>
   </div>
 
-  <div class="flex justify-center w-[50rem] relative">
+  <div class="flex justify-center w-full lg:w-[50rem] relative">
     <div *ngIf="filteredQuestions[currentQuestionIndex] as currentQuestion"
-      class="mx-auto w-full max-w-4xl h-screen max-h-[80vh] p-6 m-4 bg-white rounded-lg shadow-xl flex flex-col">
-      <h2 class="text-2xl font-semibold text-blue-700 mb-8 mt-8 mx-6">
-        Kérdés:{{currentQuestion.question}}
+      class="mx-auto w-full max-w-4xl h-screen max-h-[80vh] p-2 lg:p-6 lg:m-4 bg-white rounded-lg shadow-xl flex flex-col">
+      <h2 class="text-base lg:text-2xl font-semibold text-blue-700 mb-8 mt-8 mx-3 lg:mx-6">
+        Kérdés: {{currentQuestion.question}}
       </h2>
       <div class="flex-1 overflow-auto mb-8">
         <ul class="list-none pl-0 space-y-6">
           @for (item of currentQuestion.answers; track $index) {
-          <li class="flex items-start">
+          <li class="flex items-start text-sm lg:text-lg"
+            *ngIf="item.id.indexOf('egyik_sem') == -1 && item.id.indexOf('nem_tudja') == -1">
             <div *ngIf="!currentQuestion.isThereMoreThanOneAnswer" class="flex items-center p-4">
-              <input type="radio" *ngIf="!item.contains_Textbox" [value]="item.id"
+              <input type="radio" *ngIf="!item.contains_Textbox" [value]="item.id" id="{{item.id}}"
                 [(ngModel)]="currentQuestion.selectedAnswer" name="answer" (change)="onRadioChange(currentQuestion)"
-                class="form-radio h-6 w-6 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0">
-              <label *ngIf="!item.contains_Textbox" class="ml-4 text-lg text-gray-700">{{item.answer}}</label>
-              <input type="text" *ngIf="item.contains_Textbox" [value]="item.answer"
-                [(ngModel)]="currentQuestion.textBoxAnswer" name="answer" (input)="onTextBoxChange(currentQuestion)"
-                class="ml-10 h-12 border-2 w-[20rem] border-solid border-gray-300 rounded-lg p-2">
-              <label *ngIf="item.contains_Textbox" class="ml-4 text-lg text-gray-700">Egyéb, éspedig</label>
+                class="form-radio h-4 w-4 lg:h-6 lg:w-6 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0">
+              <label *ngIf="!item.contains_Textbox" for="{{item.id}}"
+                class="ml-4  text-gray-700">{{item.answer}}</label>
+              <div class="flex flex-col">
+                <label for="{{item.id}}"
+                  *ngIf="item.contains_Textbox && !(item.id == 'A7_1' || item.id == 'A8_20' || item.id == 'D2_103' || item.id == 'D10_20' || item.id == 'G4_24')"
+                  class="lg:ml-2 text-gray-700">Egyéb, éspedig</label>
+                <label for="{{item.id}}"
+                  *ngIf="item.contains_Textbox && (item.id == 'A7_1' || item.id == 'A8_20' || item.id == 'D2_103' || item.id == 'D10_20' || item.id == 'G4_24')"
+                  class="lg:ml-2 text-gray-700">Ide írd a választ!</label>
+                <input type="text" *ngIf="item.contains_Textbox" [value]="item.answer" id="{{item.id}}"
+                  [(ngModel)]="currentQuestion.textBoxAnswer" name="answer" (input)="onTextBoxChange(currentQuestion)"
+                  class="lg:ml-2 h-12 border-2 w-[10rem] lg:w-[20rem] border-solid border-gray-300 rounded-lg p-2">
+              </div>
             </div>
             <div *ngIf="currentQuestion.isThereMoreThanOneAnswer" class="flex items-center p-4">
               <input type="checkbox" *ngIf="!item.contains_Textbox" [value]="item.id" [(ngModel)]="item.selected"
-                (change)="updateSelectedAnswers(currentQuestion, item)"
-                class="form-checkbox h-6 w-6 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0">
-              <label *ngIf="!item.contains_Textbox" class="ml-4 text-lg text-gray-700">{{item.answer}}</label>
-              <input type="text" *ngIf="item.contains_Textbox" [value]="item.textBoxAnswer"
-                [(ngModel)]="currentQuestion.textBoxAnswer" name="answer"
-                class="ml-10 border-solid border-2 h-12 w-[20rem]  border-gray-300 rounded-lg p-2">
-              <label *ngIf="item.contains_Textbox" class="ml-4 text-lg text-gray-700">Egyéb, éspedig</label>
-
+                id="{{item.id}}" (change)="updateSelectedAnswers(currentQuestion, item)"
+                class="form-checkbox h-4 w-4 lg:h-6 lg:w-6 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0">
+              <label for="{{item.id}}" *ngIf="!item.contains_Textbox"
+                class="ml-4  text-gray-700">{{item.answer}}</label>
+              <div class="flex flex-col">
+                <label for="{{item.id}}"
+                  *ngIf="item.contains_Textbox && !(item.id == 'A7_1' || item.id == 'A8_20' || item.id == 'D2_103' || item.id == 'D10_20' || item.id == 'G4_24')"
+                  class="lg:ml-2 text-gray-700">Egyéb, éspedig</label>
+                <label for="{{item.id}}"
+                  *ngIf="item.contains_Textbox && (item.id == 'A7_1' || item.id == 'A8_20' || item.id == 'D2_103' || item.id == 'D10_20' || item.id == 'G4_24')"
+                  class="lg:ml-2 text-gray-700">Ide írd a választ!</label>
+                <input type="text" *ngIf="item.contains_Textbox" [value]="item.textBoxAnswer" id="{{item.id}}"
+                  [(ngModel)]="currentQuestion.textBoxAnswer" name="answer" (input)="changeTextBox()"
+                  class="lg:ml-2 border-solid border-2 h-12 w-[10rem] lg:w-[20rem]  border-gray-300 rounded-lg p-2">
+              </div>
+            </div>
+          </li>
+          <li class="flex items-start" *ngIf="item.id.indexOf('egyik_sem') !== -1">
+            <div class="flex items-center p-4">
+              <input type="checkbox" [(ngModel)]="isNoneSelected" (change)="handleNoneSelectedChange()" id="{{item.id}}"
+                class="form-checkbox h-4 w-4 lg:h-6 lg:w-6 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0">
+              <label class="ml-4 text-sm lg:text-lg text-gray-700" for="{{item.id}}">Egyiket sem</label>
+            </div>
+          </li>
+          <li class="flex items-start"
+            *ngIf="item.id.indexOf('nem_tudja') !== -1 && currentQuestion.isThereMoreThanOneAnswer">
+            <div class="flex items-center p-4">
+              <input type="checkbox" [(ngModel)]="isDontKnowSelected" (change)="handleDontKnowSelectedChange()"
+                id="{{item.id}}"
+                class="form-checkbox h-4 w-4 lg:h-6 lg:w-6 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0">
+              <label class="ml-4 text-gray-700 text-sm lg:text-lg" for="{{item.id}}">{{item.answer}}</label>
+            </div>
+          </li>
+          <li class="flex items-start"
+            *ngIf="item.id.indexOf('nem_tudja') !== -1 && !currentQuestion.isThereMoreThanOneAnswer">
+            <div class="flex items-center p-4">
+              <input type="radio" *ngIf="!item.contains_Textbox" [value]="item.id" id="{{item.id}}"
+                [(ngModel)]="currentQuestion.selectedAnswer" name="answer" (change)="onRadioChange(currentQuestion)"
+                class="form-radio h-4 w-4 lg:h-6 lg:w-6 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0">
+              <label *ngIf="!item.contains_Textbox" for="{{item.id}}"
+                class="ml-4 text-gray-700 text-sm lg:text-lg">{{item.answer}}</label>
             </div>
           </li>
           }
-          <li class="flex items-start"
-            *ngIf="currentQuestion.id == 'B14' || currentQuestion.id == 'B15' || currentQuestion.id == 'B16'">
-            <div class="flex items-center p-4">
-              <input type="checkbox" [(ngModel)]="BQuestionNoAnswer" (change)="B14Change()"
-                class="form-checkbox h-6 w-6 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0">
-              <label class="ml-4 text-lg text-gray-700">Egyiket sem</label>
-            </div>
-          </li>
+
         </ul>
       </div>
       <div class="flex justify-between p-4 mt-8">
@@ -108,11 +139,11 @@
 
 @placeholder {
 
-  <div>
-    <div class="z-[200] flex flex-col justify-center items-center h-full w-full top-0 left-0 absolute bg-white">
-      <app-loader-black></app-loader-black>
-      <p class=" mt-10 font-bold text-xl text-black ">Betöltés...</p>
-      <p class="mt-2 font-bold text-xl text-black">Töltsd ki az adataidat, mielőtt elindítanád a Digiméter kérdőívet!</p>
-    </div>
+<div>
+  <div class="z-[200] flex flex-col justify-center items-center h-full w-full top-0 left-0 absolute bg-white">
+    <app-loader-black></app-loader-black>
+    <p class=" mt-10 font-bold text-xl text-black ">Betöltés...</p>
+    <p class="mt-2 text-xl text-black">Ha valamelyik kérdés nem világos nyugodtan kérdezd meg DÖME-t!</p>
   </div>
-  }
+</div>
+}

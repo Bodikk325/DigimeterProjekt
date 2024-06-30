@@ -10,7 +10,6 @@ declare var d3: any;
 export class HomePieChartComponent {
   @Input() data1: any;
 
-  private margin = { top: 20, right: 30, bottom: 40, left: 40 };
   private width = 300;
   private height = 300;
   private radius = Math.min(this.width, this.height) / 2;
@@ -39,10 +38,10 @@ export class HomePieChartComponent {
   private createCharts(): void {
     const element = this.el.nativeElement.querySelector('.chart-container');
     element.innerHTML = ''; // Clear previous chart
-  
+
     // Create a container for the pie chart
-    const container = d3.select(element).append('div').attr('class', 'pie-container w-full mx-auto');
-  
+    const container = d3.select(element).append('div').attr('class', 'chart-container w-full mx-auto');
+
     this.createPieChart(container, this.adjustData(this.data1));
   }
 
@@ -62,29 +61,31 @@ export class HomePieChartComponent {
       value: d.value * scalingFactor
     }));
   }
-  
+
   private createPieChart(container: any, data: any): void {
+    const isMobile = window.innerWidth <= 600;
     const svg = container.append('svg')
-      .attr('width', '100%')
-      .attr('height', this.height + 50) // Increase height for legend
-      .attr('viewBox', `0 0 ${this.width + 200} ${this.height + 50}`) // Increase viewBox for legen
+      .attr('width', isMobile ? '200px' : '100%')
+      .attr('height', isMobile ? this.height + 100 : this.height + 50) // Increase height for legend in mobile view
+      .attr('viewBox', isMobile ? `0 0 ${this.width + 200} ${this.height + 100}` : `0 0 ${this.width + 200} ${this.height + 50}`) // Increase viewBox for legend in mobile view
       .append('g')
       .attr('transform', `translate(${this.width / 2},${this.height / 2})`);
-  
+
+
     const customColors = ['#775ad2', '#0072b5']; // Add your custom colors here
     const color = d3.scaleOrdinal(customColors);
-  
+
     const pie = d3.pie().value((d: any) => d.value).sort(null);
-  
+
     const arc = d3.arc()
       .innerRadius(0)
       .outerRadius(this.radius);
-  
+
     const arcs = svg.selectAll('arc')
       .data(pie(data))
       .enter().append('g')
       .attr('class', 'arc');
-  
+
     arcs.append('path')
       .attr('d', arc)
       .attr('fill', (d: any, i: number) => color(i))
@@ -99,9 +100,9 @@ export class HomePieChartComponent {
           return arc(interpolate(t));
         };
       });
-  
+
     const total = data.reduce((acc: any, curr: any) => acc + curr.value, 0);
-  
+
     arcs.append('text')
       .attr('transform', (d: any) => `translate(${arc.centroid(d)})`)
       .attr('dy', '0.35em')
@@ -118,31 +119,35 @@ export class HomePieChartComponent {
       })
       .style('font-weight', 'bold')
       .style('fill', 'white'); // Change the label color to white
-  
+
     // Ensure the legend creation is called after the arcs
     this.createLegend(svg, data, color);
   }
-  
+
   private createLegend(svg: any, data: any, color: any): void {
+    // Check if the screen width is less than or equal to 600px (mobile view)
+    const isMobile = window.innerWidth <= 600;
+
     const legend = svg.append('g')
       .attr('class', 'legend')
-      .attr('transform', `translate(${this.width / 2 + 20}, ${this.height / 2 - data.length * 20 / 2})`); // Adjust position
-  
+      .attr('transform', isMobile
+        ? `translate(0, ${this.height / 2 + 30})` // Position below the chart for mobile
+        : `translate(${this.width / 2 + 20}, ${this.height / 2 - data.length * 20 / 2})`); // Default position for larger screens
+
     const legendItems = legend.selectAll('.legend-item')
-      .data(data)
-      .enter().append('g')
-      .attr('class', 'legend-item')
-      
-      .style('font-weight', 'bold')
-      .attr('transform', (d: any, i: number) => `translate(0, ${i * 20})`);
-  
+    .data(data)
+    .enter().append('g')
+    .attr('class', 'legend-item')
+    .attr('transform', (d: any, i: number) => `translate(0, ${i * 30})`) // Increased spacing between items
+    .style('font-weight', 'bold');
+
     legendItems.append('rect')
       .attr('x', 0)
       .attr('y', 0)
       .attr('width', 10)
-      .attr('height', 10)
-      .style('fill', (d: any, i: number) => color(i))
-  
+      .attr('height', 5)
+      .style('fill', (d: any, i: number) => color(i));
+
     legendItems.append('text')
       .attr('x', 20)
       .attr('y', 10)
@@ -150,4 +155,5 @@ export class HomePieChartComponent {
       .style('font-size', '16px')
       .style('text-anchor', 'start');
   }
+
 }

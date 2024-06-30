@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Question } from '../models/Question';
 import { httpUrl } from '../variables';
@@ -9,20 +9,22 @@ import { httpUrl } from '../variables';
 })
 export class DataService {
 
-  url = httpUrl;
+  url: string;
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.url = httpUrl
+  }
 
-  getQuestions(topic : string): Observable<Question[]> {
-    // Az elérési út a fájlhoz az assets mappán belül
-    return this.http.get<any[]>(this.url + "readQuestions.php?topic=" + topic).pipe(
+  getQuestions(topic: string): Observable<Question[]> {
+    return this.http.get<any[]>(this.url + "readQuestions.php?topic=" + topic, { withCredentials: true }).pipe(
       map(data => this.transformQuestions(data))
     );
   }
 
   transformQuestions(data: any[]): Question[] {
+
     const questionMap = new Map<string, Question>();
-    const rawString = [];
+
     data.forEach(item => {
       if (!questionMap.has(item.id)) {
         questionMap.set(item.id, {
@@ -31,9 +33,9 @@ export class DataService {
           answers: [],
           maxpoint: item.max_point,
           category: item.Temakorok,
-          isThereMoreThanOneAnswer : item["Többválasztós-e"],
-          condition : item["condition"],
-          based_on : item["based_On"]
+          isThereMoreThanOneAnswer: item["Többválasztós-e"],
+          condition: item["condition"],
+          based_on: item["based_On"]
         });
       }
 
@@ -42,14 +44,18 @@ export class DataService {
         answer: item.answer,
         points: item.pontok,
         selected: false,
-        contains_Textbox : item.contains_Textbox,
-        id : item["answer_id"]
+        contains_Textbox: item.contains_Textbox,
+        id: item["answer_id"]
       });
 
-      // Frissítsük a max pontszámot, ha szükséges
       if (item.random_point > question!.maxpoint) {
         question!.maxpoint = item.random_point;
       }
+    });
+
+    questionMap.forEach((question) => {
+      question.answers.sort((a, b) => a.id.localeCompare(b.id));
+
     });
 
     return Array.from(questionMap.values());

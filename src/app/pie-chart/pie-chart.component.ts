@@ -42,9 +42,9 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
     const element = this.el.nativeElement.querySelector('.chart-container');
     element.innerHTML = ''; // Clear previous chart
 
-    // Create two separate containers for the pie charts
-    const container1 = d3.select(element).append('div').attr('class', 'pie-container w-full lg:w-1/2');
-    const container2 = d3.select(element).append('div').attr('class', 'pie-container w-full lg:w-1/2');
+    // Create two separate containers for each pie chart and its legend
+    const container1 = d3.select(element).append('div').attr('class', 'pie-chart-container mt-10');
+    const container2 = d3.select(element).append('div').attr('class', 'pie-chart-container mt-10');
 
     this.createPieChart(container1, this.adjustData(this.data1));
     this.createPieChart(container2, this.adjustData(this.data2));
@@ -68,15 +68,18 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   private createPieChart(container: any, data: any): void {
+
+    const isMobile = window.innerWidth <= 1024;
+
     const svg = container.append('svg')
       .attr('width', '100%')
-      .attr('height', this.height)
+      .attr('height', isMobile ? '150px' : '300px')
       .attr('viewBox', `0 0 ${this.width} ${this.height}`)
       .append('g')
       .attr('transform', `translate(${this.width / 2},${this.height / 2})`);
 
-      const customColors = ['#775ad2', '#0072b5']; // Add your custom colors here
-      const color = d3.scaleOrdinal(customColors);
+    const customColors = ['#775ad2', '#0072b5']; // Add your custom colors here
+    const color = d3.scaleOrdinal(customColors);
 
     const pie = d3.pie().value((d: any) => d.value).sort(null);
 
@@ -124,33 +127,34 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
       .style('fill', 'white');
 
     if (this.showLegend) {
-      this.createLegend(svg, data, color);
+      this.createLegend(container, data, color);
     }
   }
 
-  private createLegend(svg: any, data: any, color: any): void {
-    const legend = svg.append('g')
+  private createLegend(container: any, data: any, color: any): void {
+    const legend = container.append('div')
       .attr('class', 'legend')
-      .attr('transform', `translate(${this.width / 2 + 20}, -${this.height / 2})`);
+      .style('display', 'flex')
+      .style('flex-direction', 'column')
+      .style('justify-content', 'center')
+      .style('margin-top', '10px');
 
     const legendItems = legend.selectAll('.legend-item')
       .data(data)
-      .enter().append('g')
+      .enter().append('div')
       .attr('class', 'legend-item')
-      .attr('transform', (d: any, i: number) => `translate(0, ${i * 20})`);
+      .style('display', 'flex')
+      .style('align-items', 'center')
+      .style('margin-right', '10px');
 
-    legendItems.append('rect')
-      .attr('x', 0)
-      .attr('y', 0)
-      .attr('width', 10)
-      .attr('height', 10)
-      .style('fill', (d: any, i: number) => color(i));
+    legendItems.append('div')
+      .style('width', '10px')
+      .style('height', '10px')
+      .style('background-color', (d: any, i: number) => color(i))
+      .style('margin-right', '5px');
 
-    legendItems.append('text')
-      .attr('x', 20)
-      .attr('y', 10)
+    legendItems.append('div')
       .text((d: any) => d.category)
-      .style('font-size', '10px')
-      .style('text-anchor', 'start');
+      .style('font-size', '12px');
   }
 }

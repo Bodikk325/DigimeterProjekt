@@ -1,35 +1,31 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable, afterNextRender } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { LogarithmicScale } from 'chart.js';
 import { Point } from '../models/Point';
 import { MyFirm } from '../models/MyFirm';
 import { httpUrl } from '../variables';
-
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirmsService {
 
-  url = httpUrl;
-
-  points: Point[] = [
-  ]
-
-  newFirm: MyFirm = {
-    UserName: "",
-    Region: '',
-    Field: '',
-    Workers: '',
-    Sector: '',
-    Capital: '',
-    Revenue: ''
-  }
+  url : string;
+  newFirm: MyFirm;
 
   constructor(private http: HttpClient) {
-      
+
+      this.newFirm = {
+        UserName: "",
+        Region: '',
+        Field: '',
+        Workers: '',
+        Sector: '',
+        Capital: '',
+        Revenue: ''
+      }
+
+      this.url = httpUrl;
   }
 
   saveMyFirmData(myFirm : MyFirm)

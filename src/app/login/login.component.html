@@ -1,6 +1,7 @@
-<div class="w-full md:w-[20rem] xl:w-[35rem]">
+<div class="w-[100%] sm:w-[35rem] mx-auto md:w-[40rem] xl:w-[35rem]">
   <div *ngIf="loginShown"
     class="border-t-2 border-solid border-gray-100 relative bg-white text-black p-6 rounded shadow-2xl w-full mx-auto">
+    <h2 class="text-center font-bold mb-10 text-lg">Bejelentkezés</h2>
     <form [formGroup]="loginForm" (ngSubmit)="authService.onLoginSubmit(loginForm)" class="space-y-4">
       <input class="input-field w-full p-2 border rounded" formControlName="username" placeholder="E-mail cím">
       <input class="input-field w-full p-2 border rounded" formControlName="password" type="password"
@@ -10,15 +11,15 @@
       <div class="w-full flex justify-center">
         <button class="button bg-base_blue text-white p-2 rounded w-full font-bold" type="submit">Bejelentkezés</button>
       </div>
-      <span>(Üzenet tesztelőnek: admin-admin müködik!)</span>
     </form>
 
-    <div *ngIf="isLoading" class="absolute inset-0 bg-black rounded bg-opacity-65 flex items-center justify-center">
+    <div *ngIf="isLoading" class="absolute inset-0 bg-black rounded bg-opacity-65 flex items-center justify-center backdrop-blur-sm">
       <div class="loader"></div>
     </div>
   </div>
 
   <div *ngIf="!loginShown" class="relative bg-white text-black p-6 rounded shadow-2xl w-full mx-auto">
+    <h2 class="text-center font-bold mb-10 text-lg">Regisztráció</h2>
     <form [formGroup]="registerForm" (ngSubmit)="authService.onRegisterSubmit(registerForm)" class="space-y-4">
       <input class="input-field w-full p-2 border rounded" formControlName="username" placeholder="E-mail cím">
       <input class="input-field w-full p-2 border rounded" formControlName="password" type="password"
@@ -27,7 +28,7 @@
         placeholder="Jelszó megerősítése">
       <div class="flex flex-row">
         <input class="form-checkbox h-4 w-4 mt-1 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0" formControlName="acceptedTerms" id="check" type="checkbox">
-        <label class="ml-5" for="check">Elfogadom az <a href="https://digimeter.hu/" class="underline">adatvédelmi nyilatkozatot</a>!</label>
+        <label class="ml-5" for="check">Elfogadom az <a href="https://digimeter.hu/Adatv%C3%A9delmi-nyilatkozat.pdf" class="underline">adatvédelmi nyilatkozatot</a>!</label>
       </div>
       <p class="text-right mt-2 text-gray-600 hover:text-black cursor-pointer" (click)="toggleForm()">Már van fiókom!
       </p>
@@ -38,7 +39,7 @@
       </div>
     </form>
 
-    <div *ngIf="isLoading" class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div *ngIf="isLoading" class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center backdrop-blur-sm">
       <app-loader></app-loader>
     </div>
   </div>

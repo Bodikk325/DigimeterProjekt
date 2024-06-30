@@ -1,5 +1,5 @@
-@defer (when (myFirm.Capital != null && results != null && contQuizQuestions != null)) {
-<div class="container mt-16 mb-32 mx-auto">
+@defer (when (isContQuizLoaded && isResultsLoaded && isFirmDataLoaded)) {
+<div class="container mt-16 px-2 mb-32 mx-auto">
   <div class="w-full flex justify-end">
     <button (click)="authService.logOut()"
       class="bg-white mb-5 font-bold hover:bg-gray-200 border-solid border-2 border-gray-400 disabled:opacity-50 text-black py-3 px-6 rounded-lg">
@@ -7,18 +7,19 @@
     </button>
   </div>
   <div
-    class="flex flex-col justify-around lg:flex-row items-center lg:items-start mb-14 h-auto shadow-xl p-6 rounded-lg border-l-2 border-solid border-gray-100">
-    <div class="w-1/3 h-full flex flex-col justify-center items-center mt-10">
-      <h2 class="text-2xl font-semibold mb-4 text-center ">Rajta, töltsük ki a kérdőívet és lássuk mennyire is
+    class="flex flex-col justify-around lg:flex-row items-center lg:items-center mb-14 h-auto shadow-xl p-6 rounded-lg border-l-2 border-solid border-gray-100">
+    <div class="w-full lg:w-1/3 h-full flex flex-col justify-center items-center mt-10 lg:mt-0">
+      <h2 class="text-lg lg:text-2xl font-semibold mb-4 text-center ">Rajta, töltsük ki a kérdőívet és lássuk mennyire is
         digitalizált a vállalkozásod!</h2>
       <div class="w-full flex flex-col justify-center lg:justify-center">
-        <button type="button" (click)="goToThemeBasedQuiz('Teljes')"
-          class="bg-base_blue mb-10 hover:bg-blue-700 text-white font-bold p-4 mt-5 text-xl rounded focus:outline-none focus:shadow-outline">
-          Digiméter kérdőív kitöltése
-        </button>
         <button type="button" (click)="goToThemeBasedQuiz('Continue')" *ngIf="contQuizQuestions.length != 0"
-          class="bg-base_blue mb-10 hover:bg-blue-700 text-white font-bold p-4 mt-5 text-xl rounded focus:outline-none focus:shadow-outline">
+          class="bg-base_blue hover:bg-blue-700 text-white text-sm lg:text-lg font-bold p-4  rounded focus:outline-none focus:shadow-outline">
           Előző teszt folytatása
+        </button>
+        <button type="button" (click)="goToThemeBasedQuiz('Teljes')"
+        [ngClass]="contQuizQuestions.length != 0 ? 'bg-white hover:bg-gray-200 text-black border-solid border-2 border-gray-400' : 'bg-base_blue mb-5 hover:bg-blue-700 text-white'"
+          class="mb-6 lg:mb-0 font-bold p-4 mt-5 text-sm lg:text-lg rounded focus:outline-none focus:shadow-outline">
+          Digiméter kérdőív kitöltése
         </button>
       </div>
     </div>
@@ -30,19 +31,19 @@
 
 <div class="container mx-auto px-10">
   <div class="container mb-10 mx-auto">
-    <span class="font-bold text-xl ">Vagy, ha nincs kedved az összes kérdésen egyszerre végigmenni, akkor kitöltheted a
+    <span class="font-bold text-base text-center lg:text-left lg:text-xl ">Vagy, ha nincs kedved az összes kérdésen egyszerre végigmenni, akkor kitöltheted a
       kérdőívet témakörönként is:</span>
   </div>
 
 
   <div
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 xl:grid-rows-3 xl:w-2/3 xl:mx-auto gap-x-12 gap-y-6">
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:grid-rows-2 xl:w-full xl:mx-auto gap-x-12 gap-y-6">
     <div (click)="goToThemeBasedQuiz('Digitális mindennapok')"
       class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
       <img src="../../assets/digitalismindennapokTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
       <div class="p-4">
-        <h2 class="text-xl font-semibold mb-2">Digitális mindennapok</h2>
-        <p class="text-gray-700">Mindennapjainkat meghatározzák a digitalizáció eszközei, de nem mindegy, hogy mennyire
+        <h2 class="text-base lg:text-xl font-semibold mb-2">Digitális mindennapok</h2>
+        <p class="text-sm lg:text-base text-gray-700">Mindennapjainkat meghatározzák a digitalizáció eszközei, de nem mindegy, hogy mennyire
         </p>
       </div>
     </div>
@@ -50,16 +51,16 @@
       class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
       <img src="../../assets/digitalisjelenletTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
       <div class="p-4">
-        <h2 class="text-xl font-semibold mb-2">Digitális jelenlét</h2>
-        <p class="text-gray-700">Jelenlétünk nem csak fizikai, hanem digitális formában is mérhető</p>
+        <h2 class="text-base lg:text-xl font-semibold mb-2">Digitális jelenlét</h2>
+        <p class="text-sm lg:text-base text-gray-700">Jelenlétünk nem csak fizikai, hanem digitális formában is mérhető</p>
       </div>
     </div>
     <div (click)="goToThemeBasedQuiz('Értékesítés és marketing')"
       class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
       <img src="../../assets/ertekesitesesmarketingTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
       <div class="p-4">
-        <h2 class="text-xl font-semibold mb-2">Értékesítés és marketing</h2>
-        <p class="text-gray-700">A bevételszerzés a vállalat legfontosabb feladata, a digitalizáció ebben is segít
+        <h2 class="text-base lg:text-xl font-semibold mb-2">Értékesítés és marketing</h2>
+        <p class="text-sm lg:text-base text-gray-700">A bevételszerzés a vállalat legfontosabb feladata, a digitalizáció ebben is segít
           nekünk</p>
       </div>
     </div>
@@ -67,40 +68,40 @@
       class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
       <img src="../../assets/vallalatvezetesTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
       <div class="p-4">
-        <h2 class="text-xl font-semibold mb-2">Vállalatvezetés</h2>
-        <p class="text-gray-700">A digitalizációs eszközök megkönnyíthetik az irányítást</p>
+        <h2 class="text-base lg:text-xl font-semibold mb-2">Vállalatvezetés</h2>
+        <p class=" text-sm lg:text-base text-gray-700">A digitalizációs eszközök megkönnyíthetik az irányítást</p>
       </div>
     </div>
     <div (click)="goToThemeBasedQuiz('Informatikai biztonság')"
       class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
       <img src="../../assets/informatikaibiztonsagTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
       <div class="p-4">
-        <h2 class="text-xl font-semibold mb-2">Informatikai biztonság</h2>
-        <p class="text-gray-700">A biztonság az egyik legfontosabb szempont a kibervilágban</p>
+        <h2 class="text-base lg:text-xl font-semibold mb-2">Informatikai biztonság</h2>
+        <p class=" text-sm lg:text-base text-gray-700">A biztonság az egyik legfontosabb szempont a kibervilágban</p>
       </div>
     </div>
     <div (click)="goToThemeBasedQuiz('Digitális pénzügy')"
       class="card hover:cursor-pointer bg-white shadow-xl rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
       <img src="../../assets/digitalispenzugyekTheme.png" alt="Placeholder Image" class="w-full h-48 object-cover">
       <div class="p-4">
-        <h2 class="text-xl font-semibold mb-2">Digitális pénzügyek</h2>
-        <p class="text-gray-700">A vállalati pénzügyek digitalizációjának áttekintése</p>
+        <h2 class="text-base lg:text-xl font-semibold mb-2">Digitális pénzügyek</h2>
+        <p class="text-sm lg:text-base text-gray-700">A vállalati pénzügyek digitalizációjának áttekintése</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class=" flex flex-col lg:flex-row w-11/12 md:w-11/12 xl:w-full mb-10 mx-auto justify-between mt-20">
+<div class=" flex flex-col lg:flex-row container xl:w-full mb-10 mx-auto justify-between mt-20">
   <div
-    class="relative max-w-4xl   lg:w-[100%]  py-16 md:py-5 w-full flex flex-col p-5 bg-white shadow-xl rounded-lg border-2 border-gray-100">
-    <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Céged adatai</h2>
-    <p class="w-[90%] mx-auto text-gray-800 mb-4 text-center">Ez alapján tudod majd hozzámérni magad a Digiméter kutatás
-      eredményeihez. Az adataidat csak Te láthatod, mások nem tudják hozzád mérni magukat</p>
-    <form class="px-10">
+    class="relative max-w-4xl  lg:w-[100%]  py-16 lg:py-5 w-[90%] mx-auto flex flex-col p-5 bg-white shadow-xl rounded-lg border-2 border-gray-100 ">
+    <h2 class="text-lg lg:text-2xl font-semibold text-gray-800 mb-4 text-center">Céged adatai</h2>
+    <p class="w-full lg:w-[90%] mx-auto text-gray-800 mb-4 text-center text-sm lg:text-base">Ez alapján tudod majd hozzámérni magad a Digiméter kutatás
+      eredményeihez. <br> Az adataidat csak Te láthatod, mások nem tudják hozzád mérni magukat</p>
+    <form class="lg:px-10">
       <div class="mb-4">
         <label for="region" class="block text-gray-700 text-sm font-bold mb-2">Régió:</label>
         <select id="region" [(ngModel)]="myFirm.Region" name="region" required
-          class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          class="shadow appearance-none relative border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
           <option value="Budapest">Budapest</option>
           <option value="Dél-Alföld">Dél-Alföld</option>
           <option value="Dél-Dunántúl">Dél-Dunántúl</option>
@@ -109,7 +110,7 @@
           <option value="Közép-Dunántúl">Közép-Dunántúl</option>
           <option value="Nyugat-Dunántúl">Nyugat-Dunántúl</option>
           <option value="Pest megye">Pest megye</option>
-        </select>
+          </select>
       </div>
 
       <div class="mb-4">
@@ -207,7 +208,7 @@
           mentése</button>
       </div>
 
-      <div *ngIf="isLoading" class="absolute inset-0 bg-black rounded bg-opacity-65 flex items-center justify-center">
+      <div *ngIf="isFirmSavingLoading" class="absolute inset-0 bg-black rounded bg-opacity-65 flex items-center justify-center backdrop-blur-sm">
         <app-loader></app-loader>
       </div>
     </form>
@@ -217,21 +218,21 @@
 
   </div>
 
-  <div class="relative w-full h-full lg:w-[100%] mt-10 lg:mt-0">
+  <div class="relative w-[90%] mx-auto h-full lg:w-[100%] mt-10 lg:mt-0">
     <div class="w-full h-full shadow-xl py-5 border-2 border-gray-100 text-black rounded-lg">
-      <h2 class="text-2xl font-semibold mb-4 text-center">Eddigi eredmények</h2>
+      <h2 class="text-base lg:text-2xl font-semibold mb-4 text-center">Eddigi eredmények</h2>
       <div *ngIf="results.length != 0"
-        class="max-h-[35rem] border-t-2 border-b-2 border-gray-300 px-10 py-5 w-full overflow-y-auto">
+        class="xl:h-[40rem] border-t-2 border-b-2 border-gray-300 px-10 py-5 w-full overflow-y-auto">
         <div *ngFor="let kitoltes of results"
           class="rounded-md relative shadow-md hover:shadow-lg hover:bg-slate-100 px-2  border-solid border-2 border-base_blue   mt-10 text-white">
           <img (click)="removeResultDialogShow(kitoltes)" class="absolute w-10 h-10 right-2 top-2 cursor-pointer"
             src="assets/trash.svg" alt="">
           <div routerLink="../result/{{kitoltes.resultId}}" class="cursor-pointer">
             <div class="flex flex-col justify-center items-center">
-              <div class="w-full py-2 flex flex-col">
-                <span class="text-black">Kitöltés dátuma: <span class="font-bold">{{kitoltes.date |
+              <div class="w-full py-2 flex flex-col text-sm lg:text-base">
+                <span class="text-black">Kitöltés dátuma: <br> <span class="font-bold">{{kitoltes.date |
                     date:'yyyy-MM-dd'}}</span></span>
-                <span class="text-black mt-2">Témakör: <span class="font-bold">{{kitoltes.resultType == "" ? 'Teljes quiz' : kitoltes.resultType}}</span></span>
+                <span class="text-black mt-2">Témakör: <br> <span class="font-bold">{{kitoltes.resultType == "" ? 'Teljes quiz' : kitoltes.resultType}}</span></span>
                 <span class="text-black mt-2">Eredmény: </span>
               </div>
               <div class="chart-container mx-auto ">
@@ -246,14 +247,13 @@
       </div>
       <div *ngIf="results.length == 0">
         <p class="text-center">Még nem töltöttél ki egy kérdőívet sem! Kezdj neki most az elsőnek!</p>
-        <!-- <app-bar-chart></app-bar-chart> -->
       </div>
     </div>
-    <div *ngIf="isResultsLoading"
+    <div *ngIf="isResultRemoveLoading"
       class="absolute inset-0 bg-black rounded bg-opacity-65 flex items-center justify-center">
       <app-loader></app-loader>
     </div>
-    <div *ngIf="showDialog" class="absolute inset-0 bg-black rounded bg-opacity-65 flex items-center justify-center">
+    <div *ngIf="showDialog" class="absolute inset-0 bg-black backdrop-blur-sm rounded bg-opacity-65 flex items-center justify-center">
       <div
         class="w-4/5 py-5 px-2 bg-white border-solid border-2 border-gray-400  text-black rounded-lg shadow-lg flex flex-col justify-center items-center">
         <svg class="mb-2" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -282,8 +282,6 @@
   </div>
 </div>
 
-
-
 <app-floating-icon tutorialName="homeTutorial" [messages]="messages"></app-floating-icon>
 }
 
@@ -294,7 +292,7 @@
   <div class="z-[200] flex flex-col justify-center items-center h-full w-full top-0 left-0 absolute bg-white">
     <app-loader-black></app-loader-black>
     <p class=" mt-10 font-bold text-xl text-black ">Betöltés...</p>
-    <p class="mt-2 font-bold text-xl text-black">Töltsd ki az adataidat, mielőtt elindítanád a Digiméter kérdőívet!</p>
+    <p class="mt-2 text-sm lg:text-xl text-black text-center">Töltsd ki az adataidat, mielőtt elindítanád a Digiméter kérdőívet!</p>
   </div>
 </div>
 }

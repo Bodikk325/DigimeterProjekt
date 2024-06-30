@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+
   private authSubscription!: Subscription;
   private loadingSubscription!: Subscription;
   private errorSubscription!: Subscription;
@@ -21,23 +22,19 @@ export class LoginComponent {
     "Amennyiben van már fiókod, úgy csak szimplán jelentkezz be!"
   ]
 
-  loginForm!: FormGroup;
-  registerForm!: FormGroup;
-  isLoading = false;
-  loginShown = true;
+  loginForm: FormGroup;
+  registerForm: FormGroup;
+  isLoading: boolean;
+  loginShown: boolean;
   authService: AuthService;
 
   constructor(authService: AuthService) {
 
     this.authService = authService;
 
-    this.manageForms();
+    this.isLoading = false;
+    this.loginShown = true;
 
-    this.manageSubscriptions();
-
-  }
-
-  private manageForms() {
     this.loginForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required])
@@ -49,6 +46,8 @@ export class LoginComponent {
       confirmPassword: new FormControl('', [Validators.required]),
       acceptedTerms: new FormControl(false, [Validators.required])
     });
+
+    this.manageSubscriptions();
   }
 
   private manageSubscriptions() {
@@ -73,8 +72,14 @@ export class LoginComponent {
   }
 
   ngOnDestroy() {
-    this.authSubscription.unsubscribe();
-    this.loadingSubscription.unsubscribe();
-    this.errorSubscription.unsubscribe();
+    if (this.authSubscription != null) {
+      this.authSubscription.unsubscribe();
+    }
+    if (this.loadingSubscription != null) {
+      this.loadingSubscription.unsubscribe();
+    }
+    if (this.errorSubscription != null) {
+      this.errorSubscription.unsubscribe();
+    }
   }
 }

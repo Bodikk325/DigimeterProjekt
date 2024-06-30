@@ -7,11 +7,11 @@ import { httpUrl } from '../variables';
 })
 export class ChatService {
 
-  constructor(private http: HttpClient) {
-    
-  }
+  url : string;
 
-  url = httpUrl;
+  constructor(private http: HttpClient) {
+    this.url = httpUrl;
+  }
 
   sendMessage(category : string, message : string, question : string, type : string, userPoint : number, maxPoint : number)
   {
