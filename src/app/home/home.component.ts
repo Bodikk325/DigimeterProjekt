@@ -1,4 +1,4 @@
-import { Component, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnDestroy, Inject, PLATFORM_ID, ViewChild, ElementRef } from '@angular/core';
 import { QuizResultsService } from '../services/quizResults.service';
 import { Router } from '@angular/router';
 import { NotificationType } from '../notification/notification.component';
@@ -9,7 +9,6 @@ import { NotificationService } from '../services/notification.service';
 import { FirmsService } from '../services/firms.service';
 import { AuthService } from '../services/auth.service';
 import { Question } from '../models/Question';
-import { Result } from '../models/Result';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +16,8 @@ import { Result } from '../models/Result';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnDestroy {
+
+  @ViewChild('scrollable') scrollableDiv!: ElementRef;
 
   private resultForUserSubscription!: Subscription;
   private saveFirmSubscription!: Subscription;
@@ -34,9 +35,10 @@ export class HomeComponent implements OnDestroy {
 
   isContQuizLoaded: boolean;
   isFirmDataLoaded: boolean;
-  isResultsLoaded : boolean;
+  shouldLetToStartQuiz: boolean;
+  isResultsLoaded: boolean;
 
-  isFirmSavingLoading : boolean;
+  isFirmSavingLoading: boolean;
   showDialog: boolean;
   messages: string[];
 
@@ -51,12 +53,12 @@ export class HomeComponent implements OnDestroy {
 
     this.results = []
     this.selectedResult = {
-        average_points: 0,
-        date: 0,
-        finalScore: 0,
-        max_point: 0,
-        resultId: '',
-        resultType: ''
+      average_points: 0,
+      date: 0,
+      finalScore: 0,
+      max_point: 0,
+      resultId: '',
+      resultType: ''
     }
     this.contQuizQuestions = []
     this.isResultRemoveLoading = false;
@@ -65,6 +67,8 @@ export class HomeComponent implements OnDestroy {
     this.isContQuizLoaded = false;
     this.isFirmDataLoaded = false;
     this.isResultsLoaded = false;
+
+    this.shouldLetToStartQuiz = false;
 
     this.isFirmSavingLoading = false;
     this.showDialog = false;
@@ -85,11 +89,6 @@ export class HomeComponent implements OnDestroy {
 
   }
 
-  sendEmail()
-  {
-    
-  }
-
   //#region for managing subscriptions
 
   manageSubscriptions() {
@@ -106,15 +105,15 @@ export class HomeComponent implements OnDestroy {
           }
         },
         error: (_) => {
-            this.isContQuizLoaded = true;
-            this.contQuizQuestions = []
+          this.isContQuizLoaded = true;
+          this.contQuizQuestions = []
         }
       }
     )
 
     this.getFirmDataSubscription = this.firmService.getFirmData().subscribe(
       {
-        next: (result : any) => {
+        next: (result: any) => {
           this.isFirmDataLoaded = true;
           this.myFirm.Capital = result.capital;
           this.myFirm.Revenue = result.revenue;
@@ -122,8 +121,11 @@ export class HomeComponent implements OnDestroy {
           this.myFirm.Workers = result.employees;
           this.myFirm.Sector = result.sector;
           this.myFirm.Field = result.field;
+          if (result.capital != "" && result.region != "" && result.employees != "" && result.field != "" && result.revenue != "" && result.sector != "") {
+            this.shouldLetToStartQuiz = true;
+          }
         },
-        error : (_) => {
+        error: (_) => {
           this.isFirmDataLoaded = true;
           this.myFirm = {
             UserName: "",
@@ -140,11 +142,11 @@ export class HomeComponent implements OnDestroy {
 
     this.resultForUserSubscription = this.quizResultService.getResultsForUser().subscribe(
       {
-        next : (results : MainPageResult[]) => {
+        next: (results: MainPageResult[]) => {
           this.isResultsLoaded = true;
           this.results = results
         },
-        error : (_) => {
+        error: (_) => {
           this.isResultsLoaded = true;
           this.results = [];
         }
@@ -164,6 +166,7 @@ export class HomeComponent implements OnDestroy {
         next: (result) => {
           this.results = result;
           this.isResultRemoveLoading = false;
+          this.scrollToTop();
         },
         error: (_) => {
 
@@ -180,6 +183,7 @@ export class HomeComponent implements OnDestroy {
         next: (_) => {
           this.notiService.show("Cégadatok sikeresen mentve!", NotificationType.positivie);
           this.isFirmSavingLoading = false;
+          this.shouldLetToStartQuiz = true;
         },
         error: (_) => {
           this.notiService.show("Valami hiba történt, kérlek próbáld meg később!", NotificationType.error);
@@ -194,7 +198,7 @@ export class HomeComponent implements OnDestroy {
   //#region for the validation of the firm data
 
   goToThemeBasedQuiz(category: string) {
-    if (this.myFirm.Field == "" || this.myFirm.Region == "" || this.myFirm.Workers == "" || this.myFirm.Capital == "" || this.myFirm.Revenue == "" || this.myFirm.Sector == "") {
+    if (!this.shouldLetToStartQuiz) {
       this.notiService.show("Nincsenek kitöltve a cégadatok! Kérünk töltsd ki azokat először!", NotificationType.error);
     } else {
       this.router.navigate(['quiz', category]);
@@ -202,7 +206,7 @@ export class HomeComponent implements OnDestroy {
   }
 
   checkFirmDataAndThenGoToQuiz() {
-    if (this.myFirm.Field == "" || this.myFirm.Region == "" || this.myFirm.Workers == "" || this.myFirm.Capital == "" || this.myFirm.Revenue == "" || this.myFirm.Sector == "") {
+    if (!this.shouldLetToStartQuiz) {
       this.notiService.show("Nincsenek kitöltve a cégadatok! Kérünk töltsd ki azokat először!", NotificationType.error);
     } else {
       this.router.navigate(['quiz', ""]);
@@ -227,6 +231,12 @@ export class HomeComponent implements OnDestroy {
   removeResultDialogShow(result: MainPageResult) {
     this.selectedResult = result;
     this.showDialog = true;
+  }
+
+  scrollToTop() {
+    try {
+      this.scrollableDiv.nativeElement.scrollTop = 0;
+    } catch (err) { }
   }
 
   //#endregion

@@ -8,12 +8,17 @@
         placeholder="Jelszó">
       <p class="text-right mt-2 text-gray-600 hover:text-black cursor-pointer" (click)="toggleForm()">Még nincs fiókom..
       </p>
+      <div class="w-full flex justify-center items-center">
+        <ngx-recaptcha2 #loginCaptchaElem [siteKey]="siteKey" [useGlobalDomain]="false" formControlName="recaptcha">
+        </ngx-recaptcha2>
+      </div>
       <div class="w-full flex justify-center">
         <button class="button bg-base_blue text-white p-2 rounded w-full font-bold" type="submit">Bejelentkezés</button>
       </div>
     </form>
 
-    <div *ngIf="isLoading" class="absolute inset-0 bg-black rounded bg-opacity-65 flex items-center justify-center backdrop-blur-sm">
+    <div *ngIf="isLoading"
+      class="absolute inset-0 bg-black rounded bg-opacity-65 flex items-center justify-center backdrop-blur-sm">
       <div class="loader"></div>
     </div>
   </div>
@@ -27,11 +32,17 @@
       <input class="input-field w-full p-2 border rounded" formControlName="confirmPassword" type="password"
         placeholder="Jelszó megerősítése">
       <div class="flex flex-row">
-        <input class="form-checkbox h-4 w-4 mt-1 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0" formControlName="acceptedTerms" id="check" type="checkbox">
-        <label class="ml-5" for="check">Elfogadom az <a href="https://digimeter.hu/Adatv%C3%A9delmi-nyilatkozat.pdf" class="underline">adatvédelmi nyilatkozatot</a>!</label>
+        <input class="form-checkbox h-4 w-4 mt-1 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0"
+          formControlName="acceptedTerms" id="check" type="checkbox">
+        <label class="ml-5" for="check">Elfogadom az <a href="https://digimeter.hu/Adatv%C3%A9delmi-nyilatkozat.pdf"
+            class="underline">adatvédelmi nyilatkozatot</a>!</label>
       </div>
       <p class="text-right mt-2 text-gray-600 hover:text-black cursor-pointer" (click)="toggleForm()">Már van fiókom!
       </p>
+      <div class="w-full flex justify-center items-center">
+        <ngx-recaptcha2 #registerCaptchaElem [siteKey]="siteKey" [useGlobalDomain]="false" formControlName="recaptcha">
+        </ngx-recaptcha2>
+      </div>
       <div class="w-full flex justify-center">
         <button class="button bg-base_blue text-white p-2 h-[2.5rem] w-full rounded font-bold" type="submit">
           <span>Regisztráció</span>
@@ -39,7 +50,8 @@
       </div>
     </form>
 
-    <div *ngIf="isLoading" class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center backdrop-blur-sm">
+    <div *ngIf="isLoading"
+      class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center backdrop-blur-sm">
       <app-loader></app-loader>
     </div>
   </div>

@@ -26,6 +26,7 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 import { LoadingComponent } from './loading/loading.component';
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 import { jwtErrorInterceptor } from './interceptors/jwt-error.interceptor';
+import { NgxCaptchaModule } from 'ngx-captcha';
 
 
 @NgModule({
@@ -57,11 +58,13 @@ import { jwtErrorInterceptor } from './interceptors/jwt-error.interceptor';
     FormsModule,
     ReactiveFormsModule,
     MatTabsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxCaptchaModule
   ],
   providers: [
     provideClientHydration(),
     provideHttpClient(withFetch(), withInterceptors([jwtErrorInterceptor])),
+    
   ],
   bootstrap: [AppComponent]
 })

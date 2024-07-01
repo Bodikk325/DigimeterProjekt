@@ -20,6 +20,7 @@ export class QuizComponent implements CanComponentDeactivate {
   getQuestionsSubscription!: Subscription;
   saveContQuizSubscription!: Subscription;
 
+
   questionCount: number;
   answered_questions: number;
   isNoneSelected: boolean;
@@ -142,7 +143,13 @@ export class QuizComponent implements CanComponentDeactivate {
     }
 
     if (this.route.snapshot.paramMap.get('topic') == "Teljes" || this.route.snapshot.paramMap.get('topic') == "Continue") {
-      this.saveContQuizSubscription = this.authService.saveContQuiz(this.filteredQuestions).subscribe()
+      this.saveContQuizSubscription = this.authService.saveContQuiz(this.filteredQuestions).subscribe(
+        {
+          next : (next) => {
+            //nothing to do here
+          }
+        }
+      )
     }
 
     this.checkingTheConditions();
@@ -150,7 +157,6 @@ export class QuizComponent implements CanComponentDeactivate {
     this.BQuestionNoAnswer = false;
     this.isDontKnowSelected = false;
     this.isNoneSelected = false;
-
 
     this.currentQuestionIndex++
 
@@ -228,6 +234,10 @@ export class QuizComponent implements CanComponentDeactivate {
     }
   }
 
+  noOptionIncludesEgyikSem(question: Question): boolean {
+    return !question.answers.some(answer => answer.id.includes('egyik_sem'));
+  }
+
   //#endregion
 
 
@@ -257,7 +267,7 @@ export class QuizComponent implements CanComponentDeactivate {
       this.getQuestionsSubscription.unsubscribe();
     }
     if (this.saveContQuizSubscription != null) {
-      this.getContQuizSubscription.unsubscribe();
+      this.saveContQuizSubscription.unsubscribe();
     }
   }
 }

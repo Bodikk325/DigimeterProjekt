@@ -5,10 +5,6 @@
       class="bg-white mb-5 font-bold hover:bg-gray-200 border-solid border-2 border-gray-400 disabled:opacity-50 text-black py-3 px-6 rounded-lg">
       Kijelentkezés
     </button>
-    <button (click)="authService.sendEmail()"
-      class="bg-white mb-5 font-bold hover:bg-gray-200 border-solid border-2 border-gray-400 disabled:opacity-50 text-black py-3 px-6 rounded-lg">
-      EmailKuldes
-    </button>
   </div>
   <div
     class="flex flex-col justify-around lg:flex-row items-center lg:items-center mb-14 h-auto shadow-xl p-6 rounded-lg border-l-2 border-solid border-gray-100">
@@ -97,9 +93,9 @@
 
 <div class=" flex flex-col lg:flex-row container xl:w-full mb-10 mx-auto justify-between mt-20">
   <div
-    class="relative max-w-4xl  lg:w-[100%]  py-16 lg:py-5 w-[90%] mx-auto flex flex-col p-5 bg-white shadow-xl rounded-lg border-2 border-gray-100 ">
+    class="relative max-w-4xl  justify-center lg:w-[100%]  py-16 lg:py-5 w-[90%] mx-auto flex flex-col p-5 bg-white shadow-xl rounded-lg border-2 border-gray-100 ">
     <h2 class="text-lg lg:text-2xl font-semibold text-gray-800 mb-4 text-center">Céged adatai</h2>
-    <p class="w-full lg:w-[90%] mx-auto text-gray-800 mb-4 text-center text-sm lg:text-base">Ez alapján tudod majd hozzámérni magad a Digiméter kutatás
+    <p class="w-full lg:w-[90%] mx-auto text-gray-800 mb-10 text-center text-sm lg:text-base">Ez alapján tudod majd hozzámérni magad a Digiméter kutatás
       eredményeihez. <br> Az adataidat csak Te láthatod, mások nem tudják hozzád mérni magukat</p>
     <form class="lg:px-10">
       <div class="mb-4">
@@ -226,7 +222,7 @@
     <div class="w-full h-full shadow-xl py-5 border-2 border-gray-100 text-black rounded-lg">
       <h2 class="text-base lg:text-2xl font-semibold mb-4 text-center">Eddigi eredmények</h2>
       <div *ngIf="results.length != 0"
-        class="xl:h-[45rem] border-t-2 border-b-2 border-gray-300 px-10 py-5 w-full overflow-y-auto">
+        class="xl:h-[45rem] border-t-2 border-b-2 border-gray-300 px-10 py-5 w-full overflow-y-auto" id="scrollable" #scrollable>
         <div *ngFor="let kitoltes of results"
           class="rounded-md relative shadow-md hover:shadow-lg hover:bg-slate-100 px-2  border-solid border-2 border-base_blue   mt-10 text-white">
           <img (click)="removeResultDialogShow(kitoltes)" class="absolute w-10 h-10 right-2 top-2 cursor-pointer"
@@ -254,7 +250,7 @@
       </div>
     </div>
     <div *ngIf="isResultRemoveLoading"
-      class="absolute inset-0 bg-black rounded bg-opacity-65 flex items-center justify-center">
+      class="absolute inset-0 bg-black rounded bg-opacity-65 flex items-center justify-center backdrop-blur-sm">
       <app-loader></app-loader>
     </div>
     <div *ngIf="showDialog" class="absolute inset-0 bg-black backdrop-blur-sm rounded bg-opacity-65 flex items-center justify-center">

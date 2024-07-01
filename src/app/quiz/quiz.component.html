@@ -110,6 +110,14 @@
           </li>
           }
 
+          <li class="flex items-start" *ngIf="noOptionIncludesEgyikSem(currentQuestion) && currentQuestion.isThereMoreThanOneAnswer">
+            <div class="flex items-center p-4">
+              <input type="checkbox" [(ngModel)]="isNoneSelected" (change)="handleNoneSelectedChange()" id="{{currentQuestion.id}}_996_egyik_sem"
+                class="form-checkbox h-4 w-4 lg:h-6 lg:w-6 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0">
+              <label class="ml-4 text-sm lg:text-lg text-gray-700" for="{{currentQuestion.id}}_996_egyik_sem">Egyik sem</label>
+            </div>
+          </li>
+
         </ul>
       </div>
       <div class="flex justify-between p-4 mt-8">
@@ -131,14 +139,13 @@
   <div class="z-[200] flex flex-col justify-center items-center h-full w-full top-0 left-0 absolute bg-white">
     <app-loader-black></app-loader-black>
     <p class=" mt-10 font-bold text-xl text-black ">Adatok mentése a szerverre..</p>
-    <p class="mt-2 font-bold text-xl text-black">Kis türelem, hamarosan továbbirányítunk a kiértékelésre!</p>
+    <p class="mt-2 text-xl text-black">Kis türelem, hamarosan továbbirányítunk a kiértékelésre!</p>
   </div>
 </div>
 
 }
 
 @placeholder {
-
 <div>
   <div class="z-[200] flex flex-col justify-center items-center h-full w-full top-0 left-0 absolute bg-white">
     <app-loader-black></app-loader-black>

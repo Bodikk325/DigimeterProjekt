@@ -9,6 +9,7 @@ import { NotificationService } from './notification.service';
 import { httpUrl } from '../variables';
 import { Question } from '../models/Question';
 import { AuthServiceHelper } from '../helpers/authServiceHelper';
+import { log } from 'console';
 
 
 @Injectable({
@@ -33,6 +34,9 @@ export class AuthService {
 
   private isErrorSubject = new BehaviorSubject<boolean>(false);
   isErrorState = this.isErrorSubject.asObservable();
+
+  private wrongPasswordOrUsernameSubject = new BehaviorSubject<boolean>(false);
+  wrongPasswordOrUsernameState = this.wrongPasswordOrUsernameSubject.asObservable();
 
   constructor(private notificationService: NotificationService, private http: HttpClient, private router: Router) {
     this.newUser = {
@@ -88,12 +92,18 @@ export class AuthService {
 
     this.isErrorSubject.next(false);
 
-    const { username, password } = loginForm.value;
+    const { username, password, recaptcha } = loginForm.value;
 
     if (username == "" || password == "") {
       this.notificationService.show("Kérünk, hogy érvényes adatokat adj meg!", NotificationType.error);
       return;
     }
+
+    if(recaptcha == "")
+      {
+        this.notificationService.show("Kérünk igazold, hogy nem vagy robot!", NotificationType.error);
+        return;
+      }
 
     if (loginForm.invalid) {
       this.notificationService.show("Nem helyes formátúm! Kérünk email címet adj meg a megfelelő helyre!", NotificationType.error);
@@ -117,11 +127,14 @@ export class AuthService {
           if (error.error.message == "NotConfirmed") {
             this.notificationService.show("Ez az email cím még nincs aktiválva, nézd meg a levelesládád!", NotificationType.error)
           }
-          else {
+          else if (error.status == 401) {
             this.notificationService.show("Helytelen felhasználónév vagy jelszó!", NotificationType.error)
+            this.wrongPasswordOrUsernameSubject.next(true);
+          }
+          else {
+            this.isErrorSubject.next(true);
           }
           this.isButtonLoading(false);
-          this.isErrorSubject.next(true);
         }
       }
     );
@@ -135,7 +148,7 @@ export class AuthService {
   onRegisterSubmit(registerForm: FormGroup) {
     this.isErrorSubject.next(false);
 
-    const { username, password, confirmPassword, acceptedTerms } = registerForm.value;
+    const { username, password, confirmPassword, acceptedTerms, recaptcha } = registerForm.value;
 
     if (password == "" || username == "") {
       this.notificationService.show("Kérünk tölts ki minden adatot!", NotificationType.error)
@@ -146,6 +159,12 @@ export class AuthService {
       this.notificationService.show("Nem egyeznek a jelszavak!", NotificationType.error)
       return;
     }
+
+    if(recaptcha == "")
+      {
+        this.notificationService.show("Kérünk igazold, hogy nem vagy robot!", NotificationType.error);
+      return;
+      }
 
     if (registerForm.invalid) {
       this.notificationService.show("Nem helyes formátúm!", NotificationType.error);
@@ -165,12 +184,12 @@ export class AuthService {
 
     this.http.post(this.url + 'register.php', body, { withCredentials: true }).subscribe(
       {
-        next : (_) => {
+        next: (_) => {
           this.notificationService.show("Sikeres regisztráció!", NotificationType.positivie)
           this.showLoginForm(true);
           this.isButtonLoading(false);
         },
-        error : (error) => {
+        error: (error) => {
           if (error.status == 409) {
             this.notificationService.show("A felhasználónév már foglalt.", NotificationType.error)
             this.isButtonLoading(false);
@@ -185,22 +204,4 @@ export class AuthService {
       }
     );
   }
-
-  sendEmail()
-  {
-    let body = new HttpParams();
-    body = body.set('username', "username");
-    return this.http.post(this.url + "sendEmail.php", body).subscribe(
-      {
-        next : (_) => {
-          console.log("oksa")
-        },
-        error : (error) => 
-          {
-            console.log(error)
-          }
-      }
-    )
-  }
-
 }

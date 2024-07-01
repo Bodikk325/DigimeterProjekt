@@ -49,11 +49,22 @@ export class AiChatComponent implements AfterViewChecked {
       this.shouldScroll = true;
       this.isMessageLoading = true;
 
-      this.chatService.sendMessage(this.category, this.inputText, this.question, this.type, this.userPoint, this.maxPoint).subscribe(response => {
-        this.messages.push({ text: response, user: false });
-        this.isMessageLoading = false;
-        this.shouldScroll = true;
-      });
+      this.chatService.sendMessage(this.category, this.inputText, this.question, this.type, this.userPoint, this.maxPoint).subscribe(
+        {
+          next: (response) => {
+            this.messages.push({ text: response, user: false });
+            this.isMessageLoading = false;
+            this.shouldScroll = true;
+          },
+          error: (error) => {
+            if (error.error == "CoolDownError") {
+              this.messages.push({ text: "FIGYELEM, az üzenetküldések között 1 perces cooldown van életben a visszaélések elkerülése végett!", user: false });
+              this.isMessageLoading = false;
+              this.shouldScroll = true;
+            }
+          }
+        }
+      );
 
       this.inputText = '';
     }
