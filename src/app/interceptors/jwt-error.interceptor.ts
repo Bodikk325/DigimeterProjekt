@@ -38,7 +38,7 @@ export const jwtErrorInterceptor: HttpInterceptorFn = (req, next) => {
           location.href = "login"
         }, 3000);
       }
-      if (error.error == "InsufficientCredits" || error.error == "CoolDownError") {
+      if (error.error == "InsufficientCredits" || error.error == "CoolDownError" || error.error == "LejartSession") {
         
       }
       else 
