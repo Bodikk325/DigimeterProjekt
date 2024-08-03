@@ -62,6 +62,12 @@ export class AiChatComponent implements AfterViewChecked {
               this.isMessageLoading = false;
               this.shouldScroll = true;
             }
+            else if (error.error == "InsufficientCredits")
+              {
+                this.messages.push({ text: "FIGYELEM, lejárt a napi kredit összeged, holnap probáld újra!", user: false });
+              this.isMessageLoading = false;
+              this.shouldScroll = true;
+              }
           }
         }
       );

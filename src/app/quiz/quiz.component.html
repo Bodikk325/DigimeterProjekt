@@ -82,11 +82,53 @@
               </div>
             </div>
           </li>
-          <li class="flex items-start" *ngIf="item.id.indexOf('egyik_sem') !== -1">
+          <li class="flex items-start" *ngIf="item.id.indexOf('egyik_sem') !== -1 && currentQuestion.id != 'D4' && currentQuestion.id != 'D9' && currentQuestion.id != 'E1' && currentQuestion.id != 'E5' && currentQuestion.id != 'F2' && currentQuestion.id != 'D1' && currentQuestion.id != 'D3' && currentQuestion.id != 'C1'">
             <div class="flex items-center p-4">
               <input type="checkbox" [(ngModel)]="isNoneSelected" (change)="handleNoneSelectedChange()" id="{{item.id}}"
                 class="form-checkbox h-4 w-4 lg:h-6 lg:w-6 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0">
-              <label class="ml-4 text-sm lg:text-lg text-gray-700" for="{{item.id}}">Egyiket sem</label>
+              <label class="ml-4 text-sm lg:text-lg text-gray-700" for="{{item.id}}">Egyik sem</label>
+            </div>
+          </li>
+          <li class="flex items-start" *ngIf="item.id.indexOf('egyik_sem') !== -1 && currentQuestion.id == 'D4'">
+            <div class="flex items-center p-4">
+              <input type="checkbox" [(ngModel)]="isNoneSelected" (change)="handleNoneSelectedChange()" id="{{item.id}}"
+                class="form-checkbox h-4 w-4 lg:h-6 lg:w-6 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0">
+              <label class="ml-4 text-sm lg:text-lg text-gray-700" for="{{item.id}}">{{item.answer}}</label>
+            </div>
+          </li>
+          <li class="flex items-start" *ngIf="item.id.indexOf('egyik_sem') !== -1 && currentQuestion.id == 'C1'">
+            <div class="flex items-center p-4">
+              <input type="checkbox" [(ngModel)]="isNoneSelected" (change)="handleNoneSelectedChange()" id="{{item.id}}"
+                class="form-checkbox h-4 w-4 lg:h-6 lg:w-6 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0">
+              <label class="ml-4 text-sm lg:text-lg text-gray-700" for="{{item.id}}">{{item.answer}}</label>
+            </div>
+          </li>
+          <li class="flex items-start" *ngIf="item.id.indexOf('egyik_sem') !== -1 && currentQuestion.id == 'D9'">
+            <div class="flex items-center p-4">
+              <input type="checkbox" [(ngModel)]="isNoneSelected" (change)="handleNoneSelectedChange()" id="{{item.id}}"
+                class="form-checkbox h-4 w-4 lg:h-6 lg:w-6 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0">
+              <label class="ml-4 text-sm lg:text-lg text-gray-700" for="{{item.id}}">{{item.answer}}</label>
+            </div>
+          </li>
+          <li class="flex items-start" *ngIf="item.id.indexOf('egyik_sem') !== -1 && currentQuestion.id == 'E1'">
+            <div class="flex items-center p-4">
+              <input type="checkbox" [(ngModel)]="isNoneSelected" (change)="handleNoneSelectedChange()" id="{{item.id}}"
+                class="form-checkbox h-4 w-4 lg:h-6 lg:w-6 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0">
+              <label class="ml-4 text-sm lg:text-lg text-gray-700" for="{{item.id}}">{{item.answer}}</label>
+            </div>
+          </li>
+          <li class="flex items-start" *ngIf="item.id.indexOf('egyik_sem') !== -1 && currentQuestion.id == 'E5'">
+            <div class="flex items-center p-4">
+              <input type="checkbox" [(ngModel)]="isNoneSelected" (change)="handleNoneSelectedChange()" id="{{item.id}}"
+                class="form-checkbox h-4 w-4 lg:h-6 lg:w-6 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0">
+              <label class="ml-4 text-sm lg:text-lg text-gray-700" for="{{item.id}}">{{item.answer}}</label>
+            </div>
+          </li>
+          <li class="flex items-start" *ngIf="item.id.indexOf('egyik_sem') !== -1 && currentQuestion.id == 'F2'">
+            <div class="flex items-center p-4">
+              <input type="checkbox" [(ngModel)]="isNoneSelected" (change)="handleNoneSelectedChange()" id="{{item.id}}"
+                class="form-checkbox h-4 w-4 lg:h-6 lg:w-6 text-blue-500 border-gray-300 focus:ring-blue-400 focus:ring-offset-0">
+              <label class="ml-4 text-sm lg:text-lg text-gray-700" for="{{item.id}}">{{item.answer}}</label>
             </div>
           </li>
           <li class="flex items-start"
@@ -117,7 +159,6 @@
               <label class="ml-4 text-sm lg:text-lg text-gray-700" for="{{currentQuestion.id}}_996_egyik_sem">Egyik sem</label>
             </div>
           </li>
-
         </ul>
       </div>
       <div class="flex justify-between p-4 mt-8">

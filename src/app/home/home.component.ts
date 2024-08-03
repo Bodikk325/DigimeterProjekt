@@ -46,9 +46,9 @@ export class HomeComponent implements OnDestroy {
 
     this.messages = [
       "Ez itt a főoldal!",
-      "Itt tudsz majd új kérdőívet kitölteni vagy akár megnézni az előző kitöltéseidnek az eredményét!",
-      "Fontos, hogy mielőtt új kérdőívet töltenél ki azelőtt meg kell adnod a céged adatait!",
-      "Ehhez gördíts le a lap aljára ezen a képernyőn!"
+      "Itt tudsz új kérdőívet kitölteni vagy akár megnézni az előző kitöltéseidnek az eredményeit! (A Digiméter kérdőív azonos a kutatás során lekérdezettel, így abban magázódva fogod megtalálni a kérdéseket.)",
+      "Fontos, hogy mielőtt először kitöltenéd a kérdőívet, meg kell adnod a céged adatait, hogy a számodra releváns cégekhez tudjuk mérni a digitalizációd szintjét! Ehhez gördíts le a lap aljára ezen a képernyőn!",
+      "Ha ezeket már megadtad, akkor ki tudod tölteni a kérdőívet egyben vagy akár témánként is."
     ]
 
     this.results = []
@@ -199,7 +199,7 @@ export class HomeComponent implements OnDestroy {
 
   goToThemeBasedQuiz(category: string) {
     if (!this.shouldLetToStartQuiz) {
-      this.notiService.show("Nincsenek kitöltve a cégadatok! Kérünk töltsd ki azokat először!", NotificationType.error);
+      this.notiService.show("Nincsenek kitöltve a cégadatok! Kérjük, add meg először azokat a lap alján!", NotificationType.error);
     } else {
       this.router.navigate(['quiz', category]);
     }
@@ -207,7 +207,7 @@ export class HomeComponent implements OnDestroy {
 
   checkFirmDataAndThenGoToQuiz() {
     if (!this.shouldLetToStartQuiz) {
-      this.notiService.show("Nincsenek kitöltve a cégadatok! Kérünk töltsd ki azokat először!", NotificationType.error);
+      this.notiService.show("Nincsenek kitöltve a cégadatok! Kérjük, add meg először azokat a lap alján!", NotificationType.error);
     } else {
       this.router.navigate(['quiz', ""]);
     }

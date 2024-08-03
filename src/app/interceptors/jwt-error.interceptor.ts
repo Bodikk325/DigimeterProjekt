@@ -38,6 +38,9 @@ export const jwtErrorInterceptor: HttpInterceptorFn = (req, next) => {
           location.href = "login"
         }, 3000);
       }
+      if (error.error == "InsufficientCredits" || error.error == "CoolDownError") {
+        
+      }
       else 
       {
         notificationService.show("Valami hiba történt.. Kérünk, hogy probálkozz később, vagy jelezd felénk!", NotificationType.error)

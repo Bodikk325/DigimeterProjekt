@@ -99,14 +99,14 @@ export class AuthService {
       return;
     }
 
-    if(recaptcha == "")
+    if(loginForm.get('recaptcha')?.invalid)
       {
         this.notificationService.show("Kérünk igazold, hogy nem vagy robot!", NotificationType.error);
         return;
       }
 
     if (loginForm.invalid) {
-      this.notificationService.show("Nem helyes formátúm! Kérünk email címet adj meg a megfelelő helyre!", NotificationType.error);
+      this.notificationService.show("Nem helyes formátum! Kérünk email címet adj meg a megfelelő helyre!", NotificationType.error);
       return;
     }
 
@@ -160,14 +160,14 @@ export class AuthService {
       return;
     }
 
-    if(recaptcha == "")
+    if(registerForm.get('recaptcha')?.invalid)
       {
         this.notificationService.show("Kérünk igazold, hogy nem vagy robot!", NotificationType.error);
-      return;
+        return;
       }
 
     if (registerForm.invalid) {
-      this.notificationService.show("Nem helyes formátúm!", NotificationType.error);
+      this.notificationService.show("Nem helyes formátum!", NotificationType.error);
       return;
     }
 

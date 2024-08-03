@@ -30,6 +30,8 @@ export class QuizComponent implements CanComponentDeactivate {
   BQuestionNoAnswer: boolean;
   removedQuestions: boolean;
   isQuizInProgress: boolean;
+  changedEgyikSem: string[];
+  NoEgyikSem: string[];
   isLoaded: boolean;
   currentQuestionIndex: number;
   questionHelper: QuestionHelpers;
@@ -37,10 +39,12 @@ export class QuizComponent implements CanComponentDeactivate {
   constructor(private dataService: DataService, private quizResultsService: QuizResultsService, notiService: NotificationService, private route: ActivatedRoute, private router: Router, private authService: AuthService) {
 
     this.questionCount = 0;
+    this.changedEgyikSem = []
     this.answered_questions = 0;
     this.isNoneSelected = false;
     this.isDontKnowSelected = false;
     this.questions = [];
+    this.NoEgyikSem = ["E1"]
     this.filteredQuestions = [];
     this.BQuestionNoAnswer = false;
     this.removedQuestions = false;
@@ -65,7 +69,7 @@ export class QuizComponent implements CanComponentDeactivate {
     if ((this.route.snapshot.paramMap.get('topic') ?? "") == "Continue") {
       this.getContQuizSubscription = this.authService.getContQuiz().subscribe(
         {
-          next: (quiz : Question[]) => {
+          next: (quiz: Question[]) => {
             this.filteredQuestions = quiz;
             this.questions = this.filteredQuestions;
             this.currentQuestionIndex = QuestionHelpers.countSelectedAnswers(this.filteredQuestions);
@@ -132,8 +136,18 @@ export class QuizComponent implements CanComponentDeactivate {
     });
   }
 
-  nextQuestion() {
+  removeAnswersById(questions: Question[], idsToRemove: string[]): Question[] {
+    return questions.map(question => {
+      const filteredAnswers = question.answers.filter(answer => !idsToRemove.includes(answer.id));
+      return {
+        ...question,
+        answers: filteredAnswers
+      };
+    });
+  }
 
+  nextQuestion() {
+    console.log(this.filteredQuestions)
     if (!this.questionHelper.checkTheNumberFormatForQuestions(this.filteredQuestions, this.currentQuestionIndex)) {
       return;
     }
@@ -142,15 +156,21 @@ export class QuizComponent implements CanComponentDeactivate {
       return;
     }
 
-    if (this.route.snapshot.paramMap.get('topic') == "Teljes" || this.route.snapshot.paramMap.get('topic') == "Continue") {
-      this.saveContQuizSubscription = this.authService.saveContQuiz(this.filteredQuestions).subscribe(
-        {
-          next : (next) => {
-            //nothing to do here
-          }
-        }
-      )
+    if (this.currentQuestionIndex == this.filteredQuestions.length - 1) {
+      this.isQuizInProgress = false;
+      this.quizResultsService.saveQuizResultsAtTheEnd(this.filteredQuestions, this.route.snapshot.paramMap.get('topic') ?? "");
+      return ;
     }
+
+      if (this.route.snapshot.paramMap.get('topic') == "Teljes" || this.route.snapshot.paramMap.get('topic') == "Continue") {
+        this.saveContQuizSubscription = this.authService.saveContQuiz(this.filteredQuestions).subscribe(
+          {
+            next: (next) => {
+              //nothing to do here
+            }
+          }
+        )
+      }
 
     this.checkingTheConditions();
 
@@ -160,10 +180,10 @@ export class QuizComponent implements CanComponentDeactivate {
 
     this.currentQuestionIndex++
 
-    if (this.currentQuestionIndex == this.filteredQuestions.length) {
-      this.isQuizInProgress = false;
-      this.quizResultsService.saveQuizResultsAtTheEnd(this.filteredQuestions, this.route.snapshot.paramMap.get('topic') ?? "");
+    if (this.filteredQuestions[this.currentQuestionIndex].id == "B15") {
+      this.filteredQuestions = this.removeAnswersById(this.filteredQuestions, JSON.parse(localStorage.getItem("B14Answer") ?? '[]'))
     }
+    
   }
 
   canMoveToTheNextQuestion(): boolean {
@@ -185,7 +205,6 @@ export class QuizComponent implements CanComponentDeactivate {
   changeTextBox() {
     this.isDontKnowSelected = false;
     this.isNoneSelected = false;
-    this.filteredQuestions[this.currentQuestionIndex].selectedAnswer = undefined;
   }
 
   handleDontKnowSelectedChange() {
@@ -213,6 +232,8 @@ export class QuizComponent implements CanComponentDeactivate {
       question.selectedAnswer = [];
     }
 
+
+
     this.isNoneSelected = false;
     this.isDontKnowSelected = false;
 
@@ -232,6 +253,21 @@ export class QuizComponent implements CanComponentDeactivate {
         delete question.selectedAnswer;
       }
     }
+
+    if (question.id === "B14") {
+      // Ellenőrizzük, hogy a selectedAnswer egy lista
+      if (Array.isArray(question.selectedAnswer)) {
+        // Módosítjuk a lista összes elemét
+        const updatedAnswers = question.selectedAnswer.map((answer: string) => {
+          // Az answer első karaktere és az utána következő karakterek összefűzése "15"-tel
+          return answer.slice(0, 1) + '15' + answer.slice(3);
+        });
+
+        // Az updatedAnswers listát mentjük a localStorage-ba
+        localStorage.setItem("B14Answer", JSON.stringify(updatedAnswers));
+      }
+    }
+
   }
 
   noOptionIncludesEgyikSem(question: Question): boolean {
@@ -258,7 +294,7 @@ export class QuizComponent implements CanComponentDeactivate {
   }
 
   //#endregion
-  
+
   ngOnDestroy() {
     if (this.getContQuizSubscription != null) {
       this.getContQuizSubscription.unsubscribe();

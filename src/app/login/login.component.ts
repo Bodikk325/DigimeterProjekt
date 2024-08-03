@@ -68,7 +68,9 @@ export class LoginComponent {
       if(isWrong)
         {
           this.loginForm.controls["password"].setValue("");
+          this.loginCaptchaElem?.resetCaptcha();
         }
+        
     })
 
     this.authSubscription = this.authService.loginFormState.subscribe(show => {
@@ -83,6 +85,8 @@ export class LoginComponent {
       if (isError) {
         this.loginForm.reset();
         this.registerForm.reset();
+        this.registerCaptchaElem?.resetCaptcha();
+        this.loginCaptchaElem?.resetCaptcha();
       }
     });
   }

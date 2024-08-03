@@ -1,1 +1,1 @@
-export var httpUrl : string = "http://kzacoaching.com/";
+export var httpUrl : string = 'http://localhost/'

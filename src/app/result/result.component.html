@@ -95,39 +95,55 @@
 
                 <div class="lg:flex flex-row justify-end items-end">
                   <div class="w-full md:w-[40rem] text-[0.7rem] md:text-[1rem] lg:text-[1.2rem] mt-4 md:mt-0">
-                    <div *ngIf="valaszopcio.points >= valaszopcio.shownPoint && (valaszopcio.shownPoint != 0)"
-                      class="flex p-2 flex-col justify-between lg:flex-row items-center bg-white shadow-lg">
+                    <!-- Ha a pontszám kisebb vagy egyenlő, mint az átlag mínusz 5 -->
+                    <div *ngIf="((valaszopcio.points | rounder:valaszopcio.regionData.max_point) >= 95 || (valaszopcio.points | rounder:valaszopcio.regionData.max_point) - 5 > (valaszopcio.shownPoint | rounder:valaszopcio.regionData.max_point)) && (valaszopcio.shownPoint != 0)"
+
+                         class="flex p-2 flex-col justify-between lg:flex-row items-center bg-white shadow-lg">
                       <div class="p-5 mr-5 flex flex-col justify-between items-start">
-                        <span>A válaszoddal elért pontszám: <span class="font-bold">{{valaszopcio?.points}} pont</span>
-                          /
-                          <span class="font-bold">{{(valaszopcio.points |
-                            rounder:valaszopcio.regionData.max_point)}}</span></span>
-                        <span class="mt-2">A többi cég átlagos pontszáma: <span
-                            class="font-bold">{{valaszopcio.shownPoint
-                            | number:'1.0-1'}} pont</span> / <span class="font-bold">{{ (valaszopcio.shownPoint
-                            |rounder:valaszopcio.regionData.max_point)}}</span></span>
+                        <span>A válaszoddal elért pontszám: <span class="font-bold">{{valaszopcio?.points}} pont</span> /
+                          <span class="font-bold">{{(valaszopcio.points | rounder:valaszopcio.regionData.max_point)}}%</span></span>
+                        <span class="mt-2">A többi cég átlagos pontszáma: <span class="font-bold">{{valaszopcio.shownPoint | number:'1.0-1'}} pont</span> /
+                          <span class="font-bold">{{ (valaszopcio.shownPoint | rounder:valaszopcio.regionData.max_point)}}%</span></span>
                         <span class="mt-2">Ez számodra egy jó eredménynek számít!</span>
+                        <span *ngIf="valaszopcio.questionId == 'B5a_1' || valaszopcio.questionId == 'B5a_2'">(A honlapon található üzenetküldő űrlap / vállalati e-mail cím és a chatszolgáltatás együtt adnak ki 100%-ot)</span>
+                        <span *ngIf="valaszopcio.questionId == 'B5b_1' || valaszopcio.questionId == 'B5b_2'">(A webshopon található üzenetküldő űrlap / vállalati e-mail cím és a chatszolgáltatás együtt adnak ki 100%-ot)</span>
+                      </div>
+                      <img src="assets/ai_trans.png" class="w-14 md:w-28 rounded-full" alt="">
+                    </div>
+                  
+                    <!-- Ha a pontszám nagyobb vagy egyenlő, mint az átlag plusz 5 -->
+                    <div *ngIf="(valaszopcio.points | rounder:valaszopcio.regionData.max_point) + 5 < (valaszopcio.shownPoint | rounder:valaszopcio.regionData.max_point) && (valaszopcio.shownPoint != 0) && (valaszopcio.points | rounder:valaszopcio.regionData.max_point) < 95"
+
+                         class="flex flex-col justify-between lg:flex-row items-center bg-white shadow-lg p-5 rounded-md w-full">
+                      <div class="p-5 mr-5 flex flex-col justify-between items-start text-[0.7rem] md:text-[1rem] lg:text-[1.2rem]">
+                        <span>A válaszoddal elért pontszám: <span class="font-bold">{{valaszopcio?.points }} pont</span> /
+                          <span class="font-bold">{{(valaszopcio.points | rounder:valaszopcio.regionData.max_point)}}%</span></span>
+                        <span class="mt-2">A többi cég átlagos pontszáma: <span class="font-bold">{{valaszopcio.shownPoint | number:'1.0-1'}} pont</span> /
+                          <span class="font-bold">{{ (valaszopcio.shownPoint | rounder:valaszopcio.regionData.max_point)}}%</span></span>
+                        <span class="mt-2">Ez számodra nem egy jó eredmény, ebben a témában van még hova fejlődni.</span>
+                        <span *ngIf="valaszopcio.questionId == 'B5a_1' || valaszopcio.questionId == 'B5a_2'">(A honlapon található üzenetküldő űrlap / vállalati e-mail cím és a chatszolgáltatás együtt adnak ki 100%-ot)</span>
+                        <span *ngIf="valaszopcio.questionId == 'B5b_1' || valaszopcio.questionId == 'B5b_2'">(A webshopon található üzenetküldő űrlap / vállalati e-mail cím és a chatszolgáltatás együtt adnak ki 100%-ot)</span>
+                      </div>
+                      <img src="assets/ai_not_happy.png" class="w-14 md:w-28 rounded-full" alt="">
+                    </div>
+                  
+                    <!-- Ha a pontszám és az átlag közötti különbség kisebb, mint 5 -->
+                    <div *ngIf="(valaszopcio.shownPoint | rounder:valaszopcio.regionData.max_point) >= (valaszopcio.points | rounder:valaszopcio.regionData.max_point) - 5 && (valaszopcio.shownPoint | rounder:valaszopcio.regionData.max_point) <= (valaszopcio.points | rounder:valaszopcio.regionData.max_point) + 5 && (valaszopcio.points | rounder:valaszopcio.regionData.max_point) < 95 && (valaszopcio.shownPoint != 0)"
+
+                         class="flex flex-col justify-between lg:flex-row items-center bg-white shadow-lg p-5 rounded-md w-full">
+                      <div class="p-5 mr-5 flex flex-col justify-between items-start text-[0.7rem] md:text-[1rem] lg:text-[1.2rem]">
+                        <span>A válaszoddal elért pontszám: <span class="font-bold">{{valaszopcio?.points }} pont</span> /
+                          <span class="font-bold">{{(valaszopcio.points | rounder:valaszopcio.regionData.max_point)}}%</span></span>
+                        <span class="mt-2">A többi cég átlagos pontszáma: <span class="font-bold">{{valaszopcio.shownPoint | number:'1.0-1'}} pont</span> /
+                          <span class="font-bold">{{ (valaszopcio.shownPoint | rounder:valaszopcio.regionData.max_point)}}%</span></span>
+                        <span class="mt-2">Ez átlagos eredmény, de ha gondolod még lehet továbblépni.</span>
+                        <span *ngIf="valaszopcio.questionId == 'B5a_1' || valaszopcio.questionId == 'B5a_2'">(A honlapon található üzenetküldő űrlap / vállalati e-mail cím és a chatszolgáltatás együtt adnak ki 100%-ot)</span>
+                        <span *ngIf="valaszopcio.questionId == 'B5b_1' || valaszopcio.questionId == 'B5b_2'">(A webshopon található üzenetküldő űrlap / vállalati e-mail cím és a chatszolgáltatás együtt adnak ki 100%-ot)</span>
                       </div>
                       <img src="assets/ai_trans.png" class="w-14 md:w-28 rounded-full" alt="">
                     </div>
                   </div>
-
-                  <div *ngIf="valaszopcio.points < valaszopcio.shownPoint && (valaszopcio.shownPoint != 0)"
-                    class="flex flex-col justify-between lg:flex-row items-center bg-white shadow-lg p-5 rounded-md w-full ">
-                    <div
-                      class="p-5 mr-5 flex flex-col justify-between items-start  text-[0.7rem] md:text-[1rem] lg:text-[1.2rem]">
-                      <span>A válaszoddal elért pontszám: <span class="font-bold">{{valaszopcio?.points }} pont</span> /
-                        <span class="font-bold">{{(valaszopcio.points |
-                          rounder:valaszopcio.regionData.max_point)}}</span></span>
-                      <span class="mt-2">A többi cég átlagos pontszáma: <span class="font-bold">{{valaszopcio.shownPoint
-                          |
-                          number:'1.0-1'}} pont</span> / <span class="font-bold">{{ (valaszopcio.shownPoint
-                          |rounder:valaszopcio.regionData.max_point)}}</span></span>
-                      <span class="mt-2"> Ez számodra nem egy jó eredmény, ebben a témában van még hova
-                        fejlődni..</span>
-                    </div>
-                    <img src="assets/ai_not_happy.png" class=" w-14 md:w-28 rounded-full" alt="">
-                  </div>
+                  
                 </div>
               </div>
               @defer (on viewport; on timer(5s)) {
