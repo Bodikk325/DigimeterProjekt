@@ -184,10 +184,6 @@ export class HomeComponent implements OnDestroy {
           this.notiService.show("Cégadatok sikeresen mentve!", NotificationType.positivie);
           this.isFirmSavingLoading = false;
           this.shouldLetToStartQuiz = true;
-        },
-        error: (_) => {
-          this.notiService.show("Valami hiba történt, kérlek próbáld meg később!", NotificationType.error);
-          this.isFirmSavingLoading = false;
         }
       }
     )
