@@ -6,7 +6,7 @@
         Vissza a főoldalra
       </button>
     </a>
-    <div class="flex font-bold flex-wrap justify-start w-full gap-2 z-10" *ngIf="currentResult.resultType == ''">
+    <div class="flex font-bold flex-wrap justify-start w-full gap-2 z-10" *ngIf="currentResult.resultType == 'Teljes'">
       <button class="tab" [ngClass]="tabname == '' ? 'tab_selected' : 'tab'" (click)="changeTab('')">
         Összes
       </button>
@@ -30,8 +30,8 @@
         (click)="changeTab('Digitális mindennapok')">
         Digitális mindennapok
       </button>
-      <button class="tab" [ngClass]="tabname == 'Digitális Jelenlét' ? 'tab_selected' : 'tab'"
-        (click)="changeTab('Digitális Jelenlét')">
+      <button class="tab" [ngClass]="tabname == 'Digitális jelenlét' ? 'tab_selected' : 'tab'"
+        (click)="changeTab('Digitális jelenlét')">
         Digitális Jelenlét
       </button>
     </div>
@@ -170,8 +170,8 @@
   </div>
 </div>
 
-<app-ai-chat [type]="'result'" [category]="currentResult.resultType" [maxPoint]="maxPoint"
-  [userPoint]="currentResult.finalScore"></app-ai-chat>
+<app-ai-chat [type]="'result'" [category]="currentResult.resultType"
+  [userPoint]="achievedPercentageForAI" [firmsPoint]="avaragePercentageForAI"></app-ai-chat>
 
 <div *ngIf="isLoaded">
 

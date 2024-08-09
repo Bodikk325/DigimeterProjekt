@@ -14,7 +14,14 @@ export class ChatService {
     this.url = httpUrl;
   }
 
-  sendMessage(category : string, message : string, question : string, type : string, userPoint : number, maxPoint : number)
+  getMessages()
+  {
+    let body = new HttpParams();
+    body = body.set('jwt', AuthServiceHelper.getJwtToken());
+    return this.http.post(this.url + "get_conversations.php", body, {withCredentials : true});
+  }
+
+  sendMessage(category : string, message : string, question : string, type : string, userPoint : number, firmsPoint : number)
   {
     let body = new HttpParams();
     body = body.set('jwt', AuthServiceHelper.getJwtToken());
@@ -22,8 +29,8 @@ export class ChatService {
     body = body.set('message', message);
     body = body.set('question', question);
     body = body.set('type', type);
+    body = body.set('firmsPoint', firmsPoint);
     body = body.set('userPoint', userPoint);
-    body = body.set('maxPoint', maxPoint);
     return this.http.post(this.url + "chat.php", body, {withCredentials : true});
   }
 

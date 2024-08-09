@@ -10,7 +10,6 @@ export const jwtErrorInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(req).pipe(
     catchError((error) => {
-      console.log(error.error.error);
       if (error.error.error === "JwtHiba") {
         notificationService.show("Hiba történt a JWT token kezelésével! Kijelentkezés...", NotificationType.error);
         localStorage.removeItem("currentUser");

@@ -92,49 +92,56 @@ export class QuizComponent implements CanComponentDeactivate {
   //#region  functions for the quiz component
 
   checkingTheConditions() {
-    if (this.BQuestionNoAnswer && this.filteredQuestions[this.currentQuestionIndex].id == "B15") {
-      this.removedQuestions = true;
-      this.questions = this.questions.filter(x => x.id != "B16")
-    }
 
     if (this.currentQuestionIndex == 0 && this.route.snapshot.paramMap.get('topic') != "Continue") {
-      this.questions[0] = this.filteredQuestions[0];
+        this.questions[0] = this.filteredQuestions[0];
     }
 
-
     this.filteredQuestions = this.questions.filter(question => {
-      if (question.based_on.length === 0) {
-        return true;
-      }
+        if (question.based_on.length === 0) {
+            return true;
+        }
 
-      const conditionsMet = question.based_on.every(basedOnId => {
-        if (basedOnId == "A7") {
-          if (localStorage.getItem("A7answer") == "0") {
+        const conditionsMet = question.based_on.every(basedOnId => {
+            if (basedOnId == "A7") {
+                if (localStorage.getItem("A7answer") == "0") {
+                    this.removedQuestions = true;
+                    return false;
+                }
+            }
+            const basedOnQuestion = this.questions.find(x => x.id === basedOnId);
+            if (basedOnQuestion) {
+                const selectedAnswers = Array.isArray(basedOnQuestion.selectedAnswer) ? basedOnQuestion.selectedAnswer : [basedOnQuestion.selectedAnswer];
+
+                
+                if (basedOnQuestion.textBoxAnswer == "Nem tudja" || basedOnQuestion.textBoxAnswer == "Egyik sem") {
+                  return false;
+              }
+
+                if (!selectedAnswers || selectedAnswers.length === 0 || selectedAnswers[0] == undefined) {
+                    return true;
+                }
+
+                if (basedOnQuestion.isThereMoreThanOneAnswer) {
+                    // Többválasztós kérdés esetén elegendő, ha a condition-ben szereplő válaszok közül legalább egy egyezik
+                    return selectedAnswers.some(answer => question.condition.includes(answer as string));
+                } else {
+                    // Egyválasztós kérdés esetén minden condition-ben szereplő válasznak teljesülnie kell
+                    return selectedAnswers.some(answer => question.condition.includes(answer as string));
+                }
+            }
+            return true;
+        });
+
+        if (conditionsMet) {
+            return true;
+        } else {
             this.removedQuestions = true;
             return false;
-          }
         }
-        const basedOnQuestion = this.questions.find(x => x.id === basedOnId);
-        if (basedOnQuestion) {
-          const selectedAnswers = Array.isArray(basedOnQuestion.selectedAnswer) ? basedOnQuestion.selectedAnswer : [basedOnQuestion.selectedAnswer];
-
-          if (!selectedAnswers || selectedAnswers.length === 0 || selectedAnswers[0] == undefined) {
-            // If selectedAnswer is null or empty, don't remove the question
-            return true;
-          }
-          return selectedAnswers.some(answer => question.condition.includes(answer as string));
-        }
-        return true;
-      });
-
-      if (conditionsMet) {
-        return true;
-      } else {
-        this.removedQuestions = true;
-        return false;
-      }
     });
-  }
+}
+
 
   removeAnswersById(questions: Question[], idsToRemove: string[]): Question[] {
     return questions.map(question => {
@@ -178,11 +185,13 @@ export class QuizComponent implements CanComponentDeactivate {
     this.isDontKnowSelected = false;
     this.isNoneSelected = false;
 
-    this.currentQuestionIndex++
-
-    if (this.filteredQuestions[this.currentQuestionIndex].id == "B15") {
-      this.filteredQuestions = this.removeAnswersById(this.filteredQuestions, JSON.parse(localStorage.getItem("B14Answer") ?? '[]'))
+    if (this.currentQuestionIndex == this.filteredQuestions.length - 1) {
+      this.isQuizInProgress = false;
+      this.quizResultsService.saveQuizResultsAtTheEnd(this.filteredQuestions, this.route.snapshot.paramMap.get('topic') ?? "");
+      return ;
     }
+
+    this.currentQuestionIndex++
     
   }
 

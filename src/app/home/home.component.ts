@@ -48,7 +48,8 @@ export class HomeComponent implements OnDestroy {
       "Ez itt a főoldal!",
       "Itt tudsz új kérdőívet kitölteni vagy akár megnézni az előző kitöltéseidnek az eredményeit! (A Digiméter kérdőív azonos a kutatás során lekérdezettel, így abban magázódva fogod megtalálni a kérdéseket.)",
       "Fontos, hogy mielőtt először kitöltenéd a kérdőívet, meg kell adnod a céged adatait, hogy a számodra releváns cégekhez tudjuk mérni a digitalizációd szintjét! Ehhez gördíts le a lap aljára ezen a képernyőn!",
-      "Ha ezeket már megadtad, akkor ki tudod tölteni a kérdőívet egyben vagy akár témánként is."
+      "Ha ezeket már megadtad, akkor ki tudod tölteni a kérdőívet egyben vagy akár témánként is.",
+      "Ohh, még egy fontos információ! A visszaélések végett a Digiméter beállított nekem egy 60 kredites korlátot, ami annyit tesz, hogy egy nap csak 60 üzenetet tudunk váltani egymással! Erre fokozottan vigyázz!"
     ]
 
     this.results = []

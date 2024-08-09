@@ -26,6 +26,8 @@ export class ResultComponent {
 
   allResults: Result[];
   isLoaded: boolean;
+  achievedPercentageForAI : number;
+  avaragePercentageForAI : number;
   selectedValue: string;
   maxPoint: number;
   currentResult: Result;
@@ -43,6 +45,9 @@ export class ResultComponent {
         text: "Kérdésed van az eredményekkel kapcsolatban? Nyugodtan tedd azt fel, segítek!", user: false
       }
     ]
+
+    this.achievedPercentageForAI = 0;
+    this.avaragePercentageForAI = 0;
 
     this.isMessageLoading = false;
     this.isChatVisible = false;
@@ -159,6 +164,9 @@ export class ResultComponent {
 
     this.isLoaded = false;
 
+    this.achievedPercentageForAI = parseInt(((this.currentResult.finalScore / maxpoint) * 100).toFixed(0)) ;
+    this.avaragePercentageForAI =  parseInt(((avarage / maxpoint) * 100).toFixed(0));
+
     this.dataForPieChart1 = [
       { category: 'az ön cége', value: this.currentResult.finalScore },
       { category: 'fejlődési lehetőség', value: maxpoint - this.currentResult.finalScore },
@@ -189,7 +197,6 @@ export class ResultComponent {
       else if (this.selectedValue == "Regió") {
         result.shownPoint = result.regionData[this.myFirm.Region] as number;
       }
-
     });
   }
 
