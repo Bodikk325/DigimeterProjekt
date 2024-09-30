@@ -71,8 +71,7 @@ export class HomePieChartComponent {
       .append('g')
       .attr('transform', `translate(${this.width / 2},${this.height / 2})`);
 
-
-    const customColors = ['#775ad2', '#0072b5']; // Add your custom colors here
+    const customColors = ['#0072b5', '#B54300']; // Add your custom colors here
     const color = d3.scaleOrdinal(customColors);
 
     const pie = d3.pie().value((d: any) => d.value).sort(null);
@@ -132,7 +131,7 @@ export class HomePieChartComponent {
       .attr('class', 'legend')
       .attr('transform', isMobile
         ? `translate(0, ${this.height / 2 + 30})` // Position below the chart for mobile
-        : `translate(${this.width / 2 + 20}, ${this.height / 2 - data.length * 20 / 2})`); // Default position for larger screens
+        : `translate(${this.width / 3}, ${this.height / 2 - data.length * 20 / 2})`); // Default position for larger screens
 
     const legendItems = legend.selectAll('.legend-item')
     .data(data)
@@ -149,10 +148,10 @@ export class HomePieChartComponent {
       .style('fill', (d: any, i: number) => color(i));
 
     legendItems.append('text')
-      .attr('x', 20)
+      .attr('x', 10)
       .attr('y', 10)
       .text((d: any) => d.category)
-      .style('font-size', '16px')
+      .style('font-size', '10px')
       .style('text-anchor', 'start');
   }
 

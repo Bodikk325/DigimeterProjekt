@@ -20,10 +20,10 @@ export class LoginComponent {
 
   messages = [
     "Hé, itt vagyok, itt lent!",
-    "Kezdjük azzal, hogy létrehozunk neked egy fiókot!",
-    "Ez azért fontos, hogy el tudjuk neked menteni az előző válaszaid. Így egyrészt nem kell újrakezdened a kérdőívet, ha nem lenne időd egyszerre megválaszolni az összes kérdést.",
-    "Másrészt, ha készen vagy, bármikor visszajöhetsz, megnézheted a válaszaid és beszélgethetsz velem a digitalizációs tennivalókról ezek kapcsán. ",
-    "Amennyiben van már fiókod, úgy csak szimplán jelentkezz be!"
+    "Kezdjük azzal, hogy létrehozunk önnek egy fiókot!",
+    "Ez azért fontos, hogy el tudjuk önnek menteni az előző válaszait. Így egyrészt nem kell újrakezdenie a kérdőívet, ha nem lenne ideje egyszerre megválaszolni az összes kérdést.",
+    "Másrészt, ha végzett a kitöltéssel, bármikor visszajöhet, megnézheti a válaszokat és bészelgethet velem a digitalizációs tennivalókról ezek kapcsán. ",
+    "Amennyiben van már fiókja, úgy csak szimplán jelentkezzen be!"
   ]
 
   loginForm: FormGroup;
@@ -33,6 +33,7 @@ export class LoginComponent {
   authService: AuthService;
   siteKey : string;
   siteKey2 : string;
+  showRequirments : boolean;
 
   constructor(authService: AuthService) {
 
@@ -43,6 +44,7 @@ export class LoginComponent {
 
     this.isLoading = false;
     this.loginShown = true;
+    this.showRequirments = false;
 
     this.loginForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.email]),
@@ -52,7 +54,12 @@ export class LoginComponent {
 
     this.registerForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.pattern(/[A-Z]/),
+        Validators.pattern(/\d/)
+      ]),
       confirmPassword: new FormControl('', [Validators.required]),
       acceptedTerms: new FormControl(false, [Validators.required]),
       recaptcha: new FormControl('', [Validators.required])
@@ -111,6 +118,32 @@ export class LoginComponent {
     } else {
       this.loginCaptchaElem?.resetCaptcha();
     }
+  }
+
+  // Ezt a metódust a fókusz eseményhez kötjük
+  onFocus() {
+    console.log('Input mezőre kattintottál!');
+    this.showRequirments = true;
+  }
+
+  onBlur() {
+    this.showRequirments = false;
+    console.log('Input mező elvesztette a fókuszt!');
+  }
+
+  // Ezt a metódust a beviteli eseményhez kötjük
+  onInput(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    console.log('Valami beírásra került:', inputElement.value);
+  }
+
+  passwordHasError(): boolean {
+    const password = this.registerForm.get('password')?.value || '';
+    const hasNumber = /\d/.test(password);
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasMinLength = password.length >= 6;
+  
+    return !(hasNumber && hasUpperCase && hasMinLength);
   }
 
   ngOnDestroy() {

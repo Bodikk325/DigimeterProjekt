@@ -95,18 +95,18 @@ export class AuthService {
     const { username, password, recaptcha } = loginForm.value;
 
     if (username == "" || password == "") {
-      this.notificationService.show("Kérünk, hogy érvényes adatokat adj meg!", NotificationType.error);
+      this.notificationService.show("Kérünk, hogy érvényes adatokat adjon meg!", NotificationType.error);
       return;
     }
 
     if(loginForm.get('recaptcha')?.invalid)
       {
-        this.notificationService.show("Kérünk igazold, hogy nem vagy robot!", NotificationType.error);
+        this.notificationService.show("Kérjük igazolja, hogy nem robot!", NotificationType.error);
         return;
       }
 
     if (loginForm.invalid) {
-      this.notificationService.show("Nem helyes formátum! Kérünk email címet adj meg a megfelelő helyre!", NotificationType.error);
+      this.notificationService.show("Nem helyes formátum! Kérünk email címet adjon meg a megfelelő helyre!", NotificationType.error);
       return;
     }
 
@@ -125,7 +125,7 @@ export class AuthService {
         },
         error: (error) => {
           if (error.error.message == "NotConfirmed") {
-            this.notificationService.show("Ez az email cím még nincs aktiválva, nézd meg a levelesládád!", NotificationType.error)
+            this.notificationService.show("Ez az email cím még nincs aktiválva, tekintse meg az email címét!", NotificationType.error)
           }
           else if (error.status == 401) {
             this.notificationService.show("Helytelen felhasználónév vagy jelszó!", NotificationType.error)
@@ -151,7 +151,7 @@ export class AuthService {
     const { username, password, confirmPassword, acceptedTerms, recaptcha } = registerForm.value;
 
     if (password == "" || username == "") {
-      this.notificationService.show("Kérünk tölts ki minden adatot!", NotificationType.error)
+      this.notificationService.show("Kérünk töltsön ki minden adatot!", NotificationType.error)
       return;
     }
 
@@ -162,7 +162,7 @@ export class AuthService {
 
     if(registerForm.get('recaptcha')?.invalid)
       {
-        this.notificationService.show("Kérünk igazold, hogy nem vagy robot!", NotificationType.error);
+        this.notificationService.show("Kérünk igazolja, hogy nem robot!", NotificationType.error);
         return;
       }
 
@@ -172,7 +172,7 @@ export class AuthService {
     }
 
     if (acceptedTerms !== true) {
-      this.notificationService.show("Kerünk, hogy fogadd el az adatvédelmi nyilatkozatot!", NotificationType.error)
+      this.notificationService.show("Kérjük, hogy fogadja el az adatvédelmi nyilatkozatot!", NotificationType.error)
       return;
     }
 
@@ -195,8 +195,14 @@ export class AuthService {
             this.isButtonLoading(false);
             this.isErrorSubject.next(true);
           }
+          else if (error.status == 410)
+            {
+              this.notificationService.show("A jelszóban nem szerepelhetnek különleges karakterek, mint például a $, > és hasonlóak!", NotificationType.error)
+              this.isButtonLoading(false);
+              this.isErrorSubject.next(true);
+            }
           else {
-            this.notificationService.show("Valami hiba történt, kérünk próbáld újra később!", NotificationType.error)
+            this.notificationService.show("Valami hiba történt, kérünk próbálja újra később!", NotificationType.error)
             this.isButtonLoading(false);
             this.isErrorSubject.next(true);
           }

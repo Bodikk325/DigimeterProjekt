@@ -10,7 +10,7 @@
     class="flex flex-col justify-around lg:flex-row items-center lg:items-center mb-14 h-auto shadow-xl p-6 rounded-lg border-l-2 border-solid border-gray-100">
     <div class="w-full lg:w-1/3 h-full flex flex-col justify-center items-center mt-10 lg:mt-0">
       <h2 class="text-lg lg:text-2xl font-semibold mb-4 text-center ">Rajta, töltsük ki a kérdőívet és lássuk mennyire is
-        digitalizált a vállalkozásod!</h2>
+        digitalizált a vállalkozása!</h2>
       <div class="w-full flex flex-col justify-center lg:justify-center">
         <button type="button" (click)="goToThemeBasedQuiz('Continue')" *ngIf="contQuizQuestions.length != 0"
           class="bg-base_blue hover:bg-blue-700 text-white text-sm lg:text-lg font-bold p-4  rounded focus:outline-none focus:shadow-outline">
@@ -31,7 +31,7 @@
 
 <div class="container mx-auto px-10">
   <div class="container mb-10 mx-auto">
-    <span class="font-bold text-base text-center lg:text-left lg:text-xl ">Vagy, ha nincs kedved az összes kérdésen egyszerre végigmenni, akkor kitöltheted a
+    <span class="font-bold text-base text-center lg:text-left lg:text-xl ">Vagy, ha nincs kedve az összes kérdésen egyszerre végigmenni, akkor kitöltheti a
       kérdőívet témakörönként is:</span>
   </div>
 
@@ -94,9 +94,9 @@
 <div class=" flex flex-col lg:flex-row container xl:w-full mb-10 mx-auto justify-between mt-20">
   <div
     class="relative max-w-4xl  justify-center lg:w-[100%]  py-16 lg:py-5 w-[90%] mx-auto flex flex-col p-5 bg-white shadow-xl rounded-lg border-2 border-gray-100 ">
-    <h2 class="text-lg lg:text-2xl font-semibold text-gray-800 mb-4 text-center">Céged adatai</h2>
-    <p class="w-full lg:w-[90%] mx-auto text-gray-800 mb-10 text-center text-sm lg:text-base">Ez alapján tudod majd hozzámérni magad a Digiméter kutatás
-      eredményeihez. <br> Az adataidat csak Te láthatod, mások nem tudják hozzád mérni magukat</p>
+    <h2 class="text-lg lg:text-2xl font-semibold text-gray-800 mb-4 text-center">A cég adatai</h2>
+    <p class="w-full lg:w-[90%] mx-auto text-gray-800 mb-10 text-center text-sm lg:text-base">Ez alapján tudja majd hozzámérni magát a Digiméter kutatás
+      eredményeihez. <br> Az adatait csak Ön láthatja, mások nem tudják önhöz mérni magukat</p>
     <form class="lg:px-10">
       <div class="mb-4">
         <label for="region" class="block text-gray-700 text-sm font-bold mb-2">Régió:</label>
@@ -232,12 +232,12 @@
               <div class="w-full py-2 flex flex-col text-sm lg:text-base">
                 <span class="text-black">Kitöltés dátuma: <br> <span class="font-bold">{{kitoltes.date |
                     date:'yyyy-MM-dd'}}</span></span>
-                <span class="text-black mt-2">Témakör: <br> <span class="font-bold">{{kitoltes.resultType == "" ? 'Teljes quiz' : kitoltes.resultType}}</span></span>
+                <span class="text-black mt-2">Témakör: <br> <span class="font-bold">{{kitoltes.resultType == "Teljes" ? 'Teljes Digiméter kérdőív' : kitoltes.resultType}}</span></span>
                 <span class="text-black mt-2">Eredmény: </span>
               </div>
               <div class="chart-container mx-auto ">
                 <app-home-pie-chart [data1]="[
-            { category: 'az ön cége', value: kitoltes.finalScore },
+            { category: 'az ön cége digitális jelenlétének fejlettsége', value: kitoltes.finalScore },
             { category: 'fejlődési lehetőség', value: kitoltes.max_point - kitoltes.finalScore },
             ]"></app-home-pie-chart>
               </div>
@@ -292,7 +292,7 @@
   <div class="z-[200] flex flex-col justify-center items-center h-full w-full top-0 left-0 absolute bg-white">
     <app-loader-black></app-loader-black>
     <p class=" mt-10 font-bold text-xl text-black ">Betöltés...</p>
-    <p class="mt-2 text-sm lg:text-xl text-black text-center">Töltsd ki az adataidat, mielőtt elindítanád a Digiméter kérdőívet!</p>
+    <p class="mt-2 text-sm lg:text-xl text-black text-center">Töltse ki az adatait, mielőtt elindítaná a Digiméter kérdőívet!</p>
   </div>
 </div>
 }

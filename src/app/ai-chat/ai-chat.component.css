@@ -39,6 +39,10 @@
   height: 40px;
 }
 
+.send-button {
+  z-index: 1000; /* Adj egy nagy értéket, hogy biztosan a többi elem felett legyen */
+}
+
 .send-button:hover {
   background-color: #0056b3;
 }

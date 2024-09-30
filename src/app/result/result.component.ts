@@ -42,7 +42,7 @@ export class ResultComponent {
   constructor(private quizService: QuizResultsService, private route: ActivatedRoute, private firmService: FirmsService) {
     this.messages = [
       {
-        text: "Kérdésed van az eredményekkel kapcsolatban? Nyugodtan tedd azt fel, segítek!", user: false
+        text: "Kérdése van az eredményekkel kapcsolatban? Nyugodtan tegye azt fel, segítek!", user: false
       }
     ]
 
@@ -94,12 +94,12 @@ export class ResultComponent {
     }
 
     this.dataForPieChart1 = [
-      { category: 'az ön cége', value: 0 },
+      { category: 'az ön cége digitális jelenlétének fejlettsége', value: 0 },
       { category: 'fejlődési lehetőség', value: 0 },
     ];
 
     this.dataForPieChart2 = [
-      { category: 'konkurens cégek', value: 0 },
+      { category: 'konkurens cégek digitális jelenlétének fejlettsége', value: 0 },
       { category: 'fejlődési lehetőség', value: 0 },
     ];
 
@@ -168,12 +168,12 @@ export class ResultComponent {
     this.avaragePercentageForAI =  parseInt(((avarage / maxpoint) * 100).toFixed(0));
 
     this.dataForPieChart1 = [
-      { category: 'az ön cége', value: this.currentResult.finalScore },
+      { category: 'az ön cége digitális jelenlétének fejlettsége', value: this.currentResult.finalScore },
       { category: 'fejlődési lehetőség', value: maxpoint - this.currentResult.finalScore },
     ];
 
     this.dataForPieChart2 = [
-      { category: 'konkurens cégek', value: avarage },
+      { category: 'konkurens cégek digitális jelenlétének fejlettsége', value: avarage },
       { category: 'fejlődési lehetőség', value: maxpoint - avarage },
     ];
   }

@@ -27,8 +27,16 @@
     <h2 class="text-center font-bold mb-10 text-lg">Regisztráció</h2>
     <form [formGroup]="registerForm" (ngSubmit)="authService.onRegisterSubmit(registerForm)" class="space-y-4">
       <input class="input-field w-full p-2 border rounded" formControlName="username" placeholder="E-mail cím">
-      <input class="input-field w-full p-2 border rounded" formControlName="password" type="password"
+      <input (focus)="onFocus()" (blur)="onBlur()" (input)="onInput($event)" class="input-field w-full p-2 border rounded" formControlName="password" type="password"
         placeholder="Jelszó">
+        <div *ngIf="passwordHasError()" class="m-2 font-bold px-5 py-2 bg-gray-base_blue border-2 border-solid border-gray-400 rounded-lg">
+          <ul>
+            <li>A jelszónak legalább 6 betűből kell állnia</li>
+            <li class="mt-2">Tartalmaznia kell legalább 1 nagybetűt</li>
+            <li class="mt-2">Tartalmaznia kell legalább 1 számjegyet</li>
+          </ul>
+        </div>
+      
       <input class="input-field w-full p-2 border rounded" formControlName="confirmPassword" type="password"
         placeholder="Jelszó megerősítése">
       <div class="flex flex-row">

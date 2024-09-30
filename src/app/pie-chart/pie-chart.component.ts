@@ -77,8 +77,8 @@ export class PieChartComponent implements OnInit, OnChanges, AfterViewInit {
       .attr('viewBox', `0 0 ${this.width} ${this.height}`)
       .append('g')
       .attr('transform', `translate(${this.width / 2},${this.height / 2})`);
-
-    const customColors = ['#775ad2', '#0072b5']; // Add your custom colors here
+      
+    const customColors = ['#0072b5', '#B54300']; // Add your custom colors here
     const color = d3.scaleOrdinal(customColors);
 
     const pie = d3.pie().value((d: any) => d.value).sort(null);

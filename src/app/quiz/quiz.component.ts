@@ -35,6 +35,7 @@ export class QuizComponent implements CanComponentDeactivate {
   isLoaded: boolean;
   currentQuestionIndex: number;
   questionHelper: QuestionHelpers;
+  newQuestion : Question;
 
   constructor(private dataService: DataService, private quizResultsService: QuizResultsService, notiService: NotificationService, private route: ActivatedRoute, private router: Router, private authService: AuthService) {
 
@@ -51,6 +52,36 @@ export class QuizComponent implements CanComponentDeactivate {
     this.isQuizInProgress = true;
     this.isLoaded = false;
     this.currentQuestionIndex = 0;
+
+    this.newQuestion = {
+      id: 'KIEG',
+      question: 'Használnak CRM rendszert és ha igen használnak benne ügyfélkapcsolat kezelői rendszert?',
+      answers: [
+        {
+          id: '1',
+          answer: 'Igen',
+          points: 0,
+          contains_Textbox: false
+        },
+        {
+          id: '2',
+          answer: 'Igen, használunk CRM-et, de ügyfélkapcsolatkezelési rendszert nem',
+          points: 0,
+          contains_Textbox: false
+        },
+        {
+          id: '3',
+          answer: 'Nem használunk CRM-et',
+          points: 0,
+          contains_Textbox: false
+        }
+      ],
+      maxpoint: 0,
+      isThereMoreThanOneAnswer: false,
+      category: 'Értékesítés és marketing',
+      based_on: [],
+      condition: []
+    };
 
     this.questionHelper = new QuestionHelpers(notiService);
 
@@ -83,6 +114,11 @@ export class QuizComponent implements CanComponentDeactivate {
         this.questions = QuestionHelpers.removeDuplicateAnswers(res);
         this.filteredQuestions = QuestionHelpers.removeDuplicateAnswers(res);
         this.isLoaded = true;
+        if((this.route.snapshot.paramMap.get('topic') ?? "") == "Értékesítés és marketing")
+          {
+            this.filteredQuestions.splice(7, 0, this.newQuestion);
+            this.questions.splice(7, 0, this.newQuestion);
+          }
       });
     }
   }
@@ -92,6 +128,15 @@ export class QuizComponent implements CanComponentDeactivate {
   //#region  functions for the quiz component
 
   checkingTheConditions() {
+
+    if(this.route.snapshot.paramMap.get('topic') == "Értékesítés és marketing" && this.filteredQuestions[this.currentQuestionIndex].id == "KIEG")
+      {
+        if(this.filteredQuestions[this.currentQuestionIndex].selectedAnswer != "1")
+          {
+            this.filteredQuestions = this.filteredQuestions.filter(x=> x.id != "KIEG")
+            this.questions = this.questions.filter(x=> x.id != "KIEG")
+          }
+      }
 
     if (this.currentQuestionIndex == 0 && this.route.snapshot.paramMap.get('topic') != "Continue") {
         this.questions[0] = this.filteredQuestions[0];
@@ -123,10 +168,8 @@ export class QuizComponent implements CanComponentDeactivate {
                 }
 
                 if (basedOnQuestion.isThereMoreThanOneAnswer) {
-                    // Többválasztós kérdés esetén elegendő, ha a condition-ben szereplő válaszok közül legalább egy egyezik
                     return selectedAnswers.some(answer => question.condition.includes(answer as string));
                 } else {
-                    // Egyválasztós kérdés esetén minden condition-ben szereplő válasznak teljesülnie kell
                     return selectedAnswers.some(answer => question.condition.includes(answer as string));
                 }
             }
@@ -154,7 +197,6 @@ export class QuizComponent implements CanComponentDeactivate {
   }
 
   nextQuestion() {
-    console.log(this.filteredQuestions)
     if (!this.questionHelper.checkTheNumberFormatForQuestions(this.filteredQuestions, this.currentQuestionIndex)) {
       return;
     }

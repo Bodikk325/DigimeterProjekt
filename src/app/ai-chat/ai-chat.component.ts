@@ -47,13 +47,13 @@ export class AiChatComponent implements AfterViewChecked {
 
           if (this.type == 'result') {
             this.messages.push({
-              text: "Kérdésed van esetleg az eredménnyel kapcsolatban? Segítek ahol tudok! FIGYELEM! Tudok segíteni az eredmény értelmezésében, viszont nem tudok segíteni neked egy adott kérdésre kapott pontszámoddal kapcsolatban, csak ha tudatod velem a részleteket! Egy példa: 'Az elmúlt egy év során használtak fizetett online hirdetést a következő felületeken?' kérdésre azt válaszoltam, hogy 'Facebook és Google Ads' és csak 21%-ot kaptam, miért van ez szerinted? ", user: false
+              text: "Kérdése van esetleg az eredménnyel kapcsolatban? Segítek ahol tudok! FIGYELEM! Tudok segíteni az eredmény értelmezésében, viszont nem tudok segíteni önnek egy adott kérdésre kapott pontszámmal kapcsolatban, csak ha tudatja velem a részleteket! Egy példa: 'Az elmúlt egy év során használtak fizetett online hirdetést a következő felületeken?' kérdésre azt válaszoltam, hogy 'Facebook és Google Ads' és csak 21%-ot kaptam, miért van ez szerinted? ", user: false
             });
           }
           else {
 
             this.messages.push({
-              text: "Kérdésed van esetleg? Ne habozz kérdezni, segítek, ahol tudok!", user: false
+              text: "Kérdése van esetleg? Ne habozzon kérdezni, segítek, ahol tudok!", user: false
             });
           }
           this.isSending = false;
@@ -77,12 +77,17 @@ export class AiChatComponent implements AfterViewChecked {
   onDocumentClick(event: MouseEvent): void {
     if (!this.isChatVisible) return;
     const container = document.querySelector('.chat-container');
-    if (event.target instanceof Node && !container!.contains(event.target)) {
-      this.isChatVisible = false;
+    const targetElement = event.target as Node;
+  
+    // Ellenőrizd, hogy a kattintás a chat-containeren belül történt-e vagy sem
+    if (container && container.contains(targetElement)) {
+      return;
     }
+  
+    this.isChatVisible = false;
   }
 
-  sendMessage(): void {
+  sendMessageWithEnter(): void {
     if (this.inputText.trim()) {
       this.isSending = true;
       this.messages.push({ text: this.inputText, user: true });
@@ -105,7 +110,48 @@ export class AiChatComponent implements AfterViewChecked {
               this.shouldScroll = true;
             }
             else if (error.error == "InsufficientCredits") {
-              this.messages.push({ text: "FIGYELEM, lejárt a napi kredit összeged, holnap probáld újra!", user: false });
+              this.messages.push({ text: "FIGYELEM! Elérted a korlátot a beszélgetésben. Kérjük látogass vissza 3 óra múlva!", user: false });
+              this.isMessageLoading = false;
+              this.shouldScroll = true;
+            }
+
+          }
+        }
+      );
+
+      this.inputText = '';
+    }
+  }
+  
+
+  sendMessage(event: MouseEvent): void {
+
+    event.stopPropagation();
+
+    
+    if (this.inputText.trim()) {
+      this.isSending = true;
+      this.messages.push({ text: this.inputText, user: true });
+      this.shouldScroll = true;
+      this.isMessageLoading = true;
+
+      this.chatService.sendMessage(this.category, this.inputText, this.question, this.type, this.userPoint, this.firmsPoint).subscribe(
+        {
+          next: (response) => {
+            this.messages.push({ text: response, user: false });
+            this.isMessageLoading = false;
+            this.shouldScroll = true;
+            this.isSending = false
+          },
+          error: (error) => {
+            this.isSending = false
+            if (error.error == "CoolDownError") {
+              this.messages.push({ text: "FIGYELEM, az üzenetküldések között 15 másodperces cooldown van életben a visszaélések elkerülése végett!", user: false });
+              this.isMessageLoading = false;
+              this.shouldScroll = true;
+            }
+            else if (error.error == "InsufficientCredits") {
+              this.messages.push({ text: "FIGYELEM! Elérted a korlátot a beszélgetésben. Kérjük látogass vissza 3 óra múlva!", user: false });
               this.isMessageLoading = false;
               this.shouldScroll = true;
             }
