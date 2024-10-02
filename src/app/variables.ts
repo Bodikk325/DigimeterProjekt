@@ -1,1 +1,1 @@
-export var httpUrl : string = 'https://kzacoaching.com/'
+export var httpUrl : string = 'https://digimeter.hu/En-Digimeterem/'

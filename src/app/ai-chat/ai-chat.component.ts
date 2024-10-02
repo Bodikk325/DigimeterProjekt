@@ -110,7 +110,7 @@ export class AiChatComponent implements AfterViewChecked {
               this.shouldScroll = true;
             }
             else if (error.error == "InsufficientCredits") {
-              this.messages.push({ text: "FIGYELEM! Elérted a korlátot a beszélgetésben. Kérjük látogass vissza 3 óra múlva!", user: false });
+              this.messages.push({ text: "FIGYELEM! Elérte a korlátot a beszélgetésben. Kérjük látogasson vissza 3 óra múlva!", user: false });
               this.isMessageLoading = false;
               this.shouldScroll = true;
             }

@@ -237,7 +237,7 @@
               </div>
               <div class="chart-container mx-auto ">
                 <app-home-pie-chart [data1]="[
-            { category: 'az ön cége digitális jelenlétének fejlettsége', value: kitoltes.finalScore },
+            { category: 'az ön cégének digitális fejlettsége', value: kitoltes.finalScore },
             { category: 'fejlődési lehetőség', value: kitoltes.max_point - kitoltes.finalScore },
             ]"></app-home-pie-chart>
               </div>
@@ -246,7 +246,7 @@
         </div>
       </div>
       <div *ngIf="results.length == 0">
-        <p class="text-center">Még nem töltöttél ki egy kérdőívet sem! Kezdj neki most az elsőnek!</p>
+        <p class="text-center">Még nem töltött ki egy kérdőívet sem! Kezdjen neki most az elsőnek!</p>
       </div>
     </div>
     <div *ngIf="isResultRemoveLoading"

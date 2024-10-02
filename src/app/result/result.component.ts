@@ -94,7 +94,7 @@ export class ResultComponent {
     }
 
     this.dataForPieChart1 = [
-      { category: 'az ön cége digitális jelenlétének fejlettsége', value: 0 },
+      { category: 'az ön cégének digitális fejlettsége', value: 0 },
       { category: 'fejlődési lehetőség', value: 0 },
     ];
 
@@ -168,7 +168,7 @@ export class ResultComponent {
     this.avaragePercentageForAI =  parseInt(((avarage / maxpoint) * 100).toFixed(0));
 
     this.dataForPieChart1 = [
-      { category: 'az ön cége digitális jelenlétének fejlettsége', value: this.currentResult.finalScore },
+      { category: 'az ön cégének digitális fejlettsége', value: this.currentResult.finalScore },
       { category: 'fejlődési lehetőség', value: maxpoint - this.currentResult.finalScore },
     ];
 
